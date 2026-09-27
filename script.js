@@ -283,8 +283,7 @@ function populateFranchiseDropdown(games) {
         }
     });
 
-    // Updated placeholder text to "Select Game" as requested
-    dropdown.innerHTML = `<option value="all">🎮 Select Game...</option>`;
+    dropdown.innerHTML = `<option value="all">🎮 Select Franchise...</option>`;
     uniqueFranchises.forEach(fran => {
         const option = document.createElement('option');
         option.value = fran.toLowerCase();
@@ -546,16 +545,8 @@ function initDetailsPage(games) {
     setElementText('detailGameTitle', currentGame.title);
     setElementText('detailGameCategory', currentGame.category || currentGame.Category || '');
     setElementText('detailGameDescription', currentGame.description || '');
+    setElementText('detailGameRequirements', currentGame.requirements || '');
     setElementText('detailGamePrice', currentGame.price || 'FREE');
-
-    // Properly format requirements as HTML so <br> tags render correctly
-    const reqContainer = document.getElementById('detailGameRequirements');
-    if (reqContainer) {
-        const rawReqs = currentGame.requirements || '';
-        reqContainer.innerHTML = rawReqs.includes('<br>') 
-            ? rawReqs 
-            : rawReqs.replace(/\n/g, '<br>');
-    }
 
     const coverImg = document.getElementById('detailGameImage');
     if (coverImg && currentGame.image) {
@@ -580,7 +571,7 @@ function initDetailsPage(games) {
             downloadBtn.onclick = (e) => {
                 e.preventDefault();
                 showDownloadPartsModal(currentGame);
-            };
+            }
         } else {
             downloadBtn.href = currentGame.downloadUrl || '#';
         }
