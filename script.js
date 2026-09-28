@@ -1,7 +1,7 @@
 let loadedGamesData = [];
 let currentSearchQuery = "";
 let currentCategory = "all";
-let currentGame = "all";
+let currentFranchise = "all";
 
 document.addEventListener("DOMContentLoaded", () => {
     console.log("Squad Games Store initialized.");
@@ -153,6 +153,10 @@ async function loadGameCatalog() {
 
 function initStore(games) {
     loadedGamesData = games;
+
+    // Hide loading indicators once store data is loaded
+    const loaderElements = document.querySelectorAll('#loader, #catalog-loader, .loading-state');
+    loaderElements.forEach(el => el.style.display = 'none');
 
     populateCategoryDropdown(games);
     populateFranchiseDropdown(games);
@@ -479,7 +483,6 @@ function closeFullScreen() {
     if (fullModal) fullModal.classList.remove("active");
 }
 
-// BULLETPROOF DOWNLOAD PARTS MODAL (Safely handles objects, strings, or stringified arrays)
 function showDownloadPartsModal(game) {
     let modal = document.getElementById('download-parts-modal');
     if (!modal) {
@@ -537,7 +540,6 @@ function closeDownloadPartsModal() {
     if (modal) modal.classList.remove('active');
 }
 
-// LOGIC TO POPULATE DETAILS.HTML, DOWNLOADS, AND SCREENSHOTS GALLERY
 function initDetailsPage(games) {
     const params = new URLSearchParams(window.location.search);
     const gameId = params.get('id');
@@ -573,7 +575,6 @@ function initDetailsPage(games) {
         }
     }
 
-    // 1. FIXED DOWNLOAD LINKS / MULTI-PART HANDLING ON DETAILS PAGE
     const downloadBtn = document.getElementById('detailDownloadBtn');
     if (downloadBtn) {
         if (currentGame.downloadParts && currentGame.downloadParts.length > 0) {
@@ -589,7 +590,6 @@ function initDetailsPage(games) {
         }
     }
 
-    // 2. ALTERNATIVE / WHATSAPP LINK HANDLING ON DETAILS PAGE
     const altDownloadContainer = document.getElementById('details-alt-download-section');
     if (altDownloadContainer) {
         if (currentGame.altDownloadUrl) {
@@ -603,7 +603,6 @@ function initDetailsPage(games) {
         }
     }
 
-    // 3. FIXED SCREENSHOTS RENDERING & ENLARGING (LIGHTBOX)
     const screenshotsContainer = document.getElementById('detailGameScreenshots'); 
     if (screenshotsContainer) {
         if (currentGame.screenshots && currentGame.screenshots.length > 0) {
