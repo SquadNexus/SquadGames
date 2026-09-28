@@ -561,10 +561,12 @@ function initDetailsPage(games) {
         }
     }
 
+    // Support both direct download button, multi-part popup, and alternative/WhatsApp links on details.html
     const downloadBtn = document.getElementById('detailDownloadBtn');
     if (downloadBtn) {
         if (currentGame.downloadParts && currentGame.downloadParts.length > 0) {
             downloadBtn.href = "#";
+            downloadBtn.innerHTML = `<i class="fa-solid fa-download"></i> Download Parts (${currentGame.downloadParts.length})`;
             downloadBtn.onclick = (e) => {
                 e.preventDefault();
                 showDownloadPartsModal(currentGame);
@@ -572,5 +574,15 @@ function initDetailsPage(games) {
         } else {
             downloadBtn.href = currentGame.downloadUrl || '#';
         }
+    }
+
+    // If your details page has a dedicated container for alternative or extra download links
+    const altDownloadContainer = document.getElementById('details-alt-download-section');
+    if (altDownloadContainer && currentGame.altDownloadUrl) {
+        altDownloadContainer.innerHTML = `
+            <a href="${currentGame.altDownloadUrl}" target="_blank" class="btn-action btn-vodacom" style="display: inline-block; margin-top: 10px;">
+                💬 Alternative / Buy via WhatsApp
+            </a>
+        `;
     }
 }
