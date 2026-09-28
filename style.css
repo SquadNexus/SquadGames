@@ -164,7 +164,7 @@ body {
     box-shadow: 0 4px 12px rgba(0, 122, 255, 0.3);
 }
 
-/* --- Dynamic Filter Dropdown Styles (Added for script compatibility) --- */
+/* --- Dynamic Filter Dropdown Styles --- */
 .portal-navbar select.nav-tab,
 .portal-navbar select {
     appearance: none;
@@ -398,11 +398,7 @@ body {
     display: flex;
     gap: 16px;
     width: max-content;
-    will-change: transform; /* Optimized for JavaScript smooth continuous ticker */
-}
-
-.featured-marquee-track:hover {
-    /* Hover pause is handled dynamically via JS loop listeners */
+    will-change: transform;
 }
 
 .marquee-game-card {
@@ -703,7 +699,7 @@ body {
     letter-spacing: 0.5px;
 }
 
-/* --- FIXED: Card Action & Action Group Layout --- */
+/* --- Card Action & Action Group Layout --- */
 .card-action {
     margin-top: auto;
     display: flex;
@@ -720,7 +716,6 @@ body {
     align-self: center;
 }
 
-/* Action Group & Buttons */
 .action-group {
     display: flex;
     flex-direction: column;
