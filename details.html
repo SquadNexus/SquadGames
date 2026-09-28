@@ -7,6 +7,127 @@
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
+    <style>
+        :root {
+            --bg-card: #16161a;
+            --accent-red: #e50914;
+            --accent-green: #28a745;
+            --text-main: #ffffff;
+            --text-muted: #a7a9be;
+        }
+        body {
+            background-color: #0d0d0f;
+            color: var(--text-main);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        .portal-header-wrapper {
+            background: var(--bg-card);
+            padding: 20px 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+            margin-bottom: 30px;
+        }
+        .portal-logo {
+            margin: 0;
+            font-size: 24px;
+            background: linear-gradient(45deg, #e50914, #ff416c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .nav-back-btn {
+            background: rgba(255, 255, 255, 0.08);
+            color: #fff;
+            padding: 10px 18px;
+            border-radius: 8px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 600;
+            transition: background 0.2s;
+        }
+        .nav-back-btn:hover {
+            background: var(--accent-red);
+        }
+        .game-details-wrapper {
+            background: var(--bg-card);
+            padding: 35px;
+            border-radius: 16px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+        }
+        .details-grid {
+            display: grid;
+            grid-template-columns: 1fr 1.4fr;
+            gap: 40px;
+            align-items: start;
+        }
+        @media (max-width: 900px) {
+            .details-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        .installation-guide {
+            background: var(--bg-card);
+            padding: 30px;
+            border-radius: 16px;
+            margin-top: 30px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            border-left: 4px solid var(--accent-red);
+        }
+        .installation-guide h3 {
+            margin-top: 0;
+            color: #fff;
+            font-size: 20px;
+        }
+        .installation-guide ol {
+            color: var(--text-muted);
+            line-height: 1.8;
+            padding-left: 20px;
+            margin-bottom: 0;
+        }
+        .installation-guide li strong {
+            color: #fff;
+        }
+        .fullscreen-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.92);
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        .fullscreen-img {
+            max-width: 90%;
+            max-height: 90vh;
+            border-radius: 8px;
+            box-shadow: 0 0 30px rgba(0,0,0,0.8);
+        }
+        .fullscreen-close {
+            position: absolute;
+            top: 25px;
+            right: 35px;
+            font-size: 45px;
+            color: #fff;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        .fullscreen-close:hover {
+            color: var(--accent-red);
+        }
+    </style>
 </head>
 <body>
 
@@ -14,42 +135,42 @@
     <div class="container">
 
         <!-- Navigation Bar / Back Button -->
-        <div class="portal-header-wrapper" style="margin-bottom: 20px;">
-            <div class="portal-logo-area" style="display: flex; justify-content: space-between; align-items: center;">
+        <div class="portal-header-wrapper">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
                 <h1 class="portal-logo">Squad Games Store TZ</h1>
-                <a href="index.html" class="nav-tab" style="text-decoration: none; display: inline-flex; align-items: center; gap: 8px;">
+                <a href="index.html" class="nav-back-btn">
                     <i class="fa-solid fa-arrow-left"></i> Back to Store
                 </a>
             </div>
         </div>
 
         <!-- Game Details Wrapper -->
-        <div id="game-details-container" class="game-details-wrapper" style="background: var(--bg-card, #1e1e1e); padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.3);">
-            <div class="loading-state" style="text-align: center; padding: 40px;">
-                <div class="spinner"></div>
-                <p style="margin-top: 15px; color: #aaa;">Loading game details from catalog...</p>
+        <div id="game-details-container" class="game-details-wrapper">
+            <div style="text-align: center; padding: 60px;">
+                <div class="spinner" style="margin: 0 auto 15px;"></div>
+                <p style="color: var(--text-muted); font-size: 16px;">Loading game details from catalog...</p>
             </div>
         </div>
 
         <!-- Standard Installation Guide Section -->
-        <div class="installation-guide" style="margin-top: 30px;">
-            <h3>How to Install</h3>
+        <div class="installation-guide">
+            <h3><i class="fa-solid fa-circle-question" style="color: var(--accent-red);"></i> How to Install Games</h3>
             <ol>
                 <li><strong>Download All Parts:</strong> Ensure all multi-part archive files are downloaded completely into the same folder on your computer.</li>
                 <li><strong>Extract Files:</strong> Right-click the first archive part (Part 1) and use extraction software like WinRAR or 7-Zip to extract the game files.</li>
                 <li><strong>Run Setup:</strong> Open the extracted folder, locate the setup file or installer, and run it as Administrator.</li>
                 <li><strong>Complete Installation:</strong> Follow the on-screen prompts to install the game to your preferred directory. Make sure to install any required redistributables (DirectX, VCRedist) if prompted.</li>
                 <li><strong>Apply Crack / Fix (If Applicable):</strong> If the release requires a manual crack, copy the contents from the crack/codex folder and paste them into the main game installation directory, replacing existing files.</li>
-                <li><strong>Launch Game:</strong> Run the game executable as Administrator and enjoy!</li>
+                <li><strong>Launch Game:</strong> Run the game executable as Administrator and enjoy your game!</li>
             </ol>
         </div>
 
     </div>
 
     <!-- Fullscreen Image Modal -->
-    <div id="fullscreen-modal" class="fullscreen-overlay" onclick="closeFullScreen()" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); justify-content: center; align-items: center; z-index: 1000;">
-        <span class="fullscreen-close" style="position: absolute; top: 20px; right: 30px; font-size: 40px; color: #fff; cursor: pointer;">&times;</span>
-        <img id="fullscreen-img" class="fullscreen-img" src="" alt="Fullscreen View" style="max-width: 90%; max-height: 90%; border-radius: 8px;">
+    <div id="fullscreen-modal" class="fullscreen-overlay" onclick="closeFullScreen()">
+        <span class="fullscreen-close">&times;</span>
+        <img id="fullscreen-img" class="fullscreen-img" src="" alt="Fullscreen View">
     </div>
 
     <!-- Details Script Logic -->
@@ -61,11 +182,11 @@
 
             if (!gameId) {
                 container.innerHTML = `
-                    <div style="text-align: center; padding: 40px;">
-                        <i class="fa-solid fa-triangle-exclamation" style="font-size: 48px; color: #ffc107; margin-bottom: 15px;"></i>
-                        <h2>No Game Selected</h2>
-                        <p style="color: #aaa; margin: 10px 0 20px;">Please return to the store and select a game to view its details.</p>
-                        <a href="index.html" class="nav-tab" style="text-decoration: none; padding: 10px 20px; background: #e50914; color: #fff; border-radius: 8px;">Go to Home Store</a>
+                    <div style="text-align: center; padding: 50px;">
+                        <i class="fa-solid fa-triangle-exclamation" style="font-size: 54px; color: #ffc107; margin-bottom: 20px;"></i>
+                        <h2 style="color: #fff; margin-bottom: 10px;">No Game Selected</h2>
+                        <p style="color: var(--text-muted); margin-bottom: 25px;">Please return to the store and select a game to view its full details.</p>
+                        <a href="index.html" class="nav-back-btn" style="background: var(--accent-red);">Go to Home Store</a>
                     </div>
                 `;
                 return;
@@ -77,7 +198,7 @@
                     return response.json();
                 })
                 .then(games => {
-                    // Match by ID, title, or slug
+                    // Match game by ID, title, or formatted URL slug
                     const game = games.find(g => 
                         g.id == gameId || 
                         String(g.title).toLowerCase() === String(gameId).toLowerCase() ||
@@ -86,61 +207,71 @@
 
                     if (!game) {
                         container.innerHTML = `
-                            <div style="text-align: center; padding: 40px;">
-                                <i class="fa-solid fa-circle-xmark" style="font-size: 48px; color: #e50914; margin-bottom: 15px;"></i>
-                                <h2>Game Not Found</h2>
-                                <p style="color: #aaa; margin: 10px 0 20px;">The game you are looking for does not exist or has been removed.</p>
-                                <a href="index.html" class="nav-tab" style="text-decoration: none; padding: 10px 20px; background: #e50914; color: #fff; border-radius: 8px;">Go to Home Store</a>
+                            <div style="text-align: center; padding: 50px;">
+                                <i class="fa-solid fa-circle-xmark" style="font-size: 54px; color: var(--accent-red); margin-bottom: 20px;"></i>
+                                <h2 style="color: #fff; margin-bottom: 10px;">Game Not Found</h2>
+                                <p style="color: var(--text-muted); margin-bottom: 25px;">The game you are looking for does not exist or has been removed from the catalog.</p>
+                                <a href="index.html" class="nav-back-btn" style="background: var(--accent-red);">Go to Home Store</a>
                             </div>
                         `;
                         return;
                     }
 
-                    // Extract properties flexibly
+                    // Extract properties
                     const title = game.title || game.name || 'Untitled Game';
                     const category = game.category || game.genre || 'Game';
                     const image = game.image || game.cover || 'placeholder.jpg';
                     const description = game.description || game.desc || game.about || 'No description available for this release.';
-                    const size = game.size || game.fileSize || 'N/A';
-                    const platform = game.platform || 'PC / Mobile';
-                    const version = game.version || game.release || 'Latest';
-                    
-                    // Screenshots / Gallery array check
                     const screenshots = game.screenshots || game.gallery || game.images || [];
 
-                    // Render Full Game Details & Layout
+                    // Render Full Game Details Layout
                     container.innerHTML = `
-                        <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 30px; align-items: start;" class="details-grid">
-                            <!-- Left Column: Main Cover & Screenshots Gallery -->
-                            <div>
-                                <img src="${image}" alt="${title}" style="width: 100%; border-radius: 8px; cursor: pointer; object-fit: cover; margin-bottom: 15px;" onclick="openFullScreen(this.src)" title="Click to view full image">
-                                
+                        <div class="details-grid">
+                            <!-- Left Column: Big Cover Image & Screenshots Below -->
+                            <div style="display: flex; flex-direction: column; gap: 20px;">
+                                <div style="position: relative; border-radius: 12px; overflow: hidden; box-shadow: 0 6px 20px rgba(0,0,0,0.5);">
+                                    <img src="${image}" alt="${title}" style="width: 100%; max-height: 420px; object-fit: cover; cursor: pointer; display: block; transition: transform 0.3s;" onclick="openFullScreen(this.src)" title="Click to enlarge main picture" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
+                                </div>
+
+                                <!-- Screenshots Gallery Positioned Below Main Picture -->
                                 ${screenshots.length > 0 ? `
-                                    <h4 style="color: #fff; margin-bottom: 10px; font-size: 14px;"><i class="fa-solid fa-images"></i> Screenshots</h4>
-                                    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px;">
-                                        ${screenshots.map(shot => `
-                                            <img src="${shot}" alt="Screenshot" style="width: 100%; height: 60px; object-fit: cover; border-radius: 4px; cursor: pointer; border: 1px solid rgba(255,255,255,0.1);" onclick="openFullScreen(this.src)">
-                                        `).join('')}
+                                    <div style="display: flex; flex-direction: column; gap: 12px;">
+                                        <h4 style="color: #fff; font-size: 16px; margin: 0; display: flex; align-items: center; gap: 8px;">
+                                            <i class="fa-solid fa-images" style="color: var(--accent-red);"></i> Screenshots Gallery (${screenshots.length})
+                                        </h4>
+                                        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 10px;">
+                                            ${screenshots.map(shot => `
+                                                <div style="border-radius: 8px; overflow: hidden; border: 2px solid rgba(255,255,255,0.1); cursor: pointer; background: #000;">
+                                                    <img src="${shot}" alt="Screenshot" style="width: 100%; height: 85px; object-fit: cover; display: block; transition: transform 0.2s;" onclick="openFullScreen(this.src)" onmouseover="this.style.transform='scale(1.08)'" onmouseout="this.style.transform='scale(1)'">
+                                                </div>
+                                            `).join('')}
+                                        </div>
                                     </div>
                                 ` : ''}
                             </div>
 
-                            <!-- Right Column: Info, Description & Downloads -->
-                            <div>
-                                <span style="background: #e50914; color: #fff; padding: 4px 10px; border-radius: 4px; font-size: 12px; font-weight: bold; text-transform: uppercase;">${category}</span>
-                                <h2 style="margin: 10px 0 15px; font-size: 28px; color: #fff;">${title}</h2>
-                                <p style="color: #bbb; line-height: 1.6; margin-bottom: 20px; white-space: pre-line;">${description}</p>
-                                
-                                <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
-                                    <p style="margin: 5px 0; color: #ddd;"><strong>File Size:</strong> ${size}</p>
-                                    <p style="margin: 5px 0; color: #ddd;"><strong>Platform:</strong> ${platform}</p>
-                                    <p style="margin: 5px 0; color: #ddd;"><strong>Version:</strong> ${version}</p>
-                                    ${game.requirements ? `<p style="margin: 5px 0; color: #ddd;"><strong>Requirements:</strong> ${game.requirements}</p>` : ''}
+                            <!-- Right Column: Title, Description, Requirements & Download Links -->
+                            <div style="display: flex; flex-direction: column; gap: 20px;">
+                                <div>
+                                    <span style="background: var(--accent-red); color: #fff; padding: 5px 12px; border-radius: 6px; font-size: 12px; font-weight: bold; text-transform: uppercase; letter-spacing: 0.5px;">${category}</span>
+                                    <h2 style="margin: 12px 0 15px; font-size: 32px; color: #fff; line-height: 1.2;">${title}</h2>
+                                    <p style="color: var(--text-muted); line-height: 1.7; margin: 0; white-space: pre-line; font-size: 15px;">${description}</p>
                                 </div>
 
-                                <div class="download-section">
-                                    <h3 style="color: #fff; margin-bottom: 12px;"><i class="fa-solid fa-download"></i> Download Links</h3>
-                                    <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+                                ${game.requirements ? `
+                                    <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); padding: 20px; border-radius: 10px;">
+                                        <h4 style="margin: 0 0 10px 0; color: #fff; font-size: 16px; display: flex; align-items: center; gap: 8px;">
+                                            <i class="fa-solid fa-laptop-code" style="color: #ffc107;"></i> System Requirements
+                                        </h4>
+                                        <p style="margin: 0; color: var(--text-muted); font-size: 14px; line-height: 1.6; white-space: pre-line;">${game.requirements}</p>
+                                    </div>
+                                ` : ''}
+
+                                <div class="download-section" style="margin-top: 10px;">
+                                    <h3 style="color: #fff; margin-bottom: 15px; font-size: 18px; display: flex; align-items: center; gap: 10px;">
+                                        <i class="fa-solid fa-download" style="color: var(--accent-green);"></i> Download Links
+                                    </h3>
+                                    <div style="display: flex; flex-wrap: wrap; gap: 12px;">
                                         ${renderDownloadLinks(game)}
                                     </div>
                                 </div>
@@ -151,38 +282,42 @@
                 .catch(error => {
                     console.error('Error fetching games.json:', error);
                     container.innerHTML = `
-                        <div style="text-align: center; padding: 40px; color: #e50914;">
-                            <i class="fa-solid fa-triangle-exclamation" style="font-size: 48px; margin-bottom: 15px;"></i>
-                            <h2>Error Loading Data</h2>
-                            <p style="color: #aaa;">Could not load game catalog information. Please check your console or games.json file format.</p>
+                        <div style="text-align: center; padding: 50px; color: var(--accent-red);">
+                            <i class="fa-solid fa-triangle-exclamation" style="font-size: 54px; margin-bottom: 20px;"></i>
+                            <h2 style="color: #fff; margin-bottom: 10px;">Error Loading Data</h2>
+                            <p style="color: var(--text-muted);">Could not load catalog information. Please check your JSON file structure or connection.</p>
                         </div>
                     `;
                 });
         });
 
         function renderDownloadLinks(game) {
-            // Check for various possible download keys in JSON
-            const links = game.downloadLinks || game.links || game.parts;
-            const singleLink = game.downloadLink || game.url || game.download;
+            // Check all common JSON download property names
+            const links = game.downloadLinks || game.links || game.parts || game.download_links;
+            const singleLink = game.downloadLink || game.url || game.download || game.fileUrl || game.downloadUrl || game.link;
 
             if (links && Array.isArray(links)) {
                 return links.map((link, index) => {
-                    const url = typeof link === 'object' ? (link.url || link.link) : link;
+                    const url = typeof link === 'object' ? (link.url || link.link || link.downloadUrl) : link;
                     const name = typeof link === 'object' ? (link.name || link.title || 'Part ' + (index + 1)) : 'Download Part ' + (index + 1);
                     return `
-                        <a href="${url}" target="_blank" style="padding: 10px 18px; background: #28a745; color: #fff; text-decoration: none; border-radius: 6px; font-weight: bold; display: inline-flex; align-items: center; gap: 6px;">
+                        <a href="${url}" target="_blank" style="padding: 12px 22px; background: linear-gradient(135deg, #28a745, #218838); color: #fff; text-decoration: none; border-radius: 8px; font-weight: bold; display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 4px 15px rgba(40,167,69,0.3); transition: transform 0.2s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
                             <i class="fa-solid fa-cloud-arrow-down"></i> ${name}
                         </a>
                     `;
                 }).join('');
             } else if (singleLink) {
                 return `
-                    <a href="${singleLink}" target="_blank" style="padding: 12px 24px; background: #28a745; color: #fff; text-decoration: none; border-radius: 6px; font-weight: bold; display: inline-flex; align-items: center; gap: 8px;">
-                        <i class="fa-solid fa-cloud-arrow-down"></i> Download Game (${game.size || 'Full File'})
+                    <a href="${singleLink}" target="_blank" style="padding: 14px 28px; background: linear-gradient(135deg, #28a745, #218838); color: #fff; text-decoration: none; border-radius: 8px; font-weight: bold; display: inline-flex; align-items: center; gap: 10px; font-size: 16px; box-shadow: 0 4px 15px rgba(40,167,69,0.3); transition: transform 0.2s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+                        <i class="fa-solid fa-cloud-arrow-down"></i> Download Full Game ${game.size ? '(' + game.size + ')' : ''}
                     </a>
                 `;
             } else {
-                return `<p style="color: #ffc107; font-style: italic;">Download links are currently unavailable for this title.</p>`;
+                return `
+                    <div style="background: rgba(255, 193, 7, 0.1); border: 1px solid rgba(255, 193, 7, 0.3); padding: 15px 20px; border-radius: 8px; color: #ffc107; width: 100%; box-sizing: border-box;">
+                        <i class="fa-solid fa-circle-info"></i> Download links are currently being updated for this title. Please check back shortly!
+                    </div>
+                `;
             }
         }
 
