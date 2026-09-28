@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Squad Games Store TZ</title>
-    <!-- FontAwesome Icons for buttons & spinners -->
+    <title>Game Details - Squad Games Store TZ</title>
+    <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
@@ -13,82 +13,150 @@
     <!-- Main Container -->
     <div class="container">
 
-        <!-- Permanent Portal Header & Styled Navigation Box -->
-        <div class="portal-header-wrapper">
-            <div class="portal-logo-area">
+        <!-- Navigation Bar / Back Button -->
+        <div class="portal-header-wrapper" style="margin-bottom: 20px;">
+            <div class="portal-logo-area" style="display: flex; justify-content: space-between; align-items: center;">
                 <h1 class="portal-logo">Squad Games Store TZ</h1>
-
-                <!-- Sleek Modern Search Box Styling -->
-                <div class="portal-search-wrapper">
-                    <i class="fa-solid fa-magnifying-glass search-icon"></i>
-                    <input type="text" id="gameSearchInput" placeholder="Search games, mods, simulator...">
-                </div>
-            </div>
-
-            <!-- Portal Navigation Tabs (Categories) -->
-            <nav class="portal-navbar">
-                <button class="nav-tab active" data-category="all">All Games</button>
-                <button class="nav-tab" data-category="pc">PC Games</button>
-                <button class="nav-tab" data-category="simulation">Simulation</button>
-                <button class="nav-tab" data-category="action">Action</button>
-                <button class="nav-tab" data-category="android">Mobile / Android</button>
-            </nav>
-        </div>
-
-        <!-- Intro Banner -->
-        <div class="intro-banner">
-            <h2>Welcome to Squad Games Store TZ</h2>
-            <p>Get your favorite PC and Mobile games & mods in Tanzania</p>
-        </div>
-
-        <!-- Top Split Section Layout (Featured Marquee & Most Popular) -->
-        <div class="top-split-container">
-            <!-- Featured Marquee Section -->
-            <div class="featured-epic-wrapper">
-                <h3 class="section-title">🔥 Featured</h3>
-                <div class="featured-marquee-container">
-                    <div id="featuredTrack" class="featured-marquee-track">
-                        <!-- Featured items load here via JavaScript -->
-                    </div>
-                </div>
-            </div>
-
-            <!-- Most Popular Games Section -->
-            <div class="most-popular-wrapper">
-                <h3 class="org-section-title section-title">⭐ Popular</h3>
-                <div id="popularList" class="popular-list">
-                    <!-- Popular items load here via JavaScript -->
-                </div>
+                <a href="index.html" class="nav-tab" style="text-decoration: none; display: inline-flex; align-items: center; gap: 8px;">
+                    <i class="fa-solid fa-arrow-left"></i> Back to Store
+                </a>
             </div>
         </div>
 
-        <!-- Trust Bar -->
-        <div class="trust-bar">
-            <div class="trust-item"><span class="trust-icon">⚡</span> Fast Downloads</div>
-            <div class="trust-item"><span class="trust-icon">🛡️</span> Verified Safe Files</div>
-            <div class="trust-item"><span class="trust-icon">🇹🇿</span> Local TZ Support</div>
+        <!-- Game Details Wrapper -->
+        <div id="game-details-container" class="game-details-wrapper" style="background: var(--bg-card, #1e1e1e); padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.3);">
+            <div class="loading-state" style="text-align: center; padding: 40px;">
+                <div class="spinner"></div>
+                <p style="margin-top: 15px; color: #aaa;">Loading game details...</p>
+            </div>
         </div>
 
-        <!-- Main Game Catalog Grid Section -->
-        <section>
-            <div id="games-grid" class="game-grid">
-                <!-- Dynamic game cards load here via JavaScript -->
-                <div class="loading-state">
-                    <div class="spinner"></div>
-                    <p>Loading games catalog...</p>
-                </div>
-            </div>
-        </section>
+        <!-- Standard Installation Guide Section -->
+        <div class="installation-guide" style="margin-top: 30px;">
+            <h3>How to Install</h3>
+            <ol>
+                <li><strong>Download All Parts:</strong> Ensure all multi-part archive files are downloaded completely into the same folder on your computer.</li>
+                <li><strong>Extract Files:</strong> Right-click the first archive part (Part 1) and use extraction software like WinRAR or 7-Zip to extract the game files.</li>
+                <li><strong>Run Setup:</strong> Open the extracted folder, locate the setup file or installer, and run it as Administrator.</li>
+                <li><strong>Complete Installation:</strong> Follow the on-screen prompts to install the game to your preferred directory. Make sure to install any required redistributables (DirectX, VCRedist) if prompted.</li>
+                <li><strong>Apply Crack / Fix (If Applicable):</strong> If the release requires a manual crack, copy the contents from the crack/codex folder and paste them into the main game installation directory, replacing existing files.</li>
+                <li><strong>Launch Game:</strong> Run the game executable as Administrator and enjoy!</li>
+            </ol>
+        </div>
 
     </div>
 
     <!-- Fullscreen Image Modal -->
-    <div id="fullscreen-modal" class="fullscreen-overlay" onclick="closeFullScreen()">
-        <span class="fullscreen-close">&times;</span>
-        <img id="fullscreen-img" class="fullscreen-img" src="" alt="Fullscreen View">
+    <div id="fullscreen-modal" class="fullscreen-overlay" onclick="closeFullScreen()" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); justify-content: center; align-items: center; z-index: 1000;">
+        <span class="fullscreen-close" style="position: absolute; top: 20px; right: 30px; font-size: 40px; color: #fff; cursor: pointer;">&times;</span>
+        <img id="fullscreen-img" class="fullscreen-img" src="" alt="Fullscreen View" style="max-width: 90%; max-height: 90%; border-radius: 8px;">
     </div>
 
-    <!-- Script File -->
-    <script src="script.js"></script>
+    <!-- Details Script Logic -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const gameId = urlParams.get('id') || urlParams.get('game');
+            const container = document.getElementById('game-details-container');
+
+            if (!gameId) {
+                container.innerHTML = `
+                    <div style="text-align: center; padding: 40px;">
+                        <i class="fa-solid fa-triangle-exclamation" style="font-size: 48px; color: #ffc107; margin-bottom: 15px;"></i>
+                        <h2>No Game Selected</h2>
+                        <p style="color: #aaa; margin: 10px 0 20px;">Please return to the store and select a game to view its details.</p>
+                        <a href="index.html" class="nav-tab" style="text-decoration: none; padding: 10px 20px; background: #e50914; color: #fff; border-radius: 8px;">Go to Home Store</a>
+                    </div>
+                `;
+                return;
+            }
+
+            fetch('games.json')
+                .then(response => {
+                    if (!response.ok) throw new Error('Failed to load games data.');
+                    return response.json();
+                })
+                .then(games => {
+                    // Find matching game by ID or title slug
+                    const game = games.find(g => g.id == gameId || String(g.title).toLowerCase().replace(/[^a-z0-9]/g, '-') === String(gameId).toLowerCase());
+
+                    if (!game) {
+                        container.innerHTML = `
+                            <div style="text-align: center; padding: 40px;">
+                                <i class="fa-solid fa-circle-xmark" style="font-size: 48px; color: #e50914; margin-bottom: 15px;"></i>
+                                <h2>Game Not Found</h2>
+                                <p style="color: #aaa; margin: 10px 0 20px;">The game you are looking for does not exist or has been removed.</p>
+                                <a href="index.html" class="nav-tab" style="text-decoration: none; padding: 10px 20px; background: #e50914; color: #fff; border-radius: 8px;">Go to Home Store</a>
+                            </div>
+                        `;
+                        return;
+                    }
+
+                    // Render Full Game Details
+                    container.innerHTML = `
+                        <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 30px; align-items: start;" class="details-grid">
+                            <div>
+                                <img src="${game.image || 'placeholder.jpg'}" alt="${game.title}" style="width: 100%; border-radius: 8px; cursor: pointer; object-fit: cover;" onclick="openFullScreen(this.src)">
+                            </div>
+                            <div>
+                                <span style="background: #e50914; color: #fff; padding: 4px 10px; border-radius: 4px; font-size: 12px; font-weight: bold; text-transform: uppercase;">${game.category || 'Game'}</span>
+                                <h2 style="margin: 10px 0 15px; font-size: 28px; color: #fff;">${game.title}</h2>
+                                <p style="color: #bbb; line-height: 1.6; margin-bottom: 20px;">${game.description || 'No description available for this release.'}</p>
+                                
+                                <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 8px; margin-bottom: 20px;">
+                                    <p style="margin: 5px 0; color: #ddd;"><strong>File Size:</strong> ${game.size || 'N/A'}</p>
+                                    <p style="margin: 5px 0; color: #ddd;"><strong>Platform:</strong> ${game.platform || 'PC / Mobile'}</p>
+                                    <p style="margin: 5px 0; color: #ddd;"><strong>Version / Release:</strong> ${game.version || 'Latest'}</p>
+                                </div>
+
+                                <div class="download-section">
+                                    <h3 style="color: #fff; margin-bottom: 10px;"><i class="fa-solid fa-download"></i> Download Links</h3>
+                                    ${renderDownloadLinks(game)}
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                })
+                .catch(error => {
+                    console.error('Error fetching games.json:', error);
+                    container.innerHTML = `
+                        <div style="text-align: center; padding: 40px; color: #e50914;">
+                            <i class="fa-solid fa-triangle-exclamation" style="font-size: 48px; margin-bottom: 15px;"></i>
+                            <h2>Error Loading Data</h2>
+                            <p style="color: #aaa;">Could not load game catalog information. Please check your connection or JSON file.</p>
+                        </div>
+                    `;
+                });
+        });
+
+        function renderDownloadLinks(game) {
+            if (game.downloadLinks && Array.isArray(game.downloadLinks)) {
+                return game.downloadLinks.map((link, index) => `
+                    <a href="${link.url}" target="_blank" style="display: inline-block; margin-right: 10px; margin-bottom: 10px; padding: 10px 18px; background: #28a745; color: #fff; text-decoration: none; border-radius: 6px; font-weight: bold;">
+                        <i class="fa-solid fa-cloud-arrow-down"></i> ${link.name || 'Part ' + (index + 1)}
+                    </a>
+                `).join('');
+            } else if (game.downloadLink) {
+                return `
+                    <a href="${game.downloadLink}" target="_blank" style="display: inline-block; padding: 12px 24px; background: #28a745; color: #fff; text-decoration: none; border-radius: 6px; font-weight: bold;">
+                        <i class="fa-solid fa-cloud-arrow-down"></i> Download Game (${game.size || 'Full File'})
+                    </a>
+                `;
+            } else {
+                return `<p style="color: #ffc107;">Download links coming soon or currently unavailable.</p>`;
+            }
+        }
+
+        function openFullScreen(imgSrc) {
+            const modal = document.getElementById('fullscreen-modal');
+            const modalImg = document.getElementById('fullscreen-img');
+            modal.style.display = 'flex';
+            modalImg.src = imgSrc;
+        }
+
+        function closeFullScreen() {
+            document.getElementById('fullscreen-modal').style.display = 'none';
+        }
+    </script>
 </body>
 </html>
