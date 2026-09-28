@@ -1,7 +1,7 @@
 let loadedGamesData = [];
 let currentSearchQuery = "";
 let currentCategory = "all";
-let currentFranchise = "all";
+let currentGame = "all";
 
 document.addEventListener("DOMContentLoaded", () => {
     console.log("Squad Games Store initialized.");
@@ -479,6 +479,7 @@ function closeFullScreen() {
     if (fullModal) fullModal.classList.remove("active");
 }
 
+// BULLETPROOF DOWNLOAD PARTS MODAL (Safely handles objects, strings, or stringified arrays)
 function showDownloadPartsModal(game) {
     let modal = document.getElementById('download-parts-modal');
     if (!modal) {
@@ -509,13 +510,24 @@ function showDownloadPartsModal(game) {
 
     document.getElementById('parts-modal-title').innerText = `Download: ${game.title}`;
     
+    let partsArray = game.downloadParts;
+    if (typeof partsArray === 'string') {
+        try { partsArray = JSON.parse(partsArray); } catch (e) { partsArray = []; }
+    }
+    partsArray = partsArray || [];
+
     const container = document.getElementById('parts-list-container');
-    container.innerHTML = game.downloadParts.map((part, idx) => `
-        <a href="${part.url}" target="_blank" class="btn-action btn-get" style="display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; text-decoration: none;">
-            <span><i class="fa-solid fa-download"></i> ${part.name || `Part ${idx + 1}`}</span>
-            <i class="fa-solid fa-external-link-alt" style="font-size: 0.8rem;"></i>
-        </a>
-    `).join('');
+    container.innerHTML = partsArray.map((part, idx) => {
+        const partUrl = (typeof part === 'object' && part !== null) ? (part.url || part.link || '#') : part;
+        const partName = (typeof part === 'object' && part !== null) ? (part.name || `Part ${idx + 1}`) : `Part ${idx + 1}`;
+
+        return `
+            <a href="${partUrl}" target="_blank" class="btn-action btn-get" style="display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; text-decoration: none;">
+                <span><i class="fa-solid fa-download"></i> ${partName}</span>
+                <i class="fa-solid fa-external-link-alt" style="font-size: 0.8rem;"></i>
+            </a>
+        `;
+    }).join('');
 
     modal.classList.add('active');
 }
