@@ -525,7 +525,7 @@ function closeDownloadPartsModal() {
     if (modal) modal.classList.remove('active');
 }
 
-// LOGIC TO POPULATE DETAILS.HTML AND THE INSTALL GUIDE
+// LOGIC TO POPULATE DETAILS.HTML, DOWNLOADS, AND SCREENSHOTS GALLERY
 function initDetailsPage(games) {
     const params = new URLSearchParams(window.location.search);
     const gameId = params.get('id');
@@ -561,16 +561,45 @@ function initDetailsPage(games) {
         }
     }
 
+    // 1. FIXED DOWNLOAD LINKS / MULTI-PART HANDLING ON DETAILS PAGE
     const downloadBtn = document.getElementById('detailDownloadBtn');
     if (downloadBtn) {
         if (currentGame.downloadParts && currentGame.downloadParts.length > 0) {
             downloadBtn.href = "#";
+            downloadBtn.innerHTML = `<i class="fa-solid fa-download"></i> Download Parts (${currentGame.downloadParts.length})`;
             downloadBtn.onclick = (e) => {
                 e.preventDefault();
                 showDownloadPartsModal(currentGame);
             };
         } else {
             downloadBtn.href = currentGame.downloadUrl || '#';
+            downloadBtn.innerHTML = `<i class="fa-solid fa-download"></i> Download Game`;
+        }
+    }
+
+    // 2. ALTERNATIVE / WHATSAPP LINK HANDLING ON DETAILS PAGE
+    const altDownloadContainer = document.getElementById('details-alt-download-section');
+    if (altDownloadContainer) {
+        if (currentGame.altDownloadUrl) {
+            altDownloadContainer.innerHTML = `
+                <a href="${currentGame.altDownloadUrl}" target="_blank" class="btn-action btn-vodacom" style="display: inline-block; margin-top: 10px; text-decoration: none;">
+                    💬 Alternative / Buy via WhatsApp
+                </a>
+            `;
+        } else {
+            altDownloadContainer.innerHTML = '';
+        }
+    }
+
+    // 3. FIXED SCREENSHOTS RENDERING & ENLARGING (LIGHTBOX)
+    const screenshotsContainer = document.getElementById('detailGameScreenshots'); 
+    if (screenshotsContainer) {
+        if (currentGame.screenshots && currentGame.screenshots.length > 0) {
+            screenshotsContainer.innerHTML = currentGame.screenshots.map(shot => `
+                <img src="${shot}" alt="Game Screenshot" class="screenshot-thumb" onclick="openFullScreen('${shot}')" style="cursor: pointer;" />
+            `).join('');
+        } else {
+            screenshotsContainer.innerHTML = '<p style="color: var(--text-muted); font-size: 0.85rem;">No screenshots available for this title.</p>';
         }
     }
 }
