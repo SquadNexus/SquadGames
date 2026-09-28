@@ -95,38 +95,6 @@
         .installation-guide li strong {
             color: #fff;
         }
-        .fullscreen-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.92);
-            justify-content: center;
-            align-items: center;
-            z-index: 2000;
-            padding: 20px;
-            box-sizing: border-box;
-        }
-        .fullscreen-img {
-            max-width: 90%;
-            max-height: 90vh;
-            border-radius: 8px;
-            box-shadow: 0 0 30px rgba(0,0,0,0.8);
-        }
-        .fullscreen-close {
-            position: absolute;
-            top: 25px;
-            right: 35px;
-            font-size: 45px;
-            color: #fff;
-            cursor: pointer;
-            transition: color 0.2s;
-        }
-        .fullscreen-close:hover {
-            color: var(--accent-red);
-        }
     </style>
 </head>
 <body>
@@ -167,7 +135,7 @@
 
     </div>
 
-    <!-- Fullscreen Image Modal -->
+    <!-- Fullscreen Image Modal Overlay -->
     <div id="fullscreen-modal" class="fullscreen-overlay" onclick="closeFullScreen()">
         <span class="fullscreen-close">&times;</span>
         <img id="fullscreen-img" class="fullscreen-img" src="" alt="Fullscreen View">
@@ -198,7 +166,6 @@
                     return response.json();
                 })
                 .then(games => {
-                    // Match game by ID, title, or formatted URL slug
                     const game = games.find(g => 
                         g.id == gameId || 
                         String(g.title).toLowerCase() === String(gameId).toLowerCase() ||
@@ -217,23 +184,21 @@
                         return;
                     }
 
-                    // Extract properties
                     const title = game.title || game.name || 'Untitled Game';
                     const category = game.category || game.genre || 'Game';
                     const image = game.image || game.cover || 'placeholder.jpg';
                     const description = game.description || game.desc || game.about || 'No description available for this release.';
                     const screenshots = game.screenshots || game.gallery || game.images || [];
 
-                    // Render Full Game Details Layout
                     container.innerHTML = `
                         <div class="details-grid">
                             <!-- Left Column: Big Cover Image & Screenshots Below -->
                             <div style="display: flex; flex-direction: column; gap: 20px;">
-                                <div style="position: relative; border-radius: 12px; overflow: hidden; box-shadow: 0 6px 20px rgba(0,0,0,0.5);">
-                                    <img src="${image}" alt="${title}" style="width: 100%; max-height: 420px; object-fit: cover; cursor: pointer; display: block; transition: transform 0.3s;" onclick="openFullScreen(this.src)" title="Click to enlarge main picture" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
+                                <div style="position: relative; border-radius: 12px; overflow: hidden; box-shadow: 0 6px 20px rgba(0,0,0,0.5); background: #000;">
+                                    <img src="${image}" alt="${title}" style="width: 100%; max-height: 420px; object-fit: cover; cursor: pointer; display: block; transition: transform 0.3s;" onclick="openFullScreen(event, this.src)" title="Click to enlarge main picture" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
                                 </div>
 
-                                <!-- Screenshots Gallery Positioned Below Main Picture -->
+                                <!-- Screenshots Gallery -->
                                 ${screenshots.length > 0 ? `
                                     <div style="display: flex; flex-direction: column; gap: 12px;">
                                         <h4 style="color: #fff; font-size: 16px; margin: 0; display: flex; align-items: center; gap: 8px;">
@@ -242,7 +207,7 @@
                                         <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 10px;">
                                             ${screenshots.map(shot => `
                                                 <div style="border-radius: 8px; overflow: hidden; border: 2px solid rgba(255,255,255,0.1); cursor: pointer; background: #000;">
-                                                    <img src="${shot}" alt="Screenshot" style="width: 100%; height: 85px; object-fit: cover; display: block; transition: transform 0.2s;" onclick="openFullScreen(this.src)" onmouseover="this.style.transform='scale(1.08)'" onmouseout="this.style.transform='scale(1)'">
+                                                    <img src="${shot}" alt="Screenshot" style="width: 100%; height: 85px; object-fit: cover; display: block; transition: transform 0.2s;" onclick="openFullScreen(event, this.src)" onmouseover="this.style.transform='scale(1.08)'" onmouseout="this.style.transform='scale(1)'">
                                                 </div>
                                             `).join('')}
                                         </div>
@@ -292,13 +257,13 @@
         });
 
         function renderDownloadLinks(game) {
-            // Check all common JSON download property names
-            const links = game.downloadLinks || game.links || game.parts || game.download_links;
-            const singleLink = game.downloadLink || game.url || game.download || game.fileUrl || game.downloadUrl || game.link;
+            // Robust check covering all possible property naming conventions for multi-part & single links
+            const multiLinks = game.downloadParts || game.downloadLinks || game.links || game.parts || game.download_links;
+            const singleLink = game.downloadUrl || game.url || game.download || game.fileUrl || game.downloadUrl || game.link || game.altDownloadUrl;
 
-            if (links && Array.isArray(links)) {
-                return links.map((link, index) => {
-                    const url = typeof link === 'object' ? (link.url || link.link || link.downloadUrl) : link;
+            if (multiLinks && Array.isArray(multiLinks) && multiLinks.length > 0) {
+                return multiLinks.map((link, index) => {
+                    const url = typeof link === 'object' ? (link.url || link.link || link.downloadUrl || link.href) : link;
                     const name = typeof link === 'object' ? (link.name || link.title || 'Part ' + (index + 1)) : 'Download Part ' + (index + 1);
                     return `
                         <a href="${url}" target="_blank" style="padding: 12px 22px; background: linear-gradient(135deg, #28a745, #218838); color: #fff; text-decoration: none; border-radius: 8px; font-weight: bold; display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 4px 15px rgba(40,167,69,0.3); transition: transform 0.2s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
@@ -309,7 +274,7 @@
             } else if (singleLink) {
                 return `
                     <a href="${singleLink}" target="_blank" style="padding: 14px 28px; background: linear-gradient(135deg, #28a745, #218838); color: #fff; text-decoration: none; border-radius: 8px; font-weight: bold; display: inline-flex; align-items: center; gap: 10px; font-size: 16px; box-shadow: 0 4px 15px rgba(40,167,69,0.3); transition: transform 0.2s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
-                        <i class="fa-solid fa-cloud-arrow-down"></i> Download Full Game ${game.size ? '(' + game.size + ')' : ''}
+                        <i class="fa-solid fa-cloud-arrow-down"></i> Download Game ${game.size ? '(' + game.size + ')' : ''}
                     </a>
                 `;
             } else {
@@ -321,15 +286,22 @@
             }
         }
 
-        function openFullScreen(imgSrc) {
+        function openFullScreen(event, imgSrc) {
+            if (event) event.stopPropagation();
             const modal = document.getElementById('fullscreen-modal');
             const modalImg = document.getElementById('fullscreen-img');
             modal.style.display = 'flex';
             modalImg.src = imgSrc;
+            // Force reflow for smooth class transition
+            setTimeout(() => modal.classList.add('active'), 10);
         }
 
         function closeFullScreen() {
-            document.getElementById('fullscreen-modal').style.display = 'none';
+            const modal = document.getElementById('fullscreen-modal');
+            modal.classList.remove('active');
+            setTimeout(() => {
+                modal.style.display = 'none';
+            }, 300);
         }
     </script>
 </body>
