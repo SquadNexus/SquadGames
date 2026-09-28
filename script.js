@@ -134,7 +134,7 @@ async function loadGameCatalog() {
             },
             {
                 id: "2",
-                title: "Marvel’s Spider-Man: Miles Morales",
+                title: "Marvel's Spider-Man: Miles Morales",
                 platform: "PC",
                 category: "Action",
                 description: "Experience the rise of Miles Morales as new powers unfold.",
@@ -307,7 +307,7 @@ function renderFeaturedMarquee(sliderGames) {
                     <p>${game.description || ''}</p>
                     <div class="marquee-game-footer">
                         <span class="marquee-price">${game.price || 'FREE'}</span>
-                        <button class="btn-details" onclick="openDetailsById('${gameId}')" style="padding: 4px 8px; font-size: 0.75rem;">View</button>
+                        <button class="btn-details" onclick="openDetailsById('${encodeURIComponent(gameId)}')" style="padding: 4px 8px; font-size: 0.75rem;">View</button>
                     </div>
                 </div>
             </div>
@@ -352,7 +352,7 @@ function renderPopularList(popularGames) {
     container.innerHTML = popularGames.map((game) => {
         const gameId = game.id || game.title;
         return `
-            <div class="popular-item" onclick="openDetailsById('${gameId}')" style="cursor: pointer;">
+            <div class="popular-item" onclick="openDetailsById('${encodeURIComponent(gameId)}')" style="cursor: pointer;">
                 <img src="${game.image}" alt="${game.title}" loading="lazy" onerror="this.src='images/nfsmw-shot1.png';">
                 <div class="popular-item-info">
                     <h5>${game.title}</h5>
@@ -435,7 +435,7 @@ function renderGameStore(gameList) {
 
         card.innerHTML = `
             <span class="card-badge">${game.platform || "PC"}</span>
-            <div class="game-img-wrapper" onclick="openDetailsById('${gameId}')" style="cursor: pointer;">
+            <div class="game-img-wrapper" onclick="openDetailsById('${encodeURIComponent(gameId)}')" style="cursor: pointer;">
                 <img src="${game.image || 'images/nfsmw-shot1.png'}" alt="${game.title}" class="game-img" loading="lazy" onerror="this.onerror=null; this.src='images/nfsmw-shot1.png';" />
             </div>
             <div class="game-details">
@@ -445,7 +445,7 @@ function renderGameStore(gameList) {
                 <div class="card-action">
                     <span class="price">${game.price || 'FREE'}</span>
                     <div class="action-group">
-                        <button class="btn-details" onclick="openDetailsById('${gameId}')">Details &rarr;</button>
+                        <button class="btn-details" onclick="openDetailsById('${encodeURIComponent(gameId)}')">Details &rarr;</button>
                         ${actionButtonsHTML}
                     </div>
                 </div>
@@ -457,7 +457,7 @@ function renderGameStore(gameList) {
 }
 
 function openDetailsById(id) {
-    window.location.href = `details.html?id=${encodeURIComponent(id)}`;
+    window.location.href = `details.html?id=${id}`;
 }
 
 function openDetails(index) {
@@ -536,7 +536,6 @@ function initDetailsPage(games) {
 
     if (!currentGame) return;
 
-    // Populate standard text fields if they exist in your markup
     const setElementText = (id, text) => {
         const el = document.getElementById(id);
         if (el) el.innerText = text;
@@ -553,7 +552,6 @@ function initDetailsPage(games) {
         coverImg.src = currentGame.image;
     }
 
-    // Populate Install Guide safely with line break formatting
     const installGuideContainer = document.getElementById('gameInstallGuide');
     if (installGuideContainer) {
         if (currentGame.installGuide) {
@@ -563,7 +561,6 @@ function initDetailsPage(games) {
         }
     }
 
-    // Setup Download Action Button
     const downloadBtn = document.getElementById('detailDownloadBtn');
     if (downloadBtn) {
         if (currentGame.downloadParts && currentGame.downloadParts.length > 0) {
