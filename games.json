@@ -558,7 +558,7 @@
       { "name": "Part 12", "url": "https://thefileslocker.net/9pb4hi7d5q4w.html" },
       { "name": "Part 13", "url": "https://thefileslocker.net/4qhazzzwrisi.html" }
     ]
-},
+  },
   {
     "id": "26",
     "title": "Call of Duty: Black Ops 6",
@@ -584,7 +584,7 @@
       { "name": "Part 08", "url": "https://www.mediafire.com/file/61ihpjzhdlf6a6x/Call_of_Duty_Black_Ops_6_-_%2528Www.ApunKaGames.Com%2529.part08.rar/file" },
       { "name": "Part 09", "url": "https://www.mediafire.com/file/rr752igpwrzay4z/Call_of_Duty_Black_Ops_6_-_%2528Www.ApunKaGames.Com%2529.part09.rar/file" }
     ]
-},
+  },
   {
     "id": "27",
     "title": "Call of Duty: Black Ops III Zombies Chronicles",
@@ -623,7 +623,7 @@
       { "name": "Part 21", "url": "https://thefileslocker.net/acm2aswerxal.html" },
       { "name": "Part 22", "url": "https://thefileslocker.net/3fimsqvbpnfc.html" }
     ]
-},
+  },
   {
     "id": "28",
     "title": "Call of Duty: WWII Digital Deluxe Edition",
@@ -852,65 +852,14 @@
     "platform": "PC",
     "category": "Action/Shooting",
     "description": "Call of Duty 4: Modern Warfare, developed by Infinity Ward and published by Activision for Windows in 2007, is a 2.56 GB groundbreaking first-person shooter that successfully shifted the franchise away from its historical World War II roots into a tense, contemporary military setting centered around a gripping global conflict. The gameplay delivers fast-paced gunplay and cinematic, highly influential campaign missions—such as the iconic stealth operations—while pioneering deep progression systems and modern combat mechanics in competitive multiplayer that permanently reshaped the entire genre.",
-    "requirements": "OS: Windows XP/Vista (Windows 95/98/ME/2000 are unsupported)<br>Processor: Pentium 4 @ 2.4 GHz / AMD Athlon 2600+ or any Dual Core @ 1.8 GHz<br>RAM: 512 MB<br>Hard Disk: 8 GB available space<br>Graphics Card: nVidia 6600 / ATI Radeon 9800Pro<br>Sound Card:DirectX 9.0c Compatible<br>DirectX: Version 9.0c DVD Rom Drive",
+    "requirements": "OS: Windows XP/Vista<br>Processor: Pentium 4 @ 2.4 GHz / AMD Athlon 2600+ or any Dual Core @ 1.8 GHz<br>RAM: 1 GB (XP) / 2 GB (Vista)<br>Hard Disk: 8 GB available space<br>Graphics Card: 256 MB NVIDIA GeForce 6600GT / ATI Radeon 1600XT or better<br>DirectX: Version 9.0c",
     "price": "FREE",
-    "image": "images/cod4mw.png",
+    "image": "images/cod4.png",
     "screenshots": [
-        "images/cod4mw1.png",
-        "images/cod4mw2.png",
-        "images/cod4mw3.png"
+      "images/cod4_1.png",
+      "images/cod4_2.png",
+      "images/cod4_3.png"
     ],
-    "downloadUrl": "https://www.mediafire.com/file/mbnf76k86lgwv7b/Call_Of_Duty_4_Moden_Warfare-_%2528Www.ApunKaGames.Biz%2529.exe/file"
-  },
-  {
-    "id": "39",
-    "title": "Call of Duty 2",
-    "platform": "PC",
-    "category": "Action, FPS",
-    "description": "Call of Duty 2, developed by Infinity Ward and published by Activision for Windows on October 25, 2005, is a 3.48 GB classic first-person shooter that delivers cinematic and immersive battles across the historic frontlines of Europe and North Africa during World War II. The gameplay plunges players into intense infantry combat featuring authentic period weapons, strategic missions, and dynamic, artificial intelligence-driven firefights that capture an authentic, chaotic war atmosphere.",
-    "requirements": "OS: Windows 7/Vista/XP<br>Processor: Pentium IV 1.4GHz or AMD Athlon XP 1700+<br>RAM: 256 MB<br>Hard Disk: 4 GB available space<br>Graphics Card: 64 MB ATi Radeon 9600 or GeForce FX 5200 Class,<br>DirectX: Version 9.0c",
-    "price": "FREE",
-    "image": "images/cod2.png",
-    "screenshots": [
-        "images/cod21.png",
-        "images/cod22.png",
-        "images/cod23.png"
-    ],
-    "downloadUrl": "https://www.mediafire.com/file/d4imx443u5xquiy/Call_of_Duty_2_-_%2528Www.ApunKaGames.Biz%2529.rar/file"
-  },
-  {
-    "id": "40",
-    "title": "Call of Duty 1",
-    "platform": "PC",
-    "category": "Shooting",
-    "description": "Call of Duty 1, developed by Infinity Ward and published by Activision for Windows, is a lightweight 421 MB World War II first-person shooter that laid the foundation for one of the most successful gaming franchises in history. The gameplay immerses players in intense, team-oriented combat across multiple historic campaigns told from American, British, and Soviet perspectives, featuring authentic period weaponry, challenging tactical missions, and cinematic storytelling that collectively set a brand new standard for the war shooter genre.",
-    "requirements": "OS: 98/ME/2000/XP<br>Processor: Pentium III or Athlon 600 MHz<br>Processor (Windows 98/ME) or Pentium III or Athlon 700 MHz Processor (Windows 2000/XP)<br>RAM: 128 MB<br>Graphics card: 32 MB 3D Accelerated DirectX compatible<br>Sound card: 16-bit DirectX compatible<br>Storage: 1.4 GB Hard Disk Space<br>DirectX: 9.0 b",
-    "price": "FREE",
-    "image": "images/cod1.png",
-    "screenshots": [
-        "images/cod11.png",
-        "images/cod12.png",
-        "images/cod13.png"
-    ],
-    "downloadUrl": "https://www.mediafire.com/file/q66yxz8yyjvk38f/Call_of_Duty_1_-_%2528Www.ApunKaGames.Biz%2529.rar/file"
-  },
-  {
-    "id": "41",
-    "title": "FIFA 23",
-    "platform": "PC",
-    "category": "Sports",
-    "description": "EA Sports FIFA 23, developed by EA Vancouver and EA Romania alongside EA Sports and published for Windows on September 30, 2022, is a 55 GB football sports simulation video game that utilizes upgraded HyperMotion2 technology captured from real-world match data to deliver smoother, more lifelike player movement across over 6,0",
-    "requirements": "OS: Windows 10 64-bit<br>Processor: Intel Core i5 6600k or AMD Ryzen 5 1600<br>RAM: 8 GB<br>Hard Disk: 100 GB available space<br>Graphics Card: NVIDIA GeForce GTX 1050 Ti or AMD Radeon RX 570<br>DirectX: Version 12",
-    "price": "FREE",
-    "image": "images/fifa23.png",
-    "screenshots": [
-      "images/fifa23_1.png",
-      "images/fifa23_2.png",
-      "images/fifa23_3.png"
-    ],
-    "downloadParts": [
-      { "name": "Part 01", "url": "https://www.mediafire.com/file_premium/fifa23_part01_placeholder/file" },
-      { "name": "Part 02", "url": "https://www.mediafire.com/file_premium/fifa23_part02_placeholder/file" }
-    ]
+    "downloadUrl": "https://www.mediafire.com/file/cod4-placeholder/file"
   }
 ]
