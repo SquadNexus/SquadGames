@@ -920,5 +920,30 @@
         { "name": "Part 10", "url": "https://www.mediafire.com/file/v250gu5rla1v11z/FIFA_21_-_%2528Www.ApunKaGames.Net%2529.part10.rar/file" },
         { "name": "Part 11", "url": "https://www.mediafire.com/file/uewlwlptfna3bd0/FIFA_21_-_%2528Www.ApunKaGames.Net%2529.part11.rar/file" }
     ]
+},
+  {
+    "id": "41",
+    "title": "FIFA 20 Ultimate Edition",
+    "platform": "PC",
+    "category": "Football, Sports",
+    "description": "FIFA 20 Ultimate Edition, developed by EA Sports for Windows, is a 34.5 GB premium sports simulation video game that enhances the core football experience with valuable bonus content, including FUT packs, special player items, and early access benefits. The gameplay delivers realistic football action featuring improved ball control and the exciting introduction of VOLTA Football, which brings authentic small-sided street matches to the franchise alongside traditional Career Mode, Ultimate Team, and online multiplayer.",
+    "requirements": "OS: Windows 7/8.1/10 (64-Bit)<br>Processor: AMD Phenom II X4 965<br>RAM: 8 GB Hard Disk: 50 GB available space<br>Graphics Card: NVIDIA GeForce GTX 660<br>DirectX: Version 11",
+    "installGuide": "Extract the file using Winrar. (Download Winrar)\nOpen “FIFA 20 Ultimate Edition” >> “Game” folder.\nThen double click on “FIFA20” icon to play the game. Done!",
+    "price": "FREE",
+    "image": "images/fifa20ue.png",
+    "screenshots": [
+        "images/fifa20ue1.png",
+        "images/fifa20ue2.png",
+        "images/fifa20ue3.png"
+    ],
+    "downloadParts": [
+        { "name": "Part 01", "url": "https://www.mediafire.com/file/u68jb6hmbavsn3j/FIFA_20_Ultimate_Edition_-_%2528Www.ApunKaGames.Biz%2529.part1.rar/file" },
+        { "name": "Part 02", "url": "https://www.mediafire.com/file/tooo95b6l3uilh3/FIFA_20_Ultimate_Edition_-_%2528Www.ApunKaGames.Biz%2529.part2.rar/file" },
+        { "name": "Part 03", "url": "https://www.mediafire.com/file/m9u057fjknder14/FIFA_20_Ultimate_Edition_-_%2528Www.ApunKaGames.Biz%2529.part3.rar/file" },
+        { "name": "Part 04", "url": "https://www.mediafire.com/file/dhv2x99dbs3c41h/FIFA_20_Ultimate_Edition_-_%2528Www.ApunKaGames.Biz%2529.part4.rar/file" },
+        { "name": "Part 05", "url": "https://www.mediafire.com/file/84mh59cizvkhons/FIFA_20_Ultimate_Edition_-_%2528Www.ApunKaGames.Biz%2529.part5.rar/file" },
+        { "name": "Part 06", "url": "https://www.mediafire.com/file/lyvmgkbwg4zmfsz/FIFA_20_Ultimate_Edition_-_%2528Www.ApunKaGames.Biz%2529.part6.rar/file" },
+        { "name": "Part 07", "url": "https://www.mediafire.com/file/u8dt6cr718l5219/FIFA_20_Ultimate_Edition_-_%2528Www.ApunKaGames.Biz%2529.part7.rar/file" }
+    ]
 }
 ]
