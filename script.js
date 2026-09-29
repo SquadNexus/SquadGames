@@ -541,18 +541,32 @@ function closeDownloadPartsModal() {
 }
 
 function initDetailsPage(games) {
+    // 1. Aggressively hide all loaders/spinners immediately so it never freezes
+    const detailsLoaders = document.querySelectorAll('#loader, #catalog-loader, .loading-state, [id*="load"], [class*="load"]');
+    detailsLoaders.forEach(el => el.style.display = 'none');
+
     const params = new URLSearchParams(window.location.search);
     const gameId = params.get('id');
 
-    // Hide any loading elements/spinners on the details page immediately
-    const detailsLoaders = document.querySelectorAll('#loader, #catalog-loader, .loading-state');
-    detailsLoaders.forEach(el => el.style.display = 'none');
+    if (!gameId) {
+        console.warn("No game ID found in URL parameters!");
+        return;
+    }
 
-    if (!gameId) return;
+    // Decode URL parameter safely to handle spaces and symbols correctly
+    const decodedId = decodeURIComponent(gameId);
 
-    const currentGame = games.find(g => String(g.id) === String(gameId) || String(g.title) === String(gameId));
+    const currentGame = games.find(g => 
+        String(g.id) === String(decodedId) || 
+        String(g.title).toLowerCase() === String(decodedId).toLowerCase()
+    );
 
-    if (!currentGame) return;
+    if (!currentGame) {
+        console.error("Game not found in catalog for ID:", decodedId);
+        const titleEl = document.getElementById('detailGameTitle');
+        if (titleEl) titleEl.innerText = "Game Not Found";
+        return;
+    }
 
     const setElementText = (id, text) => {
         const el = document.getElementById(id);
@@ -565,7 +579,6 @@ function initDetailsPage(games) {
     setElementText('detailGameRequirements', currentGame.requirements || '');
     setElementText('detailGamePrice', currentGame.price || 'FREE');
 
-    // Populating install guide fields as updated
     const detailInstallGuideEl = document.getElementById('detailInstallGuide');
     if (detailInstallGuideEl) {
         detailInstallGuideEl.textContent = currentGame.installGuide;
