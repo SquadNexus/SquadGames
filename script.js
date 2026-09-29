@@ -4,264 +4,304 @@ let currentCategory = "all";
 let currentFranchise = "all";
 
 document.addEventListener("DOMContentLoaded", () => {
-    console.log("Squad Games Store initialized.");[cite: 8]
+    console.log("Squad Games Store initialized.");
 
     // 1. Restore scroll position instantly if it was saved before leaving
-    const savedPosition = localStorage.getItem('scrollPosition');[cite: 8]
+    const savedPosition = localStorage.getItem('scrollPosition');
     if (savedPosition !== null) {
         window.scrollTo({
             top: parseInt(savedPosition),
             behavior: 'instant'
         });
-        localStorage.removeItem('scrollPosition');[cite: 8]
+        localStorage.removeItem('scrollPosition');
     }
 
     // 2. Save scroll position whenever any action/download/details button is clicked
     document.addEventListener('click', function(e) {
         if (e.target.closest('.btn-action') || e.target.closest('.btn-details')) {
-            localStorage.setItem('scrollPosition', window.scrollY);[cite: 8]
+            localStorage.setItem('scrollPosition', window.scrollY);
         }
     });
 
-    // 3. Sleek loading animation handler & Universal Multi-part popup trigger
+    // 3. Sleek loading animation handler & Universal Multi-part popup trigger for all current & future games
     document.addEventListener('click', function(e) {
-        if (e.target.closest('#download-parts-modal')) return;[cite: 8]
+        if (e.target.closest('#download-parts-modal')) return;
 
-        const downloadBtn = e.target.closest('.btn-download, .btn-get, .btn-action');[cite: 8]
+        const downloadBtn = e.target.closest('.btn-download, .btn-get, .btn-action');
         if (!downloadBtn) return;
 
-        if (downloadBtn.classList.contains('btn-vodacom') || downloadBtn.href.includes('wa.me')) return;[cite: 8]
+        if (downloadBtn.classList.contains('btn-vodacom') || downloadBtn.href.includes('wa.me')) return;
 
         let targetGame = null;
 
-        const gameId = downloadBtn.getAttribute('data-game-id');[cite: 8]
+        const gameId = downloadBtn.getAttribute('data-game-id');
         if (gameId) {
-            targetGame = loadedGamesData.find(g => (g.id || g.title) == gameId);[cite: 8]
+            targetGame = loadedGamesData.find(g => (g.id || g.title) === gameId);
         }
 
+        // Fallback check if data-game-id wasn't present
         if (!targetGame) {
-            const gameIndex = downloadBtn.getAttribute('data-game-index');[cite: 8]
+            const gameIndex = downloadBtn.getAttribute('data-game-index');
             if (gameIndex !== null && loadedGamesData[gameIndex]) {
-                targetGame = loadedGamesData[gameIndex];[cite: 8]
+                targetGame = loadedGamesData[gameIndex];
             }
         }
 
         if (!targetGame && downloadBtn.href) {
-            targetGame = loadedGamesData.find(g => g.downloadUrl && downloadBtn.href.includes(g.downloadUrl));[cite: 8]
+            targetGame = loadedGamesData.find(g => g.downloadUrl && downloadBtn.href.includes(g.downloadUrl));
         }
 
         if (targetGame && targetGame.downloadParts && targetGame.downloadParts.length > 0) {
             e.preventDefault();
-            showDownloadPartsModal(targetGame);[cite: 8]
+            showDownloadPartsModal(targetGame);
             return;
         }
 
-        const targetUrl = downloadBtn.getAttribute('href');[cite: 8]
-        if (!targetUrl || targetUrl === '#' || targetUrl === 'undefined' || targetUrl === '') return;[cite: 8]
-        if (downloadBtn.classList.contains('preparing')) return;[cite: 8]
+        const targetUrl = downloadBtn.getAttribute('href');
+        if (!targetUrl || targetUrl === '#' || targetUrl === 'undefined' || targetUrl === '') return;
+        if (downloadBtn.classList.contains('preparing')) return;
 
         e.preventDefault();
-        downloadBtn.classList.add('preparing');[cite: 8]
+        downloadBtn.classList.add('preparing');
         
-        const originalHTML = downloadBtn.innerHTML;[cite: 8]
-        downloadBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Preparing Link...`;[cite: 8]
+        const originalHTML = downloadBtn.innerHTML;
+        downloadBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Preparing Link...`;
 
         setTimeout(() => {
-            downloadBtn.innerHTML = `<i class="fa-solid fa-check"></i> Redirecting...`;[cite: 8]
-            window.open(targetUrl, '_blank');[cite: 8]
+            downloadBtn.innerHTML = `<i class="fa-solid fa-check"></i> Redirecting...`;
+            window.open(targetUrl, '_blank');
 
             setTimeout(() => {
-                downloadBtn.innerHTML = originalHTML;[cite: 8]
-                downloadBtn.classList.remove('preparing');[cite: 8]
+                downloadBtn.innerHTML = originalHTML;
+                downloadBtn.classList.remove('preparing');
             }, 2000);
         }, 1000);
     });
 
-    // 4. Load Game Catalog (Only if on index page or if container exists)
-    if (document.getElementById("gameGrid") || document.getElementById("games-grid") || document.getElementById("featuredTrack")) {
-        loadGameCatalog();[cite: 8]
-    }
+    // 4. Load Game Catalog
+    loadGameCatalog();
 });
 
 async function loadGameCatalog() {
-    const pathSegments = window.location.pathname.split('/').filter(Boolean);[cite: 8]
-    const repoPrefix = (window.location.hostname.includes("github.io") && pathSegments.length > 0) ? `/${pathSegments[0]}/` : './';[cite: 8]
+    const pathSegments = window.location.pathname.split('/').filter(Boolean);
+    const repoPrefix = (window.location.hostname.includes("github.io") && pathSegments.length > 0) ? `/${pathSegments[0]}/` : './';
 
     const possiblePaths = [
-        repoPrefix + 'games.json',[cite: 8]
-        './games.json',[cite: 8]
-        'games.json'[cite: 8]
+        repoPrefix + 'games.json',
+        './games.json',
+        'games.json'
     ];
 
     let rawData = null;
 
     for (const path of possiblePaths) {
         try {
-            const response = await fetch(path);[cite: 8]
+            console.log("Attempting to fetch games.json from:", path);
+            const response = await fetch(path);
             if (response.ok) {
-                rawData = await response.json();[cite: 8]
+                rawData = await response.json();
+                console.log("Successfully loaded games.json from:", path);
                 break;
             }
         } catch (err) {
-            console.warn("Failed path attempt:", path);[cite: 8]
+            console.warn("Failed path attempt:", path);
         }
     }
 
     let gamesArray = [];
     if (Array.isArray(rawData)) {
-        gamesArray = rawData;[cite: 8]
+        gamesArray = rawData;
     } else if (rawData && typeof rawData === 'object') {
-        gamesArray = rawData.games || rawData.data || rawData.list || Object.values(rawData).find(Array.isArray) || [];[cite: 8]
+        gamesArray = rawData.games || rawData.data || rawData.list || Object.values(rawData).find(Array.isArray) || [];
     }
 
-    initStore(gamesArray);[cite: 8]
+    if (gamesArray.length === 0) {
+        console.warn("Using fallback catalog data.");
+        gamesArray = [
+            {
+                id: "1",
+                title: "Tanzania Euro Truck Simulator 2 + 50 TZ mods packs",
+                platform: "PC",
+                category: "Simulation / PC",
+                description: "Full Euro Truck Simulator 2 PC game bundled with 50 custom TZ mods.",
+                requirements: "OS: Windows 10/11 (64-bit) | RAM: 8 GB | Storage: 25 GB",
+                installGuide: "1. Extract the downloaded archive.\n2. Run setup.exe as administrator.\n3. Move mods to documents folder.",
+                price: "TZS 20,000",
+                image: "images/ets-2-pc.jpg",
+                screenshots: [],
+                downloadUrl: "https://selar.com/8z3yp9tnyv",
+                altDownloadUrl: "https://wa.me/255692752060?text=Hello%20Squad%20Games"
+            },
+            {
+                id: "2",
+                title: "Marvel's Spider-Man: Miles Morales",
+                platform: "PC",
+                category: "Action",
+                description: "Experience the rise of Miles Morales as new powers unfold.",
+                requirements: "OS: Windows 10 (64-bit) | RAM: 8 GB",
+                installGuide: "1. Extract files.\n2. Install prerequisite runtimes.\n3. Play from shortcut.",
+                price: "FREE",
+                image: "images/spider-man.jpg",
+                screenshots: [],
+                downloadUrl: "https://wa.me/255692752060"
+            }
+        ];
+    }
+
+    initStore(gamesArray);
 }
 
 function initStore(games) {
-    loadedGamesData = games;[cite: 8]
+    loadedGamesData = games;
 
-    const loaderElements = document.querySelectorAll('#loader, #catalog-loader, .loading-state');[cite: 8]
-    loaderElements.forEach(el => el.style.display = 'none');[cite: 8]
+    // Hide loading indicators once store data is loaded
+    const loaderElements = document.querySelectorAll('#loader, #catalog-loader, .loading-state');
+    loaderElements.forEach(el => el.style.display = 'none');
 
-    populateCategoryDropdown(games);[cite: 8]
-    populateFranchiseDropdown(games);[cite: 8]
+    populateCategoryDropdown(games);
+    populateFranchiseDropdown(games);
 
     const featuredGames = games.filter(game => {
-        const title = (game.title || "").toLowerCase();[cite: 8]
-        if (title.includes("1.57")) return false;[cite: 8]
-        const isEtsTanzaniaOrMobile = title.includes("euro truck") && (title.includes("tanzania") || title.includes("tz") || title.includes("mobile") || title.includes("android"));[cite: 8]
+        const title = (game.title || "").toLowerCase();
+        if (title.includes("1.57")) return false;
+        const isEtsTanzaniaOrMobile = title.includes("euro truck") && (title.includes("tanzania") || title.includes("tz") || title.includes("mobile") || title.includes("android"));
         return isEtsTanzaniaOrMobile || 
                title.includes("spider-man") || 
                title.includes("gta v") || 
                title.includes("gta 5") || 
                title.includes("heat") || 
                title.includes("fifa 22") || 
-               title.includes("black ops 3");[cite: 8]
+               title.includes("black ops 3");
     });
     
-    renderFeaturedMarquee(featuredGames.length ? featuredGames : games);[cite: 8]
+    renderFeaturedMarquee(featuredGames.length ? featuredGames : games); 
 
     const popularGames = games.filter(game => {
-        const title = (game.title || "").toLowerCase();[cite: 8]
-        return title.includes("euro truck simulator") || title.includes("gta") || title.includes("spider-man");[cite: 8]
+        const title = (game.title || "").toLowerCase();
+        return title.includes("euro truck simulator") || title.includes("gta") || title.includes("spider-man");
     });
-    renderPopularList(popularGames.length ? popularGames : games);[cite: 8]
+    renderPopularList(popularGames.length ? popularGames : games);
 
-    applyFilters();[cite: 8]
+    applyFilters(); 
 
-    const searchInput = document.getElementById('gameSearchInput');[cite: 8]
+    const searchInput = document.getElementById('gameSearchInput');
     if (searchInput) {
         searchInput.addEventListener('input', (e) => {
-            currentSearchQuery = e.target.value.toLowerCase().trim();[cite: 8]
-            applyFilters();[cite: 8]
+            currentSearchQuery = e.target.value.toLowerCase().trim();
+            applyFilters();
         });
     }
 
     document.querySelectorAll('.portal-navbar .nav-tab:not(select)').forEach(tab => {
         tab.addEventListener('click', (e) => {
             e.preventDefault();
-            document.querySelectorAll('.portal-navbar .nav-tab:not(select)').forEach(t => t.classList.remove('active'));[cite: 8]
-            tab.classList.add('active');[cite: 8]
-            currentCategory = "all";[cite: 8]
+            document.querySelectorAll('.portal-navbar .nav-tab:not(select)').forEach(t => t.classList.remove('active'));
+            tab.classList.add('active');
+            currentCategory = "all";
             
-            const categoryDropdown = document.getElementById('categoryDropdown');[cite: 8]
-            if (categoryDropdown) categoryDropdown.value = "all";[cite: 8]
-            const franchiseDropdown = document.getElementById('franchiseDropdown');[cite: 8]
-            if (franchiseDropdown) franchiseDropdown.value = "all";[cite: 8]
-            currentFranchise = "all";[cite: 8]
+            const categoryDropdown = document.getElementById('categoryDropdown');
+            if (categoryDropdown) categoryDropdown.value = "all";
+            const franchiseDropdown = document.getElementById('franchiseDropdown');
+            if (franchiseDropdown) franchiseDropdown.value = "all";
+            currentFranchise = "all";
 
-            applyFilters();[cite: 8]
+            applyFilters();
         });
     });
 
-    const categoryDropdown = document.getElementById('categoryDropdown');[cite: 8]
+    const categoryDropdown = document.getElementById('categoryDropdown');
     if (categoryDropdown) {
         categoryDropdown.addEventListener('change', (e) => {
-            currentCategory = e.target.value.toLowerCase();[cite: 8]
-            document.querySelectorAll('.portal-navbar .nav-tab:not(select)').forEach(t => t.classList.remove('active'));[cite: 8]
-            applyFilters();[cite: 8]
+            currentCategory = e.target.value.toLowerCase();
+            document.querySelectorAll('.portal-navbar .nav-tab:not(select)').forEach(t => t.classList.remove('active'));
+            applyFilters();
         });
     }
 
-    const franchiseDropdown = document.getElementById('franchiseDropdown');[cite: 8]
+    const franchiseDropdown = document.getElementById('franchiseDropdown');
     if (franchiseDropdown) {
         franchiseDropdown.addEventListener('change', (e) => {
-            currentFranchise = e.target.value.toLowerCase();[cite: 8]
-            applyFilters();[cite: 8]
+            currentFranchise = e.target.value.toLowerCase();
+            applyFilters();
         });
     }
 
-    const closeModalBtn = document.querySelector('.close-btn');[cite: 8]
-    if (closeModalBtn) closeModalBtn.addEventListener('click', closeModalDirect);[cite: 8]
+    const closeModalBtn = document.querySelector('.close-btn');
+    if (closeModalBtn) closeModalBtn.addEventListener('click', closeModalDirect);
 
-    const fullscreenCloseBtn = document.querySelector('.fullscreen-close');[cite: 8]
-    if (fullscreenCloseBtn) fullscreenCloseBtn.addEventListener('click', closeFullScreen);[cite: 8]
+    const fullscreenCloseBtn = document.querySelector('.fullscreen-close');
+    if (fullscreenCloseBtn) fullscreenCloseBtn.addEventListener('click', closeFullScreen);
+
+    // AUTO-LOAD FOR DETAILS.HTML PAGE IF PRESENT
+    if (window.location.pathname.includes('details.html')) {
+        initDetailsPage(games);
+    }
 }
 
 function populateCategoryDropdown(games) {
-    const dropdown = document.getElementById('categoryDropdown');[cite: 8]
+    const dropdown = document.getElementById('categoryDropdown');
     if (!dropdown) return;
 
-    let uniqueCategories = new Set();[cite: 8]
+    let uniqueCategories = new Set();
     games.forEach(game => {
-        const rawCategory = game.category || game.Category || game.genre || game.tags || "";[cite: 8]
+        const rawCategory = game.category || game.Category || game.genre || game.tags || "";
         if (rawCategory) {
-            const catString = Array.isArray(rawCategory) ? rawCategory.join('/') : String(rawCategory);[cite: 8]
+            const catString = Array.isArray(rawCategory) ? rawCategory.join('/') : String(rawCategory);
             catString.split('/').forEach(cat => {
-                let cleanCat = cat.trim();[cite: 8]
-                if (cleanCat) uniqueCategories.add(cleanCat);[cite: 8]
+                let cleanCat = cat.trim();
+                if (cleanCat) uniqueCategories.add(cleanCat);
             });
         }
     });
 
-    dropdown.innerHTML = `<option value="all">📁 Select Category...</option>`;[cite: 8]
+    dropdown.innerHTML = `<option value="all">📁 Select Category...</option>`;
     uniqueCategories.forEach(cat => {
-        const option = document.createElement('option');[cite: 8]
-        option.value = cat.toLowerCase();[cite: 8]
-        option.textContent = cat;[cite: 8]
-        dropdown.appendChild(option);[cite: 8]
+        const option = document.createElement('option');
+        option.value = cat.toLowerCase();
+        option.textContent = cat;
+        dropdown.appendChild(option);
     });
 }
 
 function populateFranchiseDropdown(games) {
-    const dropdown = document.getElementById('franchiseDropdown');[cite: 8]
+    const dropdown = document.getElementById('franchiseDropdown');
     if (!dropdown) return;
 
-    let uniqueFranchises = new Set();[cite: 8]
+    let uniqueFranchises = new Set();
     games.forEach(game => {
-        let franchise = game.franchise || game.series;[cite: 8]
+        let franchise = game.franchise || game.series;
         
         if (!franchise && game.title) {
-            const title = game.title.toLowerCase();[cite: 8]
-            if (title.includes("need for speed")) franchise = "Need for Speed";[cite: 8]
-            else if (title.includes("call of duty")) franchise = "Call of Duty";[cite: 8]
-            else if (title.includes("grand theft auto") || title.includes("gta")) franchise = "Grand Theft Auto";[cite: 8]
-            else if (title.includes("euro truck simulator")) franchise = "Euro Truck Simulator";[cite: 8]
-            else if (title.includes("spider-man")) franchise = "Spider-Man";[cite: 8]
-            else if (title.includes("carx street")) franchise = "CarX Street";[cite: 8]
-            else if (title.includes("fifa")) franchise = "FIFA";[cite: 8]
+            const title = game.title.toLowerCase();
+            if (title.includes("need for speed")) franchise = "Need for Speed";
+            else if (title.includes("call of duty")) franchise = "Call of Duty";
+            else if (title.includes("grand theft auto") || title.includes("gta")) franchise = "Grand Theft Auto";
+            else if (title.includes("euro truck simulator")) franchise = "Euro Truck Simulator";
+            else if (title.includes("spider-man")) franchise = "Spider-Man";
+            else if (title.includes("carx street")) franchise = "CarX Street";
+            else if (title.includes("fifa")) franchise = "FIFA";
         }
 
         if (franchise) {
-            uniqueFranchises.add(franchise.trim());[cite: 8]
+            uniqueFranchises.add(franchise.trim());
         }
     });
 
-    dropdown.innerHTML = `<option value="all">🎮 Select Franchise...</option>`;[cite: 8]
+    dropdown.innerHTML = `<option value="all">🎮 Select Franchise...</option>`;
     uniqueFranchises.forEach(fran => {
-        const option = document.createElement('option');[cite: 8]
-        option.value = fran.toLowerCase();[cite: 8]
-        option.textContent = fran;[cite: 8]
-        dropdown.appendChild(option);[cite: 8]
+        const option = document.createElement('option');
+        option.value = fran.toLowerCase();
+        option.textContent = fran;
+        dropdown.appendChild(option);
     });
 }
 
 function renderFeaturedMarquee(sliderGames) {
-    const track = document.getElementById("featuredTrack");[cite: 8]
+    const track = document.getElementById("featuredTrack");
     if (!track) return;
 
     const cardsHTML = sliderGames.map((game) => {
-        const gameId = game.id || game.title;[cite: 8]
+        const gameId = game.id || game.title;
         return `
             <div class="marquee-game-card">
                 <img class="marquee-game-img" src="${game.image}" alt="${game.title}" loading="lazy" onerror="this.src='images/nfsmw-shot1.png';">
@@ -278,43 +318,43 @@ function renderFeaturedMarquee(sliderGames) {
         `;
     }).join('');
 
-    track.innerHTML = cardsHTML + cardsHTML;[cite: 8]
-    initSmoothMarquee(track);[cite: 8]
+    track.innerHTML = cardsHTML + cardsHTML;
+    initSmoothMarquee(track);
 }
 
 function initSmoothMarquee(track) {
-    if (track.dataset.scrollingActive === "true") return;[cite: 8]
-    track.dataset.scrollingActive = "true";[cite: 8]
+    if (track.dataset.scrollingActive === "true") return;
+    track.dataset.scrollingActive = "true";
 
-    let scrollAmount = 0;[cite: 8]
-    const speed = 1.0;[cite: 8]
-    let isPaused = false;[cite: 8]
+    let scrollAmount = 0;
+    const speed = 1.0; 
+    let isPaused = false;
 
-    track.addEventListener('mouseenter', () => isPaused = true);[cite: 8]
-    track.addEventListener('mouseleave', () => isPaused = false);[cite: 8]
-    track.addEventListener('touchstart', () => isPaused = true);[cite: 8]
-    track.addEventListener('touchend', () => isPaused = false);[cite: 8]
+    track.addEventListener('mouseenter', () => isPaused = true);
+    track.addEventListener('mouseleave', () => isPaused = false);
+    track.addEventListener('touchstart', () => isPaused = true);
+    track.addEventListener('touchend', () => isPaused = false);
 
     function scrollStep() {
         if (!isPaused) {
-            scrollAmount += speed;[cite: 8]
+            scrollAmount += speed;
             if (scrollAmount >= track.scrollWidth / 2) {
-                scrollAmount = 0;[cite: 8]
+                scrollAmount = 0;
             }
-            track.style.transform = `translateX(-${scrollAmount}px)`;[cite: 8]
+            track.style.transform = `translateX(-${scrollAmount}px)`;
         }
-        requestAnimationFrame(scrollStep);[cite: 8]
+        requestAnimationFrame(scrollStep);
     }
 
-    requestAnimationFrame(scrollStep);[cite: 8]
+    requestAnimationFrame(scrollStep);
 }
 
 function renderPopularList(popularGames) {
-    const container = document.getElementById("popularList");[cite: 8]
+    const container = document.getElementById("popularList");
     if (!container) return;
 
     container.innerHTML = popularGames.map((game) => {
-        const gameId = game.id || game.title;[cite: 8]
+        const gameId = game.id || game.title;
         return `
             <div class="popular-item" onclick="openDetailsById('${encodeURIComponent(gameId)}')" style="cursor: pointer;">
                 <img src="${game.image}" alt="${game.title}" loading="lazy" onerror="this.src='images/nfsmw-shot1.png';">
@@ -330,33 +370,33 @@ function renderPopularList(popularGames) {
 
 function applyFilters() {
     const filteredGames = loadedGamesData.filter(game => {
-        const title = (game.title || "").toLowerCase();[cite: 8]
-        const description = (game.description || "").toLowerCase();[cite: 8]
-        const category = (game.category || game.Category || "").toLowerCase();[cite: 8]
-        const platform = (game.platform || "").toLowerCase();[cite: 8]
-        const franchiseField = (game.franchise || game.series || "").toLowerCase();[cite: 8]
-        const fullText = (title + " " + description).toLowerCase();[cite: 8]
+        const title = (game.title || "").toLowerCase();
+        const description = (game.description || "").toLowerCase();
+        const category = (game.category || game.Category || "").toLowerCase();
+        const platform = (game.platform || "").toLowerCase();
+        const franchiseField = (game.franchise || game.series || "").toLowerCase();
+        const fullText = (title + " " + description).toLowerCase();
 
-        const matchesSearch = title.includes(currentSearchQuery) || description.includes(currentSearchQuery);[cite: 8]
+        const matchesSearch = title.includes(currentSearchQuery) || description.includes(currentSearchQuery);
 
-        let matchesCategory = true;[cite: 8]
+        let matchesCategory = true;
         if (currentCategory !== 'all') {
-            matchesCategory = category.includes(currentCategory) || platform.includes(currentCategory);[cite: 8]
+            matchesCategory = category.includes(currentCategory) || platform.includes(currentCategory);
         }
 
-        let matchesFranchise = true;[cite: 8]
+        let matchesFranchise = true;
         if (currentFranchise !== 'all') {
-            matchesFranchise = franchiseField.includes(currentFranchise) || fullText.includes(currentFranchise);[cite: 8]
+            matchesFranchise = franchiseField.includes(currentFranchise) || fullText.includes(currentFranchise);
         }
 
-        return matchesSearch && matchesCategory && matchesFranchise;[cite: 8]
+        return matchesSearch && matchesCategory && matchesFranchise;
     });
 
-    renderGameStore(filteredGames);[cite: 8]
+    renderGameStore(filteredGames);
 }
 
 function renderGameStore(gameList) {
-    const container = document.getElementById("gameGrid") || document.getElementById("games-grid");[cite: 8]
+    const container = document.getElementById("gameGrid") || document.getElementById("games-grid");
 
     if (!container) return;
 
@@ -372,18 +412,18 @@ function renderGameStore(gameList) {
     }
 
     gameList.forEach((game) => {
-        const gameId = game.id || game.title;[cite: 8]
-        const originalIndex = loadedGamesData.indexOf(game);[cite: 8]
-        const card = document.createElement("div");[cite: 8]
-        card.classList.add("game-card");[cite: 8]
+        const gameId = game.id || game.title;
+        const originalIndex = loadedGamesData.indexOf(game);
+        const card = document.createElement("div");
+        card.classList.add("game-card");
 
-        const priceText = String(game.price || "").trim().toUpperCase();[cite: 8]
-        const isFree = priceText === "FREE" || priceText === "0" || priceText.includes("FREE");[cite: 8]
+        const priceText = String(game.price || "").trim().toUpperCase();
+        const isFree = priceText === "FREE" || priceText === "0" || priceText.includes("FREE");
 
-        const actionBtnText = isFree ? "Get" : "Buy Now";[cite: 8]
-        const actionBtnClass = isFree ? "btn-get" : "btn-download";[cite: 8]
+        const actionBtnText = isFree ? "Get" : "Buy Now";
+        const actionBtnClass = isFree ? "btn-get" : "btn-download";
         
-        const targetUrl = game.downloadUrl || (game.downloadParts && game.downloadParts.length > 0 ? "#" : "");[cite: 8]
+        const targetUrl = game.downloadUrl || (game.downloadParts && game.downloadParts.length > 0 ? "#" : "");
 
         let actionButtonsHTML = `
             <a href="${targetUrl}" target="_blank" class="btn-action ${actionBtnClass}" data-game-id="${gameId}" data-game-index="${originalIndex}">${actionBtnText}</a>
@@ -421,42 +461,34 @@ function renderGameStore(gameList) {
 }
 
 function openDetailsById(id) {
-    window.location.href = `details.html?id=${id}`;[cite: 8]
+    window.location.href = `details.html?id=${id}`;
 }
 
 function openDetails(index) {
-    const game = loadedGamesData[index];[cite: 8]
+    const game = loadedGamesData[index];
     if (!game) return;
-    const identifier = game.id !== undefined ? game.id : game.title;[cite: 8]
-    openDetailsById(identifier);[cite: 8]
+    const identifier = game.id !== undefined ? game.id : game.title;
+    openDetailsById(identifier);
 }
 
 function openFullScreen(imgSrc) {
-    const fullModal = document.getElementById("fullscreenOverlay") || document.getElementById("fullscreen-modal");[cite: 8]
-    const fullImg = document.getElementById("fullscreenImg") || document.getElementById("fullscreen-img");[cite: 8]
-    if (fullImg) fullImg.src = imgSrc;[cite: 8]
-    if (fullModal) {
-        fullModal.style.display = 'flex';
-        setTimeout(() => fullModal.classList.add("active"), 10);
-    }
+    const fullModal = document.getElementById("fullscreenOverlay");
+    const fullImg = document.getElementById("fullscreenImg");
+    if (fullImg) fullImg.src = imgSrc;
+    if (fullModal) fullModal.classList.add("active");
 }
 
 function closeFullScreen() {
-    const fullModal = document.getElementById("fullscreenOverlay") || document.getElementById("fullscreen-modal");[cite: 8]
-    if (fullModal) {
-        fullModal.classList.remove("active");
-        setTimeout(() => {
-            if (fullModal.id === 'fullscreen-modal') fullModal.style.display = 'none';
-        }, 300);
-    }
+    const fullModal = document.getElementById("fullscreenOverlay");
+    if (fullModal) fullModal.classList.remove("active");
 }
 
 function showDownloadPartsModal(game) {
-    let modal = document.getElementById('download-parts-modal');[cite: 8]
+    let modal = document.getElementById('download-parts-modal');
     if (!modal) {
-        modal = document.createElement('div');[cite: 8]
-        modal.id = 'download-parts-modal';[cite: 8]
-        modal.className = 'modal-overlay';[cite: 8]
+        modal = document.createElement('div');
+        modal.id = 'download-parts-modal';
+        modal.className = 'modal-overlay';
         modal.innerHTML = `
             <div class="modal-content" style="max-width: 450px; background: var(--bg-card, #1e1e1e); padding: 25px; border-radius: 12px; color: #fff; position: relative; box-shadow: 0 10px 25px rgba(0,0,0,0.5);">
                 <button onclick="closeDownloadPartsModal()" style="position: absolute; top: 15px; right: 15px; background: none; border: none; color: #aaa; font-size: 1.2rem; cursor: pointer;"><i class="fa-solid fa-xmark"></i></button>
@@ -470,43 +502,121 @@ function showDownloadPartsModal(game) {
                 <div id="parts-list-container" style="display: flex; flex-direction: column; gap: 10px;"></div>
             </div>
         `;
-        document.body.appendChild(modal);[cite: 8]
+        document.body.appendChild(modal);
         
         modal.addEventListener('click', function(event) {
             if (event.target === modal) {
-                closeDownloadPartsModal();[cite: 8]
+                closeDownloadPartsModal();
             }
         });
     }
 
-    const titleEl = document.getElementById('parts-modal-title');
-    if (titleEl) titleEl.innerText = `Download: ${game.title}`;[cite: 8]
+    document.getElementById('parts-modal-title').innerText = `Download: ${game.title}`;
     
-    let partsArray = game.downloadParts;[cite: 8]
+    let partsArray = game.downloadParts;
     if (typeof partsArray === 'string') {
-        try { partsArray = JSON.parse(partsArray); } catch (e) { partsArray = []; }[cite: 8]
+        try { partsArray = JSON.parse(partsArray); } catch (e) { partsArray = []; }
     }
-    partsArray = partsArray || [];[cite: 8]
+    partsArray = partsArray || [];
 
-    const container = document.getElementById('parts-list-container');[cite: 8]
-    if (container) {
-        container.innerHTML = partsArray.map((part, idx) => {
-            const partUrl = (typeof part === 'object' && part !== null) ? (part.url || part.link || '#') : part;[cite: 8]
-            const partName = (typeof part === 'object' && part !== null) ? (part.name || `Part ${idx + 1}`) : `Part ${idx + 1}`;[cite: 8]
+    const container = document.getElementById('parts-list-container');
+    container.innerHTML = partsArray.map((part, idx) => {
+        const partUrl = (typeof part === 'object' && part !== null) ? (part.url || part.link || '#') : part;
+        const partName = (typeof part === 'object' && part !== null) ? (part.name || `Part ${idx + 1}`) : `Part ${idx + 1}`;
 
-            return `
-                <a href="${partUrl}" target="_blank" class="btn-action btn-get" style="display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; text-decoration: none;">
-                    <span><i class="fa-solid fa-download"></i> ${partName}</span>
-                    <i class="fa-solid fa-external-link-alt" style="font-size: 0.8rem;"></i>
-                </a>
-            `;
-        }).join('');
-    }
+        return `
+            <a href="${partUrl}" target="_blank" class="btn-action btn-get" style="display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; text-decoration: none;">
+                <span><i class="fa-solid fa-download"></i> ${partName}</span>
+                <i class="fa-solid fa-external-link-alt" style="font-size: 0.8rem;"></i>
+            </a>
+        `;
+    }).join('');
 
-    modal.classList.add('active');[cite: 8]
+    modal.classList.add('active');
 }
 
 function closeDownloadPartsModal() {
-    const modal = document.getElementById('download-parts-modal');[cite: 8]
-    if (modal) modal.classList.remove('active');[cite: 8]
+    const modal = document.getElementById('download-parts-modal');
+    if (modal) modal.classList.remove('active');
+}
+
+function initDetailsPage(games) {
+    const params = new URLSearchParams(window.location.search);
+    const gameId = params.get('id');
+
+    if (!gameId) return;
+
+    const currentGame = games.find(g => String(g.id) === String(gameId) || String(g.title) === String(gameId));
+
+    if (!currentGame) return;
+
+    const setElementText = (id, text) => {
+        const el = document.getElementById(id);
+        if (el) el.innerText = text;
+    };
+
+    setElementText('detailGameTitle', currentGame.title);
+    setElementText('detailGameCategory', currentGame.category || currentGame.Category || '');
+    setElementText('detailGameDescription', currentGame.description || '');
+    setElementText('detailGameRequirements', currentGame.requirements || '');
+    setElementText('detailGamePrice', currentGame.price || 'FREE');
+
+    // Added explicit textContent assignment for detailInstallGuide as requested
+    const detailInstallGuideEl = document.getElementById('detailInstallGuide');
+    if (detailInstallGuideEl) {
+        detailInstallGuideEl.textContent = currentGame.installGuide;
+    }
+
+    const coverImg = document.getElementById('detailGameImage');
+    if (coverImg && currentGame.image) {
+        coverImg.src = currentGame.image;
+    }
+
+    const installGuideContainer = document.getElementById('gameInstallGuide');
+    if (installGuideContainer) {
+        if (currentGame.installGuide) {
+            installGuideContainer.innerHTML = currentGame.installGuide.replace(/\n/g, '<br>');
+        } else {
+            installGuideContainer.innerHTML = "<p>Standard installation: Extract archive and run setup executable.</p>";
+        }
+    }
+
+    const downloadBtn = document.getElementById('detailDownloadBtn');
+    if (downloadBtn) {
+        if (currentGame.downloadParts && currentGame.downloadParts.length > 0) {
+            downloadBtn.href = "#";
+            downloadBtn.innerHTML = `<i class="fa-solid fa-download"></i> Download Parts (${currentGame.downloadParts.length})`;
+            downloadBtn.onclick = (e) => {
+                e.preventDefault();
+                showDownloadPartsModal(currentGame);
+            };
+        } else {
+            downloadBtn.href = currentGame.downloadUrl || '#';
+            downloadBtn.innerHTML = `<i class="fa-solid fa-download"></i> Download Game`;
+        }
+    }
+
+    const altDownloadContainer = document.getElementById('details-alt-download-section');
+    if (altDownloadContainer) {
+        if (currentGame.altDownloadUrl) {
+            altDownloadContainer.innerHTML = `
+                <a href="${currentGame.altDownloadUrl}" target="_blank" class="btn-action btn-vodacom" style="display: inline-block; margin-top: 10px; text-decoration: none;">
+                    💬 Alternative / Buy via WhatsApp
+                </a>
+            `;
+        } else {
+            altDownloadContainer.innerHTML = '';
+        }
+    }
+
+    const screenshotsContainer = document.getElementById('detailGameScreenshots'); 
+    if (screenshotsContainer) {
+        if (currentGame.screenshots && currentGame.screenshots.length > 0) {
+            screenshotsContainer.innerHTML = currentGame.screenshots.map(shot => `
+                <img src="${shot}" alt="Game Screenshot" class="screenshot-thumb" onclick="openFullScreen('${shot}')" style="cursor: pointer;" />
+            `).join('');
+        } else {
+            screenshotsContainer.innerHTML = '<p style="color: var(--text-muted); font-size: 0.85rem;">No screenshots available for this title.</p>';
+        }
+    }
 }
