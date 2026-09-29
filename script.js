@@ -544,6 +544,10 @@ function initDetailsPage(games) {
     const params = new URLSearchParams(window.location.search);
     const gameId = params.get('id');
 
+    // Hide any loading elements/spinners on the details page immediately
+    const detailsLoaders = document.querySelectorAll('#loader, #catalog-loader, .loading-state');
+    detailsLoaders.forEach(el => el.style.display = 'none');
+
     if (!gameId) return;
 
     const currentGame = games.find(g => String(g.id) === String(gameId) || String(g.title) === String(gameId));
@@ -561,7 +565,7 @@ function initDetailsPage(games) {
     setElementText('detailGameRequirements', currentGame.requirements || '');
     setElementText('detailGamePrice', currentGame.price || 'FREE');
 
-    // Added explicit textContent assignment for detailInstallGuide as requested
+    // Populating install guide fields as updated
     const detailInstallGuideEl = document.getElementById('detailInstallGuide');
     if (detailInstallGuideEl) {
         detailInstallGuideEl.textContent = currentGame.installGuide;
