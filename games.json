@@ -901,11 +901,11 @@
     "requirements": "OS: Windows 10 (64-Bit)<br>Processor: Intel Core i3-6100<br>RAM: 8 GB<br>Hard Disk: 50 GB available space<br>Graphics Card: NVIDIA GeForce GTX 660<br>DirectX: Version 11",
     "installGuide": "Extract the file using Winrar. (Download Winrar)\nOpen “FIFA 21” >> “FIFA 21” folder.\nThen double click on “FIFA21” icon to play the game. Done!",
     "price": "FREE",
-    "image": "images/fifa23ue.png",
+    "image": "images/fifa21ue.png",
     "screenshots": [
-        "images/fifa23ue1.png",
-        "images/fifa23ue2.png",
-        "images/fifa23ue3.png"
+        "images/fifa21ue1.png",
+        "images/fifa21ue2.png",
+        "images/fifa21ue3.png"
     ],
     "downloadParts": [
         { "name": "Part 01", "url": "https://www.mediafire.com/file/brhn9yninhkfqph/FIFA_21_-_%2528Www.ApunKaGames.Net%2529.part01.rar/file" },
