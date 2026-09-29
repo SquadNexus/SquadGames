@@ -868,7 +868,7 @@
     "platform": "PC",
     "category": "Sports",
     "description": "EA Sports FIFA 23, developed by EA Vancouver and EA Romania alongside EA Sports and published for Windows on September 30, 2022, is a 55 GB football sports simulation video game that utilizes upgraded HyperMotion2 technology captured from real-world match data to deliver smoother, more lifelike player movement across over 6,000 true-to-life animations. The gameplay shines with enhanced ball physics, refined dribbling and shooting mechanics, cross-play support, and deep, immersive modes like Ultimate Team and Career, making every match feel exceptionally authentic and tactically rich",
-    "requirements": "OS: Windows 10 (64‑bit) Processor: Intel Core i5 6600k or AMD Ryzen 5 1600 RAM: 8 GB Hard Disk: 100 GB available space Graphics Card: 4 GB, NVIDIA GeForce GTX 1050 Ti or AMD Radeon RX 570 DirectX: Version 11",
+    "requirements": "OS: Windows 10 (64‑bit)<br>Processor: Intel Core i5 6600k or AMD Ryzen 5 1600<br>RAM: 8 GB<br>Hard Disk: 100 GB available space<br>Graphics Card: 4 GB, NVIDIA GeForce GTX 1050 Ti or AMD Radeon RX 570<br>DirectX: Version 11",
     "installGuide": "Extract the file using Winrar. (Download Winrar)\nOpen “FIFA 23” folder, double click on “Setup” and install it.\nAfter installation complete, go to the folder where you extract the game.\nOpen “MD5” folder, copy all files and paste it where you install the game.\nThen double click on “Game” icon to play the game. Done!",
     "price": "FREE",
     "image": "images/fifa23.png",
