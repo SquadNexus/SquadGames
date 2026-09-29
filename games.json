@@ -990,5 +990,21 @@
         { "name": "Part 4", "url": "https://www.mediafire.com/file/i85jwgtjbw4034s/Pro_Evolution_Soccer_2018.part4.rar/file" },
         { "name": "Part 5", "url": "https://www.mediafire.com/file/6liz2glioz6nc0q/Pro_Evolution_Soccer_2018.part5.rar/file" }
     ]
+},
+  {
+    "id": "44",
+    "title": "Pro Evolution Soccer 2017",
+    "platform": "PC",
+    "category": "Sports, Football",
+    "description": "Pro Evolution Soccer 2017, developed by PES Productions and published by Konami for Windows on September 13, 2016, is a 3.40 GB realistic football simulation video game that lets players control teams, execute complex tactics, and compete across global leagues. The gameplay delivers a top-tier sports experience through precise passing mechanics, responsive skill moves, and strategic team management set within dynamic matches featuring detailed player animations and authentic stadiums.",
+    "requirements": "OS: Windows 10/8.1/8/7 SP1/Vista SP2 (32/64-bit)<br>Processor: Intel Core 2 Duo E4300 1.8 GHz or Athlon II X2 240 2.8 GHz<br>RAM: 1 GB<br>Hard Drive: 8 GB available space<br>Video Card: 512MB, Nvidia GeForce 8800 GS or AMD Radeon X1600 XT<br>Network: TCP/IP 512 kbps or higher<br>DirectX: 9.0c",
+    "price": "FREE",
+    "image": "images/pes17.png",
+    "screenshots": [
+        "images/pes171.png",
+        "images/pes172.png",
+        "images/pes173.png"
+    ],
+    "downloadUrl": "https://www.mediafire.com/file/lu789x3haol9mvd/Pro_Evolution_Soccer_2017_-_%2528Www.ApunKaGames.Biz%2529.rar/file"
 }
 ]
