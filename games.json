@@ -891,5 +891,34 @@
         { "name": "Part 11", "url": "https://www.mediafire.com/file/m0auufdtolnfy7i/FIFA_23_-_%2528Www.ApunKaGames.Net%2529.part11.rar/file" },
         { "name": "Part 12", "url": "https://www.mediafire.com/file/f2hj3vc98eiag12/FIFA_23_-_%2528Www.ApunKaGames.Net%2529.part12.rar/file" }
     ]
+},
+  {
+    "id": "40",
+    "title": "FIFA 21 Ultimate Edition",
+    "platform": "PC",
+    "category": "Sports",
+    "description": "EA Sports FIFA 23, developed by EA Vancouver and EA Romania alongside EA Sports and published for Windows on September 30, 2022, is a 55 GB football sports simulation video game that utilizes upgraded HyperMotion2 technology captured from real-world match data to deliver smoother, more lifelike player movement across over 6,000 true-to-life animations. The gameplay shines with enhanced ball physics, refined dribbling and shooting mechanics, cross-play support, and deep, immersive modes like Ultimate Team and Career, making every match feel exceptionally authentic and tactically rich",
+    "requirements": "OS: Windows 10 (64-Bit)<br>Processor: Intel Core i3-6100<br>RAM: 8 GB<br>Hard Disk: 50 GB available space<br>Graphics Card: NVIDIA GeForce GTX 660<br>DirectX: Version 11",
+    "installGuide": "Extract the file using Winrar. (Download Winrar)\nOpen “FIFA 21” >> “FIFA 21” folder.\nThen double click on “FIFA21” icon to play the game. Done!",
+    "price": "FREE",
+    "image": "images/fifa23ue.png",
+    "screenshots": [
+        "images/fifa23ue1.png",
+        "images/fifa23ue2.png",
+        "images/fifa23ue3.png"
+    ],
+    "downloadParts": [
+        { "name": "Part 01", "url": "https://www.mediafire.com/file/brhn9yninhkfqph/FIFA_21_-_%2528Www.ApunKaGames.Net%2529.part01.rar/file" },
+        { "name": "Part 02", "url": "https://www.mediafire.com/file/0n5orzk45v15p65/FIFA_21_-_%2528Www.ApunKaGames.Net%2529.part02.rar/file" },
+        { "name": "Part 03", "url": "https://www.mediafire.com/file/pj1cy2bjlpzgk54/FIFA_21_-_%2528Www.ApunKaGames.Net%2529.part03.rar/file" },
+        { "name": "Part 04", "url": "https://www.mediafire.com/file/8h8fx25dqz3e911/FIFA_21_-_%2528Www.ApunKaGames.Net%2529.part04.rar/file" },
+        { "name": "Part 05", "url": "https://www.mediafire.com/file/yra9npdl9hk97pl/FIFA_21_-_%2528Www.ApunKaGames.Net%2529.part05.rar/file" },
+        { "name": "Part 06", "url": "https://www.mediafire.com/file/hmw069nq79yqrgj/FIFA_21_-_%2528Www.ApunKaGames.Net%2529.part06.rar/file" },
+        { "name": "Part 07", "url": "https://www.mediafire.com/file/had3pryi0qn9a60/FIFA_21_-_%2528Www.ApunKaGames.Net%2529.part07.rar/file" },
+        { "name": "Part 08", "url": "https://www.mediafire.com/file/crxejxkotvm274h/FIFA_21_-_%2528Www.ApunKaGames.Net%2529.part08.rar/file" },
+        { "name": "Part 09", "url": "https://www.mediafire.com/file/a8pzhr03k20ufoa/FIFA_21_-_%2528Www.ApunKaGames.Net%2529.part09.rar/file" },
+        { "name": "Part 10", "url": "https://www.mediafire.com/file/v250gu5rla1v11z/FIFA_21_-_%2528Www.ApunKaGames.Net%2529.part10.rar/file" },
+        { "name": "Part 11", "url": "https://www.mediafire.com/file/uewlwlptfna3bd0/FIFA_21_-_%2528Www.ApunKaGames.Net%2529.part11.rar/file" }
+    ]
 }
 ]
