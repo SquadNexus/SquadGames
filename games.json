@@ -968,5 +968,27 @@
         { "name": "Part 4", "url": "https://www.mediafire.com/file/7rmm0l3vrthw2vq/PES_2019_-_%2528Www.ApunkaGames.Net%2529.part4.rar/file" },
         { "name": "Part 5", "url": "https://www.mediafire.com/file/13y1pm68rpipvrp/PES_2019_-_%2528Www.ApunkaGames.Net%2529.part5.rar/file" }
     ]
+},
+  {
+    "id": "43",
+    "title": "Pro Evolution Soccer 2018",
+    "platform": "PC",
+    "category": " Sports",
+    "description": "Pro Evolution Soccer 2018, developed and published by Konami for Windows in 2017, is a 21.1 GB football simulation video game that builds upon the franchise with smoother player control, realistic movement, improved dribbling, and refined passing systems. The gameplay delivers a polished and tactically deep sports experience across popular modes like Master League, myClub, and online play, offering fans enhanced presentation and authentic pitch competition.",
+    "requirements": "OS: Windows 7 SP1/8.1/10 (64-bit) Processor: Intel Core i5-3450（3.10GHz）/AMD FX 4100（3.60GHz) RAM: 8 GB Hard Drive: 30 GB available space Video Card: NVIDIA GTX 650/AMD Radeon HD 7750 DirectX: Version 11",
+    "price": "FREE",
+    "image": "images/pes18.png",
+    "screenshots": [
+        "images/pes181.png",
+        "images/pes182.png",
+        "images/pes183.png"
+    ],
+    "downloadParts": [
+        { "name": "Part 1", "url": "https://www.mediafire.com/file/2qecitfhceo17es/Pro_Evolution_Soccer_2018.part1.rar/file" },
+        { "name": "Part 2", "url": "https://www.mediafire.com/file/xa2xwbew1y15edi/Pro_Evolution_Soccer_2018.part2.rar/file" },
+        { "name": "Part 3", "url": "https://www.mediafire.com/file/80z1nms2wiue3ev/Pro_Evolution_Soccer_2018.part3.rar/file" },
+        { "name": "Part 4", "url": "https://www.mediafire.com/file/i85jwgtjbw4034s/Pro_Evolution_Soccer_2018.part4.rar/file" },
+        { "name": "Part 5", "url": "https://www.mediafire.com/file/6liz2glioz6nc0q/Pro_Evolution_Soccer_2018.part5.rar/file" }
+    ]
 }
 ]
