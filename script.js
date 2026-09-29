@@ -541,7 +541,7 @@ function closeDownloadPartsModal() {
 }
 
 function initDetailsPage(games) {
-    // 1. Aggressively hide all loaders/spinners immediately so it never freezes
+    // 1. Aggressively hide all loader/spinner containers immediately
     const detailsLoaders = document.querySelectorAll('#loader, #catalog-loader, .loading-state, [id*="load"], [class*="load"]');
     detailsLoaders.forEach(el => el.style.display = 'none');
 
@@ -553,7 +553,7 @@ function initDetailsPage(games) {
         return;
     }
 
-    // Decode URL parameter safely to handle spaces and symbols correctly
+    // 2. Decode the ID to handle spaces and special characters properly
     const decodedId = decodeURIComponent(gameId);
 
     const currentGame = games.find(g => 
