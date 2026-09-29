@@ -945,5 +945,28 @@
         { "name": "Part 06", "url": "https://www.mediafire.com/file/lyvmgkbwg4zmfsz/FIFA_20_Ultimate_Edition_-_%2528Www.ApunKaGames.Biz%2529.part6.rar/file" },
         { "name": "Part 07", "url": "https://www.mediafire.com/file/u8dt6cr718l5219/FIFA_20_Ultimate_Edition_-_%2528Www.ApunKaGames.Biz%2529.part7.rar/file" }
     ]
+},
+  {
+    "id": "42",
+    "title": "Pro Evolution Soccer 2019",
+    "platform": "PC",
+    "category": "Pro Evolution Soccer 2019",
+    "description": "",
+    "requirements": "OS: Windows 7 SP1/8.1/10  (64-bit) Processor: Intel Core i5-3470 / AMD FX 4350 RAM: 4 GB Hard Drive: 30 GB available space Video Card: NVIDIA GTX 670 / AMD Radeon HD 7870 DirectX: Version 11",
+    "installGuide": "",
+    "price": "FREE",
+    "image": "images/pes19.png",
+    "screenshots": [
+        "images/pes191.png",
+        "images/pes192.png",
+        "images/pes193.png"
+    ],
+    "downloadParts": [
+        { "name": "Part 1", "url": "https://www.mediafire.com/file/jflh5ympra6zv8h/PES_2019_-_%2528Www.ApunkaGames.Net%2529.part1.rar/file" },
+        { "name": "Part 2", "url": "https://www.mediafire.com/file/buw452vttz24gt8/PES_2019_-_%2528Www.ApunkaGames.Net%2529.part2.rar/file" },
+        { "name": "Part 3", "url": "https://www.mediafire.com/file/npbf3socc7t0irq/PES_2019_-_%2528Www.ApunkaGames.Net%2529.part3.rar/file" },
+        { "name": "Part 4", "url": "https://www.mediafire.com/file/7rmm0l3vrthw2vq/PES_2019_-_%2528Www.ApunkaGames.Net%2529.part4.rar/file" },
+        { "name": "Part 5", "url": "https://www.mediafire.com/file/13y1pm68rpipvrp/PES_2019_-_%2528Www.ApunkaGames.Net%2529.part5.rar/file" }
+    ]
 }
 ]
