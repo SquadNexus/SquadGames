@@ -907,7 +907,6 @@ body {
     line-height: 1.45;
 }
 
-/* --- MODERN SPECIFICATIONS LIST STYLING --- */
 .specs-box ul, .requirements-list, .specs-container ul {
     list-style: none;
     padding-left: 0;
@@ -954,7 +953,7 @@ body {
     border-color: var(--accent-blue);
 }
 
-/* Full Screen Lightbox (Fixed screen enlargement & overflow bugs) */
+/* Full Screen Lightbox */
 .fullscreen-overlay {
     position: fixed;
     top: 0;
@@ -1002,73 +1001,6 @@ body {
 
 .fullscreen-close:hover {
     opacity: 1;
-}
-
-/* Google Drive Download Popup Styles */
-.gdrive-popup-box {
-    background: rgba(0, 122, 255, 0.1);
-    border: 1px solid rgba(0, 122, 255, 0.3);
-    padding: 16px;
-    border-radius: 12px;
-    margin-top: 16px;
-    text-align: center;
-}
-
-.gdrive-link-input {
-    width: 100%;
-    padding: 10px 12px;
-    background: rgba(0, 0, 0, 0.5);
-    border: 1px solid rgba(255, 255, 255, 0.15);
-    color: #fff;
-    border-radius: 8px;
-    font-size: 0.85rem;
-    margin-bottom: 10px;
-    box-sizing: border-box;
-    text-align: center;
-}
-
-.gdrive-btn-row {
-    display: flex;
-    gap: 8px;
-    justify-content: center;
-}
-
-.btn-gdrive-primary {
-    background: var(--accent-blue);
-    color: #fff;
-    border: none;
-    padding: 9px 16px;
-    border-radius: 8px;
-    font-weight: 700;
-    font-size: 0.85rem;
-    cursor: pointer;
-    text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    box-shadow: 0 4px 12px rgba(0, 122, 255, 0.3);
-    transition: all 0.2s;
-}
-
-.btn-gdrive-primary:hover {
-    background: #0062cc;
-    transform: translateY(-1px);
-}
-
-.btn-gdrive-copy {
-    background: rgba(255, 255, 255, 0.1);
-    color: #fff;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    padding: 9px 14px;
-    border-radius: 8px;
-    font-weight: 700;
-    font-size: 0.85rem;
-    cursor: pointer;
-    transition: all 0.2s;
-}
-
-.btn-gdrive-copy:hover {
-    background: rgba(255, 255, 255, 0.2);
 }
 
 @media (max-width: 600px) {
