@@ -125,7 +125,7 @@
             <h3><i class="fa-solid fa-circle-question" style="color: var(--accent-red);"></i> How to Install Games</h3>
             <ol>
                 <li><strong>Download All Parts:</strong> Ensure all multi-part archive files are downloaded completely into the same folder on your computer.</li>
-                <li><strong>Extract Files:</strong>  Extract Files: Select all the files to assure that all your essentials are fully extracted and and use extraction software like WinRAR or 7-Zip to extract the game files.</li>
+                <li><strong>Extract Files:</strong> Select all the files to assure that all your essentials are fully extracted and and use extraction software like WinRAR or 7-Zip to extract the game files.</li>
                 <li><strong>Run Setup:</strong> Open the extracted folder, locate the setup file or installer, and run it as Administrator.</li>
                 <li><strong>Complete Installation:</strong> Follow the on-screen prompts to install the game to your preferred directory. Make sure to install any required redistributables (DirectX, VCRedist) if prompted.</li>
                 <li><strong>Apply Crack / Fix (If Applicable):</strong> If the release requires a manual crack, copy the contents from the crack/codex folder and paste them into the main game installation directory, replacing existing files.</li>
@@ -233,10 +233,14 @@
                                 ` : ''}
 
                                 <div class="download-section" style="margin-top: 10px;">
-                                    <h3 style="color: #fff; margin-bottom: 15px; font-size: 18px; display: flex; align-items: center; gap: 10px;">
-                                        <i class="fa-solid fa-download" style="color: var(--accent-green);"></i> Download Links
-                                    </h3>
-                                    <div style="display: flex; flex-wrap: wrap; gap: 12px;">
+                                    <button onclick="toggleDownloadLinks()" style="width: 100%; padding: 14px 20px; background: linear-gradient(135deg, #28a745, #218838); color: #fff; border: none; border-radius: 10px; font-size: 18px; font-weight: bold; display: flex; align-items: center; justify-content: space-between; cursor: pointer; box-shadow: 0 4px 15px rgba(40,167,69,0.3); transition: background 0.2s;">
+                                        <span style="display: flex; align-items: center; gap: 10px;">
+                                            <i class="fa-solid fa-download"></i> Download Links
+                                        </span>
+                                        <i id="download-chevron" class="fa-solid fa-chevron-down" style="transition: transform 0.3s;"></i>
+                                    </button>
+                                    
+                                    <div id="download-links-container" style="display: none; flex-direction: column; gap: 12px; margin-top: 15px;">
                                         ${renderDownloadLinks(game)}
                                     </div>
                                 </div>
@@ -266,14 +270,14 @@
                     const url = typeof link === 'object' ? (link.url || link.link || link.downloadUrl || link.href) : link;
                     const name = typeof link === 'object' ? (link.name || link.title || 'Part ' + (index + 1)) : 'Download Part ' + (index + 1);
                     return `
-                        <a href="${url}" target="_blank" style="padding: 12px 22px; background: linear-gradient(135deg, #28a745, #218838); color: #fff; text-decoration: none; border-radius: 8px; font-weight: bold; display: inline-flex; align-items: center; gap: 8px; box-shadow: 0 4px 15px rgba(40,167,69,0.3); transition: transform 0.2s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+                        <a href="${url}" target="_blank" style="width: 100%; box-sizing: border-box; padding: 14px 20px; background: linear-gradient(135deg, #28a745, #218838); color: #fff; text-decoration: none; border-radius: 8px; font-weight: bold; display: flex; align-items: center; gap: 10px; box-shadow: 0 4px 15px rgba(40,167,69,0.3); transition: transform 0.2s;" onmouseover="this.style.transform='translateX(4px)'" onmouseout="this.style.transform='translateX(0)'">
                             <i class="fa-solid fa-cloud-arrow-down"></i> ${name}
                         </a>
                     `;
                 }).join('');
             } else if (singleLink) {
                 return `
-                    <a href="${singleLink}" target="_blank" style="padding: 14px 28px; background: linear-gradient(135deg, #28a745, #218838); color: #fff; text-decoration: none; border-radius: 8px; font-weight: bold; display: inline-flex; align-items: center; gap: 10px; font-size: 16px; box-shadow: 0 4px 15px rgba(40,167,69,0.3); transition: transform 0.2s;" onmouseover="this.style.transform='translateY(-2px)'" onmouseout="this.style.transform='translateY(0)'">
+                    <a href="${singleLink}" target="_blank" style="width: 100%; box-sizing: border-box; padding: 14px 20px; background: linear-gradient(135deg, #28a745, #218838); color: #fff; text-decoration: none; border-radius: 8px; font-weight: bold; display: flex; align-items: center; gap: 10px; font-size: 16px; box-shadow: 0 4px 15px rgba(40,167,69,0.3); transition: transform 0.2s;" onmouseover="this.style.transform='translateX(4px)'" onmouseout="this.style.transform='translateX(0)'">
                         <i class="fa-solid fa-cloud-arrow-down"></i> Download Game ${game.size ? '(' + game.size + ')' : ''}
                     </a>
                 `;
@@ -283,6 +287,18 @@
                         <i class="fa-solid fa-circle-info"></i> Download links are currently being updated for this title. Please check back shortly!
                     </div>
                 `;
+            }
+        }
+
+        function toggleDownloadLinks() {
+            const container = document.getElementById('download-links-container');
+            const chevron = document.getElementById('download-chevron');
+            if (container.style.display === 'none' || container.style.display === '') {
+                container.style.display = 'flex';
+                chevron.style.transform = 'rotate(180deg)';
+            } else {
+                container.style.display = 'none';
+                chevron.style.transform = 'rotate(0deg)';
             }
         }
 
@@ -306,4 +322,3 @@
     </script>
 </body>
 </html>
-```[cite: 15]
