@@ -160,6 +160,7 @@ function initStore(games) {
 
     populateCategoryDropdown(games);
     populateFranchiseDropdown(games);
+    renderGameTypes(games); // Populates dynamic category navigation tabs if container exists
 
     const featuredGames = games.filter(game => {
         const title = (game.title || "").toLowerCase();
@@ -262,6 +263,42 @@ function populateCategoryDropdown(games) {
         dropdown.appendChild(option);
     });
 }
+
+// Automatically extracts unique game types and populates #dynamic-game-types container if present in HTML
+function renderGameTypes(games) {
+    const container = document.getElementById('dynamic-game-types');
+    if (!container) return;
+
+    const typesSet = new Set();
+    games.forEach(game => {
+        const cat = game.category || game.Category || game.genre;
+        if (cat) {
+            const catString = Array.isArray(cat) ? cat.join('/') : String(cat);
+            catString.split('/').forEach(c => {
+                let trimmed = c.trim();
+                if (trimmed) typesSet.add(trimmed);
+            });
+        }
+    });
+
+    let html = '';
+    typesSet.forEach(type => {
+        html += `<button class="nav-tab" onclick="filterByCategory('${type}')">${type}</button>`;
+    });
+    container.innerHTML = html;
+}
+
+// Global category filtering handler for dynamic tabs & dropdowns
+function filterByCategory(category) {
+    const lowerCat = category.toLowerCase();
+    currentCategory = (lowerCat === 'home' || lowerCat === 'all') ? 'all' : lowerCat;
+    
+    const categoryDropdown = document.getElementById('categoryDropdown');
+    if (categoryDropdown) categoryDropdown.value = currentCategory;
+
+    applyFilters();
+}
+window.filterByCategory = filterByCategory;
 
 function populateFranchiseDropdown(games) {
     const dropdown = document.getElementById('franchiseDropdown');
@@ -463,6 +500,7 @@ function renderGameStore(gameList) {
 function openDetailsById(id) {
     window.location.href = `details.html?id=${id}`;
 }
+window.openDetailsById = openDetailsById;
 
 function openDetails(index) {
     const game = loadedGamesData[index];
@@ -470,6 +508,7 @@ function openDetails(index) {
     const identifier = game.id !== undefined ? game.id : game.title;
     openDetailsById(identifier);
 }
+window.openDetails = openDetails;
 
 function openFullScreen(imgSrc) {
     const fullModal = document.getElementById("fullscreenOverlay");
@@ -477,11 +516,13 @@ function openFullScreen(imgSrc) {
     if (fullImg) fullImg.src = imgSrc;
     if (fullModal) fullModal.classList.add("active");
 }
+window.openFullScreen = openFullScreen;
 
 function closeFullScreen() {
     const fullModal = document.getElementById("fullscreenOverlay");
     if (fullModal) fullModal.classList.remove("active");
 }
+window.closeFullScreen = closeFullScreen;
 
 function showDownloadPartsModal(game) {
     let modal = document.getElementById('download-parts-modal');
@@ -534,11 +575,19 @@ function showDownloadPartsModal(game) {
 
     modal.classList.add('active');
 }
+window.showDownloadPartsModal = showDownloadPartsModal;
 
 function closeDownloadPartsModal() {
     const modal = document.getElementById('download-parts-modal');
     if (modal) modal.classList.remove('active');
 }
+window.closeDownloadPartsModal = closeDownloadPartsModal;
+
+function closeModalDirect() {
+    const modal = document.getElementById('download-parts-modal');
+    if (modal) modal.classList.remove('active');
+}
+window.closeModalDirect = closeModalDirect;
 
 function initDetailsPage(games) {
     // 1. Aggressively hide all loader/spinner containers immediately
