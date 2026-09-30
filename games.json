@@ -1006,5 +1006,33 @@
         "images/pes173.png"
     ],
     "downloadUrl": "https://www.mediafire.com/file/lu789x3haol9mvd/Pro_Evolution_Soccer_2017_-_%2528Www.ApunKaGames.Biz%2529.rar/file"
+},
+  {
+    "id": "45",
+    "title": "The Last of Us Part I",
+    "platform": "PC",
+    "category": "Action / Adventure",
+    "description": "Experience the emotional storytelling and unforgettable characters in The Last of Us, winner of over 200 Game of the Year awards. In a civilization ravaged, where infected and hardened survivors run rampant, Joel is hired to smuggle 14-year-old Ellie out of a military quarantine zone.",
+    "requirements": "OS: Windows 10 (Version 1909 or Newer) Processor: AMD Ryzen 5 1500X, Intel Core i7-4770K RAM: 16 GB Hard Disk: 100 GB available space Graphics Card: AMD Radeon RX 470 (4 GB), AMD Radeon RX 6500 XT (4 GB), NVIDIA GeForce GTX 970 (4 GB), NVIDIA GeForce GTX 1050 Ti (4 GB) DirectX: Version 11 Additional Notes: SSD Recommended",
+    "price": "FREE",
+    "image": "images/tloup1.png",
+    "screenshots": [
+        "images/tloup11.png",
+        "images/tloup12.png",
+        "images/tloup13.png"
+    ],
+    "downloadParts": [
+        { "name": "Part 01", "url": "https://www.mediafire.com/file/6537m9cq64vf12b/The_Last_of_Us_Part_I_-_%2528Www.ApunKaGames.net%2529.part01.rar/file" },
+        { "name": "Part 02", "url": "https://www.mediafire.com/file/s7j3nofebjrui67/The_Last_of_Us_Part_I_-_%2528Www.ApunKaGames.net%2529.part02.rar/file" },
+        { "name": "Part 03", "url": "https://www.mediafire.com/file/26x8dz6zf2gipq8/The_Last_of_Us_Part_I_-_%2528Www.ApunKaGames.net%2529.part03.rar/file" },
+        { "name": "Part 04", "url": "https://www.mediafire.com/file/a07qz2tdjor0rrb/The_Last_of_Us_Part_I_-_%2528Www.ApunKaGames.net%2529.part04.rar/file" },
+        { "name": "Part 05", "url": "https://www.mediafire.com/file/b0a9dz8czduopg3/The_Last_of_Us_Part_I_-_%2528Www.ApunKaGames.net%2529.part05.rar/file" },
+        { "name": "Part 06", "url": "https://www.mediafire.com/file/fkqll4jbptwmb3f/The_Last_of_Us_Part_I_-_%2528Www.ApunKaGames.net%2529.part06.rar/file" },
+        { "name": "Part 07", "url": "https://www.mediafire.com/file/6flp4c0v6al0zrs/The_Last_of_Us_Part_I_-_%2528Www.ApunKaGames.net%2529.part07.rar/file" },
+        { "name": "Part 08", "url": "https://www.mediafire.com/file/izo2dpu21ypdxfz/The_Last_of_Us_Part_I_-_%2528Www.ApunKaGames.net%2529.part08.rar/file" },
+        { "name": "Part 09", "url": "https://www.mediafire.com/file/epd73a52njq5pg8/The_Last_of_Us_Part_I_-_%2528Www.ApunKaGames.net%2529.part09.rar/file" },
+        { "name": "Part 10", "url": "https://www.mediafire.com/file/tzd6li95fi7xyzo/The_Last_of_Us_Part_I_-_%2528Www.ApunKaGames.net%2529.part10.rar/file" },
+        { "name": "Part 11", "url": "https://www.mediafire.com/file/kye5f8qtg82x322/The_Last_of_Us_Part_I_-_%2528Www.ApunKaGames.net%2529.part11.rar/file" }
+    ]
 }
 ]
