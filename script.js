@@ -1,7 +1,6 @@
 let loadedGamesData = [];
 let currentSearchQuery = "";
 let currentCategory = "all";
-let currentFranchise = "all";
 
 document.addEventListener("DOMContentLoaded", () => {
     console.log("Squad Games Store initialized.");
@@ -16,16 +15,19 @@ document.addEventListener("DOMContentLoaded", () => {
         localStorage.removeItem('scrollPosition');
     }
 
-    // 2. Save scroll position whenever any action/download/details button is clicked
+    // 2. Save scroll position on action/details click & close dropdowns on outside click
     document.addEventListener('click', function(e) {
         if (e.target.closest('.btn-action') || e.target.closest('.btn-details')) {
             localStorage.setItem('scrollPosition', window.scrollY);
         }
         
-        // Close dropdown if clicking outside
         if (!e.target.closest('.category-dropdown-wrapper')) {
-            const dropdownList = document.getElementById('categoriesDropdownList');
-            if (dropdownList) dropdownList.style.display = 'none';
+            const catDropdown = document.getElementById('categoriesDropdownList');
+            if (catDropdown) catDropdown.style.display = 'none';
+        }
+        if (!e.target.closest('.gametype-dropdown-wrapper')) {
+            const gameDropdown = document.getElementById('gameTypesDropdownList');
+            if (gameDropdown) gameDropdown.style.display = 'none';
         }
     });
 
@@ -128,7 +130,7 @@ async function loadGameCatalog() {
                 id: "1",
                 title: "Tanzania Euro Truck Simulator 2 + 50 TZ mods packs",
                 platform: "PC",
-                category: "Simulation / PC",
+                category: "Simulation",
                 description: "Full Euro Truck Simulator 2 PC game bundled with 50 custom TZ mods.",
                 requirements: "OS: Windows 10/11 (64-bit) | RAM: 8 GB | Storage: 25 GB",
                 installGuide: "1. Extract the downloaded archive.\n2. Run setup.exe as administrator.\n3. Move mods to documents folder.",
@@ -164,9 +166,8 @@ function initStore(games) {
     const loaderElements = document.querySelectorAll('#loader, #catalog-loader, .loading-state');
     loaderElements.forEach(el => el.style.display = 'none');
 
-    populateCategoryDropdown(games);
-    populateFranchiseDropdown(games);
-    renderThreeMainCategories(games); // Renders the exact 3-button layout you requested
+    // Render interactive expandable dropdown navigation
+    renderThreeMainCategories(games);
 
     const featuredGames = games.filter(game => {
         const title = (game.title || "").toLowerCase();
@@ -199,22 +200,6 @@ function initStore(games) {
         });
     }
 
-    const categoryDropdown = document.getElementById('categoryDropdown');
-    if (categoryDropdown) {
-        categoryDropdown.addEventListener('change', (e) => {
-            currentCategory = e.target.value.toLowerCase();
-            applyFilters();
-        });
-    }
-
-    const franchiseDropdown = document.getElementById('franchiseDropdown');
-    if (franchiseDropdown) {
-        franchiseDropdown.addEventListener('change', (e) => {
-            currentFranchise = e.target.value.toLowerCase();
-            applyFilters();
-        });
-    }
-
     const closeModalBtn = document.querySelector('.close-btn');
     if (closeModalBtn) closeModalBtn.addEventListener('click', closeModalDirect);
 
@@ -227,9 +212,10 @@ function initStore(games) {
     }
 }
 
-function populateCategoryDropdown(games) {
-    const dropdown = document.getElementById('categoryDropdown');
-    if (!dropdown) return;
+// Renders interactive navigation with expandable Categories & Game Types dropdowns
+function renderThreeMainCategories(games) {
+    const container = document.getElementById('dynamic-game-types');
+    if (!container) return;
 
     let uniqueCategories = new Set();
     games.forEach(game => {
@@ -243,141 +229,74 @@ function populateCategoryDropdown(games) {
         }
     });
 
-    dropdown.innerHTML = `<option value="all">📁 Select Category...</option>`;
+    let categoriesListHTML = `<a href="#" onclick="filterByCategory('all'); return false;" style="display: block; padding: 10px 14px; color: #f1c40f; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.1); font-weight: 600;"><i class="fa-solid fa-layer-group" style="margin-right: 6px;"></i> All Categories (${uniqueCategories.size})</a>`;
     uniqueCategories.forEach(cat => {
-        const option = document.createElement('option');
-        option.value = cat.toLowerCase();
-        option.textContent = cat;
-        dropdown.appendChild(option);
+        categoriesListHTML += `<a href="#" onclick="filterByCategory('${cat}'); return false;" style="display: block; padding: 10px 14px; color: #fff; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.05); transition: background 0.2s;">${cat}</a>`;
     });
-}
 
-// Renders ONLY the 3 requested navigation buttons in #dynamic-game-types
-function renderThreeMainCategories(games) {
-    const container = document.getElementById('dynamic-game-types');
-    if (!container) return;
-
-    // Collect unique categories for the expandable list
-    let uniqueCategories = new Set();
+    let gamesListHTML = `<a href="#" onclick="filterByCategory('all'); return false;" style="display: block; padding: 10px 14px; color: #f1c40f; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.1); font-weight: 600;"><i class="fa-solid fa-gamepad" style="margin-right: 6px;"></i> All Available Games (${games.length})</a>`;
     games.forEach(game => {
-        const cat = game.category || game.Category || game.genre;
-        if (cat) {
-            const catString = Array.isArray(cat) ? cat.join('/') : String(cat);
-            catString.split('/').forEach(c => {
-                let trimmed = c.trim();
-                if (trimmed) uniqueCategories.add(trimmed);
-            });
-        }
+        const gameId = game.id || game.title;
+        gamesListHTML += `<a href="#" onclick="openDetailsById('${encodeURIComponent(gameId)}'); return false;" style="display: block; padding: 10px 14px; color: #fff; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.05); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><i class="fa-solid fa-play" style="margin-right: 6px; color: var(--accent-blue); font-size: 0.7rem;"></i> ${game.title}</a>`;
     });
 
-    let categoriesListHTML = '';
-    uniqueCategories.forEach(cat => {
-        categoriesListHTML += `<a href="#" onclick="filterByCategory('${cat}'); return false;" style="display: block; padding: 8px 12px; color: #fff; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.05);">${cat}</a>`;
-    });
-
-    // Build the 3 clean buttons structure
     container.innerHTML = `
-        <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap;">
-            <!-- 1. Home Button -->
-            <button class="nav-tab" onclick="filterByCategory('all')">
+        <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap; width: 100%;">
+            <!-- 1. Home / All Games Button -->
+            <button class="nav-tab active" onclick="filterByCategory('all')">
                 <i class="fa-solid fa-house"></i> Home
             </button>
 
-            <!-- 2. All Categories Button (Expandable Dropdown) -->
+            <!-- 2. All Categories Expandable Dropdown -->
             <div class="category-dropdown-wrapper" style="position: relative; display: inline-block;">
-                <button class="nav-tab" onclick="toggleCategoriesDropdown(event)">
+                <button class="nav-tab" onclick="toggleDropdown('categoriesDropdownList', event)">
                     <i class="fa-solid fa-layer-group"></i> All Categories <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem; margin-left: 4px;"></i>
                 </button>
-                <div id="categoriesDropdownList" style="display: none; position: absolute; top: 100%; left: 0; background: var(--bg-card, #1e1e1e); min-width: 200px; border-radius: 8px; box-shadow: 0 8px 20px rgba(0,0,0,0.5); z-index: 1000; margin-top: 5px; max-height: 250px; overflow-y: auto; border: 1px solid rgba(255,255,255,0.1);">
-                    <a href="#" onclick="filterByCategory('all'); return false;" style="display: block; padding: 8px 12px; color: #f1c40f; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.05);">All Categories</a>
+                <div id="categoriesDropdownList" style="display: none; position: absolute; top: 100%; left: 0; background: #1e1e1e; min-width: 240px; border-radius: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.7); z-index: 9999; margin-top: 6px; max-height: 300px; overflow-y: auto; border: 1px solid rgba(255,255,255,0.15);">
                     ${categoriesListHTML}
                 </div>
             </div>
 
-            <!-- 3. Game Type / All Available Games Button -->
-            <button class="nav-tab" onclick="expandAllGameTypes()">
-                <i class="fa-solid fa-gamepad"></i> Game Type
-            </button>
+            <!-- 3. Game Type Expandable Dropdown -->
+            <div class="gametype-dropdown-wrapper" style="position: relative; display: inline-block;">
+                <button class="nav-tab" onclick="toggleDropdown('gameTypesDropdownList', event)">
+                    <i class="fa-solid fa-gamepad"></i> Game Type <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem; margin-left: 4px;"></i>
+                </button>
+                <div id="gameTypesDropdownList" style="display: none; position: absolute; top: 100%; left: 0; background: #1e1e1e; min-width: 280px; border-radius: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.7); z-index: 9999; margin-top: 6px; max-height: 300px; overflow-y: auto; border: 1px solid rgba(255,255,255,0.15);">
+                    ${gamesListHTML}
+                </div>
+            </div>
         </div>
     `;
 }
 
-// Toggle function for All Categories dropdown expansion
-function toggleCategoriesDropdown(e) {
+// Universal dropdown toggle handler
+function toggleDropdown(elementId, e) {
     e.stopPropagation();
-    const dropdownList = document.getElementById('categoriesDropdownList');
+    const otherId = elementId === 'categoriesDropdownList' ? 'gameTypesDropdownList' : 'categoriesDropdownList';
+    const otherEl = document.getElementById(otherId);
+    if (otherEl) otherEl.style.display = 'none';
+
+    const dropdownList = document.getElementById(elementId);
     if (dropdownList) {
         dropdownList.style.display = dropdownList.style.display === 'block' ? 'none' : 'block';
     }
 }
-window.toggleCategoriesDropdown = toggleCategoriesDropdown;
+window.toggleDropdown = toggleDropdown;
 
-// Filter handler when clicking a category or Home
 function filterByCategory(category) {
     const lowerCat = category.toLowerCase();
     currentCategory = (lowerCat === 'home' || lowerCat === 'all') ? 'all' : lowerCat;
-    
-    const categoryDropdown = document.getElementById('categoryDropdown');
-    if (categoryDropdown) categoryDropdown.value = currentCategory;
+    currentSearchQuery = '';
 
-    const dropdownList = document.getElementById('categoriesDropdownList');
-    if (dropdownList) dropdownList.style.display = 'none';
+    const catList = document.getElementById('categoriesDropdownList');
+    if (catList) catList.style.display = 'none';
+    const gameList = document.getElementById('gameTypesDropdownList');
+    if (gameList) gameList.style.display = 'none';
 
     applyFilters();
 }
 window.filterByCategory = filterByCategory;
-
-// Game Type button action (shows/lists all available games)
-function expandAllGameTypes() {
-    currentCategory = 'all';
-    currentFranchise = 'all';
-    currentSearchQuery = '';
-    
-    const searchInput = document.getElementById('gameSearchInput');
-    if (searchInput) searchInput.value = '';
-
-    const categoryDropdown = document.getElementById('categoryDropdown');
-    if (categoryDropdown) categoryDropdown.value = 'all';
-
-    const franchiseDropdown = document.getElementById('franchiseDropdown');
-    if (franchiseDropdown) franchiseDropdown.value = 'all';
-
-    applyFilters();
-}
-window.expandAllGameTypes = expandAllGameTypes;
-
-function populateFranchiseDropdown(games) {
-    const dropdown = document.getElementById('franchiseDropdown');
-    if (!dropdown) return;
-
-    let uniqueFranchises = new Set();
-    games.forEach(game => {
-        let franchise = game.franchise || game.series;
-        
-        if (!franchise && game.title) {
-            const title = game.title.toLowerCase();
-            if (title.includes("need for speed")) franchise = "Need for Speed";
-            else if (title.includes("call of duty")) franchise = "Call of Duty";
-            else if (title.includes("grand theft auto") || title.includes("gta")) franchise = "Grand Theft Auto";
-            else if (title.includes("euro truck simulator")) franchise = "Euro Truck Simulator";
-            else if (title.includes("spider-man")) franchise = "Spider-Man";
-            else if (title.includes("carx street")) franchise = "CarX Street";
-            else if (title.includes("fifa")) franchise = "FIFA";
-        }
-
-        if (franchise) {
-            uniqueFranchises.add(franchise.trim());
-        }
-    });
-
-    dropdown.innerHTML = `<option value="all">🎮 Select Franchise...</option>`;
-    uniqueFranchises.forEach(fran => {
-        const option = document.createElement('option');
-        option.value = fran.toLowerCase();
-        option.textContent = fran;
-        dropdown.appendChild(option);
-    });
-}
 
 function renderFeaturedMarquee(sliderGames) {
     const track = document.getElementById("featuredTrack");
@@ -457,8 +376,6 @@ function applyFilters() {
         const description = (game.description || "").toLowerCase();
         const category = (game.category || game.Category || "").toLowerCase();
         const platform = (game.platform || "").toLowerCase();
-        const franchiseField = (game.franchise || game.series || "").toLowerCase();
-        const fullText = (title + " " + description).toLowerCase();
 
         const matchesSearch = title.includes(currentSearchQuery) || description.includes(currentSearchQuery);
 
@@ -467,12 +384,7 @@ function applyFilters() {
             matchesCategory = category.includes(currentCategory) || platform.includes(currentCategory);
         }
 
-        let matchesFranchise = true;
-        if (currentFranchise !== 'all') {
-            matchesFranchise = franchiseField.includes(currentFranchise) || fullText.includes(currentFranchise);
-        }
-
-        return matchesSearch && matchesCategory && matchesFranchise;
+        return matchesSearch && matchesCategory;
     });
 
     renderGameStore(filteredGames);
@@ -548,24 +460,16 @@ function openDetailsById(id) {
 }
 window.openDetailsById = openDetailsById;
 
-function openDetails(index) {
-    const game = loadedGamesData[index];
-    if (!game) return;
-    const identifier = game.id !== undefined ? game.id : game.title;
-    openDetailsById(identifier);
-}
-window.openDetails = openDetails;
-
 function openFullScreen(imgSrc) {
-    const fullModal = document.getElementById("fullscreenOverlay");
-    const fullImg = document.getElementById("fullscreenImg");
+    const fullModal = document.getElementById("fullscreenOverlay") || document.getElementById("fullscreen-overlay");
+    const fullImg = document.getElementById("fullscreenImg") || document.getElementById("fullscreen-img");
     if (fullImg) fullImg.src = imgSrc;
     if (fullModal) fullModal.classList.add("active");
 }
 window.openFullScreen = openFullScreen;
 
 function closeFullScreen() {
-    const fullModal = document.getElementById("fullscreenOverlay");
+    const fullModal = document.getElementById("fullscreenOverlay") || document.getElementById("fullscreen-overlay");
     if (fullModal) fullModal.classList.remove("active");
 }
 window.closeFullScreen = closeFullScreen;
@@ -629,14 +533,7 @@ function closeDownloadPartsModal() {
 }
 window.closeDownloadPartsModal = closeDownloadPartsModal;
 
-function closeModalDirect() {
-    const modal = document.getElementById('download-parts-modal');
-    if (modal) modal.classList.remove('active');
-}
-window.closeModalDirect = closeModalDirect;
-
 function initDetailsPage(games) {
-    // 1. Aggressively hide all loader/spinner containers immediately
     const detailsLoaders = document.querySelectorAll('#loader, #catalog-loader, .loading-state, [id*="load"], [class*="load"]');
     detailsLoaders.forEach(el => el.style.display = 'none');
 
@@ -648,7 +545,6 @@ function initDetailsPage(games) {
         return;
     }
 
-    // 2. Decode the ID to handle spaces and special characters properly
     const decodedId = decodeURIComponent(gameId);
 
     const currentGame = games.find(g => 
