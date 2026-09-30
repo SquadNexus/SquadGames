@@ -18,36 +18,17 @@
             <div class="portal-logo-area">
                 <h1 class="portal-logo">Squad Games Store TZ</h1>
 
-                <!-- Sleek Modern Live Search Box -->
+                <!-- Sleek Modern Search Box Styling -->
                 <div class="portal-search-wrapper">
                     <i class="fa-solid fa-magnifying-glass search-icon"></i>
-                    <input type="text" id="gameSearchInput" placeholder="Search games, racing, combat, mods..." onkeyup="handleSearch()">
+                    <input type="text" id="gameSearchInput" placeholder="Search games, mods, simulator...">
                 </div>
             </div>
 
-            <!-- 3-Part Navigation Bar Configuration -->
-            <nav class="portal-navbar" id="nav-categories-bar" style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
-                
-                <!-- Part 1: Home Category -->
-                <button class="nav-tab active" onclick="filterByCategory('home')">
-                    <i class="fa-solid fa-house"></i> Home
-                </button>
-
-                <div style="width: 1px; height: 20px; background: rgba(255,255,255,0.15); margin: 0 5px;"></div>
-
-                <!-- Part 2: Dynamic Game Types (Automatically lists Racing, Combat, War, Sports, etc. from games.json) -->
-                <div id="dynamic-game-types" style="display: inline-flex; gap: 8px; flex-wrap: wrap; align-items: center;">
-                    <!-- Dynamically populated via script.js -->
-                </div>
-
-                <div style="width: 1px; height: 20px; background: rgba(255,255,255,0.15); margin: 0 5px;"></div>
-
-                <!-- Part 3: All Categories -->
-                <button class="nav-tab" onclick="filterByCategory('all')">
-                    <i class="fa-solid fa-layer-group"></i> All Categories
-                </button>
-
-            </nav>
+            <!-- Portal Navigation Container (Dynamic Expandable Dropdowns & Home) -->
+            <div id="dynamic-game-types" class="portal-navbar">
+                <!-- Dropdown buttons load here dynamically via JavaScript -->
+            </div>
         </div>
 
         <!-- Intro Banner -->
@@ -98,7 +79,7 @@
     </div>
 
     <!-- Fullscreen Image Modal -->
-    <div id="fullscreen-modal" class="fullscreen-overlay" onclick="closeFullScreen()">
+    <div id="fullscreen-overlay" class="fullscreen-overlay" onclick="closeFullScreen()">
         <span class="fullscreen-close">&times;</span>
         <img id="fullscreen-img" class="fullscreen-img" src="" alt="Fullscreen View">
     </div>
