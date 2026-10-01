@@ -1013,7 +1013,7 @@
     "platform": "PC",
     "category": "Action / Adventure",
     "description": "Experience the emotional storytelling and unforgettable characters in The Last of Us, winner of over 200 Game of the Year awards. In a civilization ravaged, where infected and hardened survivors run rampant, Joel is hired to smuggle 14-year-old Ellie out of a military quarantine zone.",
-    "requirements": "OS: Windows 10 (Version 1909 or Newer) Processor: AMD Ryzen 5 1500X, Intel Core i7-4770K RAM: 16 GB Hard Disk: 100 GB available space Graphics Card: AMD Radeon RX 470 (4 GB), AMD Radeon RX 6500 XT (4 GB), NVIDIA GeForce GTX 970 (4 GB), NVIDIA GeForce GTX 1050 Ti (4 GB) DirectX: Version 11 Additional Notes: SSD Recommended",
+    "requirements": "OS: Windows 10 (Version 1909 or Newer)<br>Processor: AMD Ryzen 5 1500X, Intel Core i7-4770K<br>RAM: 16 GB<br>Hard Disk: 100 GB available space<br>Graphics Card: AMD Radeon RX 470 (4 GB), AMD Radeon RX 6500 XT (4 GB), NVIDIA GeForce GTX 970 (4 GB), NVIDIA GeForce GTX 1050 Ti (4 GB)<br>DirectX: Version 11<br>Additional Notes: SSD Recommended",
     "price": "FREE",
     "image": "images/tloup1.png",
     "screenshots": [
@@ -1033,6 +1033,40 @@
         { "name": "Part 09", "url": "https://www.mediafire.com/file/epd73a52njq5pg8/The_Last_of_Us_Part_I_-_%2528Www.ApunKaGames.net%2529.part09.rar/file" },
         { "name": "Part 10", "url": "https://www.mediafire.com/file/tzd6li95fi7xyzo/The_Last_of_Us_Part_I_-_%2528Www.ApunKaGames.net%2529.part10.rar/file" },
         { "name": "Part 11", "url": "https://www.mediafire.com/file/kye5f8qtg82x322/The_Last_of_Us_Part_I_-_%2528Www.ApunKaGames.net%2529.part11.rar/file" }
+    ]
+},
+  {
+    "id": "46",
+    "title": "The Last of Us Part II Remastered",
+    "platform": "PC",
+    "category": "Action-adventure, Open world",
+    "description": "The Last of Us Part II Remastered, developed by Naughty Dog, Nixxes Software, Iron Galaxy Studios, and PlayStation Publishing LLC for Windows on June 16, 2025, is a 78.5 GB open-world action-adventure video game that continues Ellie's intense, emotionally charged journey of survival and revenge in a brutal post-apocalyptic setting. The gameplay blends seamless stealth, visceral combat, exploration, and crafting mechanics, enhanced by upgraded visuals, smoother performance, and engaging new challenge modes that deliver a definitive and deeply immersive experience.",
+    "requirements": "OS: Windows 10/11 64-bit (version 1909 or higher)<br>Processor: Intel Core i3-8100, AMD Ryzen 3 1300X<br>RAM: 16 GB<br>Hard Disk: 150 GB available space<br>Graphics Card: NVIDIA GeForce GTX 1650, AMD Radeon RX 5500XT<br>Additional Notes: SSD Required<br>DirectX: Version 12",
+    "installGuide": "",
+    "price": "FREE",
+    "image": "images/tloup2.png",
+    "screenshots": [
+        "images/tloup21.png",
+        "images/tloup22.png",
+        "images/tloup23.png"
+    ],
+    "downloadParts": [
+        { "name": "Part 1", "url": "https://thefileslocker.net/h1o51mtjtmns.html" },
+        { "name": "Part 2", "url": "https://thefileslocker.net/gsb3qrebmstc.html" },
+        { "name": "Part 3", "url": "https://thefileslocker.net/mc1gb5lkfvqv.html" },
+        { "name": "Part 4", "url": "https://thefileslocker.net/mmfngyku6x7z.html" },
+        { "name": "Part 5", "url": "https://thefileslocker.net/uhcynrnby2ob.html" },
+        { "name": "Part 6", "url": "https://thefileslocker.net/iod53ja6eksd.html" },
+        { "name": "Part 7", "url": "https://thefileslocker.net/bm415wou7kn8.html" },
+        { "name": "Part 8", "url": "https://thefileslocker.net/q2a72u5462b8.html" },
+        { "name": "Part 9", "url": "https://thefileslocker.net/q2a72u5462b8.html" },
+        { "name": "Part 10", "url": "https://thefileslocker.net/q2a72u5462b8.html" },
+        { "name": "Part 11", "url": "https://thefileslocker.net/6stjxx1p31rk.html" },
+        { "name": "Part 12", "url": "https://thefileslocker.net/29r0hbl04vn7.html" },
+        { "name": "Part 13", "url": "https://thefileslocker.net/29r0hbl04vn7.html" },
+        { "name": "Part 14", "url": "https://thefileslocker.net/5dnrnlycx3nb.html" },
+        { "name": "Part 15", "url": "https://thefileslocker.net/0vhi5rwn4pib.html" },
+        { "name": "Part 16", "url": "https://thefileslocker.net/6zd0wlr81bs3.html" }
     ]
 }
 ]
