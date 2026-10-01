@@ -2,8 +2,8 @@ let loadedGamesData = [];
 let currentSearchQuery = "";
 let currentCategory = "all";
 let currentSeries = "all";
-let visibleGamesLimit = 8; // Initial number of games shown
-const gamesBatchSize = 8;   // Number of games loaded per "See More" click
+let showAllGames = false; // Tracks whether all games or a limited batch are shown
+const INITIAL_GAME_LIMIT = 8; // Number of games shown initially before clicking "See More"
 
 document.addEventListener("DOMContentLoaded", () => {
     console.log("Squad Games Store initialized.");
@@ -149,7 +149,7 @@ function initStore(games) {
     if (searchInput) {
         searchInput.addEventListener('input', (e) => {
             currentSearchQuery = e.target.value.toLowerCase().trim();
-            visibleGamesLimit = 8; // Reset limit on search
+            showAllGames = false; // Reset view on new search
             applyFilters();
         });
     }
@@ -174,6 +174,7 @@ function getGameSeriesName(title) {
     if (t.includes('tomb raider')) return 'Tomb Raider';
     if (t.includes('battlefield')) return 'Battlefield';
     
+    // Fallback: take text before colon or dash, or first 2 words
     if (title.includes(':')) return title.split(':')[0].trim();
     if (title.includes(' - ')) return title.split(' - ')[0].trim();
     const words = title.split(' ');
@@ -254,7 +255,7 @@ window.toggleDropdown = toggleDropdown;
 function filterByCategory(category) {
     currentCategory = category.toLowerCase() === 'all' ? 'all' : category.toLowerCase();
     currentSeries = 'all';
-    visibleGamesLimit = 8; // Reset limit on filter change
+    showAllGames = false;
     closeAllDropdowns();
     applyFilters();
 }
@@ -263,7 +264,7 @@ window.filterByCategory = filterByCategory;
 function filterBySeries(seriesName) {
     currentSeries = seriesName.toLowerCase() === 'all' ? 'all' : seriesName.toLowerCase();
     currentCategory = 'all';
-    visibleGamesLimit = 8; // Reset limit on filter change
+    showAllGames = false;
     closeAllDropdowns();
     applyFilters();
 }
@@ -273,7 +274,7 @@ function resetAllFilters() {
     currentCategory = 'all';
     currentSeries = 'all';
     currentSearchQuery = '';
-    visibleGamesLimit = 8; // Reset limit on reset
+    showAllGames = false;
     closeAllDropdowns();
     applyFilters();
 }
@@ -312,11 +313,19 @@ function applyFilters() {
     renderGameStore(filteredGames);
 }
 
-function loadMoreGames() {
-    visibleGamesLimit += gamesBatchSize;
+function toggleShowAllGames(expand) {
+    showAllGames = expand;
     applyFilters();
+    
+    // If collapsing back to "See Less", gently scroll back to the top of the grid
+    if (!expand) {
+        const gridEl = document.getElementById("gameGrid") || document.getElementById("games-grid");
+        if (gridEl) {
+            gridEl.scrollIntoView({ behavior: 'smooth' });
+        }
+    }
 }
-window.loadMoreGames = loadMoreGames;
+window.toggleShowAllGames = toggleShowAllGames;
 
 function renderFeaturedMarquee(sliderGames) {
     const track = document.getElementById("featuredTrack");
@@ -405,10 +414,10 @@ function renderGameStore(gameList) {
         return;
     }
 
-    // Slice the game list to respect the initial limit and pagination
-    const gamesToDisplay = gameList.slice(0, visibleGamesLimit);
+    // Determine whether to slice games or show all based on showAllGames flag
+    const gamesToRender = showAllGames ? gameList : gameList.slice(0, INITIAL_GAME_LIMIT);
 
-    gamesToDisplay.forEach((game) => {
+    gamesToRender.forEach((game) => {
         const gameId = game.id || game.title;
         const originalIndex = loadedGamesData.indexOf(game);
         const card = document.createElement("div");
@@ -455,19 +464,30 @@ function renderGameStore(gameList) {
         container.appendChild(card);
     });
 
-    // If there are more games left to show, add a "See More Games" button at the bottom
-    if (gameList.length > visibleGamesLimit) {
-        const seeMoreDiv = document.createElement("div");
-        seeMoreDiv.style.gridColumn = "1 / -1";
-        seeMoreDiv.style.textAlign = "center";
-        seeMoreDiv.style.margin = "30px 0";
-        
-        seeMoreDiv.innerHTML = `
-            <button onclick="loadMoreGames()" style="padding: 12px 30px; font-size: 1rem; background: var(--accent-color, #f1c40f); color: #000; font-weight: bold; border-radius: 8px; cursor: pointer; border: none; box-shadow: 0 4px 15px rgba(0,0,0,0.3); transition: transform 0.2s;">
-                See More Games <i class="fa-solid fa-chevron-down" style="margin-left: 6px;"></i>
-            </button>
-        `;
-        container.appendChild(seeMoreDiv);
+    // Append "See More" or "See Less" toggle button at the bottom if total games exceed the initial limit
+    if (gameList.length > INITIAL_GAME_LIMIT) {
+        const toggleWrapper = document.createElement("div");
+        toggleWrapper.style.gridColumn = "1 / -1";
+        toggleWrapper.style.textAlign = "center";
+        toggleWrapper.style.marginTop = "30px";
+        toggleWrapper.style.marginBottom = "20px";
+
+        if (!showAllGames) {
+            const remainingCount = gameList.length - INITIAL_GAME_LIMIT;
+            toggleWrapper.innerHTML = `
+                <button onclick="toggleShowAllGames(true)" style="padding: 14px 28px; font-size: 1rem; background: var(--accent-blue, #3498db); color: #fff; border: none; border-radius: 10px; cursor: pointer; font-weight: 600; box-shadow: 0 4px 15px rgba(52, 152, 219, 0.4); transition: transform 0.2s ease;">
+                    <i class="fa-solid fa-angles-down" style="margin-right: 8px;"></i> See More (${remainingCount} more games)
+                </button>
+            `;
+        } else {
+            toggleWrapper.innerHTML = `
+                <button onclick="toggleShowAllGames(false)" style="padding: 14px 28px; font-size: 1rem; background: #333; color: #fff; border: 1px solid rgba(255,255,255,0.2); border-radius: 10px; cursor: pointer; font-weight: 600; transition: transform 0.2s ease;">
+                    <i class="fa-solid fa-angles-up" style="margin-right: 8px;"></i> See Less
+                </button>
+            `;
+        }
+
+        container.appendChild(toggleWrapper);
     }
 }
 
