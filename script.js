@@ -166,7 +166,7 @@ function initStore(games) {
     const loaderElements = document.querySelectorAll('#loader, #catalog-loader, .loading-state');
     loaderElements.forEach(el => el.style.display = 'none');
 
-    // Render interactive expandable dropdown navigation
+    // Render interactive expandable dropdown navigation dynamically scanning all games
     renderThreeMainCategories(games);
 
     const featuredGames = games.filter(game => {
@@ -212,9 +212,9 @@ function initStore(games) {
     }
 }
 
-// Renders interactive navigation with expandable Categories & Game Types dropdowns
+// Automatically scans all present & future games in games.json to populate Categories & Game Types dropdowns
 function renderThreeMainCategories(games) {
-    const container = document.getElementById('dynamic-game-types');
+    const container = document.getElementById('dynamic-game-types') || document.querySelector('.portal-navbar');
     if (!container) return;
 
     let uniqueCategories = new Set();
@@ -241,30 +241,28 @@ function renderThreeMainCategories(games) {
     });
 
     container.innerHTML = `
-        <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap; width: 100%;">
-            <!-- 1. Home / All Games Button -->
-            <button class="nav-tab active" onclick="filterByCategory('all')">
-                <i class="fa-solid fa-house"></i> Home
+        <!-- 1. Home / All Games Button -->
+        <button class="nav-tab active" onclick="filterByCategory('all')">
+            <i class="fa-solid fa-house"></i> Home
+        </button>
+
+        <!-- 2. All Categories Expandable Dropdown -->
+        <div class="category-dropdown-wrapper" style="position: relative; display: inline-block;">
+            <button class="nav-tab" onclick="toggleDropdown('categoriesDropdownList', event)">
+                <i class="fa-solid fa-layer-group"></i> All Categories <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem; margin-left: 4px;"></i>
             </button>
-
-            <!-- 2. All Categories Expandable Dropdown -->
-            <div class="category-dropdown-wrapper" style="position: relative; display: inline-block;">
-                <button class="nav-tab" onclick="toggleDropdown('categoriesDropdownList', event)">
-                    <i class="fa-solid fa-layer-group"></i> All Categories <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem; margin-left: 4px;"></i>
-                </button>
-                <div id="categoriesDropdownList" style="display: none; position: absolute; top: 100%; left: 0; background: #1e1e1e; min-width: 240px; border-radius: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.7); z-index: 9999; margin-top: 6px; max-height: 300px; overflow-y: auto; border: 1px solid rgba(255,255,255,0.15);">
-                    ${categoriesListHTML}
-                </div>
+            <div id="categoriesDropdownList" style="display: none; position: absolute; top: 100%; left: 0; background: #1e1e1e; min-width: 240px; border-radius: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.7); z-index: 9999; margin-top: 6px; max-height: 300px; overflow-y: auto; border: 1px solid rgba(255,255,255,0.15);">
+                ${categoriesListHTML}
             </div>
+        </div>
 
-            <!-- 3. Game Type Expandable Dropdown -->
-            <div class="gametype-dropdown-wrapper" style="position: relative; display: inline-block;">
-                <button class="nav-tab" onclick="toggleDropdown('gameTypesDropdownList', event)">
-                    <i class="fa-solid fa-gamepad"></i> Game Type <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem; margin-left: 4px;"></i>
-                </button>
-                <div id="gameTypesDropdownList" style="display: none; position: absolute; top: 100%; left: 0; background: #1e1e1e; min-width: 280px; border-radius: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.7); z-index: 9999; margin-top: 6px; max-height: 300px; overflow-y: auto; border: 1px solid rgba(255,255,255,0.15);">
-                    ${gamesListHTML}
-                </div>
+        <!-- 3. Game Type Expandable Dropdown -->
+        <div class="gametype-dropdown-wrapper" style="position: relative; display: inline-block;">
+            <button class="nav-tab" onclick="toggleDropdown('gameTypesDropdownList', event)">
+                <i class="fa-solid fa-gamepad"></i> Game Type <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem; margin-left: 4px;"></i>
+            </button>
+            <div id="gameTypesDropdownList" style="display: none; position: absolute; top: 100%; left: 0; background: #1e1e1e; min-width: 280px; border-radius: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.7); z-index: 9999; margin-top: 6px; max-height: 300px; overflow-y: auto; border: 1px solid rgba(255,255,255,0.15);">
+                ${gamesListHTML}
             </div>
         </div>
     `;
