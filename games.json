@@ -1163,5 +1163,22 @@
         { "name": "Part 5", "url": "https://thefileslocker.net/ysfejmlf43kk.html" },
         { "name": "Part 6", "url": "https://thefileslocker.net/cx9069bm3oci.html" }
     ]
+},
+  {
+    "id": "51",
+    "title": "Tomb Raider",
+    "platform": "PC",
+    "category": "Action-adventure",
+    "description": "Tomb Raider, developed by Crystal Dynamics and published by Square Enix Europe for Windows on March 5, 2013, is a 6.48 GB action-adventure video game that serves as a thrilling origin story, guiding a younger Lara Croft through perilous environments as she evolves into a hardened survivor. The gameplay combines cinematic storytelling, intricate puzzle-solving, and environmental exploration with intense survival combat and deadly traps, delivering a gripping and immersive PC experience.",
+    "requirements": "OS: Windows XP/Vista/7/8<br>CPU: Dual Core AMD Athlon64 X2 2.1 Ghz (4050+), Intel Core2 Duo 1.86 Ghz (E6300)<br>RAM: 2 GB<br>Hard Drive: 12 GB available space<br>Video Card: 512 MB, AMD Radeon HD 2600 XT, nVidia 8600<br>Other Requirements: Broadband Internet connection<br>DirectX: 9.0c",
+    "installGuide": "",
+    "price": "FREE",
+    "image": "images/tr.png",
+    "screenshots": [
+        "images/tr1.png",
+        "images/tr2.png",
+        "images/tr3.png"
+    ],
+    "downloadUrl": "https://www.mediafire.com/file/ceoxolgxh67kwfn/Tomb_Raider_2013_-_%2528Www.ApunKaGames.Com%2529.rar/file",
 }
 ]
