@@ -862,35 +862,36 @@
     ],
     "downloadUrl": "https://www.mediafire.com/file/cod4-placeholder/file"
   },
-  {
-    "id": "39",
-    "title": "FIFA 23",
-    "platform": "PC",
-    "category": "Sports",
-    "description": "EA Sports FIFA 23, developed by EA Vancouver and EA Romania alongside EA Sports and published for Windows on September 30, 2022, is a 55 GB football sports simulation video game that utilizes upgraded HyperMotion2 technology captured from real-world match data to deliver smoother, more lifelike player movement across over 6,000 true-to-life animations. The gameplay shines with enhanced ball physics, refined dribbling and shooting mechanics, cross-play support, and deep, immersive modes like Ultimate Team and Career, making every match feel exceptionally authentic and tactically rich",
-    "requirements": "OS: Windows 10 (64‑bit)<br>Processor: Intel Core i5 6600k or AMD Ryzen 5 1600<br>RAM: 8 GB<br>Hard Disk: 100 GB available space<br>Graphics Card: 4 GB, NVIDIA GeForce GTX 1050 Ti or AMD Radeon RX 570<br>DirectX: Version 11",
-    "installGuide": "Extract the file using Winrar. (Download Winrar)\nOpen “FIFA 23” folder, double click on “Setup” and install it.\nAfter installation complete, go to the folder where you extract the game.\nOpen “MD5” folder, copy all files and paste it where you install the game.\nThen double click on “Game” icon to play the game. Done!",
-    "price": "FREE",
-    "image": "images/fifa23.png",
-    "screenshots": [
-        "images/fifa231.png",
-        "images/fifa232.png",
-        "images/fifa233.png"
-    ],
-    "downloadParts": [
-        { "name": "Part 01", "url": "https://www.mediafire.com/file/3iw3z7prmt75qfz/FIFA_23_-_%2528Www.ApunKaGames.Net%2529.part01.rar/file" },
-        { "name": "Part 02", "url": "https://www.mediafire.com/file/csroulu4hc78qf9/FIFA_23_-_%2528Www.ApunKaGames.Net%2529.part02.rar/file" },
-        { "name": "Part 03", "url": "https://www.mediafire.com/file/cn8r9a8gii2eab1/FIFA_23_-_%2528Www.ApunKaGames.Net%2529.part03.rar/file" },
-        { "name": "Part 04", "url": "https://www.mediafire.com/file/hp3w0swme68j7l6/FIFA_23_-_%2528Www.ApunKaGames.Net%2529.part04.rar/file" },
-        { "name": "Part 05", "url": "https://www.mediafire.com/file/rf3mv0s9pm5odoi/FIFA_23_-_%2528Www.ApunKaGames.Net%2529.part05.rar/file" },
-        { "name": "Part 06", "url": "https://www.mediafire.com/file/tay63rdu6515l6i/FIFA_23_-_%2528Www.ApunKaGames.Net%2529.part06.rar/file" },
-        { "name": "Part 07", "url": "https://www.mediafire.com/file/d3erx0fu35n72ri/FIFA_23_-_%2528Www.ApunKaGames.Net%2529.part07.rar/file" },
-        { "name": "Part 08", "url": "https://www.mediafire.com/file/x8knhyebsih3azo/FIFA_23_-_%2528Www.ApunKaGames.Net%2529.part08.rar/file" },
-        { "name": "Part 09", "url": "https://www.mediafire.com/file/x8jgcg2p92fexn1/FIFA_23_-_%2528Www.ApunKaGames.Net%2529.part09.rar/file" },
-        { "name": "Part 10", "url": "https://www.mediafire.com/file/dqzo8dfwv443bjy/FIFA_23_-_%2528Www.ApunKaGames.Net%2529.part10.rar/file" },
-        { "name": "Part 11", "url": "https://www.mediafire.com/file/m0auufdtolnfy7i/FIFA_23_-_%2528Www.ApunKaGames.Net%2529.part11.rar/file" },
-        { "name": "Part 12", "url": "https://www.mediafire.com/file/f2hj3vc98eiag12/FIFA_23_-_%2528Www.ApunKaGames.Net%2529.part12.rar/file" }
-    ]
+ {
+  "id": "39",
+  "title": "FIFA 23",
+  "platform": "PC",
+  "category": "Sports",
+  "description": "EA Sports FIFA 23, developed by EA Vancouver and EA Romania alongside EA Sports and published for Windows on September 30, 2022, is a 55 GB football sports simulation video game that utilizes upgraded HyperMotion2 technology captured from real-world match data to deliver smoother, more lifelike player movement across over 6,000 true-to-life animations. The gameplay shines with enhanced ball physics, refined dribbling and shooting mechanics, cross-play support, and deep, immersive modes like Ultimate Team and Career, making every match feel exceptionally authentic and tactically rich.",
+  "requirements": "OS: Windows 10 (64‑bit)<br>Processor: Intel Core i5 6600k or AMD Ryzen 5 1600<br>RAM: 8 GB<br>Hard Disk: 100 GB available space<br>Graphics Card: 4 GB, NVIDIA GeForce GTX 1050 Ti or AMD Radeon RX 570<br>DirectX: Version 11",
+  "installGuide": "Extract the file using Winrar. (Download Winrar)\nOpen “FIFA 23” folder, double click on “Setup” and install it.\nAfter installation complete, go to the folder where you extract the game.\nOpen “MD5” folder, copy all files and paste it where you install the game.\nThen double click on “Game” icon to play the game. Done!",
+  "price": "FREE",
+  "image": "images/fifa23.png",
+  "screenshots": [
+    "images/fifa231.png",
+    "images/fifa232.png",
+    "images/fifa233.png"
+  ],
+  "downloadParts": [
+    { "name": "Part 01", "url": "https://www.mediafire.com/file/3iw3z7prmt75qfz/FIFA_23_-_%2528Www.ApunKaGames.Net%2529.part01.rar/file" },
+    { "name": "Part 02", "url": "https://www.mediafire.com/file/csroulu4hc78qf9/FIFA_23_-_%2528Www.ApunKaGames.Net%2529.part02.rar/file" },
+    { "name": "Part 03", "url": "https://www.mediafire.com/file/cn8r9a8gii2eab1/FIFA_23_-_%2528Www.ApunKaGames.Net%2529.part03.rar/file" },
+    { "name": "Part 04", "url": "https://www.mediafire.com/file/hp3w0swme68j7l6/FIFA_23_-_%2528Www.ApunKaGames.Net%2529.part04.rar/file" },
+    { "name": "Part 05", "url": "https://www.mediafire.com/file/rf3mv0s9pm5odoi/FIFA_23_-_%2528Www.ApunKaGames.Net%2529.part05.rar/file" },
+    { "name": "Part 06", "url": "https://www.mediafire.com/file/tay63rdu6515l6i/FIFA_23_-_%2528Www.ApunKaGames.Net%2529.part06.rar/file" },
+    { "name": "Part 07", "url": "https://www.mediafire.com/file/d3erx0fu35n72ri/FIFA_23_-_%2528Www.ApunKaGames.Net%2529.part07.rar/file" },
+    { "name": "Part 08", "url": "https://www.mediafire.com/file/x8knhyebsih3azo/FIFA_23_-_%2528Www.ApunKaGames.Net%2529.part08.rar/file" },
+    { "name": "Part 09", "url": "https://www.mediafire.com/file/x8jgcg2p92fexn1/FIFA_23_-_%2528Www.ApunKaGames.Net%2529.part09.rar/file" },
+    { "name": "Part 10", "url": "https://www.mediafire.com/file/dqzo8dfwv443bjy/FIFA_23_-_%2528Www.ApunKaGames.Net%2529.part10.rar/file" },
+    { "name": "Part 11", "url": "https://www.mediafire.com/file/m0auufdtolnfy7i/FIFA_23_-_%2528Www.ApunKaGames.Net%2529.part11.rar/file" },
+    { "name": "Part 12", "url": "https://www.mediafire.com/file/f2hj3vc98eiag12/FIFA_23_-_%2528Www.ApunKaGames.Net%2529.part12.rar/file" }
+  ]
+}
 },
   {
     "id": "40",
