@@ -2,8 +2,8 @@ let loadedGamesData = [];
 let currentSearchQuery = "";
 let currentCategory = "all";
 let currentSeries = "all";
-let showAllGames = false; // Tracks whether all games or a limited batch are shown
-const INITIAL_GAME_LIMIT = 8; // Number of games shown initially before clicking "See More"
+let showAllGames = false;
+const INITIAL_GAME_LIMIT = 8;
 
 document.addEventListener("DOMContentLoaded", () => {
     console.log("Squad Games Store initialized.");
@@ -127,7 +127,6 @@ function initStore(games) {
     const loaderElements = document.querySelectorAll('#loader, #catalog-loader, .loading-state');
     loaderElements.forEach(el => el.style.display = 'none');
 
-    // Render Categories & Game Series Dropdowns
     renderNavbarDropdowns(games);
 
     const featuredGames = games.filter(game => {
@@ -149,7 +148,7 @@ function initStore(games) {
     if (searchInput) {
         searchInput.addEventListener('input', (e) => {
             currentSearchQuery = e.target.value.toLowerCase().trim();
-            showAllGames = false; // Reset view on new search
+            showAllGames = false;
             applyFilters();
         });
     }
@@ -157,6 +156,42 @@ function initStore(games) {
     if (window.location.pathname.includes('details.html')) {
         initDetailsPage(games);
     }
+}
+
+// Helper to normalize and clean categories into unified standard names
+function getNormalizedCategories(rawCategory) {
+    if (!rawCategory) return ['Action'];
+    
+    // Split by commas, slashes, or dashes if multiple categories are combined
+    const parts = String(rawCategory).split(/[\/,]+/).map(p => p.trim().toLowerCase());
+    let normalizedSet = new Set();
+
+    parts.forEach(p => {
+        if (p.includes('racing') || p.includes('drive') || p.includes('car')) {
+            normalizedSet.add('Racing');
+        } else if (p.includes('fps') || p.includes('shooter') || p.includes('first-person') || p.includes('gun')) {
+            normalizedSet.add('FPS');
+        } else if (p.includes('sport') || p.includes('soccer') || p.includes('fifa') || p.includes('pes')) {
+            normalizedSet.add('Sports');
+        } else if (p.includes('war') || p.includes('military') || p.includes('battle')) {
+            normalizedSet.add('War');
+        } else if (p.includes('adventure')) {
+            normalizedSet.add('Adventure');
+        } else if (p.includes('action')) {
+            normalizedSet.add('Action');
+        } else if (p.includes('simulation') || p.includes('simulator') || p.includes('truck')) {
+            normalizedSet.add('Simulation');
+        } else if (p.includes('strategy')) {
+            normalizedSet.add('Strategy');
+        } else if (p.includes('horror') || p.includes('zombie')) {
+            normalizedSet.add('Horror');
+        } else if (p.length > 0) {
+            // Capitalize first letter of unknown custom categories
+            normalizedSet.add(p.charAt(0).toUpperCase() + p.slice(1));
+        }
+    });
+
+    return normalizedSet.size > 0 ? Array.from(normalizedSet) : ['Action'];
 }
 
 // Helper to extract clean game series/franchise names from game titles
@@ -174,14 +209,13 @@ function getGameSeriesName(title) {
     if (t.includes('tomb raider')) return 'Tomb Raider';
     if (t.includes('battlefield')) return 'Battlefield';
     
-    // Fallback: take text before colon or dash, or first 2 words
     if (title.includes(':')) return title.split(':')[0].trim();
     if (title.includes(' - ')) return title.split(' - ')[0].trim();
     const words = title.split(' ');
     return words.slice(0, 2).join(' ');
 }
 
-// Automatically scans all games and groups them into general categories & game series/types
+// Scans games and builds clean, non-duplicate category and series dropdowns
 function renderNavbarDropdowns(games) {
     const container = document.getElementById('dynamic-game-types') || document.querySelector('.portal-navbar');
     if (!container) return;
@@ -191,20 +225,17 @@ function renderNavbarDropdowns(games) {
 
     games.forEach(game => {
         const rawCategory = game.category || game.Category || game.genre || "";
-        if (rawCategory) {
-            String(rawCategory).split('/').forEach(cat => {
-                let cleanCat = cat.trim();
-                if (cleanCat) uniqueCategories.add(cleanCat);
-            });
-        }
+        const cleanCategories = getNormalizedCategories(rawCategory);
+        cleanCategories.forEach(cat => uniqueCategories.add(cat));
+
         if (game.title) {
             uniqueSeries.add(getGameSeriesName(game.title));
         }
     });
 
     let categoriesListHTML = `<a href="#" onclick="filterByCategory('all'); return false;" style="display: block; padding: 10px 14px; color: #f1c40f; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.1); font-weight: 600;"><i class="fa-solid fa-layer-group" style="margin-right: 6px;"></i> All Categories</a>`;
-    uniqueCategories.forEach(cat => {
-        categoriesListHTML += `<a href="#" onclick="filterByCategory('${cat}'); return false;" style="display: block; padding: 10px 14px; color: #fff; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.05);">${cat}</a>`;
+    Array.from(uniqueCategories).sort().forEach(cat => {
+        categoriesListHTML += `<a href="#" onclick="filterByCategory('${cat}'); return false;" style="display: block; padding: 10px 14px; color: #fff; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.05);"><i class="fa-solid fa-tag" style="margin-right: 6px; color: var(--accent-blue); font-size: 0.7rem;"></i> ${cat}</a>`;
     });
 
     let seriesListHTML = `<a href="#" onclick="filterBySeries('all'); return false;" style="display: block; padding: 10px 14px; color: #f1c40f; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.1); font-weight: 600;"><i class="fa-solid fa-gamepad" style="margin-right: 6px;"></i> All Game Series</a>`;
@@ -217,7 +248,7 @@ function renderNavbarDropdowns(games) {
             <i class="fa-solid fa-house"></i> Home
         </button>
 
-        <!-- Categories Dropdown -->
+        <!-- Clean Categories Dropdown -->
         <div class="category-dropdown-wrapper" style="position: relative; display: inline-block;">
             <button class="nav-tab" onclick="toggleDropdown('categoriesDropdownList', event)">
                 <i class="fa-solid fa-layer-group"></i> All Categories <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem; margin-left: 4px;"></i>
@@ -227,7 +258,7 @@ function renderNavbarDropdowns(games) {
             </div>
         </div>
 
-        <!-- Game Series / Types Dropdown -->
+        <!-- Game Series Dropdown -->
         <div class="gametype-dropdown-wrapper" style="position: relative; display: inline-block;">
             <button class="nav-tab" onclick="toggleDropdown('gameTypesDropdownList', event)">
                 <i class="fa-solid fa-gamepad"></i> Game Type / Series <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem; margin-left: 4px;"></i>
@@ -291,15 +322,15 @@ function applyFilters() {
     const filteredGames = loadedGamesData.filter(game => {
         const title = (game.title || "").toLowerCase();
         const description = (game.description || "").toLowerCase();
-        const category = (game.category || game.Category || "").toLowerCase();
-        const platform = (game.platform || "").toLowerCase();
+        const rawCategory = game.category || game.Category || "";
+        const gameCategories = getNormalizedCategories(rawCategory).map(c => c.toLowerCase());
         const series = getGameSeriesName(game.title).toLowerCase();
 
         const matchesSearch = title.includes(currentSearchQuery) || description.includes(currentSearchQuery);
 
         let matchesCategory = true;
         if (currentCategory !== 'all') {
-            matchesCategory = category.includes(currentCategory) || platform.includes(currentCategory);
+            matchesCategory = gameCategories.includes(currentCategory);
         }
 
         let matchesSeries = true;
@@ -317,7 +348,6 @@ function toggleShowAllGames(expand) {
     showAllGames = expand;
     applyFilters();
     
-    // If collapsing back to "See Less", gently scroll back to the top of the grid
     if (!expand) {
         const gridEl = document.getElementById("gameGrid") || document.getElementById("games-grid");
         if (gridEl) {
@@ -414,7 +444,6 @@ function renderGameStore(gameList) {
         return;
     }
 
-    // Determine whether to slice games or show all based on showAllGames flag
     const gamesToRender = showAllGames ? gameList : gameList.slice(0, INITIAL_GAME_LIMIT);
 
     gamesToRender.forEach((game) => {
@@ -464,7 +493,6 @@ function renderGameStore(gameList) {
         container.appendChild(card);
     });
 
-    // Append "See More" or "See Less" toggle button at the bottom if total games exceed the initial limit
     if (gameList.length > INITIAL_GAME_LIMIT) {
         const toggleWrapper = document.createElement("div");
         toggleWrapper.style.gridColumn = "1 / -1";
