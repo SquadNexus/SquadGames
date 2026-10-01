@@ -1116,5 +1116,27 @@
         { "name": "Part 5", "url": "https://thefileslocker.net/hmo77yqqba5y.html" },
         { "name": "Part 6", "url": "https://thefileslocker.net/l9inht0eshgk.html" }
     ]
+},
+  {
+    "id": "49",
+    "title": "Rise of the Tomb Raider",
+    "platform": "PC",
+    "category": "Action-adventure, Stealth",
+    "description": "Rise of the Tomb Raider, developed by Crystal Dynamics and published by Square Enix for PC, is a 14 GB action-adventure video game that follows Lara Croft on a perilous expedition through the harsh environments of Siberia in search of the ancient secret of immortality. The gameplay combines immersive environmental exploration, intricate puzzle-solving, crafting mechanics, and intense survival combat, challenging players to master Lara's unique skills as she navigates large, mysterious tombs and overcomes both ruthless enemies and unforgiving wilderness.",
+    "requirements": "OS: Windows 7 64bit Processor: Intel Core i3-2100 or AMD equivalent RAM: 6 GB Hard Drive: 25 GB available space Video Card: NVIDIA GTX 650 2GB or AMD HD7770 2GB DirectX: Version 11",
+    "installGuide": "",
+    "price": "FREE",
+    "image": "images/rottrplain.png",
+    "screenshots": [
+        "images/rottrplain1.png",
+        "images/rottrplain2.png",
+        "images/rottrplain3.png"
+    ],
+    "downloadUrl": "#",
+    "downloadParts": [
+        { "name": "Part 1", "url": "https://www.mediafire.com/file/yujp9pfpb3vbbn5/Rise_of_the_Tomb_Raider_-_%2528Www.ApunKaGames.Net%2529.part1.rar/file" },
+        { "name": "Part 2", "url": "https://www.mediafire.com/file/ytly9161asa1wqb/Rise_of_the_Tomb_Raider_-_%2528Www.ApunKaGames.Net%2529.part2.rar/file" },
+        { "name": "Part 3", "url": "https://www.mediafire.com/file/481kiuig74akr04/Rise_of_the_Tomb_Raider_-_%2528Www.ApunKaGames.Net%2529.part3.rar/file" }
+    ]
 }
 ]
