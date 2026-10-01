@@ -1138,5 +1138,30 @@
         { "name": "Part 2", "url": "https://www.mediafire.com/file/ytly9161asa1wqb/Rise_of_the_Tomb_Raider_-_%2528Www.ApunKaGames.Net%2529.part2.rar/file" },
         { "name": "Part 3", "url": "https://www.mediafire.com/file/481kiuig74akr04/Rise_of_the_Tomb_Raider_-_%2528Www.ApunKaGames.Net%2529.part3.rar/file" }
     ]
+},
+  {
+    "id": "50",
+    "title": "Shadow of the Tomb Raider",
+    "platform": "PC",
+    "category": " Action-adventure",
+    "description": "Developer/Publishers: Eidos-Montréal, Square Enix\nShadow of the Tomb Raider (27.2 GB) is an action-adventure game that follows Lara Croft on her most dangerous journey as she races to stop a global apocalypse. Players explore ancient tombs, solve challenging puzzles, survive deadly environments, and engage in stealth-based combat. Set across beautiful jungles and hidden civilizations, the game offers stunning visuals and immersive storytelling. Shadow of the Tomb Raider is perfect for PC players who enjoy exploration, action, and cinematic adventures.",
+    "requirements": "OS: Windows 7 64-bit or higher<br>Processor: i3-3220 INTEL or AMD Equivalent<br>RAM: 8 GB<br>Hard Drive: 40 GB available space<br>Video Card: Nvidia GTX 660/GTX 1050 or AMD Radeon HD 7770<br>DirectX: Version 11",
+    "installGuide": "",
+    "price": "FREE",
+    "image": "images/sottr.png",
+    "screenshots": [
+        "images/sottr1.png",
+        "images/sottr2.png",
+        "images/sottr3.png"
+    ],
+    "downloadUrl": "#",
+    "downloadParts": [
+        { "name": "Part 1", "url": "https://thefileslocker.net/ommoia2lkrni.html" },
+        { "name": "Part 2", "url": "https://thefileslocker.net/sro4xo55tjri.html" },
+        { "name": "Part 3", "url": "https://thefileslocker.net/npe7y3j40ht9.html" },
+        { "name": "Part 4", "url": "https://thefileslocker.net/6smy6xpu8b52.html" },
+        { "name": "Part 5", "url": "https://thefileslocker.net/ysfejmlf43kk.html" },
+        { "name": "Part 6", "url": "https://thefileslocker.net/cx9069bm3oci.html" }
+    ]
 }
 ]
