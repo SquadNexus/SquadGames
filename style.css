@@ -127,14 +127,9 @@ body {
 .portal-navbar {
     display: flex;
     gap: 8px;
-    overflow-x: auto;
+    flex-wrap: wrap; /* Fixed: allows items and dropdowns to display fully without clipping */
     padding-bottom: 4px;
-    scrollbar-width: none;
     align-items: center;
-}
-
-.portal-navbar::-webkit-scrollbar {
-    display: none;
 }
 
 .nav-tab {
