@@ -1,13 +1,19 @@
+/**
+ * Squad Games Store TZ - Ultimate Gaming Portal Stylesheet
+ * Optimized for dark gaming aesthetics, responsive grids, and modern UI components.
+ */
+
 :root {
     --text-muted: #94a3b8;
     --bg-card: rgba(22, 22, 26, 0.88);
     --border-color: rgba(255, 255, 255, 0.08);
     --accent-green: #25d366;
     --accent-blue: #007aff;
+    --accent-orange: #ff9500;
 }
 
 body {
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-family: 'Poppins', system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     background: linear-gradient(rgba(10, 10, 12, 0.88), rgba(10, 10, 12, 0.88)), 
                 url('images/background.png') no-repeat center center fixed;
     background-size: cover;
@@ -18,19 +24,11 @@ body {
     -webkit-font-smoothing: antialiased;
 }
 
-/* Header Navbar */
-.navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 14px 28px;
-    background-color: rgba(18, 18, 22, 0.9);
-    border-bottom: 1px solid var(--border-color);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    position: sticky;
-    top: 0;
-    z-index: 999;
+/* Main Container */
+.container {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 24px 20px;
 }
 
 /* --- Permanent Portal Header & Styled Navigation Box --- */
@@ -57,17 +55,34 @@ body {
 
 .portal-logo {
     font-weight: 800;
-    font-size: 1.2rem;
+    font-size: 1.25rem;
     color: #ffffff;
     letter-spacing: -0.3px;
     margin: 0;
     white-space: nowrap;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.logo-icon {
+    color: var(--accent-blue);
+}
+
+.tz-badge {
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: #fff;
+    font-size: 0.65rem;
+    padding: 2px 6px;
+    border-radius: 4px;
+    vertical-align: middle;
+    letter-spacing: 0.5px;
 }
 
 /* --- Sleek Modern Search Box Styling --- */
 .portal-search-wrapper {
     position: relative;
-    width: 280px;
+    width: 300px;
     max-width: 100%;
     background: rgba(255, 255, 255, 0.04);
     border: 1px solid rgba(255, 255, 255, 0.08);
@@ -92,8 +107,6 @@ body {
 }
 
 .portal-search-wrapper .search-icon {
-    position: static;
-    transform: none;
     color: var(--text-muted);
     font-size: 0.85rem;
     pointer-events: none;
@@ -109,13 +122,9 @@ body {
     background: transparent;
     border: none;
     padding: 10px 0;
-    border-radius: 0;
     color: #ffffff;
     font-size: 0.85rem;
     outline: none;
-    transition: none;
-    box-sizing: border-box;
-    box-shadow: none;
     font-family: inherit;
 }
 
@@ -124,10 +133,11 @@ body {
     opacity: 0.7;
 }
 
+/* --- Navigation Bar & Dropdowns --- */
 .portal-navbar {
     display: flex;
     gap: 8px;
-    flex-wrap: wrap; /* Fixed: allows items and dropdowns to display fully without clipping */
+    flex-wrap: wrap;
     padding-bottom: 4px;
     align-items: center;
 }
@@ -162,28 +172,69 @@ body {
     box-shadow: 0 4px 12px rgba(0, 122, 255, 0.3);
 }
 
-/* Dropdown Links Hover & Scrollbar Styling */
-#categoriesDropdownList a:hover, 
-#gameTypesDropdownList a:hover {
-    background: rgba(0, 122, 255, 0.2) !important;
-    color: var(--accent-blue) !important;
+.chevron-icon {
+    font-size: 0.7rem;
+    margin-left: 4px;
+    transition: transform 0.2s ease;
 }
 
-#categoriesDropdownList::-webkit-scrollbar,
-#gameTypesDropdownList::-webkit-scrollbar {
+/* Custom Dropdown Lists */
+.custom-dropdown-list {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: #16161a;
+    min-width: 250px;
+    border-radius: 12px;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.8);
+    z-index: 9999;
+    margin-top: 8px;
+    max-height: 320px;
+    overflow-y: auto;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    padding: 6px 0;
+}
+
+.dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    color: #fff;
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 500;
+    transition: background 0.2s ease, color 0.2s ease;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.dropdown-item i {
+    font-size: 0.75rem;
+    color: var(--accent-blue);
+}
+
+.dropdown-item.highlight {
+    color: var(--accent-orange);
+    font-weight: 700;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.dropdown-item.highlight i {
+    color: var(--accent-orange);
+}
+
+.dropdown-item:hover {
+    background: rgba(0, 122, 255, 0.2);
+    color: var(--accent-blue);
+}
+
+.custom-dropdown-list::-webkit-scrollbar {
     width: 6px;
 }
-#categoriesDropdownList::-webkit-scrollbar-thumb,
-#gameTypesDropdownList::-webkit-scrollbar-thumb {
+.custom-dropdown-list::-webkit-scrollbar-thumb {
     background: rgba(255, 255, 255, 0.2);
     border-radius: 3px;
-}
-
-/* Main Container */
-.container {
-    max-width: 1120px;
-    margin: 0 auto;
-    padding: 24px 20px;
 }
 
 /* Intro Banner */
@@ -260,8 +311,15 @@ body {
     font-size: 1.05rem;
     font-weight: 800;
     margin: 0 0 12px 0;
-    color: #ff9500;
+    color: var(--accent-orange);
     letter-spacing: 0.3px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.flame-icon, .star-icon {
+    color: var(--accent-orange);
 }
 
 .featured-marquee-container {
@@ -384,7 +442,6 @@ body {
     border-radius: 10px;
     border: 1px solid rgba(255, 255, 255, 0.05);
     transition: all 0.2s ease;
-    text-decoration: none;
     cursor: pointer;
 }
 
@@ -420,6 +477,11 @@ body {
     font-size: 0.72rem;
     color: var(--accent-green);
     font-weight: 700;
+}
+
+.popular-item i {
+    font-size: 0.75rem;
+    color: var(--text-muted);
 }
 
 /* Trust Bar */
@@ -525,6 +587,7 @@ body {
     width: 100%;
     height: 170px;
     background: #000;
+    cursor: pointer;
 }
 
 .game-img {
@@ -566,19 +629,18 @@ body {
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
-    text-overflow: ellipsis;
     height: 2.8em;
 }
 
 .category-tag {
-    color: #ff9500;
+    color: var(--accent-orange);
     font-size: 0.75rem;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 0.5px;
 }
 
-/* --- Card Action & Action Group Layout --- */
+/* Card Action & Buttons */
 .card-action {
     margin-top: auto;
     display: flex;
@@ -603,14 +665,6 @@ body {
     max-width: 130px;
 }
 
-.action-group .btn-details,
-.action-group .btn-action {
-    width: 100%;
-    box-sizing: border-box;
-    text-align: center;
-    white-space: nowrap;
-}
-
 .btn-details {
     background: rgba(255, 255, 255, 0.06);
     color: #ffffff;
@@ -621,6 +675,7 @@ body {
     font-size: 0.82rem;
     cursor: pointer;
     transition: all 0.2s ease;
+    text-align: center;
 }
 
 .btn-details:hover {
@@ -656,15 +711,15 @@ body {
 }
 
 .btn-vodacom {
-    background: linear-gradient(135deg, #e60000, #b30000);
+    background: linear-gradient(135deg, #25d366, #128c7e);
     color: #ffffff;
-    box-shadow: 0 4px 12px rgba(230, 0, 0, 0.25);
+    box-shadow: 0 4px 12px rgba(37, 211, 102, 0.25);
 }
 
 .btn-vodacom:hover {
-    background: linear-gradient(135deg, #ff1a1a, #cc0000);
+    background: linear-gradient(135deg, #2eba5e, #107c70);
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(230, 0, 0, 0.4);
+    box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
 }
 
 .btn-get {
@@ -677,6 +732,52 @@ body {
     background: linear-gradient(135deg, #34d399, #10b981);
     box-shadow: 0 6px 20px rgba(16, 185, 129, 0.5);
     transform: translateY(-2px);
+}
+
+/* See More / See Less Toggle Buttons */
+.btn-see-more {
+    padding: 14px 28px;
+    font-size: 1rem;
+    background: var(--accent-blue);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 600;
+    box-shadow: 0 4px 15px rgba(0, 122, 255, 0.4);
+    transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.btn-see-more:hover {
+    background: #0062cc;
+    transform: translateY(-2px);
+}
+
+.btn-see-less {
+    padding: 14px 28px;
+    font-size: 1rem;
+    background: #333;
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.btn-see-less:hover {
+    background: #444;
+    transform: translateY(-2px);
+}
+
+/* Portal Footer */
+.portal-footer {
+    text-align: center;
+    padding: 30px 0;
+    margin-top: 40px;
+    border-top: 1px solid var(--border-color);
+    color: var(--text-muted);
+    font-size: 0.85rem;
 }
 
 /* Full Screen Lightbox */
