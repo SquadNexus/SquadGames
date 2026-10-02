@@ -1,3 +1,9 @@
+/**
+ * Squad Games Store TZ - Core Application Script
+ * Manages game catalog loading, dynamic filters, search, marquee animations, 
+ * multi-part downloads, and UI modal states.
+ */
+
 let loadedGamesData = [];
 let currentSearchQuery = "";
 let currentCategory = "all";
@@ -6,19 +12,19 @@ let showAllGames = false;
 const INITIAL_GAME_LIMIT = 8;
 
 document.addEventListener("DOMContentLoaded", () => {
-    console.log("Squad Games Store initialized.");
+    console.log("Squad Games Store TZ initialized successfully.");
 
-    // 1. Restore scroll position instantly if it was saved before leaving
+    // 1. Restore scroll position instantly if saved before navigating to details
     const savedPosition = localStorage.getItem('scrollPosition');
     if (savedPosition !== null) {
         window.scrollTo({
-            top: parseInt(savedPosition),
+            top: parseInt(savedPosition, 10),
             behavior: 'instant'
         });
         localStorage.removeItem('scrollPosition');
     }
 
-    // 2. Save scroll position on action/details click & close dropdowns on outside click
+    // 2. Global click listeners for scroll tracking and dropdown auto-closing
     document.addEventListener('click', function(e) {
         if (e.target.closest('.btn-action') || e.target.closest('.btn-details')) {
             localStorage.setItem('scrollPosition', window.scrollY);
@@ -46,7 +52,7 @@ document.addEventListener("DOMContentLoaded", () => {
         let targetGame = null;
         const gameId = downloadBtn.getAttribute('data-game-id');
         if (gameId) {
-            targetGame = loadedGamesData.find(g => (g.id || g.title) === gameId);
+            targetGame = loadedGamesData.find(g => String(g.id || g.title) === decodeURIComponent(gameId));
         }
 
         if (!targetGame) {
@@ -83,10 +89,13 @@ document.addEventListener("DOMContentLoaded", () => {
         }, 1000);
     });
 
-    // 4. Load Game Catalog
+    // 4. Trigger Game Catalog Fetch
     loadGameCatalog();
 });
 
+/**
+ * Robust asynchronous loader for games.json supporting GitHub Pages repo paths
+ */
 async function loadGameCatalog() {
     const pathSegments = window.location.pathname.split('/').filter(Boolean);
     const repoPrefix = (window.location.hostname.includes("github.io") && pathSegments.length > 0) ? `/${pathSegments[0]}/` : './';
@@ -107,7 +116,7 @@ async function loadGameCatalog() {
                 break;
             }
         } catch (err) {
-            console.warn("Failed path attempt:", path);
+            console.warn("Failed fetching from path attempt:", path);
         }
     }
 
@@ -121,6 +130,9 @@ async function loadGameCatalog() {
     initStore(gamesArray);
 }
 
+/**
+ * Initializes store components and search listeners after data is fetched
+ */
 function initStore(games) {
     loadedGamesData = games;
 
@@ -158,11 +170,12 @@ function initStore(games) {
     }
 }
 
-// Helper to normalize and clean categories into unified standard names
+/**
+ * Normalizes raw category strings into clean unified categories
+ */
 function getNormalizedCategories(rawCategory) {
     if (!rawCategory) return ['Action'];
     
-    // Split by commas, slashes, or dashes if multiple categories are combined
     const parts = String(rawCategory).split(/[\/,]+/).map(p => p.trim().toLowerCase());
     let normalizedSet = new Set();
 
@@ -186,7 +199,6 @@ function getNormalizedCategories(rawCategory) {
         } else if (p.includes('horror') || p.includes('zombie')) {
             normalizedSet.add('Horror');
         } else if (p.length > 0) {
-            // Capitalize first letter of unknown custom categories
             normalizedSet.add(p.charAt(0).toUpperCase() + p.slice(1));
         }
     });
@@ -194,7 +206,9 @@ function getNormalizedCategories(rawCategory) {
     return normalizedSet.size > 0 ? Array.from(normalizedSet) : ['Action'];
 }
 
-// Helper to extract clean game series/franchise names from game titles
+/**
+ * Extracts clean franchise/series names from game titles
+ */
 function getGameSeriesName(title) {
     const t = title.toLowerCase();
     if (t.includes('call of duty')) return 'Call of Duty';
@@ -215,7 +229,9 @@ function getGameSeriesName(title) {
     return words.slice(0, 2).join(' ');
 }
 
-// Scans games and builds clean, non-duplicate category and series dropdowns
+/**
+ * Dynamically builds navbar dropdown items for categories and series
+ */
 function renderNavbarDropdowns(games) {
     const container = document.getElementById('dynamic-game-types') || document.querySelector('.portal-navbar');
     if (!container) return;
@@ -233,14 +249,14 @@ function renderNavbarDropdowns(games) {
         }
     });
 
-    let categoriesListHTML = `<a href="#" onclick="filterByCategory('all'); return false;" style="display: block; padding: 10px 14px; color: #f1c40f; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.1); font-weight: 600;"><i class="fa-solid fa-layer-group" style="margin-right: 6px;"></i> All Categories</a>`;
+    let categoriesListHTML = `<a href="#" onclick="filterByCategory('all'); return false;" class="dropdown-item highlight"><i class="fa-solid fa-layer-group"></i> All Categories</a>`;
     Array.from(uniqueCategories).sort().forEach(cat => {
-        categoriesListHTML += `<a href="#" onclick="filterByCategory('${cat}'); return false;" style="display: block; padding: 10px 14px; color: #fff; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.05);"><i class="fa-solid fa-tag" style="margin-right: 6px; color: var(--accent-blue); font-size: 0.7rem;"></i> ${cat}</a>`;
+        categoriesListHTML += `<a href="#" onclick="filterByCategory('${cat}'); return false;" class="dropdown-item"><i class="fa-solid fa-tag"></i> ${cat}</a>`;
     });
 
-    let seriesListHTML = `<a href="#" onclick="filterBySeries('all'); return false;" style="display: block; padding: 10px 14px; color: #f1c40f; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.1); font-weight: 600;"><i class="fa-solid fa-gamepad" style="margin-right: 6px;"></i> All Game Series</a>`;
+    let seriesListHTML = `<a href="#" onclick="filterBySeries('all'); return false;" class="dropdown-item highlight"><i class="fa-solid fa-gamepad"></i> All Game Series</a>`;
     Array.from(uniqueSeries).sort().forEach(series => {
-        seriesListHTML += `<a href="#" onclick="filterBySeries('${series}'); return false;" style="display: block; padding: 10px 14px; color: #fff; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.05);"><i class="fa-solid fa-play" style="margin-right: 6px; color: var(--accent-blue); font-size: 0.7rem;"></i> ${series}</a>`;
+        seriesListHTML += `<a href="#" onclick="filterBySeries('${series}'); return false;" class="dropdown-item"><i class="fa-solid fa-play"></i> ${series}</a>`;
     });
 
     container.innerHTML = `
@@ -248,12 +264,12 @@ function renderNavbarDropdowns(games) {
             <i class="fa-solid fa-house"></i> Home
         </button>
 
-        <!-- Clean Categories Dropdown -->
+        <!-- Categories Dropdown -->
         <div class="category-dropdown-wrapper" style="position: relative; display: inline-block;">
             <button class="nav-tab" onclick="toggleDropdown('categoriesDropdownList', event)">
-                <i class="fa-solid fa-layer-group"></i> All Categories <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem; margin-left: 4px;"></i>
+                <i class="fa-solid fa-layer-group"></i> Categories <i class="fa-solid fa-chevron-down chevron-icon"></i>
             </button>
-            <div id="categoriesDropdownList" style="display: none; position: absolute; top: 100%; left: 0; background: #1e1e1e; min-width: 240px; border-radius: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.7); z-index: 9999; margin-top: 6px; max-height: 300px; overflow-y: auto; border: 1px solid rgba(255,255,255,0.15);">
+            <div id="categoriesDropdownList" class="custom-dropdown-list">
                 ${categoriesListHTML}
             </div>
         </div>
@@ -261,9 +277,9 @@ function renderNavbarDropdowns(games) {
         <!-- Game Series Dropdown -->
         <div class="gametype-dropdown-wrapper" style="position: relative; display: inline-block;">
             <button class="nav-tab" onclick="toggleDropdown('gameTypesDropdownList', event)">
-                <i class="fa-solid fa-gamepad"></i> Game Type / Series <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem; margin-left: 4px;"></i>
+                <i class="fa-solid fa-gamepad"></i> Series <i class="fa-solid fa-chevron-down chevron-icon"></i>
             </button>
-            <div id="gameTypesDropdownList" style="display: none; position: absolute; top: 100%; left: 0; background: #1e1e1e; min-width: 280px; border-radius: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.7); z-index: 9999; margin-top: 6px; max-height: 300px; overflow-y: auto; border: 1px solid rgba(255,255,255,0.15);">
+            <div id="gameTypesDropdownList" class="custom-dropdown-list">
                 ${seriesListHTML}
             </div>
         </div>
@@ -318,6 +334,9 @@ function closeAllDropdowns() {
     if (gameList) gameList.style.display = 'none';
 }
 
+/**
+ * Applies search query, category, and series filters to the catalog
+ */
 function applyFilters() {
     const filteredGames = loadedGamesData.filter(game => {
         const title = (game.title || "").toLowerCase();
@@ -357,6 +376,9 @@ function toggleShowAllGames(expand) {
 }
 window.toggleShowAllGames = toggleShowAllGames;
 
+/**
+ * Renders the featured marquee slider
+ */
 function renderFeaturedMarquee(sliderGames) {
     const track = document.getElementById("featuredTrack");
     if (!track) return;
@@ -372,7 +394,7 @@ function renderFeaturedMarquee(sliderGames) {
                     <p>${game.description || ''}</p>
                     <div class="marquee-game-footer">
                         <span class="marquee-price">${game.price || 'FREE'}</span>
-                        <button class="btn-details" onclick="openDetailsById('${encodeURIComponent(gameId)}')" style="padding: 4px 8px; font-size: 0.75rem;">View</button>
+                        <button class="btn-details" onclick="openDetailsById('${encodeURIComponent(gameId)}')">View</button>
                     </div>
                 </div>
             </div>
@@ -410,6 +432,9 @@ function initSmoothMarquee(track) {
     requestAnimationFrame(scrollStep);
 }
 
+/**
+ * Renders the most popular games sidebar/section
+ */
 function renderPopularList(popularGames) {
     const container = document.getElementById("popularList");
     if (!container) return;
@@ -417,18 +442,21 @@ function renderPopularList(popularGames) {
     container.innerHTML = popularGames.map((game) => {
         const gameId = game.id || game.title;
         return `
-            <div class="popular-item" onclick="openDetailsById('${encodeURIComponent(gameId)}')" style="cursor: pointer;">
+            <div class="popular-item" onclick="openDetailsById('${encodeURIComponent(gameId)}')">
                 <img src="${game.image}" alt="${game.title}" loading="lazy" onerror="this.src='images/nfsmw-shot1.png';">
                 <div class="popular-item-info">
                     <h5>${game.title}</h5>
                     <span>${game.price || 'FREE'}</span>
                 </div>
-                <i class="fa-solid fa-chevron-right" style="font-size: 0.75rem; color: var(--text-muted);"></i>
+                <i class="fa-solid fa-chevron-right"></i>
             </div>
         `;
     }).join('');
 }
 
+/**
+ * Renders the main game catalog grid with pagination limit
+ */
 function renderGameStore(gameList) {
     const container = document.getElementById("gameGrid") || document.getElementById("games-grid");
     if (!container) return;
@@ -438,6 +466,7 @@ function renderGameStore(gameList) {
     if (gameList.length === 0) {
         container.innerHTML = `
             <div class="loading-state" style="grid-column: 1 / -1; text-align: center; padding: 40px; color: #fff;">
+                <i class="fa-solid fa-face-sad-tear" style="font-size: 2rem; margin-bottom: 10px; color: var(--accent-blue);"></i>
                 <p>No games found matching your selection.</p>
             </div>
         `;
@@ -460,7 +489,7 @@ function renderGameStore(gameList) {
         const targetUrl = game.downloadUrl || (game.downloadParts && game.downloadParts.length > 0 ? "#" : "");
 
         let actionButtonsHTML = `
-            <a href="${targetUrl}" target="_blank" class="btn-action ${actionBtnClass}" data-game-id="${gameId}" data-game-index="${originalIndex}">${actionBtnText}</a>
+            <a href="${targetUrl}" target="_blank" class="btn-action ${actionBtnClass}" data-game-id="${encodeURIComponent(gameId)}" data-game-index="${originalIndex}">${actionBtnText}</a>
         `;
 
         if (game.altDownloadUrl) {
@@ -473,7 +502,7 @@ function renderGameStore(gameList) {
 
         card.innerHTML = `
             <span class="card-badge">${game.platform || "PC"}</span>
-            <div class="game-img-wrapper" onclick="openDetailsById('${encodeURIComponent(gameId)}')" style="cursor: pointer;">
+            <div class="game-img-wrapper" onclick="openDetailsById('${encodeURIComponent(gameId)}')">
                 <img src="${game.image || 'images/nfsmw-shot1.png'}" alt="${game.title}" class="game-img" loading="lazy" onerror="this.onerror=null; this.src='images/nfsmw-shot1.png';" />
             </div>
             <div class="game-details">
@@ -503,14 +532,14 @@ function renderGameStore(gameList) {
         if (!showAllGames) {
             const remainingCount = gameList.length - INITIAL_GAME_LIMIT;
             toggleWrapper.innerHTML = `
-                <button onclick="toggleShowAllGames(true)" style="padding: 14px 28px; font-size: 1rem; background: var(--accent-blue, #3498db); color: #fff; border: none; border-radius: 10px; cursor: pointer; font-weight: 600; box-shadow: 0 4px 15px rgba(52, 152, 219, 0.4); transition: transform 0.2s ease;">
-                    <i class="fa-solid fa-angles-down" style="margin-right: 8px;"></i> See More (${remainingCount} more games)
+                <button onclick="toggleShowAllGames(true)" class="btn-see-more">
+                    <i class="fa-solid fa-angles-down"></i> See More (${remainingCount} more games)
                 </button>
             `;
         } else {
             toggleWrapper.innerHTML = `
-                <button onclick="toggleShowAllGames(false)" style="padding: 14px 28px; font-size: 1rem; background: #333; color: #fff; border: 1px solid rgba(255,255,255,0.2); border-radius: 10px; cursor: pointer; font-weight: 600; transition: transform 0.2s ease;">
-                    <i class="fa-solid fa-angles-up" style="margin-right: 8px;"></i> See Less
+                <button onclick="toggleShowAllGames(false)" class="btn-see-less">
+                    <i class="fa-solid fa-angles-up"></i> See Less
                 </button>
             `;
         }
@@ -538,6 +567,9 @@ function closeFullScreen() {
 }
 window.closeFullScreen = closeFullScreen;
 
+/**
+ * Displays download parts modal when a game contains multi-part archives
+ */
 function showDownloadPartsModal(game) {
     let modal = document.getElementById('download-parts-modal');
     if (!modal) {
