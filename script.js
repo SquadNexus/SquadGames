@@ -481,18 +481,18 @@ function renderGameStore(gameList) {
         const card = document.createElement("div");
         card.classList.add("game-card");
 
-        // First two games (index 0 and 1) are paid games requiring "Buy Now"
+        // First two games (index 0 and 1) or ID 1 & 2 are paid games requiring "Buy Now"
         const isPaid = originalIndex === 0 || originalIndex === 1 || String(game.id) === "1" || String(game.id) === "2";
         
         let actionBtnText = "Get";
         let actionBtnClass = "btn-get";
-        let targetUrl = game.downloadUrl || (game.downloadParts && game.downloadParts.length > 0 ? "#" : "");
+        let targetUrl = game.downloadUrl || game.link || game.url || game.download || (game.downloadParts && game.downloadParts.length > 0 ? "#" : "");
 
         if (isPaid) {
             actionBtnText = "Buy Now";
             actionBtnClass = "btn-download";
             const orderMessage = encodeURIComponent(`Hello, I want to buy ${game.title} (${game.platform})`);
-            targetUrl = game.altDownloadUrl || `https://wa.me/255XXXXXXXXX?text=${orderMessage}`;
+            targetUrl = game.altDownloadUrl || game.buyUrl || `https://wa.me/255XXXXXXXXX?text=${orderMessage}`;
         }
 
         let actionButtonsHTML = `
@@ -580,14 +580,14 @@ function initDetailsPage(games) {
     const buttonText = isPaid ? "Buy Now" : "Get Game";
     const buttonClass = isPaid ? "btn-action btn-download" : "btn-action btn-get";
     
-    let actionHtml = "";
+    let targetUrl = game.downloadUrl || game.link || game.url || game.download || (game.downloadParts && game.downloadParts.length > 0 ? "#" : "");
+
     if (isPaid) {
         const orderMessage = encodeURIComponent(`Hello, I want to buy ${game.title} (${game.platform})`);
-        const targetUrl = game.altDownloadUrl || `https://wa.me/255XXXXXXXXX?text=${orderMessage}`;
-        actionHtml = `<a href="${targetUrl}" target="_blank" class="${buttonClass}" style="display:inline-block; text-align:center; text-decoration:none;">${buttonText}</a>`;
-    } else {
-        actionHtml = `<button class="${buttonClass}" data-game-id="${game.id}">${buttonText}</button>`;
+        targetUrl = game.altDownloadUrl || game.buyUrl || `https://wa.me/255XXXXXXXXX?text=${orderMessage}`;
     }
+
+    const actionHtml = `<a href="${targetUrl}" target="_blank" class="${buttonClass}" data-game-id="${game.id}" style="display:inline-block; text-align:center; text-decoration:none;">${buttonText}</a>`;
 
     container.innerHTML = `
         <div class="game-details-card" style="padding: 2rem; max-width: 800px; margin: auto; color: #fff;">
