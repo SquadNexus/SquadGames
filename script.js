@@ -131,7 +131,7 @@ async function loadGameCatalog() {
 }
 
 /**
- * Initializes store components, search listeners, and details page after data is fetched
+ * Initializes store components and search listeners after data is fetched
  */
 function initStore(games) {
     loadedGamesData = games;
@@ -167,84 +167,6 @@ function initStore(games) {
 
     if (window.location.pathname.includes('details.html')) {
         initDetailsPage(games);
-    }
-}
-
-/**
- * Populates game details page elements dynamically from games.json query parameter
- */
-function initDetailsPage(games) {
-    const urlParams = new URLSearchParams(window.location.search);
-    const gameId = urlParams.get('id');
-    if (!gameId) return;
-
-    const decodedId = decodeURIComponent(gameId);
-    const game = games.find(g => String(g.id || g.title) === decodedId);
-    if (!game) {
-        const container = document.querySelector('.container') || document.body;
-        container.innerHTML = `<div style="text-align:center; padding: 50px; color:#fff;"><h2>Game not found!</h2><a href="index.html" class="btn-action btn-download" style="margin-top:15px; display:inline-block;">Back to Store</a></div>`;
-        return;
-    }
-
-    // Populate Title, Category, Description, Image
-    const titleEl = document.getElementById('gameTitle') || document.querySelector('.game-title, h1');
-    if (titleEl) titleEl.textContent = game.title;
-
-    const categoryEl = document.getElementById('gameCategory') || document.querySelector('.category-tag, .card-badge');
-    if (categoryEl) categoryEl.textContent = game.category || game.genre || 'Action';
-
-    const descEl = document.getElementById('gameDescription') || document.querySelector('.game-description, p');
-    if (descEl) descEl.textContent = game.description || game.desc || 'No description available for this release.';
-
-    const imgEl = document.getElementById('gameImage') || document.querySelector('.game-cover img, .detail-img');
-    if (imgEl) imgEl.src = game.image || 'images/nfsmw-shot1.png';
-
-    // Strict Price & Action Button Logic for Details Page
-    const priceStr = String(game.price || "").trim();
-    const isPaid = priceStr !== "" && 
-                   priceStr.toUpperCase() !== "FREE" && 
-                   priceStr !== "0" && 
-                   priceStr !== "0.00" && 
-                   priceStr.toLowerCase() !== "0 tzs";
-
-    const actionContainer = document.getElementById('detailActionArea') || document.getElementById('action-container');
-    if (actionContainer) {
-        if (isPaid) {
-            actionContainer.innerHTML = `
-                <a href="https://wa.me/255XXXXXXXXX?text=I%20want%20to%20buy%20${encodeURIComponent(game.title)}" class="btn-action btn-vodacom" target="_blank">
-                    <i class="fab fa-whatsapp"></i> Buy via WhatsApp (${game.price})
-                </a>
-            `;
-        } else {
-            const downloadUrl = game.downloadUrl || '#';
-            actionContainer.innerHTML = `
-                <a href="${downloadUrl}" class="btn-action btn-download" target="_blank">
-                    <i class="fas fa-download"></i> Download Game Files
-                </a>
-            `;
-        }
-    }
-
-    // System Requirements
-    if (game.requirements) {
-        const minEl = document.getElementById('minSpecs');
-        if (minEl && game.requirements.min) {
-            minEl.innerHTML = `
-                OS: ${game.requirements.min.os || 'Windows 10'}<br>
-                Processor: ${game.requirements.min.processor || 'Intel Core i5'}<br>
-                RAM: ${game.requirements.min.ram || '8 GB'}<br>
-                Graphics: ${game.requirements.min.graphics || 'NVIDIA GTX 960'}
-            `;
-        }
-        const recEl = document.getElementById('recSpecs');
-        if (recEl && game.requirements.rec) {
-            recEl.innerHTML = `
-                OS: ${game.requirements.rec.os || 'Windows 11'}<br>
-                Processor: ${game.requirements.rec.processor || 'Intel Core i7'}<br>
-                RAM: ${game.requirements.rec.ram || '16 GB'}<br>
-                Graphics: ${game.requirements.rec.graphics || 'NVIDIA GTX 1060'}
-            `;
-        }
     }
 }
 
@@ -533,7 +455,7 @@ function renderPopularList(popularGames) {
 }
 
 /**
- * Renders the main game catalog grid with pagination limit and correct button mapping
+ * Renders the main game catalog grid with pagination limit
  */
 function renderGameStore(gameList) {
     const container = document.getElementById("gameGrid") || document.getElementById("games-grid");
@@ -559,23 +481,31 @@ function renderGameStore(gameList) {
         const card = document.createElement("div");
         card.classList.add("game-card");
 
-        // Strict Price Check: Only games with an explicit price are paid (Buy button)
-        const priceStr = String(game.price || "").trim();
-        const isPaid = priceStr !== "" && 
-                       priceStr.toUpperCase() !== "FREE" && 
-                       priceStr !== "0" && 
-                       priceStr !== "0.00" && 
-                       priceStr.toLowerCase() !== "0 tzs";
+        // First two games (index 0 and 1) are paid games requiring "Buy Now"
+        const isPaid = originalIndex === 0 || originalIndex === 1 || String(game.id) === "1" || String(game.id) === "2";
+        
+        let actionBtnText = "Get";
+        let actionBtnClass = "btn-get";
+        let targetUrl = game.downloadUrl || (game.downloadParts && game.downloadParts.length > 0 ? "#" : "");
 
-        const actionBtnText = isPaid ? "Buy Now" : "Get";
-        const actionBtnClass = isPaid ? "btn-vodacom" : "btn-get";
-        const targetUrl = isPaid 
-            ? `https://wa.me/255XXXXXXXXX?text=I%20want%20to%20buy%20${encodeURIComponent(game.title)}` 
-            : (game.downloadUrl || (game.downloadParts && game.downloadParts.length > 0 ? "#" : ""));
+        if (isPaid) {
+            actionBtnText = "Buy Now";
+            actionBtnClass = "btn-download";
+            const orderMessage = encodeURIComponent(`Hello, I want to buy ${game.title} (${game.platform})`);
+            targetUrl = game.altDownloadUrl || `https://wa.me/255XXXXXXXXX?text=${orderMessage}`;
+        }
 
         let actionButtonsHTML = `
             <a href="${targetUrl}" target="_blank" class="btn-action ${actionBtnClass}" data-game-id="${encodeURIComponent(gameId)}" data-game-index="${originalIndex}">${actionBtnText}</a>
         `;
+
+        if (!isPaid && game.altDownloadUrl) {
+            actionButtonsHTML += `
+                <a href="${game.altDownloadUrl}" target="_blank" class="btn-action btn-vodacom" style="margin-top: 6px;">
+                    💬 WhatsApp
+                </a>
+            `;
+        }
 
         card.innerHTML = `
             <span class="card-badge">${game.platform || "PC"}</span>
@@ -629,6 +559,60 @@ function openDetailsById(id) {
     window.location.href = `details.html?id=${id}`;
 }
 window.openDetailsById = openDetailsById;
+
+/**
+ * Populates game details page elements dynamically from games.json query parameter
+ */
+function initDetailsPage(games) {
+    const urlParams = new URLSearchParams(window.location.search);
+    const gameId = urlParams.get('id');
+    if (!gameId) return;
+    
+    const decodedId = decodeURIComponent(gameId);
+    const gameIndex = games.findIndex(g => String(g.id || g.title) === decodedId);
+    const game = gameIndex !== -1 ? games[gameIndex] : null;
+    if (!game) return;
+    
+    const container = document.querySelector('.container') || document.body;
+    
+    // Check if it's one of the first two paid games
+    const isPaid = gameIndex === 0 || gameIndex === 1 || String(game.id) === "1" || String(game.id) === "2";
+    const buttonText = isPaid ? "Buy Now" : "Get Game";
+    const buttonClass = isPaid ? "btn-action btn-download" : "btn-action btn-get";
+    
+    let actionHtml = "";
+    if (isPaid) {
+        const orderMessage = encodeURIComponent(`Hello, I want to buy ${game.title} (${game.platform})`);
+        const targetUrl = game.altDownloadUrl || `https://wa.me/255XXXXXXXXX?text=${orderMessage}`;
+        actionHtml = `<a href="${targetUrl}" target="_blank" class="${buttonClass}" style="display:inline-block; text-align:center; text-decoration:none;">${buttonText}</a>`;
+    } else {
+        actionHtml = `<button class="${buttonClass}" data-game-id="${game.id}">${buttonText}</button>`;
+    }
+
+    container.innerHTML = `
+        <div class="game-details-card" style="padding: 2rem; max-width: 800px; margin: auto; color: #fff;">
+            <a href="index.html" class="back-link" style="color: #00f; text-decoration: underline;">&larr; Back to Home</a>
+            <h1>${game.title}</h1>
+            <img src="${game.image}" alt="${game.title}" style="max-width: 100%; border-radius: 8px; margin: 1rem 0;">
+            <p><strong>Platform:</strong> ${game.platform}</p>
+            <p><strong>Category:</strong> ${game.category}</p>
+            <p><strong>Size:</strong> ${game.size}</p>
+            <p><strong>Price:</strong> ${game.price || 'FREE'}</p>
+            
+            <div class="requirements" style="margin: 1.5rem 0; background: #1e1e1e; padding: 1rem; border-radius: 6px;">
+                <h3>System Requirements</h3>
+                <p><strong>OS:</strong> ${game.systemRequirements.os}</p>
+                <p><strong>Processor:</strong> ${game.systemRequirements.processor}</p>
+                <p><strong>RAM:</strong> ${game.systemRequirements.ram}</p>
+                <p><strong>Storage:</strong> ${game.systemRequirements.storage}</p>
+            </div>
+            
+            <div class="action-wrapper" style="margin-top: 1.5rem;">
+                ${actionHtml}
+            </div>
+        </div>
+    `;
+}
 
 function openFullScreen(imgSrc) {
     const fullModal = document.getElementById("fullscreenOverlay") || document.getElementById("fullscreen-overlay");
