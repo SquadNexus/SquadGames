@@ -3,45 +3,55 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Squad Games Store TZ</title>
-    <!-- FontAwesome Icons for buttons & spinners -->
+    <title>Squad Games Store TZ | Ultimate PC & Mobile Gaming Portal</title>
+    
+    <!-- Google Fonts for a Modern Gaming Aesthetic -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- FontAwesome Icons for UI Elements -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Custom Stylesheet -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <!-- Main Container -->
+    <!-- Main Portal Wrapper -->
     <div class="container">
 
-        <!-- Permanent Portal Header & Styled Navigation Box -->
-        <div class="portal-header-wrapper">
+        <!-- Permanent Portal Header & Navigation Box -->
+        <header class="portal-header-wrapper">
             <div class="portal-logo-area">
-                <h1 class="portal-logo">Squad Games Store TZ</h1>
+                <h1 class="portal-logo">
+                    <i class="fa-solid fa-gamepad logo-icon"></i> Squad Games Store <span class="tz-badge">TZ</span>
+                </h1>
 
-                <!-- Sleek Modern Search Box Styling -->
+                <!-- Sleek Modern Search Box -->
                 <div class="portal-search-wrapper">
                     <i class="fa-solid fa-magnifying-glass search-icon"></i>
-                    <input type="text" id="gameSearchInput" placeholder="Search games, mods, simulator...">
+                    <input type="text" id="gameSearchInput" placeholder="Search games, sims, action titles..." autocomplete="off">
                 </div>
             </div>
 
-            <!-- Portal Navigation Container (Dynamic Expandable Dropdowns & Home) -->
-            <div id="dynamic-game-types" class="portal-navbar">
-                <!-- Dropdown buttons load here dynamically via JavaScript -->
-            </div>
-        </div>
+            <!-- Portal Navigation Container (Dynamic Dropdowns & Categories) -->
+            <nav id="dynamic-game-types" class="portal-navbar" aria-label="Game Categories">
+                <!-- Dropdown buttons and category tabs load dynamically via JavaScript -->
+            </nav>
+        </header>
 
-        <!-- Intro Banner -->
-        <div class="intro-banner">
+        <!-- Intro Banner Section -->
+        <section class="intro-banner" role="region" aria-label="Welcome Notice">
             <h2>Welcome to Squad Games Store TZ</h2>
-            <p>Get your favorite PC and Mobile games & mods in Tanzania</p>
-        </div>
+            <p>Get your favorite PC and Mobile games, repacks, and mods right here in Tanzania 🇹🇿</p>
+        </section>
 
         <!-- Top Split Section Layout (Featured Marquee & Most Popular) -->
         <div class="top-split-container">
             <!-- Featured Marquee Section -->
             <div class="featured-epic-wrapper">
-                <h3 class="section-title">🔥 Featured</h3>
+                <h3 class="section-title"><i class="fa-solid fa-fire flame-icon"></i> Featured Highlights</h3>
                 <div class="featured-marquee-container">
                     <div id="featuredTrack" class="featured-marquee-track">
                         <!-- Featured items load here via JavaScript -->
@@ -51,40 +61,47 @@
 
             <!-- Most Popular Games Section -->
             <div class="most-popular-wrapper">
-                <h3 class="org-section-title section-title">⭐ Popular</h3>
+                <h3 class="org-section-title section-title"><i class="fa-solid fa-star star-icon"></i> Most Popular</h3>
                 <div id="popularList" class="popular-list">
                     <!-- Popular items load here via JavaScript -->
                 </div>
             </div>
         </div>
 
-        <!-- Trust Bar -->
-        <div class="trust-bar">
-            <div class="trust-item"><span class="trust-icon">⚡</span> Fast Downloads</div>
+        <!-- Trust & Features Bar -->
+        <div class="trust-bar" role="region" aria-label="Store Benefits">
+            <div class="trust-item"><span class="trust-icon">⚡</span> High-Speed Links</div>
             <div class="trust-item"><span class="trust-icon">🛡️</span> Verified Safe Files</div>
             <div class="trust-item"><span class="trust-icon">🇹🇿</span> Local TZ Support</div>
         </div>
 
         <!-- Main Game Catalog Grid Section -->
-        <section>
-            <div id="games-grid" class="game-grid">
-                <!-- Dynamic game cards load here via JavaScript -->
-                <div class="loading-state">
-                    <div class="spinner"></div>
-                    <p>Loading games catalog...</p>
+        <main>
+            <section aria-label="Game Catalog">
+                <div id="games-grid" class="game-grid">
+                    <!-- Dynamic game cards load here via JavaScript -->
+                    <div class="loading-state">
+                        <div class="spinner" aria-hidden="true"></div>
+                        <p>Loading games catalog (1–51)...</p>
+                    </div>
                 </div>
-            </div>
-        </section>
+            </section>
+        </main>
+
+        <!-- Footer Info -->
+        <footer class="portal-footer">
+            <p>&copy; 2026 Squad Games Store TZ. Built for gamers.</p>
+        </footer>
 
     </div>
 
-    <!-- Fullscreen Image Modal -->
-    <div id="fullscreen-overlay" class="fullscreen-overlay" onclick="closeFullScreen()">
-        <span class="fullscreen-close">&times;</span>
-        <img id="fullscreen-img" class="fullscreen-img" src="" alt="Fullscreen View">
+    <!-- Fullscreen Image Modal Overlay -->
+    <div id="fullscreen-overlay" class="fullscreen-overlay" onclick="closeFullScreen()" role="dialog" aria-modal="true" aria-label="Image Preview">
+        <span class="fullscreen-close" aria-label="Close modal">&times;</span>
+        <img id="fullscreen-img" class="fullscreen-img" src="" alt="Fullscreen Game Screenshot">
     </div>
 
-    <!-- Script File -->
+    <!-- Core Script File -->
     <script src="script.js"></script>
 </body>
 </html>
