@@ -69,7 +69,10 @@ document.addEventListener("DOMContentLoaded", () => {
         }
 
         const targetUrl = downloadBtn.getAttribute('href');
-        if (!targetUrl || targetUrl === '#' || targetUrl === 'undefined' || targetUrl === '') return;
+        if (!targetUrl || targetUrl === '#' || targetUrl === 'undefined' || targetUrl === '') {
+            e.preventDefault(); // Prevents page reload/redirect to main menu when link is empty
+            return;
+        }
         if (downloadBtn.classList.contains('preparing')) return;
 
         e.preventDefault();
