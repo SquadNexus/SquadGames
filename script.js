@@ -62,7 +62,8 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         }
 
-        if (targetGame && targetGame.downloadParts && targetGame.downloadParts.length > 0) {
+        const gameParts = targetGame && (targetGame.downloadParts || targetGame.parts);
+        if (targetGame && gameParts && gameParts.length > 0) {
             e.preventDefault();
             showDownloadPartsModal(targetGame);
             return;
@@ -486,13 +487,14 @@ function renderGameStore(gameList) {
         
         let actionBtnText = "Get";
         let actionBtnClass = "btn-get";
-        let targetUrl = game.downloadUrl || game.link || game.url || game.download || (game.downloadParts && game.downloadParts.length > 0 ? "#" : "");
+        let gameParts = game.downloadParts || game.parts;
+        let targetUrl = game.downloadUrl || game.link || game.url || game.download || (gameParts && gameParts.length > 0 ? "#" : "");
 
         if (isPaid) {
             actionBtnText = "Buy Now";
             actionBtnClass = "btn-download";
             const orderMessage = encodeURIComponent(`Hello, I want to buy ${game.title} (${game.platform})`);
-            targetUrl = game.altDownloadUrl || game.buyUrl || `https://wa.me/255XXXXXXXXX?text=${orderMessage}`;
+            targetUrl = game.altDownloadUrl || game.buyUrl || `https://wa.me/255692752060?text=${orderMessage}`;
         }
 
         let actionButtonsHTML = `
@@ -580,11 +582,12 @@ function initDetailsPage(games) {
     const buttonText = isPaid ? "Buy Now" : "Get Game";
     const buttonClass = isPaid ? "btn-action btn-download" : "btn-action btn-get";
     
-    let targetUrl = game.downloadUrl || game.link || game.url || game.download || (game.downloadParts && game.downloadParts.length > 0 ? "#" : "");
+    let gameParts = game.downloadParts || game.parts;
+    let targetUrl = game.downloadUrl || game.link || game.url || game.download || (gameParts && gameParts.length > 0 ? "#" : "");
 
     if (isPaid) {
         const orderMessage = encodeURIComponent(`Hello, I want to buy ${game.title} (${game.platform})`);
-        targetUrl = game.altDownloadUrl || game.buyUrl || `https://wa.me/255XXXXXXXXX?text=${orderMessage}`;
+        targetUrl = game.altDownloadUrl || game.buyUrl || `https://wa.me/255692752060?text=${orderMessage}`;
     }
 
     const actionHtml = `<a href="${targetUrl}" target="_blank" class="${buttonClass}" data-game-id="${game.id}" style="display:inline-block; text-align:center; text-decoration:none;">${buttonText}</a>`;
@@ -661,7 +664,7 @@ function showDownloadPartsModal(game) {
 
     document.getElementById('parts-modal-title').innerText = `Download: ${game.title}`;
     
-    let partsArray = game.downloadParts;
+    let partsArray = game.downloadParts || game.parts;
     if (typeof partsArray === 'string') {
         try { partsArray = JSON.parse(partsArray); } catch (e) { partsArray = []; }
     }
