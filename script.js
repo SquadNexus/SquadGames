@@ -1,21 +1,30 @@
+/**
+ * Squad Games Store TZ - Core Application Script
+ * Manages game catalog loading, dynamic filters, search, marquee animations, 
+ * multi-part downloads, and UI modal states.
+ */
+
 let loadedGamesData = [];
 let currentSearchQuery = "";
 let currentCategory = "all";
+let currentSeries = "all";
+let showAllGames = false;
+const INITIAL_GAME_LIMIT = 8;
 
 document.addEventListener("DOMContentLoaded", () => {
-    console.log("Squad Games Store initialized.");
+    console.log("Squad Games Store TZ initialized successfully.");
 
-    // 1. Restore scroll position instantly if it was saved before leaving
+    // 1. Restore scroll position instantly if saved before navigating to details
     const savedPosition = localStorage.getItem('scrollPosition');
     if (savedPosition !== null) {
         window.scrollTo({
-            top: parseInt(savedPosition),
+            top: parseInt(savedPosition, 10),
             behavior: 'instant'
         });
         localStorage.removeItem('scrollPosition');
     }
 
-    // 2. Save scroll position on action/details click & close dropdowns on outside click
+    // 2. Global click listeners for scroll tracking and dropdown auto-closing
     document.addEventListener('click', function(e) {
         if (e.target.closest('.btn-action') || e.target.closest('.btn-details')) {
             localStorage.setItem('scrollPosition', window.scrollY);
@@ -31,7 +40,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // 3. Sleek loading animation handler & Universal Multi-part popup trigger for all current & future games
+    // 3. Multi-part popup trigger handler for downloads
     document.addEventListener('click', function(e) {
         if (e.target.closest('#download-parts-modal')) return;
 
@@ -41,13 +50,11 @@ document.addEventListener("DOMContentLoaded", () => {
         if (downloadBtn.classList.contains('btn-vodacom') || downloadBtn.href.includes('wa.me')) return;
 
         let targetGame = null;
-
         const gameId = downloadBtn.getAttribute('data-game-id');
         if (gameId) {
-            targetGame = loadedGamesData.find(g => (g.id || g.title) === gameId);
+            targetGame = loadedGamesData.find(g => String(g.id || g.title) === decodeURIComponent(gameId));
         }
 
-        // Fallback check if data-game-id wasn't present
         if (!targetGame) {
             const gameIndex = downloadBtn.getAttribute('data-game-index');
             if (gameIndex !== null && loadedGamesData[gameIndex]) {
@@ -55,11 +62,8 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         }
 
-        if (!targetGame && downloadBtn.href) {
-            targetGame = loadedGamesData.find(g => g.downloadUrl && downloadBtn.href.includes(g.downloadUrl));
-        }
-
-        if (targetGame && targetGame.downloadParts && targetGame.downloadParts.length > 0) {
+        const gameParts = targetGame && (targetGame.downloadParts || targetGame.parts);
+        if (targetGame && gameParts && gameParts.length > 0) {
             e.preventDefault();
             showDownloadPartsModal(targetGame);
             return;
@@ -86,17 +90,25 @@ document.addEventListener("DOMContentLoaded", () => {
         }, 1000);
     });
 
-    // 4. Load Game Catalog
+    // 4. Trigger Game Catalog Fetch
     loadGameCatalog();
 });
 
+/**
+ * Robust asynchronous loader for games.json supporting GitHub Pages repo paths & details subpages
+ */
 async function loadGameCatalog() {
     const pathSegments = window.location.pathname.split('/').filter(Boolean);
-    const repoPrefix = (window.location.hostname.includes("github.io") && pathSegments.length > 0) ? `/${pathSegments[0]}/` : './';
+    let repoPrefix = './';
+    
+    if (window.location.hostname.includes("github.io") && pathSegments.length > 1 && !pathSegments[0].includes('.html')) {
+        repoPrefix = `/${pathSegments[0]}/`;
+    }
 
     const possiblePaths = [
         repoPrefix + 'games.json',
         './games.json',
+        '../games.json',
         'games.json'
     ];
 
@@ -104,15 +116,13 @@ async function loadGameCatalog() {
 
     for (const path of possiblePaths) {
         try {
-            console.log("Attempting to fetch games.json from:", path);
             const response = await fetch(path);
             if (response.ok) {
                 rawData = await response.json();
-                console.log("Successfully loaded games.json from:", path);
                 break;
             }
         } catch (err) {
-            console.warn("Failed path attempt:", path);
+            console.warn("Failed fetching from path attempt:", path);
         }
     }
 
@@ -123,63 +133,23 @@ async function loadGameCatalog() {
         gamesArray = rawData.games || rawData.data || rawData.list || Object.values(rawData).find(Array.isArray) || [];
     }
 
-    if (gamesArray.length === 0) {
-        console.warn("Using fallback catalog data.");
-        gamesArray = [
-            {
-                id: "1",
-                title: "Tanzania Euro Truck Simulator 2 + 50 TZ mods packs",
-                platform: "PC",
-                category: "Simulation",
-                description: "Full Euro Truck Simulator 2 PC game bundled with 50 custom TZ mods.",
-                requirements: "OS: Windows 10/11 (64-bit) | RAM: 8 GB | Storage: 25 GB",
-                installGuide: "1. Extract the downloaded archive.\n2. Run setup.exe as administrator.\n3. Move mods to documents folder.",
-                price: "TZS 20,000",
-                image: "images/ets-2-pc.jpg",
-                screenshots: [],
-                downloadUrl: "https://selar.com/8z3yp9tnyv",
-                altDownloadUrl: "https://wa.me/255692752060?text=Hello%20Squad%20Games"
-            },
-            {
-                id: "2",
-                title: "Marvel's Spider-Man: Miles Morales",
-                platform: "PC",
-                category: "Action",
-                description: "Experience the rise of Miles Morales as new powers unfold.",
-                requirements: "OS: Windows 10 (64-bit) | RAM: 8 GB",
-                installGuide: "1. Extract files.\n2. Install prerequisite runtimes.\n3. Play from shortcut.",
-                price: "FREE",
-                image: "images/spider-man.jpg",
-                screenshots: [],
-                downloadUrl: "https://wa.me/255692752060"
-            }
-        ];
-    }
-
     initStore(gamesArray);
 }
 
+/**
+ * Initializes store components and search listeners after data is fetched
+ */
 function initStore(games) {
     loadedGamesData = games;
 
-    // Hide loading indicators once store data is loaded
     const loaderElements = document.querySelectorAll('#loader, #catalog-loader, .loading-state');
     loaderElements.forEach(el => el.style.display = 'none');
 
-    // Render interactive expandable dropdown navigation
-    renderThreeMainCategories(games);
+    renderNavbarDropdowns(games);
 
     const featuredGames = games.filter(game => {
         const title = (game.title || "").toLowerCase();
-        if (title.includes("1.57")) return false;
-        const isEtsTanzaniaOrMobile = title.includes("euro truck") && (title.includes("tanzania") || title.includes("tz") || title.includes("mobile") || title.includes("android"));
-        return isEtsTanzaniaOrMobile || 
-               title.includes("spider-man") || 
-               title.includes("gta v") || 
-               title.includes("gta 5") || 
-               title.includes("heat") || 
-               title.includes("fifa 22") || 
-               title.includes("black ops 3");
+        return title.includes("euro truck") || title.includes("spider-man") || title.includes("gta") || title.includes("heat");
     });
     
     renderFeaturedMarquee(featuredGames.length ? featuredGames : games); 
@@ -196,81 +166,132 @@ function initStore(games) {
     if (searchInput) {
         searchInput.addEventListener('input', (e) => {
             currentSearchQuery = e.target.value.toLowerCase().trim();
+            showAllGames = false;
             applyFilters();
         });
     }
 
-    const closeModalBtn = document.querySelector('.close-btn');
-    if (closeModalBtn) closeModalBtn.addEventListener('click', closeModalDirect);
-
-    const fullscreenCloseBtn = document.querySelector('.fullscreen-close');
-    if (fullscreenCloseBtn) fullscreenCloseBtn.addEventListener('click', closeFullScreen);
-
-    // AUTO-LOAD FOR DETAILS.HTML PAGE IF PRESENT
     if (window.location.pathname.includes('details.html')) {
         initDetailsPage(games);
     }
 }
 
-// Renders interactive navigation with expandable Categories & Game Types dropdowns
-function renderThreeMainCategories(games) {
-    const container = document.getElementById('dynamic-game-types');
-    if (!container) return;
+/**
+ * Normalizes raw category strings into clean unified categories
+ */
+function getNormalizedCategories(rawCategory) {
+    if (!rawCategory) return ['Action'];
+    
+    const parts = String(rawCategory).split(/[\/,]+/).map(p => p.trim().toLowerCase());
+    let normalizedSet = new Set();
 
-    let uniqueCategories = new Set();
-    games.forEach(game => {
-        const rawCategory = game.category || game.Category || game.genre || game.tags || "";
-        if (rawCategory) {
-            const catString = Array.isArray(rawCategory) ? rawCategory.join('/') : String(rawCategory);
-            catString.split('/').forEach(cat => {
-                let cleanCat = cat.trim();
-                if (cleanCat) uniqueCategories.add(cleanCat);
-            });
+    parts.forEach(p => {
+        if (p.includes('racing') || p.includes('drive') || p.includes('car')) {
+            normalizedSet.add('Racing');
+        } else if (p.includes('fps') || p.includes('shooter') || p.includes('first-person') || p.includes('gun')) {
+            normalizedSet.add('FPS');
+        } else if (p.includes('sport') || p.includes('soccer') || p.includes('fifa') || p.includes('pes')) {
+            normalizedSet.add('Sports');
+        } else if (p.includes('war') || p.includes('military') || p.includes('battle')) {
+            normalizedSet.add('War');
+        } else if (p.includes('adventure')) {
+            normalizedSet.add('Adventure');
+        } else if (p.includes('action')) {
+            normalizedSet.add('Action');
+        } else if (p.includes('simulation') || p.includes('simulator') || p.includes('truck')) {
+            normalizedSet.add('Simulation');
+        } else if (p.includes('strategy')) {
+            normalizedSet.add('Strategy');
+        } else if (p.includes('horror') || p.includes('zombie')) {
+            normalizedSet.add('Horror');
+        } else if (p.length > 0) {
+            normalizedSet.add(p.charAt(0).toUpperCase() + p.slice(1));
         }
     });
 
-    let categoriesListHTML = `<a href="#" onclick="filterByCategory('all'); return false;" style="display: block; padding: 10px 14px; color: #f1c40f; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.1); font-weight: 600;"><i class="fa-solid fa-layer-group" style="margin-right: 6px;"></i> All Categories (${uniqueCategories.size})</a>`;
-    uniqueCategories.forEach(cat => {
-        categoriesListHTML += `<a href="#" onclick="filterByCategory('${cat}'); return false;" style="display: block; padding: 10px 14px; color: #fff; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.05); transition: background 0.2s;">${cat}</a>`;
+    return normalizedSet.size > 0 ? Array.from(normalizedSet) : ['Action'];
+}
+
+/**
+ * Extracts clean franchise/series names from game titles
+ */
+function getGameSeriesName(title) {
+    const t = title.toLowerCase();
+    if (t.includes('call of duty')) return 'Call of Duty';
+    if (t.includes('fifa')) return 'FIFA';
+    if (t.includes('pro evolution soccer') || t.includes('pes')) return 'Pro Evolution Soccer';
+    if (t.includes('grand theft auto') || t.includes('gta')) return 'Grand Theft Auto (GTA)';
+    if (t.includes('need for speed') || t.includes('nfs')) return 'Need for Speed';
+    if (t.includes('euro truck simulator')) return 'Euro Truck Simulator';
+    if (t.includes('spider-man') || t.includes('spiderman')) return 'Spider-Man';
+    if (t.includes('resident evil')) return 'Resident Evil';
+    if (t.includes('far cry')) return 'Far Cry';
+    if (t.includes('tomb raider')) return 'Tomb Raider';
+    if (t.includes('battlefield')) return 'Battlefield';
+    
+    if (title.includes(':')) return title.split(':')[0].trim();
+    if (title.includes(' - ')) return title.split(' - ')[0].trim();
+    const words = title.split(' ');
+    return words.slice(0, 2).join(' ');
+}
+
+/**
+ * Dynamically builds navbar dropdown items for categories and series
+ */
+function renderNavbarDropdowns(games) {
+    const container = document.getElementById('dynamic-game-types') || document.querySelector('.portal-navbar');
+    if (!container) return;
+
+    let uniqueCategories = new Set();
+    let uniqueSeries = new Set();
+
+    games.forEach(game => {
+        const rawCategory = game.category || game.Category || game.genre || "";
+        const cleanCategories = getNormalizedCategories(rawCategory);
+        cleanCategories.forEach(cat => uniqueCategories.add(cat));
+
+        if (game.title) {
+            uniqueSeries.add(getGameSeriesName(game.title));
+        }
     });
 
-    let gamesListHTML = `<a href="#" onclick="filterByCategory('all'); return false;" style="display: block; padding: 10px 14px; color: #f1c40f; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.1); font-weight: 600;"><i class="fa-solid fa-gamepad" style="margin-right: 6px;"></i> All Available Games (${games.length})</a>`;
-    games.forEach(game => {
-        const gameId = game.id || game.title;
-        gamesListHTML += `<a href="#" onclick="openDetailsById('${encodeURIComponent(gameId)}'); return false;" style="display: block; padding: 10px 14px; color: #fff; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.05); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><i class="fa-solid fa-play" style="margin-right: 6px; color: var(--accent-blue); font-size: 0.7rem;"></i> ${game.title}</a>`;
+    let categoriesListHTML = `<a href="#" onclick="filterByCategory('all'); return false;" class="dropdown-item highlight"><i class="fa-solid fa-layer-group"></i> All Categories</a>`;
+    Array.from(uniqueCategories).sort().forEach(cat => {
+        categoriesListHTML += `<a href="#" onclick="filterByCategory('${cat}'); return false;" class="dropdown-item"><i class="fa-solid fa-tag"></i> ${cat}</a>`;
+    });
+
+    let seriesListHTML = `<a href="#" onclick="filterBySeries('all'); return false;" class="dropdown-item highlight"><i class="fa-solid fa-gamepad"></i> All Game Series</a>`;
+    Array.from(uniqueSeries).sort().forEach(series => {
+        seriesListHTML += `<a href="#" onclick="filterBySeries('${series}'); return false;" class="dropdown-item"><i class="fa-solid fa-play"></i> ${series}</a>`;
     });
 
     container.innerHTML = `
-        <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap; width: 100%;">
-            <!-- 1. Home / All Games Button -->
-            <button class="nav-tab active" onclick="filterByCategory('all')">
-                <i class="fa-solid fa-house"></i> Home
+        <button class="nav-tab active" onclick="resetAllFilters()">
+            <i class="fa-solid fa-house"></i> Home
+        </button>
+
+        <!-- Categories Dropdown -->
+        <div class="category-dropdown-wrapper" style="position: relative; display: inline-block;">
+            <button class="nav-tab" onclick="toggleDropdown('categoriesDropdownList', event)">
+                <i class="fa-solid fa-layer-group"></i> Categories <i class="fa-solid fa-chevron-down chevron-icon"></i>
             </button>
-
-            <!-- 2. All Categories Expandable Dropdown -->
-            <div class="category-dropdown-wrapper" style="position: relative; display: inline-block;">
-                <button class="nav-tab" onclick="toggleDropdown('categoriesDropdownList', event)">
-                    <i class="fa-solid fa-layer-group"></i> All Categories <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem; margin-left: 4px;"></i>
-                </button>
-                <div id="categoriesDropdownList" style="display: none; position: absolute; top: 100%; left: 0; background: #1e1e1e; min-width: 240px; border-radius: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.7); z-index: 9999; margin-top: 6px; max-height: 300px; overflow-y: auto; border: 1px solid rgba(255,255,255,0.15);">
-                    ${categoriesListHTML}
-                </div>
+            <div id="categoriesDropdownList" class="custom-dropdown-list">
+                ${categoriesListHTML}
             </div>
+        </div>
 
-            <!-- 3. Game Type Expandable Dropdown -->
-            <div class="gametype-dropdown-wrapper" style="position: relative; display: inline-block;">
-                <button class="nav-tab" onclick="toggleDropdown('gameTypesDropdownList', event)">
-                    <i class="fa-solid fa-gamepad"></i> Game Type <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem; margin-left: 4px;"></i>
-                </button>
-                <div id="gameTypesDropdownList" style="display: none; position: absolute; top: 100%; left: 0; background: #1e1e1e; min-width: 280px; border-radius: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.7); z-index: 9999; margin-top: 6px; max-height: 300px; overflow-y: auto; border: 1px solid rgba(255,255,255,0.15);">
-                    ${gamesListHTML}
-                </div>
+        <!-- Game Series Dropdown -->
+        <div class="gametype-dropdown-wrapper" style="position: relative; display: inline-block;">
+            <button class="nav-tab" onclick="toggleDropdown('gameTypesDropdownList', event)">
+                <i class="fa-solid fa-gamepad"></i> Series <i class="fa-solid fa-chevron-down chevron-icon"></i>
+            </button>
+            <div id="gameTypesDropdownList" class="custom-dropdown-list">
+                ${seriesListHTML}
             </div>
         </div>
     `;
 }
 
-// Universal dropdown toggle handler
 function toggleDropdown(elementId, e) {
     e.stopPropagation();
     const otherId = elementId === 'categoriesDropdownList' ? 'gameTypesDropdownList' : 'categoriesDropdownList';
@@ -285,19 +306,85 @@ function toggleDropdown(elementId, e) {
 window.toggleDropdown = toggleDropdown;
 
 function filterByCategory(category) {
-    const lowerCat = category.toLowerCase();
-    currentCategory = (lowerCat === 'home' || lowerCat === 'all') ? 'all' : lowerCat;
-    currentSearchQuery = '';
-
-    const catList = document.getElementById('categoriesDropdownList');
-    if (catList) catList.style.display = 'none';
-    const gameList = document.getElementById('gameTypesDropdownList');
-    if (gameList) gameList.style.display = 'none';
-
+    currentCategory = category.toLowerCase() === 'all' ? 'all' : category.toLowerCase();
+    currentSeries = 'all';
+    showAllGames = false;
+    closeAllDropdowns();
     applyFilters();
 }
 window.filterByCategory = filterByCategory;
 
+function filterBySeries(seriesName) {
+    currentSeries = seriesName.toLowerCase() === 'all' ? 'all' : seriesName.toLowerCase();
+    currentCategory = 'all';
+    showAllGames = false;
+    closeAllDropdowns();
+    applyFilters();
+}
+window.filterBySeries = filterBySeries;
+
+function resetAllFilters() {
+    currentCategory = 'all';
+    currentSeries = 'all';
+    currentSearchQuery = '';
+    showAllGames = false;
+    closeAllDropdowns();
+    applyFilters();
+}
+window.resetAllFilters = resetAllFilters;
+
+function closeAllDropdowns() {
+    const catList = document.getElementById('categoriesDropdownList');
+    if (catList) catList.style.display = 'none';
+    const gameList = document.getElementById('gameTypesDropdownList');
+    if (gameList) gameList.style.display = 'none';
+}
+
+/**
+ * Applies search query, category, and series filters to the catalog
+ */
+function applyFilters() {
+    const filteredGames = loadedGamesData.filter(game => {
+        const title = (game.title || "").toLowerCase();
+        const description = (game.description || "").toLowerCase();
+        const rawCategory = game.category || game.Category || "";
+        const gameCategories = getNormalizedCategories(rawCategory).map(c => c.toLowerCase());
+        const series = getGameSeriesName(game.title).toLowerCase();
+
+        const matchesSearch = title.includes(currentSearchQuery) || description.includes(currentSearchQuery);
+
+        let matchesCategory = true;
+        if (currentCategory !== 'all') {
+            matchesCategory = gameCategories.includes(currentCategory);
+        }
+
+        let matchesSeries = true;
+        if (currentSeries !== 'all') {
+            matchesSeries = series === currentSeries;
+        }
+
+        return matchesSearch && matchesCategory && matchesSeries;
+    });
+
+    renderGameStore(filteredGames);
+}
+
+function toggleShowAllGames(expand) {
+    showAllGames = expand;
+    applyFilters();
+    
+    if (!expand) {
+        const gridEl = document.getElementById("gameGrid") || document.getElementById("games-grid");
+        if (gridEl) {
+            gridEl.scrollIntoView({ behavior: 'smooth' });
+        }
+    }
+}
+window.toggleShowAllGames = toggleShowAllGames;
+
+/**
+ * Renders the featured marquee slider
+ */
 function renderFeaturedMarquee(sliderGames) {
     const track = document.getElementById("featuredTrack");
     if (!track) return;
@@ -313,7 +400,7 @@ function renderFeaturedMarquee(sliderGames) {
                     <p>${game.description || ''}</p>
                     <div class="marquee-game-footer">
                         <span class="marquee-price">${game.price || 'FREE'}</span>
-                        <button class="btn-details" onclick="openDetailsById('${encodeURIComponent(gameId)}')" style="padding: 4px 8px; font-size: 0.75rem;">View</button>
+                        <button class="btn-details" onclick="openDetailsById('${encodeURIComponent(gameId)}')">View</button>
                     </div>
                 </div>
             </div>
@@ -351,6 +438,9 @@ function initSmoothMarquee(track) {
     requestAnimationFrame(scrollStep);
 }
 
+/**
+ * Renders the most popular games sidebar/section
+ */
 function renderPopularList(popularGames) {
     const container = document.getElementById("popularList");
     if (!container) return;
@@ -358,41 +448,23 @@ function renderPopularList(popularGames) {
     container.innerHTML = popularGames.map((game) => {
         const gameId = game.id || game.title;
         return `
-            <div class="popular-item" onclick="openDetailsById('${encodeURIComponent(gameId)}')" style="cursor: pointer;">
+            <div class="popular-item" onclick="openDetailsById('${encodeURIComponent(gameId)}')">
                 <img src="${game.image}" alt="${game.title}" loading="lazy" onerror="this.src='images/nfsmw-shot1.png';">
                 <div class="popular-item-info">
                     <h5>${game.title}</h5>
                     <span>${game.price || 'FREE'}</span>
                 </div>
-                <i class="fa-solid fa-chevron-right" style="font-size: 0.75rem; color: var(--text-muted);"></i>
+                <i class="fa-solid fa-chevron-right"></i>
             </div>
         `;
     }).join('');
 }
 
-function applyFilters() {
-    const filteredGames = loadedGamesData.filter(game => {
-        const title = (game.title || "").toLowerCase();
-        const description = (game.description || "").toLowerCase();
-        const category = (game.category || game.Category || "").toLowerCase();
-        const platform = (game.platform || "").toLowerCase();
-
-        const matchesSearch = title.includes(currentSearchQuery) || description.includes(currentSearchQuery);
-
-        let matchesCategory = true;
-        if (currentCategory !== 'all') {
-            matchesCategory = category.includes(currentCategory) || platform.includes(currentCategory);
-        }
-
-        return matchesSearch && matchesCategory;
-    });
-
-    renderGameStore(filteredGames);
-}
-
+/**
+ * Renders the main game catalog grid with pagination limit
+ */
 function renderGameStore(gameList) {
     const container = document.getElementById("gameGrid") || document.getElementById("games-grid");
-
     if (!container) return;
 
     container.innerHTML = "";
@@ -400,31 +472,40 @@ function renderGameStore(gameList) {
     if (gameList.length === 0) {
         container.innerHTML = `
             <div class="loading-state" style="grid-column: 1 / -1; text-align: center; padding: 40px; color: #fff;">
-                <p>No games found matching your search or filters.</p>
+                <i class="fa-solid fa-face-sad-tear" style="font-size: 2rem; margin-bottom: 10px; color: var(--accent-blue);"></i>
+                <p>No games found matching your selection.</p>
             </div>
         `;
         return;
     }
 
-    gameList.forEach((game) => {
+    const gamesToRender = showAllGames ? gameList : gameList.slice(0, INITIAL_GAME_LIMIT);
+
+    gamesToRender.forEach((game) => {
         const gameId = game.id || game.title;
         const originalIndex = loadedGamesData.indexOf(game);
         const card = document.createElement("div");
         card.classList.add("game-card");
 
-        const priceText = String(game.price || "").trim().toUpperCase();
-        const isFree = priceText === "FREE" || priceText === "0" || priceText.includes("FREE");
-
-        const actionBtnText = isFree ? "Get" : "Buy Now";
-        const actionBtnClass = isFree ? "btn-get" : "btn-download";
+        const isPaid = game.price && game.price.toUpperCase() !== 'FREE' && game.price.trim() !== '';
         
-        const targetUrl = game.downloadUrl || (game.downloadParts && game.downloadParts.length > 0 ? "#" : "");
+        let actionBtnText = "Get";
+        let actionBtnClass = "btn-get";
+        let gameParts = game.downloadParts || game.parts;
+        let targetUrl = game.downloadUrl || game.link || game.url || game.download || (gameParts && gameParts.length > 0 ? "#" : "");
+
+        if (isPaid) {
+            actionBtnText = "Buy Now";
+            actionBtnClass = "btn-download";
+            const orderMessage = encodeURIComponent(`Hello, I want to buy ${game.title} (${game.platform})`);
+            targetUrl = game.altDownloadUrl || game.buyUrl || `https://wa.me/255692752060?text=${orderMessage}`;
+        }
 
         let actionButtonsHTML = `
-            <a href="${targetUrl}" target="_blank" class="btn-action ${actionBtnClass}" data-game-id="${gameId}" data-game-index="${originalIndex}">${actionBtnText}</a>
+            <a href="${targetUrl}" target="_blank" class="btn-action ${actionBtnClass}" data-game-id="${encodeURIComponent(gameId)}" data-game-index="${originalIndex}">${actionBtnText}</a>
         `;
 
-        if (game.altDownloadUrl) {
+        if (!isPaid && game.altDownloadUrl) {
             actionButtonsHTML += `
                 <a href="${game.altDownloadUrl}" target="_blank" class="btn-action btn-vodacom" style="margin-top: 6px;">
                     💬 WhatsApp
@@ -434,7 +515,7 @@ function renderGameStore(gameList) {
 
         card.innerHTML = `
             <span class="card-badge">${game.platform || "PC"}</span>
-            <div class="game-img-wrapper" onclick="openDetailsById('${encodeURIComponent(gameId)}')" style="cursor: pointer;">
+            <div class="game-img-wrapper" onclick="openDetailsById('${encodeURIComponent(gameId)}')">
                 <img src="${game.image || 'images/nfsmw-shot1.png'}" alt="${game.title}" class="game-img" loading="lazy" onerror="this.onerror=null; this.src='images/nfsmw-shot1.png';" />
             </div>
             <div class="game-details">
@@ -453,12 +534,92 @@ function renderGameStore(gameList) {
 
         container.appendChild(card);
     });
+
+    if (gameList.length > INITIAL_GAME_LIMIT) {
+        const toggleWrapper = document.createElement("div");
+        toggleWrapper.style.gridColumn = "1 / -1";
+        toggleWrapper.style.textAlign = "center";
+        toggleWrapper.style.marginTop = "30px";
+        toggleWrapper.style.marginBottom = "20px";
+
+        if (!showAllGames) {
+            const remainingCount = gameList.length - INITIAL_GAME_LIMIT;
+            toggleWrapper.innerHTML = `
+                <button onclick="toggleShowAllGames(true)" class="btn-see-more">
+                    <i class="fa-solid fa-angles-down"></i> See More (${remainingCount} more games)
+                </button>
+            `;
+        } else {
+            toggleWrapper.innerHTML = `
+                <button onclick="toggleShowAllGames(false)" class="btn-see-less">
+                    <i class="fa-solid fa-angles-up"></i> See Less
+                </button>
+            `;
+        }
+
+        container.appendChild(toggleWrapper);
+    }
 }
 
 function openDetailsById(id) {
     window.location.href = `details.html?id=${id}`;
 }
 window.openDetailsById = openDetailsById;
+
+/**
+ * Populates game details page elements dynamically from games.json query parameter (with safe optional chaining)
+ */
+function initDetailsPage(games) {
+    const urlParams = new URLSearchParams(window.location.search);
+    const gameId = urlParams.get('id');
+    if (!gameId) return;
+    
+    const decodedId = decodeURIComponent(gameId);
+    const gameIndex = games.findIndex(g => String(g.id || g.title) === decodedId);
+    const game = gameIndex !== -1 ? games[gameIndex] : null;
+    if (!game) return;
+    
+    const container = document.querySelector('.container') || document.body;
+    
+    const isPaid = game.price && game.price.toUpperCase() !== 'FREE' && game.price.trim() !== '';
+    const buttonText = isPaid ? "Buy Now" : "Get Game";
+    const buttonClass = isPaid ? "btn-action btn-download" : "btn-action btn-get";
+    
+    let gameParts = game.downloadParts || game.parts;
+    let targetUrl = game.downloadUrl || game.link || game.url || game.download || (gameParts && gameParts.length > 0 ? "#" : "");
+
+    if (isPaid) {
+        const orderMessage = encodeURIComponent(`Hello, I want to buy ${game.title} (${game.platform})`);
+        targetUrl = game.altDownloadUrl || game.buyUrl || `https://wa.me/255692752060?text=${orderMessage}`;
+    }
+
+    const actionHtml = `<a href="${targetUrl}" target="_blank" class="${buttonClass}" data-game-id="${game.id}" style="display:inline-block; text-align:center; text-decoration:none;">${buttonText}</a>`;
+
+    // Safe optional chaining (?.) used below to prevent crashes if systemRequirements is missing
+    container.innerHTML = `
+        <div class="game-details-card" style="padding: 2rem; max-width: 800px; margin: auto; color: #fff;">
+            <a href="index.html" class="back-link" style="color: #00f; text-decoration: underline;">&larr; Back to Home</a>
+            <h1>${game.title}</h1>
+            <img src="${game.image}" alt="${game.title}" style="max-width: 100%; border-radius: 8px; margin: 1rem 0;">
+            <p><strong>Platform:</strong> ${game.platform || 'PC'}</p>
+            <p><strong>Category:</strong> ${game.category || game.Category || 'General'}</p>
+            <p><strong>Size:</strong> ${game.size || 'N/A'}</p>
+            <p><strong>Price:</strong> ${game.price || 'FREE'}</p>
+            
+            <div class="requirements" style="margin: 1.5rem 0; background: #1e1e1e; padding: 1rem; border-radius: 6px;">
+                <h3>System Requirements</h3>
+                <p><strong>OS:</strong> ${game.systemRequirements?.os || 'Not specified'}</p>
+                <p><strong>Processor:</strong> ${game.systemRequirements?.processor || 'Not specified'}</p>
+                <p><strong>RAM:</strong> ${game.systemRequirements?.ram || 'Not specified'}</p>
+                <p><strong>Storage:</strong> ${game.systemRequirements?.storage || 'Not specified'}</p>
+            </div>
+            
+            <div class="action-wrapper" style="margin-top: 1.5rem;">
+                ${actionHtml}
+            </div>
+        </div>
+    `;
+}
 
 function openFullScreen(imgSrc) {
     const fullModal = document.getElementById("fullscreenOverlay") || document.getElementById("fullscreen-overlay");
@@ -474,6 +635,9 @@ function closeFullScreen() {
 }
 window.closeFullScreen = closeFullScreen;
 
+/**
+ * Displays download parts modal when a game contains multi-part archives
+ */
 function showDownloadPartsModal(game) {
     let modal = document.getElementById('download-parts-modal');
     if (!modal) {
@@ -504,7 +668,7 @@ function showDownloadPartsModal(game) {
 
     document.getElementById('parts-modal-title').innerText = `Download: ${game.title}`;
     
-    let partsArray = game.downloadParts;
+    let partsArray = game.downloadParts || game.parts;
     if (typeof partsArray === 'string') {
         try { partsArray = JSON.parse(partsArray); } catch (e) { partsArray = []; }
     }
@@ -532,99 +696,3 @@ function closeDownloadPartsModal() {
     if (modal) modal.classList.remove('active');
 }
 window.closeDownloadPartsModal = closeDownloadPartsModal;
-
-function initDetailsPage(games) {
-    const detailsLoaders = document.querySelectorAll('#loader, #catalog-loader, .loading-state, [id*="load"], [class*="load"]');
-    detailsLoaders.forEach(el => el.style.display = 'none');
-
-    const params = new URLSearchParams(window.location.search);
-    const gameId = params.get('id');
-
-    if (!gameId) {
-        console.warn("No game ID found in URL parameters!");
-        return;
-    }
-
-    const decodedId = decodeURIComponent(gameId);
-
-    const currentGame = games.find(g => 
-        String(g.id) === String(decodedId) || 
-        String(g.title).toLowerCase() === String(decodedId).toLowerCase()
-    );
-
-    if (!currentGame) {
-        console.error("Game not found in catalog for ID:", decodedId);
-        const titleEl = document.getElementById('detailGameTitle');
-        if (titleEl) titleEl.innerText = "Game Not Found";
-        return;
-    }
-
-    const setElementText = (id, text) => {
-        const el = document.getElementById(id);
-        if (el) el.innerText = text;
-    };
-
-    setElementText('detailGameTitle', currentGame.title);
-    setElementText('detailGameCategory', currentGame.category || currentGame.Category || '');
-    setElementText('detailGameDescription', currentGame.description || '');
-    setElementText('detailGameRequirements', currentGame.requirements || '');
-    setElementText('detailGamePrice', currentGame.price || 'FREE');
-
-    const detailInstallGuideEl = document.getElementById('detailInstallGuide');
-    if (detailInstallGuideEl) {
-        detailInstallGuideEl.textContent = currentGame.installGuide;
-    }
-
-    const coverImg = document.getElementById('detailGameImage');
-    if (coverImg && currentGame.image) {
-        coverImg.src = currentGame.image;
-    }
-
-    const installGuideContainer = document.getElementById('gameInstallGuide');
-    if (installGuideContainer) {
-        if (currentGame.installGuide) {
-            installGuideContainer.innerHTML = currentGame.installGuide.replace(/\n/g, '<br>');
-        } else {
-            installGuideContainer.innerHTML = "<p>Standard installation: Extract archive and run setup executable.</p>";
-        }
-    }
-
-    const downloadBtn = document.getElementById('detailDownloadBtn');
-    if (downloadBtn) {
-        if (currentGame.downloadParts && currentGame.downloadParts.length > 0) {
-            downloadBtn.href = "#";
-            downloadBtn.innerHTML = `<i class="fa-solid fa-download"></i> Download Parts (${currentGame.downloadParts.length})`;
-            downloadBtn.onclick = (e) => {
-                e.preventDefault();
-                showDownloadPartsModal(currentGame);
-            };
-        } else {
-            downloadBtn.href = currentGame.downloadUrl || '#';
-            downloadBtn.innerHTML = `<i class="fa-solid fa-download"></i> Download Game`;
-        }
-    }
-
-    const altDownloadContainer = document.getElementById('details-alt-download-section');
-    if (altDownloadContainer) {
-        if (currentGame.altDownloadUrl) {
-            altDownloadContainer.innerHTML = `
-                <a href="${currentGame.altDownloadUrl}" target="_blank" class="btn-action btn-vodacom" style="display: inline-block; margin-top: 10px; text-decoration: none;">
-                    💬 Alternative / Buy via WhatsApp
-                </a>
-            `;
-        } else {
-            altDownloadContainer.innerHTML = '';
-        }
-    }
-
-    const screenshotsContainer = document.getElementById('detailGameScreenshots'); 
-    if (screenshotsContainer) {
-        if (currentGame.screenshots && currentGame.screenshots.length > 0) {
-            screenshotsContainer.innerHTML = currentGame.screenshots.map(shot => `
-                <img src="${shot}" alt="Game Screenshot" class="screenshot-thumb" onclick="openFullScreen('${shot}')" style="cursor: pointer;" />
-            `).join('');
-        } else {
-            screenshotsContainer.innerHTML = '<p style="color: var(--text-muted); font-size: 0.85rem;">No screenshots available for this title.</p>';
-        }
-    }
-}
