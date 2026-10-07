@@ -1,6 +1,6 @@
 /**
  * Squad Games Store TZ - Core Application Script
- * Fully synchronized with dynamic categories, clean franchise filters, floating dropdowns, and dual payment options.
+ * Fully synchronized with dynamic categories, clean franchise filters, floating dropdowns, dual payment options, and smart auto-size detection.
  */
 
 let loadedGamesData = [];
@@ -85,6 +85,20 @@ document.addEventListener("DOMContentLoaded", () => {
     // 4. Load Game Catalog
     loadGameCatalog();
 });
+
+/**
+ * Smart Helper: Automatically extracts file size from game data if 'size' property is missing
+ */
+function getGameSize(game) {
+    if (game.size) return game.size; // If explicitly defined in JSON
+    
+    // Search both description and requirements for patterns like "25 GB", "70.5 GB", "512 MB"
+    const textToSearch = (game.description || '') + ' ' + (game.requirements || '');
+    const match = textToSearch.match(/(\d+(\.\d+)?\s*(GB|MB))/i);
+    
+    return match ? match[0] : 'N/A';
+}
+window.getGameSize = getGameSize;
 
 async function loadGameCatalog() {
     const pathSegments = window.location.pathname.split('/').filter(Boolean);
@@ -171,7 +185,6 @@ function renderNavbarDropdowns(games) {
     let franchisesMap = new Map();
 
     games.forEach(game => {
-        // Extract Categories dynamically from games.json
         const rawCategory = game.category || game.Category || game.genre || "";
         if (rawCategory) {
             String(rawCategory).split(/[\/,]+/).forEach(cat => {
@@ -182,7 +195,6 @@ function renderNavbarDropdowns(games) {
             });
         }
 
-        // Group into clean Franchises / Game Types without repeating individual game titles
         const title = (game.title || "").toLowerCase();
         let franchiseName = "";
 
@@ -311,11 +323,12 @@ function renderFeaturedMarquee(sliderGames) {
 
     const cardsHTML = sliderGames.map((game) => {
         const gameId = game.id || game.title;
+        const gameSize = getGameSize(game);
         return `
             <div class="marquee-game-card">
                 <img class="marquee-game-img" src="${game.image}" alt="${game.title}" loading="lazy" onerror="this.src='images/nfsmw-shot1.png';">
                 <div class="marquee-game-content">
-                    <span class="marquee-game-badge">${game.platform || 'Game'}</span>
+                    <span class="marquee-game-badge">${game.platform || 'Game'} • ${gameSize}</span>
                     <h4>${game.title}</h4>
                     <p>${game.description || ''}</p>
                     <div class="marquee-game-footer">
