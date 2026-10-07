@@ -9,183 +9,412 @@
     <link rel="stylesheet" href="style.css">
     <style>
         :root {
-            --bg-card: #16161a;
+            --bg-main: #0b0b0e;
+            --bg-card: #141419;
+            --border-color: rgba(255, 255, 255, 0.08);
+            --accent-blue: #007aff;
+            --accent-green: #22c55e;
             --accent-red: #e50914;
-            --accent-green: #28a745;
             --text-main: #ffffff;
-            --text-muted: #a7a9be;
+            --text-muted: #94a3b8;
         }
+
         body {
-            background-color: #0d0d0f;
+            background-color: var(--bg-main);
             color: var(--text-main);
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             margin: 0;
             padding: 0;
         }
+
         .container {
-            max-width: 1200px;
+            max-width: 1140px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 24px 20px;
         }
-        .portal-header-wrapper {
+
+        /* Top Header Navigation */
+        .details-header {
             background: var(--bg-card);
-            padding: 20px 30px;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.5);
-            margin-bottom: 30px;
+            border: 1px solid var(--border-color);
+            padding: 18px 24px;
+            border-radius: 16px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
-        .portal-logo {
-            margin: 0;
-            font-size: 24px;
-            background: linear-gradient(45deg, #e50914, #ff416c);
+
+        .store-logo {
+            font-size: 1.25rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #ffffff 30%, var(--accent-blue) 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-        }
-        .nav-back-btn {
-            background: rgba(255, 255, 255, 0.08);
-            color: #fff;
-            padding: 10px 18px;
-            border-radius: 8px;
+            margin: 0;
             text-decoration: none;
+        }
+
+        .back-btn {
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid var(--border-color);
+            color: #fff;
+            padding: 8px 16px;
+            border-radius: 10px;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 700;
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            font-weight: 600;
-            transition: background 0.2s;
+            transition: all 0.2s ease;
         }
-        .nav-back-btn:hover {
-            background: var(--accent-red);
+
+        .back-btn:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.3);
         }
-        .game-details-wrapper {
+
+        /* Main Hero Card (ApunKaGames Style) */
+        .game-hero-card {
             background: var(--bg-card);
-            padding: 35px;
-            border-radius: 16px;
-            box-shadow: 0 8px 30px rgba(0,0,0,0.4);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 15px 45px rgba(0,0,0,0.6);
+            margin-bottom: 30px;
         }
-        .details-grid {
+
+        .hero-grid {
             display: grid;
-            grid-template-columns: 1fr 1.4fr;
-            gap: 40px;
+            grid-template-columns: 380px 1fr;
+            gap: 35px;
             align-items: start;
         }
+
         @media (max-width: 900px) {
-            .details-grid {
+            .hero-grid {
                 grid-template-columns: 1fr;
             }
         }
-        .installation-guide {
-            background: var(--bg-card);
-            padding: 30px;
-            border-radius: 16px;
-            margin-top: 30px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
-            border-left: 4px solid var(--accent-red);
+
+        /* Cover Image & Quick Specs */
+        .cover-wrapper {
+            position: relative;
+            border-radius: 14px;
+            overflow: hidden;
+            background: #000;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.6);
         }
-        .installation-guide h3 {
-            margin-top: 0;
+
+        .cover-wrapper img {
+            width: 100%;
+            height: 460px;
+            object-fit: cover;
+            display: block;
+            cursor: pointer;
+            transition: transform 0.4s ease;
+        }
+
+        .cover-wrapper img:hover {
+            transform: scale(1.03);
+        }
+
+        .specs-box {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            padding: 18px;
+            margin-top: 20px;
+        }
+
+        .spec-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            font-size: 0.88rem;
+        }
+
+        .spec-row:last-child {
+            border-bottom: none;
+        }
+
+        .spec-label {
+            color: var(--text-muted);
+            font-weight: 600;
+        }
+
+        .spec-value {
             color: #fff;
-            font-size: 20px;
+            font-weight: 700;
+            text-align: right;
         }
-        .installation-guide ol {
+
+        /* Game Info Content */
+        .game-info-content h1 {
+            margin: 0 0 12px 0;
+            font-size: 2.1rem;
+            font-weight: 800;
+            color: #fff;
+            letter-spacing: -0.5px;
+            line-height: 1.2;
+        }
+
+        .badge-group {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 16px;
+        }
+
+        .badge {
+            background: rgba(0, 122, 255, 0.15);
+            color: var(--accent-blue);
+            border: 1px solid rgba(0, 122, 255, 0.3);
+            padding: 5px 12px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .badge-price {
+            background: rgba(34, 197, 94, 0.15);
+            color: var(--accent-green);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+        }
+
+        .game-description {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            line-height: 1.7;
+            margin-bottom: 25px;
+            white-space: pre-line;
+        }
+
+        /* System Requirements Box */
+        .sys-req-container {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            padding: 20px;
+            margin-bottom: 25px;
+        }
+
+        .sys-req-container h3 {
+            margin: 0 0 12px 0;
+            font-size: 1.05rem;
+            color: #ff9500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .sys-req-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 8px;
+            font-size: 0.88rem;
+            color: var(--text-muted);
+        }
+
+        .sys-req-grid strong {
+            color: #fff;
+        }
+
+        /* Download / Action Box */
+        .download-box {
+            background: linear-gradient(135deg, rgba(34, 197, 94, 0.1), rgba(16, 185, 129, 0.05));
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            border-radius: 14px;
+            padding: 22px;
+            text-align: center;
+        }
+
+        .download-btn-main {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            background: linear-gradient(135deg, #22c55e, #16a34a);
+            color: #fff;
+            padding: 16px 24px;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-weight: 800;
+            text-decoration: none;
+            box-shadow: 0 8px 25px rgba(34, 197, 94, 0.4);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            cursor: pointer;
+            border: none;
+            box-sizing: border-box;
+        }
+
+        .download-btn-main:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 30px rgba(34, 197, 94, 0.6);
+        }
+
+        /* Screenshots Gallery */
+        .screenshots-section {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 15px 45px rgba(0,0,0,0.6);
+        }
+
+        .screenshots-section h3 {
+            margin: 0 0 18px 0;
+            font-size: 1.2rem;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .screenshots-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 14px;
+        }
+
+        .screenshot-item {
+            border-radius: 10px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            background: #000;
+            height: 130px;
+            cursor: pointer;
+        }
+
+        .screenshot-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.3s ease;
+            display: block;
+        }
+
+        .screenshot-item img:hover {
+            transform: scale(1.08);
+        }
+
+        /* Installation Guide Box */
+        .install-guide-box {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-left: 4px solid var(--accent-blue);
+            border-radius: 16px;
+            padding: 25px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .install-guide-box h3 {
+            margin: 0 0 14px 0;
+            font-size: 1.1rem;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .install-guide-box ol {
+            margin: 0;
+            padding-left: 20px;
             color: var(--text-muted);
             line-height: 1.8;
-            padding-left: 20px;
-            margin-bottom: 0;
+            font-size: 0.9rem;
         }
-        .installation-guide li strong {
+
+        .install-guide-box li strong {
             color: #fff;
         }
-        .spinner {
-            width: 40px;
-            height: 40px;
-            border: 4px solid rgba(255, 255, 255, 0.1);
-            border-top-color: var(--accent-red);
-            border-radius: 50%;
-            animation: spin 0.8s linear infinite;
-        }
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-        .fullscreen-overlay {
+
+        /* Lightbox Modal */
+        .lightbox-overlay {
             position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.9);
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0,0,0,0.92);
+            backdrop-filter: blur(10px);
             display: none;
             align-items: center;
             justify-content: center;
-            z-index: 9999;
+            z-index: 99999;
             opacity: 0;
             transition: opacity 0.3s ease;
+            padding: 20px;
+            box-sizing: border-box;
         }
-        .fullscreen-overlay.active {
+
+        .lightbox-overlay.active {
             opacity: 1;
         }
-        .fullscreen-img {
-            max-width: 90%;
-            max-height: 90vh;
-            border-radius: 8px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.8);
+
+        .lightbox-img {
+            max-width: 90vw;
+            max-height: 85vh;
+            border-radius: 12px;
+            box-shadow: 0 0 50px rgba(0,0,0,0.9);
+            object-fit: contain;
         }
-        .fullscreen-close {
+
+        .lightbox-close {
             position: absolute;
             top: 25px;
             right: 35px;
+            font-size: 2.5rem;
             color: #fff;
-            font-size: 40px;
-            font-weight: bold;
             cursor: pointer;
-            transition: color 0.2s;
+            opacity: 0.8;
         }
-        .fullscreen-close:hover {
-            color: var(--accent-red);
+
+        .lightbox-close:hover {
+            opacity: 1;
+        }
+
+        .loading-state {
+            text-align: center;
+            padding: 80px 20px;
+            color: var(--text-muted);
         }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <!-- Navigation Bar / Back Button -->
-        <div class="portal-header-wrapper">
-            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
-                <h1 class="portal-logo">Squad Games Store TZ</h1>
-                <a href="index.html" class="nav-back-btn">
-                    <i class="fa-solid fa-arrow-left"></i> Back to Store
-                </a>
-            </div>
+        <!-- Top Header Navigation -->
+        <div class="details-header">
+            <a href="index.html" class="store-logo">Squad Games Store TZ</a>
+            <a href="index.html" class="back-btn">
+                <i class="fa-solid fa-arrow-left"></i> Back to Store
+            </a>
         </div>
 
-        <!-- Game Details Wrapper -->
-        <div id="game-details-container" class="game-details-wrapper">
-            <div style="text-align: center; padding: 60px;">
-                <div class="spinner" style="margin: 0 auto 15px;"></div>
-                <p style="color: var(--text-muted); font-size: 16px;">Loading game details from catalog...</p>
+        <!-- Main Game Details Container -->
+        <div id="game-details-container">
+            <div class="loading-state">
+                <i class="fa-solid fa-spinner fa-spin" style="font-size: 2rem; color: var(--accent-blue); margin-bottom: 12px;"></i>
+                <p>Loading game details...</p>
             </div>
-        </div>
-
-        <!-- Standard Installation Guide Section -->
-        <div class="installation-guide">
-            <h3><i class="fa-solid fa-circle-question" style="color: var(--accent-red);"></i> How to Install Games</h3>
-            <ol>
-                <li><strong>Download All Parts:</strong> Ensure all multi-part archive files are downloaded completely into the same folder on your computer.</li>
-                <li><strong>Extract Files:</strong> Select all files and use extraction software like WinRAR or 7-Zip to extract the game files.</li>
-                <li><strong>Run Setup:</strong> Open the extracted folder, locate the setup file or installer, and run it as Administrator.</li>
-                <li><strong>Complete Installation:</strong> Follow on-screen prompts and install any required redistributables (DirectX, VCRedist) if prompted.</li>
-                <li><strong>Apply Crack / Fix:</strong> If required, copy contents from the crack folder into the main game installation directory.</li>
-                <li><strong>Launch Game:</strong> Run the game executable as Administrator and enjoy!</li>
-            </ol>
         </div>
     </div>
 
-    <!-- Fullscreen Image Modal Overlay -->
-    <div id="fullscreen-modal" class="fullscreen-overlay" onclick="closeFullScreen()">
-        <span class="fullscreen-close">&times;</span>
-        <img id="fullscreen-img" class="fullscreen-img" src="" alt="Fullscreen View">
+    <!-- Lightbox Modal Overlay -->
+    <div id="lightboxModal" class="lightbox-overlay" onclick="closeLightbox()">
+        <span class="lightbox-close">&times;</span>
+        <img id="lightboxImg" class="lightbox-img" src="" alt="Zoomed Screenshot">
     </div>
 
-    <!-- Details Script Logic -->
+    <!-- Script Logic -->
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const urlParams = new URLSearchParams(window.location.search);
@@ -194,23 +423,23 @@
 
             if (!gameId) {
                 container.innerHTML = `
-                    <div style="text-align: center; padding: 50px;">
-                        <i class="fa-solid fa-triangle-exclamation" style="font-size: 54px; color: #ffc107; margin-bottom: 20px;"></i>
-                        <h2 style="color: #fff; margin-bottom: 10px;">No Game Selected</h2>
-                        <p style="color: var(--text-muted); margin-bottom: 25px;">Please return to the store and select a game to view its full details.</p>
-                        <a href="index.html" class="nav-back-btn" style="background: var(--accent-red);">Go to Home Store</a>
+                    <div class="game-hero-card" style="text-align: center; padding: 50px;">
+                        <i class="fa-solid fa-triangle-exclamation" style="font-size: 3rem; color: #ffc107; margin-bottom: 15px;"></i>
+                        <h2>No Game Selected</h2>
+                        <p style="color: var(--text-muted); margin-bottom: 20px;">Please select a game from the home store[cite: 11].</p>
+                        <a href="index.html" class="back-btn" style="background: var(--accent-blue); display: inline-flex;">Return Home</a>
                     </div>
                 `;
                 return;
             }
 
             fetch('games.json')
-                .then(response => {
-                    if (!response.ok) throw new Error('Failed to load games data.');
-                    return response.json();
+                .then(res => {
+                    if (!res.ok) throw new Error("Failed to load games.json");
+                    return res.json();
                 })
-                .then(games => {
-                    let gamesArray = Array.isArray(games) ? games : (games.games || games.data || games.list || Object.values(games).find(Array.isArray) || []);
+                .then(rawData => {
+                    let gamesArray = Array.isArray(rawData) ? rawData : (rawData.games || rawData.data || rawData.list || Object.values(rawData).find(Array.isArray) || []);
 
                     const game = gamesArray.find(g => 
                         String(g.id) === String(gameId) || 
@@ -219,176 +448,162 @@
 
                     if (!game) {
                         container.innerHTML = `
-                            <div style="text-align: center; padding: 50px;">
-                                <i class="fa-solid fa-circle-xmark" style="font-size: 54px; color: var(--accent-red); margin-bottom: 20px;"></i>
-                                <h2 style="color: #fff; margin-bottom: 10px;">Game Not Found</h2>
-                                <p style="color: var(--text-muted); margin-bottom: 25px;">The game you are looking for does not exist or has been removed.</p>
-                                <a href="index.html" class="nav-back-btn" style="background: var(--accent-red);">Go to Home Store</a>
+                            <div class="game-hero-card" style="text-align: center; padding: 50px;">
+                                <i class="fa-solid fa-circle-xmark" style="font-size: 3rem; color: var(--accent-red); margin-bottom: 15px;"></i>
+                                <h2>Game Not Found</h2>
+                                <p style="color: var(--text-muted); margin-bottom: 20px;">The requested game does not exist in the catalog[cite: 11].</p>
+                                <a href="index.html" class="back-btn" style="background: var(--accent-blue); display: inline-flex;">Return Home</a>
                             </div>
                         `;
                         return;
                     }
 
-                    const title = game.title || 'Untitled Game';
-                    const category = game.category || 'Game';
-                    const image = game.image || 'placeholder.jpg';
-                    const description = game.description || 'Full game release with secure direct downloads.';
-                    const screenshots = game.screenshots || [];
-                    const gameSize = game.size || 'N/A';
-                    const platform = game.platform || 'PC';
-                    
-                    const isPaid = String(game.id) === "1" || String(game.id) === "2";
-                    const displayPrice = String(game.id) === "1" ? "TZS 20,000" : String(game.id) === "2" ? "TZS 10,000" : "FREE";
-                    const orderMessage = encodeURIComponent(`Hello SquadGames, I want to buy ${title} (${platform})`);
-                    const buyUrl = `https://wa.me/255692752060?text=${orderMessage}`;
-
-                    let sysReqHTML = '';
-                    if (game.systemRequirements && typeof game.systemRequirements === 'object') {
-                        sysReqHTML = `
-                            <p style="margin: 4px 0;"><strong>OS:</strong> ${game.systemRequirements.os || 'Not specified'}</p>
-                            <p style="margin: 4px 0;"><strong>Processor:</strong> ${game.systemRequirements.processor || 'Not specified'}</p>
-                            <p style="margin: 4px 0;"><strong>RAM:</strong> ${game.systemRequirements.ram || 'Not specified'}</p>
-                            <p style="margin: 4px 0;"><strong>Storage:</strong> ${game.systemRequirements.storage || 'Not specified'}</p>
-                        `;
-                    } else {
-                        sysReqHTML = `<p style="margin: 0; color: var(--text-muted);">Standard PC system requirements apply.</p>`;
-                    }
-
-                    container.innerHTML = `
-                        <div class="details-grid">
-                            <!-- Left Column: Cover Image & Screenshots -->
-                            <div style="display: flex; flex-direction: column; gap: 20px;">
-                                <div style="position: relative; border-radius: 12px; overflow: hidden; box-shadow: 0 6px 20px rgba(0,0,0,0.5); background: #000;">
-                                    <img src="${image}" alt="${title}" style="width: 100%; max-height: 420px; object-fit: cover; cursor: pointer; display: block; transition: transform 0.3s;" onclick="openFullScreen(event, this.src)" title="Click to enlarge" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
-                                </div>
-
-                                ${screenshots.length > 0 ? `
-                                    <div style="display: flex; flex-direction: column; gap: 12px;">
-                                        <h4 style="color: #fff; font-size: 16px; margin: 0; display: flex; align-items: center; gap: 8px;">
-                                            <i class="fa-solid fa-images" style="color: var(--accent-red);"></i> Screenshots (${screenshots.length})
-                                        </h4>
-                                        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 10px;">
-                                            ${screenshots.map(shot => `
-                                                <div style="border-radius: 8px; overflow: hidden; border: 2px solid rgba(255,255,255,0.1); cursor: pointer; background: #000;">
-                                                    <img src="${shot}" alt="Screenshot" style="width: 100%; height: 85px; object-fit: cover; display: block; transition: transform 0.2s;" onclick="openFullScreen(event, this.src)" onmouseover="this.style.transform='scale(1.08)'" onmouseout="this.style.transform='scale(1)'">
-                                                </div>
-                                            `).join('')}
-                                        </div>
-                                    </div>
-                                ` : ''}
-                            </div>
-
-                            <!-- Right Column: Title, Metadata, Requirements & Action -->
-                            <div style="display: flex; flex-direction: column; gap: 20px;">
-                                <div>
-                                    <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-bottom: 10px;">
-                                        <span style="background: var(--accent-red); color: #fff; padding: 5px 12px; border-radius: 6px; font-size: 12px; font-weight: bold; text-transform: uppercase;">${category}</span>
-                                        <span style="background: rgba(255,255,255,0.1); color: #fff; padding: 5px 10px; border-radius: 6px; font-size: 12px; font-weight: bold;">📁 Size: ${gameSize}</span>
-                                        <span style="background: rgba(40,167,69,0.2); color: #28a745; border: 1px solid #28a745; padding: 4px 10px; border-radius: 6px; font-size: 12px; font-weight: bold;">🏷️ ${displayPrice}</span>
-                                    </div>
-                                    <h2 style="margin: 0 0 15px; font-size: 32px; color: #fff; line-height: 1.2;">${title}</h2>
-                                    <p style="color: var(--text-muted); line-height: 1.7; margin: 0; white-space: pre-line; font-size: 15px;">${description}</p>
-                                </div>
-
-                                <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); padding: 20px; border-radius: 10px;">
-                                    <h4 style="margin: 0 0 10px 0; color: #fff; font-size: 16px; display: flex; align-items: center; gap: 8px;">
-                                        <i class="fa-solid fa-laptop-code" style="color: #ffc107;"></i> System Requirements
-                                    </h4>
-                                    <div style="color: var(--text-muted); font-size: 14px; line-height: 1.6;">
-                                        ${sysReqHTML}
-                                    </div>
-                                </div>
-
-                                <div class="download-section" style="margin-top: 10px;">
-                                    ${isPaid ? `
-                                        <a href="${buyUrl}" target="_blank" style="width: 100%; box-sizing: border-box; padding: 14px 20px; background: linear-gradient(135deg, #e50914, #b20710); color: #fff; text-decoration: none; border-radius: 10px; font-size: 18px; font-weight: bold; display: flex; align-items: center; justify-content: center; gap: 10px; box-shadow: 0 4px 15px rgba(229,9,20,0.4); transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
-                                            <i class="fa-brands fa-whatsapp" style="font-size: 22px;"></i> Buy Now via WhatsApp (${displayPrice})
-                                        </a>
-                                    ` : `
-                                        <button onclick="toggleDownloadLinks()" style="width: 100%; padding: 14px 20px; background: linear-gradient(135deg, #28a745, #218838); color: #fff; border: none; border-radius: 10px; font-size: 18px; font-weight: bold; display: flex; align-items: center; justify-content: space-between; cursor: pointer; box-shadow: 0 4px 15px rgba(40,167,69,0.3); transition: background 0.2s;">
-                                            <span style="display: flex; align-items: center; gap: 10px;">
-                                                <i class="fa-solid fa-download"></i> Download Links (${gameSize})
-                                            </span>
-                                            <i id="download-chevron" class="fa-solid fa-chevron-down" style="transition: transform 0.3s;"></i>
-                                        </button>
-                                        
-                                        <div id="download-links-container" style="display: none; flex-direction: column; gap: 12px; margin-top: 15px;">
-                                            ${renderDownloadLinks(game)}
-                                        </div>
-                                    `}
-                                </div>
-                            </div>
-                        </div>
-                    `;
+                    renderGameDetails(game);
                 })
-                .catch(error => {
-                    console.error('Error fetching games.json:', error);
+                .catch(err => {
+                    console.error("Error:", err);
                     container.innerHTML = `
-                        <div style="text-align: center; padding: 50px; color: var(--accent-red);">
-                            <i class="fa-solid fa-triangle-exclamation" style="font-size: 54px; margin-bottom: 20px;"></i>
-                            <h2 style="color: #fff; margin-bottom: 10px;">Error Loading Data</h2>
-                            <p style="color: var(--text-muted);">Could not load catalog information. Please check your JSON file.</p>
+                        <div class="game-hero-card" style="text-align: center; padding: 50px; color: var(--accent-red);">
+                            <i class="fa-solid fa-triangle-exclamation" style="font-size: 3rem; margin-bottom: 15px;"></i>
+                            <h2>Catalog Error</h2>
+                            <p style="color: var(--text-muted);">Could not load games catalog data[cite: 11].</p>
                         </div>
                     `;
                 });
         });
 
-        function renderDownloadLinks(game) {
-            const linksArray = game.parts || game.downloadParts || game.links || [];
+        function renderGameDetails(game) {
+            const container = document.getElementById('game-details-container');
+            const title = game.title || "Untitled Game";
+            const category = game.category || game.Category || "Action / PC";
+            const platform = game.platform || "PC / Windows";
+            const image = game.image || "images/nfsmw-shot1.png";
+            const description = game.description || "High-speed action packed game release with verified direct download links.";
+            const gameSize = game.size || "N/A";
+            const screenshots = game.screenshots || [];
+            
+            const isPaid = String(game.id) === "1" || String(game.id) === "2";
+            const displayPrice = String(game.id) === "1" ? "TZS 20,000" : String(game.id) === "2" ? "TZS 10,000" : "FREE";
 
-            if (linksArray.length > 0) {
-                return linksArray.map((link, index) => {
-                    const url = typeof link === 'object' ? (link.url || link.link || '#') : link;
-                    const name = typeof link === 'object' ? (link.name || `Part ${index + 1}`) : `Download Part ${index + 1} (${game.size})`;
-                    return `
-                        <a href="${url}" target="_blank" style="width: 100%; box-sizing: border-box; padding: 14px 20px; background: linear-gradient(135deg, #28a745, #218838); color: #fff; text-decoration: none; border-radius: 8px; font-weight: bold; display: flex; align-items: center; gap: 10px; box-shadow: 0 4px 15px rgba(40,167,69,0.3); transition: transform 0.2s;" onmouseover="this.style.transform='translateX(4px)'" onmouseout="this.style.transform='translateX(0)'">
-                            <i class="fa-solid fa-cloud-arrow-down"></i> ${name}
-                        </a>
-                    `;
-                }).join('');
-            } else if (game.downloadUrl) {
-                return `
-                    <a href="${game.downloadUrl}" target="_blank" style="width: 100%; box-sizing: border-box; padding: 14px 20px; background: linear-gradient(135deg, #28a745, #218838); color: #fff; text-decoration: none; border-radius: 8px; font-weight: bold; display: flex; align-items: center; gap: 10px; box-shadow: 0 4px 15px rgba(40,167,69,0.3);">
-                        <i class="fa-solid fa-cloud-arrow-down"></i> Download Game (${game.size})
-                    </a>
-                `;
-            } else {
-                return `
-                    <div style="background: rgba(255, 193, 7, 0.1); border: 1px solid rgba(255, 193, 7, 0.3); padding: 15px; border-radius: 8px; color: #ffc107;">
-                        <i class="fa-solid fa-circle-info"></i> Download links are being updated for this title. Check back soon!
+            // System requirements formatting
+            let sysReqHTML = `<p style="margin: 0; color: var(--text-muted);">Standard PC hardware requirements apply.</p>`;
+            if (game.systemRequirements && typeof game.systemRequirements === 'object') {
+                const req = game.systemRequirements;
+                sysReqHTML = `
+                    <div class="sys-req-grid">
+                        <div><strong>OS:</strong> ${req.os || 'Windows 10 / 11 (64-bit)'}</div>
+                        <div><strong>Processor:</strong> ${req.processor || 'Intel Core i5 / AMD equivalent'}</div>
+                        <div><strong>Memory (RAM):</strong> ${req.ram || '8 GB RAM'}</div>
+                        <div><strong>Storage:</strong> ${req.storage || gameSize} available space</div>
                     </div>
                 `;
             }
-        }
 
-        function toggleDownloadLinks() {
-            const container = document.getElementById('download-links-container');
-            const chevron = document.getElementById('download-chevron');
-            if (container.style.display === 'none' || container.style.display === '') {
-                container.style.display = 'flex';
-                chevron.style.transform = 'rotate(180deg)';
+            // Action / Download button rendering
+            let actionButtonHTML = '';
+            let gameParts = game.parts || game.downloadParts;
+
+            if (isPaid) {
+                const orderMessage = encodeURIComponent(`Hello SquadGames, I want to buy ${title} (${platform}) using Vodacom mobile money.`);
+                const buyUrl = `https://wa.me/255692752060?text=${orderMessage}`;
+                actionButtonHTML = `
+                    <div class="download-box">
+                        <p style="margin: 0 0 12px 0; font-size: 0.9rem; color: #fff; font-weight: 600;">💎 Premium Game Release — Price: <span style="color: var(--accent-green);">${displayPrice}</span></p>
+                        <a href="${buyUrl}" target="_blank" class="download-btn-main" style="background: linear-gradient(135deg, #25d366, #128c7e); box-shadow: 0 8px 25px rgba(37,211,102,0.4);">
+                            <i class="fa-brands fa-whatsapp" style="font-size: 1.3rem;"></i> Buy Now via WhatsApp (${displayPrice})
+                        </a>
+                    </div>
+                `;
+            } else if (gameParts && gameParts.length > 0) {
+                actionButtonHTML = `
+                    <div class="download-box">
+                        <p style="margin: 0 0 12px 0; font-size: 0.88rem; color: #f1c40f; font-weight: 600;">
+                            <i class="fa-solid fa-triangle-exclamation"></i> Multi-part Archive (${gameParts.length} Parts). Download all parts for successful installation.
+                        </p>
+                        <button onclick='showDownloadPartsModal(${JSON.stringify(game)})' class="download-btn-main">
+                            <i class="fa-solid fa-cloud-arrow-down"></i> Download All Parts (${gameSize})
+                        </button>
+                    </div>
+                `;
+            } else if (game.downloadUrl) {
+                actionButtonHTML = `
+                    <div class="download-box">
+                        <a href="${game.downloadUrl}" target="_blank" class="download-btn-main">
+                            <i class="fa-solid fa-cloud-arrow-down"></i> Direct Download (${gameSize})
+                        </a>
+                    </div>
+                `;
             } else {
-                container.style.display = 'none';
-                chevron.style.transform = 'rotate(0deg)';
+                actionButtonHTML = `
+                    <div class="download-box" style="background: rgba(255,193,7,0.1); border-color: rgba(255,193,7,0.3);">
+                        <p style="margin: 0; color: #ffc107; font-weight: 600;"><i class="fa-solid fa-circle-info"></i> Download links updating soon. Check back shortly!</p>
+                    </div>
+                `;
             }
-        }
 
-        function openFullScreen(event, imgSrc) {
-            if (event) event.stopPropagation();
-            const modal = document.getElementById('fullscreen-modal');
-            const modalImg = document.getElementById('fullscreen-img');
-            modal.style.display = 'flex';
-            modalImg.src = imgSrc;
-            setTimeout(() => modal.classList.add('active'), 10);
-        }
+            // Screenshots HTML
+            let screenshotsHTML = '';
+            if (screenshots.length > 0) {
+                screenshotsHTML = `
+                    <div class="screenshots-section">
+                        <h3><i class="fa-solid fa-images" style="color: var(--accent-blue);"></i> In-Game Screenshots</h3>
+                        <div class="screenshots-grid">
+                            ${screenshots.map(shot => `
+                                <div class="screenshot-item" onclick="openLightbox('${shot}')">
+                                    <img src="${shot}" alt="Screenshot" loading="lazy" onerror="this.src='images/nfsmw-shot1.png';">
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                `;
+            }
 
-        function closeFullScreen() {
-            const modal = document.getElementById('fullscreen-modal');
-            modal.classList.remove('active');
-            setTimeout(() => {
-                modal.style.display = 'none';
-            }, 300);
-        }
-    </script>
-</body>
-</html>
+            container.innerHTML = `
+                <div class="game-hero-card">
+                    <div class="hero-grid">
+                        <!-- Left: Cover & Quick Specs -->
+                        <div>
+                            <div class="cover-wrapper">
+                                <img src="${image}" alt="${title}" onclick="openLightbox('${image}')" onerror="this.src='images/nfsmw-shot1.png';">
+                            </div>
+                            <div class="specs-box">
+                                <div class="spec-row">
+                                    <span class="spec-label">Platform</span>
+                                    <span class="spec-value">${platform}</span>
+                                </div>
+                                <div class="spec-row">
+                                    <span class="spec-label">File Size</span>
+                                    <span class="spec-value">${gameSize}</span>
+                                </div>
+                                <div class="spec-row">
+                                    <span class="spec-label">Category</span>
+                                    <span class="spec-value">${category}</span>
+                                </div>
+                                <div class="spec-row">
+                                    <span class="spec-label">Price</span>
+                                    <span class="spec-value" style="color: var(--accent-green);">${displayPrice}</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Right: Details, Sys Req & Download -->
+                        <div class="game-info-content">
+                            <div class="badge-group">
+                                <span class="badge">${category}</span>
+                                <span class="badge">${platform}</span>
+                                <span class="badge badge-price">${displayPrice}</span>
+                            </div>
+                            <h1>${title}</h1>
+                            <p class="game-description">${description}</p>
+
+                            <div class="sys-req-container">
+                                <h3><i class="fa-solid fa-laptop-code"></i> System Requirements</h3>
+                                ${sysReqHTML}
+                            </div>
+
+                            ${actionButtonHTML}
+                        </div>
+                    </div>
+                </div>
+
+                ${screenshotsHTML
