@@ -187,6 +187,16 @@
 
     <!-- Details Script Logic -->
     <script>
+        /**
+         * Smart Helper: Automatically extracts file size from game data if explicit 'size' property is missing
+         */
+        function getGameSize(game) {
+            if (game.size) return game.size;
+            const textToSearch = (game.description || '') + ' ' + (game.requirements || '');
+            const match = textToSearch.match(/(\d+(\.\d+)?\s*(GB|MB))/i);
+            return match ? match[0] : 'N/A';
+        }
+
         document.addEventListener('DOMContentLoaded', async () => {
             const urlParams = new URLSearchParams(window.location.search);
             const gameId = urlParams.get('id') || urlParams.get('game');
@@ -258,7 +268,7 @@
             const image = game.image || 'placeholder.jpg';
             const description = game.description || 'Full game release with secure direct downloads.';
             const screenshots = game.screenshots || [];
-            const gameSize = game.size || 'N/A';
+            const gameSize = getGameSize(game); // Uses smart auto-size detector
             const platform = game.platform || 'PC';
             
             const isPaid = String(game.id) === "1" || String(game.id) === "2";
@@ -266,8 +276,11 @@
             const orderMessage = encodeURIComponent(`Hello SquadGames, I want to buy ${title} (${platform})`);
             const buyUrl = `https://wa.me/255692752060?text=${orderMessage}`;
 
+            // Fixed requirements parser: correctly reads 'game.requirements' string from JSON
             let sysReqHTML = '';
-            if (game.systemRequirements && typeof game.systemRequirements === 'object') {
+            if (game.requirements) {
+                sysReqHTML = `<div style="color: var(--text-muted); font-size: 14px; line-height: 1.6;">${game.requirements}</div>`;
+            } else if (game.systemRequirements && typeof game.systemRequirements === 'object') {
                 sysReqHTML = `
                     <p style="margin: 4px 0;"><strong>OS:</strong> ${game.systemRequirements.os || 'Not specified'}</p>
                     <p style="margin: 4px 0;"><strong>Processor:</strong> ${game.systemRequirements.processor || 'Not specified'}</p>
