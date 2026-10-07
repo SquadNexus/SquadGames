@@ -1,4 +1,869 @@
-{
+
+[
+  {
+    "id": "1",
+    "title": "Tanzania Euro Truck Simulator 2 + 50 TZ mods packs",
+    "platform": "PC",
+    "category": "Simulation / PC",
+    "description": "Full Euro Truck Simulator 2 PC game bundled with 50 custom TZ mods.",
+    "requirements": "OS: Windows 10/11 (64-bit)<br>RAM: 8 GB<br>Storage: 25 GB<br>GPU: Intel HD 620 / NVIDIA GTX 660",
+    "price": "TZS 20,000",
+    "image": "images/f645a854f358ea2a930c5be36d485616.jpg",
+    "screenshots": [
+      "images/4193b766a912970fac32e8b171d693df.jpg",
+      "images/f645a854f358ea2a930c5be36d485616.jpg",
+      "images/Screenshot_20260902_131118_TikTok.jpg"
+    ],
+    "downloadUrl": "https://selar.com/8z3yp9tnyv",
+    "altDownloadUrl": "https://wa.me/255692752060?text=Hello%20SquadGames%2C%20I%20want%20to%20buy%20Tanzania%20Euro%20Truck%20Simulator%202%20%2B%2050%20TZ%20mods%20packs%20(TZS%2020%2C000)%20via%20Vodacom."
+  },
+  {
+    "id": "2",
+    "title": "Tanzania Euro Truck Simulator 2 Mobile",
+    "platform": "Android",
+    "category": "Mobile Games",
+    "description": "Experience driving heavy trucks across Tanzania directly on your Android phone.",
+    "requirements": "OS: Android 8.0+<br>RAM: 4 GB minimum<br>Storage: 3 GB free space",
+    "price": "TZS 10,000",
+    "image": "images/ets-2-mobile.jpg",
+    "screenshots": [
+      "images/Screenshot_20260902_131001_TikTok.jpg",
+      "images/Screenshot_20260902_130935_TikTok.jpg",
+      "images/be9b02184c2d31b4c53e8500366db61e.jpg"
+    ],
+    "downloadUrl": "https://selar.com/8002i2803s",
+    "altDownloadUrl": "https://wa.me/255692752060?text=Hello%20SquadGames%2C%20I%20want%20to%20buy%20Tanzania%20Euro%20Truck%20Simulator%202%20Mobile%20(TZS%2010%2C000)%20via%20Vodacom."
+  },
+  {
+    "id": "3",
+    "title": "Euro Truck Simulator 2 v1.57.2.2s + 103 DLCs + Multiplayer Game",
+    "platform": "PC",
+    "category": "Open World / Simulation",
+    "description": "It includes 103 DLCs + Multiplayer Game",
+    "requirements": "OS: Windows 10 (64‑bit)<br>Processor: Intel Core i5-6400 or AMD Ryzen 3 1200 or similar<br>RAM: 8 GB<br>Hard Disk: 25 GB available space (Euro Truck Simulator 2 base game)<br>Graphics Card: NVIDIA GeForce GTX 660 or AMD Radeon RX 460 or Intel HD 630 (2GB VRAM)<br>DirectX: Version 11",
+    "price": "FREE",
+    "image": "images/ets 2 1.57.png",
+    "screenshots": [
+      "images/Annotation 2026-09-02 125957.png",
+      "images/Annotation 2026-09-02 130017.png",
+      "images/Annotation 2026-09-02 125943.png"
+    ],
+    "downloadParts": [
+      { "name": "Part 1", "url": "https://www.mediafire.com/file_premium/h9kaupu38m7c63n/Euro_Truck_Simulator_2_v1.57.2.2s_-_%2528Www.ApunKaGames.Com%2529.part1.rar/file" },
+      { "name": "Part 2", "url": "https://www.mediafire.com/file_premium/kkzoiiat3obg47e/Euro_Truck_Simulator_2_v1.57.2.2s_-_%2528Www.ApunKaGames.Com%2529.part2.rar/file" },
+      { "name": "Part 3", "url": "https://www.mediafire.com/file_premium/2bd19ue2w9imnlw/Euro_Truck_Simulator_2_v1.57.2.2s_-_%2528Www.ApunKaGames.Com%2529.part3.rar/file" },
+      { "name": "Part 4", "url": "https://www.mediafire.com/file_premium/j432j4lkjnrde2w/Euro_Truck_Simulator_2_v1.57.2.2s_-_%2528Www.ApunKaGames.Com%2529.part4.rar/file" }
+    ]
+  },
+  {
+    "id": "4",
+    "title": "Need for Speed Most Wanted 2005",
+    "platform": "PC",
+    "category": "Racing / Open world",
+    "description": "Need for Speed Most Wanted 2005 or NFS mw is one of the racing games nowadays, wherein you can simply download it 100 percent of its free version for free, working no survey and any charges.",
+    "requirements": "OS: Windows 2000/XP/7<br>CPU: 1.4GHz Processor<br>RAM: 256 MB<br>Storage: 3 GB<br>GPU: 64 MB<br>DirectX: Version 9.0c",
+    "price": "FREE",
+    "image": "images/nfsmw-shot4.png",
+    "screenshots": [
+      "images/nfsmw-shot1.png",
+      "images/nfsmw-shot2.png",
+      "images/nfsmw-shot3.png"
+    ],
+    "downloadUrl": "https://www.mediafire.com/file_premium/adkj9ovmehh2mva/NFS_Most_Wanted_2005_-_%2528www.apunkagames.com%2529.zip/file"
+  },
+  {
+    "id": "5",
+    "title": "Need for Speed Payback",
+    "platform": "PC",
+    "category": "Racing",
+    "description": "Need for Speed Payback (21.8 GB) is an action-packed arcade racing video game featuring intense police pursuits, off-road races, and custom car builds.",
+    "requirements": "OS: Windows 7/8/10 (64-bit)<br>Processor: Intel i3 6300 @ 3.8GHz<br>RAM: 6 GB<br>Storage: 30 GB<br>Graphics: NVIDIA GTX 750 Ti / AMD HD 7870<br>DirectX: Version 11",
+    "price": "FREE",
+    "image": "images/nfspb1.png",
+    "screenshots": [
+      "images/nfspb2.png",
+      "images/nfspb3.png",
+      "images/nfspb5.png",
+      "images/nfspb4.png"
+    ],
+    "downloadParts": [
+      { "name": "Part 1", "url": "https://www.mediafire.com/file_premium/mcj809iu65qw7y2/Need_for_Speed_Payback_-_%2528Www.ApunKaGames.Biz%2529.part1.rar/file" },
+      { "name": "Part 2", "url": "https://www.mediafire.com/file_premium/pfd1b1koti6lgsa/Need_for_Speed_Payback_-_%2528Www.ApunKaGames.Biz%2529.part2.rar/file" },
+      { "name": "Part 3", "url": "https://www.mediafire.com/file_premium/6vv71eoclwwpdmf/Need_for_Speed_Payback_-_%2528Www.ApunKaGames.Biz%2529.part3.rar/file" },
+      { "name": "Part 4", "url": "https://www.mediafire.com/file_premium/8wrylygn5u8vvjj/Need_for_Speed_Payback_-_%2528Www.ApunKaGames.Biz%2529.part4.rar/file" },
+      { "name": "Part 5", "url": "https://www.mediafire.com/file_premium/0ghqv14m6xact3s/Need_for_Speed_Payback_-_%2528Www.ApunKaGames.Biz%2529.part5.rar/file" }
+    ]
+  },
+  {
+    "id": "6",
+    "title": "Call of Duty: Advanced Warfare",
+    "platform": "PC",
+    "category": "Action, Shooting",
+    "description": "Call of Duty: Advanced Warfare (24.4 GB) is a first-person shooter featuring futuristic exoskeletons and holographic projections relayed directly from equipped weapons.",
+    "requirements": "OS: Windows 7/8/8.1 (64-Bit)<br>Processor: Intel Core i3-530 @ 2.93 GHz<br>RAM: 6 GB<br>Storage: 55 GB<br>Graphics: NVIDIA GTS 450 / ATI HD 5870<br>DirectX: Version 11",
+    "price": "FREE",
+    "image": "images/codaw1.png",
+    "screenshots": [
+      "images/codaw2.png",
+      "images/codaw3.png",
+      "images/codaw4.png"
+    ],
+    "downloadParts": [
+      { "name": "Part 1", "url": "https://thefileslocker.net/g8jcqswgume2.html" },
+      { "name": "Part 2", "url": "https://thefileslocker.net/bswnqizltceh.html" },
+      { "name": "Part 3", "url": "https://thefileslocker.net/il2j0xyoumf2.html" },
+      { "name": "Part 4", "url": "https://thefileslocker.net/zpnlzg3phztl.html" },
+      { "name": "Part 5", "url": "https://thefileslocker.net/5m0g4xomvi27.html" }
+    ]
+  },
+  {
+    "id": "7",
+    "title": "CarX Street",
+    "platform": "PC",
+    "category": "Racing, Sports",
+    "description": "CarX Street (10.8 GB) is an open-world driving game that blends street racing, car customization, and exploration.",
+    "requirements": "OS: Windows 10 or higher (64‑bit)<br>Processor: Ryzen 5 2600 @ 3.4 GHz / Intel® Core™ I5-8400 @ 2.5 GHz<br>RAM: 8 GB<br>Hard Disk: 20 GB available space<br>Graphics Card: Nvidia Geforce GTX 1050 TI 4 GB / Radeon RX 570 8 GB<br>Network: Broadband Internet connection<br>DirectX: Version 11",
+    "price": "FREE",
+    "image": "images/carxstreet.png",
+    "screenshots": [
+      "images/carxstreet1.png",
+      "images/carxstreet2.png",
+      "images/carxstreet3.png"
+    ],
+    "downloadParts": [
+      { "name": "Part 1", "url": "https://www.mediafire.com/file_premium/l394foa9co0wwpb/CarX_Street_-_%2528Www.ApunkaGames.Com%2529.part1.rar/file" },
+      { "name": "Part 2", "url": "https://www.mediafire.com/file_premium/o6d3wxvl11ukjbn/CarX_Street_-_%2528Www.ApunkaGames.Com%2529.part2.rar/file" },
+      { "name": "Part 3", "url": "https://www.mediafire.com/file_premium/r085iug73w2qnol/CarX_Street_-_%2528Www.ApunkaGames.Com%2529.part3.rar/file" }
+    ]
+  },
+  {
+    "id": "8",
+    "title": "Grand Theft Auto V Legacy",
+    "platform": "PC",
+    "category": "Action-adventure, Open world",
+    "description": "Grand Theft Auto V Legacy combines cinematic storytelling with classic GTA sandbox gameplay in Los Santos.",
+    "requirements": "OS: Windows 10 (64‑bit)<br>Processor: Intel Core 2 Quad CPU Q6600 @ 2.40GHz (4 CPUs) / AMD Phenom 9850 Quad-Core (4 CPUs) @ 2.5GHz<br>RAM: 4 GB<br>Hard Disk: 125 GB available space<br>Graphics Card: NVIDIA 9800 GT 1GB / AMD HD 4870 1GB (DX 10, 10.1, 11)<br>Sound Card: 100% DirectX 10 compatible<br>DirectX: Version 11",
+    "price": "FREE",
+    "image": "images/gta5.png",
+    "screenshots": [
+      "images/gta51.png",
+      "images/gta52.png",
+      "images/gta53.png"
+    ],
+    "downloadParts": [
+      { "name": "Part 01", "url": "https://www.mediafire.com/file_premium/lt5qanoluv4xcxv/Grand_Theft_Auto_V_Legacy_-_%2528Www.ApunKaGames.Net%2529.part01.rar/file" },
+      { "name": "Part 02", "url": "https://www.mediafire.com/file_premium/dtxadlu1hoo754y/Grand_Theft_Auto_V_Legacy_-_%2528Www.ApunKaGames.Net%2529.part02.rar/file" },
+      { "name": "Part 03", "url": "https://www.mediafire.com/file_premium/rdpm1wrrnpmto6h/Grand_Theft_Auto_V_Legacy_-_%2528Www.ApunKaGames.Net%2529.part03.rar/file" },
+      { "name": "Part 04", "url": "https://www.mediafire.com/file_premium/j83929m3fdt7av3/Grand_Theft_Auto_V_Legacy_-_%2528Www.ApunKaGames.Net%2529.part04.rar/file" },
+      { "name": "Part 05", "url": "https://www.mediafire.com/file_premium/1luc2mvxfm38r99/Grand_Theft_Auto_V_Legacy_-_%2528Www.ApunKaGames.Net%2529.part05.rar/file" },
+      { "name": "Part 06", "url": "https://www.mediafire.com/file_premium/qx2cri8brglyhaw/Grand_Theft_Auto_V_Legacy_-_%2528Www.ApunKaGames.Net%2529.part06.rar/file" },
+      { "name": "Part 07", "url": "https://www.mediafire.com/file_premium/cptuso4okrz4ud2/Grand_Theft_Auto_V_Legacy_-_%2528Www.ApunKaGames.Net%2529.part07.rar/file" },
+      { "name": "Part 08", "url": "https://www.mediafire.com/file_premium/6oi1ujyk838g3tp/Grand_Theft_Auto_V_Legacy_-_%2528Www.ApunKaGames.Net%2529.part08.rar/file" },
+      { "name": "Part 09", "url": "https://www.mediafire.com/file_premium/b1lh8gl8ng6jy9i/Grand_Theft_Auto_V_Legacy_-_%2528Www.ApunKaGames.Net%2529.part09.rar/file" },
+      { "name": "Part 10", "url": "https://www.mediafire.com/file_premium/zw6f6mrqwnjcpo7/Grand_Theft_Auto_V_Legacy_-_%2528Www.ApunKaGames.Net%2529.part10.rar/file" },
+      { "name": "Part 11", "url": "https://www.mediafire.com/file_premium/c70nbnfe4dodbvz/Grand_Theft_Auto_V_Legacy_-_%2528Www.ApunKaGames.Net%2529.part11.rar/file" }
+    ]
+  },
+  {
+    "id": "9",
+    "title": "GTA 4",
+    "platform": "PC",
+    "category": "Action-adventure, Open World",
+    "description": "GTA 4 (13.2 GB) is a legendary open-world game centered on Niko Bellic’s journey through Liberty City.",
+    "requirements": "OS: Windows XP/Vista/7<br>Processor: Intel Core 2 DUO @ 1.8 GHz / AMD Athlon 64 X2 @ 2.4 GHz<br>RAM: 2 GB<br>Hard Disk: 16 GB available space<br>Graphics Card: 256 MB, nVidia GeForce 7900 / ATI Radeon X1900<br>Sound Card: DirectX Compatible<br>DirectX: Version 9.0c<br>DVD Rom Drive",
+    "price": "FREE",
+    "image": "images/gta4.png",
+    "screenshots": [
+      "images/gta41.png",
+      "images/gta42.png",
+      "images/gta43.png",
+      "images/gta44.png"
+    ],
+    "downloadParts": [
+      { "name": "Part 1", "url": "https://thefileslocker.net/qxaumncytfd4.html" },
+      { "name": "Part 2", "url": "https://thefileslocker.net/8tz8chin1o7w.html" },
+      { "name": "Part 3", "url": "https://thefileslocker.net/857lfzdfaw8a.html" }
+    ]
+  },
+  {
+    "id": "10",
+    "title": "Call of Duty: Black Ops 1",
+    "platform": "PC",
+    "category": "First-person shooter",
+    "description": "Call of Duty: Black Ops 1 is a classic action first-person shooter set during the Cold War.",
+    "requirements": "OS: Windows XP/Vista/7<br>CPU: Intel Core2 Duo E6600 or AMD Phenom X3 8750 or better<br>RAM: 2 GB<br>Hard Drive Space: 12 GB<br>Video Card: Shader 3.0 or better 256MB NVIDIA GeForce 8600GT or better<br>Sound Card: DirectX 9.0 Compliant<br>DirectX: 9.0c",
+    "price": "FREE",
+    "image": "images/codbo.png",
+    "screenshots": [
+      "images/codbo1.png",
+      "images/codbo2.png",
+      "images/codbo3.png",
+      "images/codbo4.png"
+    ],
+    "downloadParts": [
+      { "name": "Part 1", "url": "https://www.mediafire.com/file_premium/qzakjeyt3b5itm6/Call_of_Duty_-_BO1_%2528Www.ApunkaGames.Net%2529.part1.rar/file" },
+      { "name": "Part 2", "url": "https://www.mediafire.com/file_premium/66n2ktmz51krl4q/Call_of_Duty_-_BO1_%2528Www.ApunkaGames.Net%2529.part2.rar/file" }
+    ]
+  },
+  {
+    "id": "11",
+    "title": "Call of Duty: Infinite Warfare",
+    "platform": "PC",
+    "category": "Action, Adventure, Shooting",
+    "description": "Call of Duty: Infinite Warfare is a futuristic FPS that takes the battle beyond Earth into space warfare.",
+    "requirements": "OS: Windows 7 (64-Bit) or later<br>Processor: Intel Core i3-3225 @ 3.30GHz or equivalent<br>RAM: 8 GB<br>Hard Drive: 70 GB available space<br>Video Card: NVIDIA GeForce GTX 660 2GB / AMD Radeon HD 7850 2GB<br>Network: Broadband Internet connection<br>DirectX: Version 11",
+    "price": "FREE",
+    "image": "images/codiw.png",
+    "screenshots": [
+        "images/codiw1.png",
+        "images/codiw2.png",
+        "images/codiw3.png"
+    ],
+    "downloadParts": [
+        { "name": "Part 01", "url": "https://thefileslocker.net/g3l4dtg4db3p.html" },
+        { "name": "Part 02", "url": "https://thefileslocker.net/6yx1ps2neici.html" },
+        { "name": "Part 03", "url": "https://thefileslocker.net/yg9z4g75fslq.html" },
+        { "name": "Part 04", "url": "https://thefileslocker.net/d62wuk70zxsy.html" },
+        { "name": "Part 05", "url": "https://thefileslocker.net/yn2j4kqxyxcu.html" },
+        { "name": "Part 06", "url": "https://thefileslocker.net/7xrmjmcz1uor.html" },
+        { "name": "Part 07", "url": "https://thefileslocker.net/ghgu1pju67no.html" },
+        { "name": "Part 08", "url": "https://thefileslocker.net/ctd7k3173gsv.html" }
+    ]
+  },
+  {
+    "id": "12",
+    "title": "Marvel’s Spider-Man: Miles Morales",
+    "platform": "PC",
+    "category": "Action-adventure",
+    "description": "Marvel’s Spider-Man: Miles Morales delivers a thrilling superhero adventure as Miles protects New York City.",
+    "requirements": "OS: Windows 10 64-bit 1909<br>Processor: Intel Core i3-4160, 3.6 GHz or AMD equivalent<br>RAM: 8 GB<br>Hard Disk: 75 GB available space<br>Graphics Card: NVIDIA GTX 950 or AMD Radeon RX 470<br>DirectX: Version 12",
+    "price": "FREE",
+    "image": "images/sm.png",
+    "screenshots": [
+      "images/sm1.png",
+      "images/sm2.png",
+      "images/sm3.png"
+    ],
+    "downloadParts": [
+      { "name": "Part 1", "url": "https://thefileslocker.net/7yv9j0lytzxn.html" },
+      { "name": "Part 2", "url": "https://thefileslocker.net/fam031gob15b.html" },
+      { "name": "Part 3", "url": "https://thefileslocker.net/da40c7vglbnu.html" },
+      { "name": "Part 4", "url": "https://thefileslocker.net/rk8qx2j0upi1.html" },
+      { "name": "Part 5", "url": "https://thefileslocker.net/zyf21oe3ec0n.html" },
+      { "name": "Part 6", "url": "https://thefileslocker.net/r4hkztih9j3m.html" },
+      { "name": "Part 7", "url": "https://thefileslocker.net/igwmbx2n22qp.html" },
+      { "name": "Part 8", "url": "https://thefileslocker.net/i98swjh3pw5c.html" }
+    ]
+  },
+  {
+    "id": "13",
+    "title": "FIFA 22",
+    "platform": "PC",
+    "category": "Sports, Simulation",
+    "description": "FIFA 22 delivers realistic football gameplay powered by improved player movement and ball physics.",
+    "requirements": "OS: Windows 10 – 64-Bit (Latest Update)<br>Processor: Intel Core i3-6100 @ 3.7GHz or AMD Athlon X4 880K @4GHz<br>RAM: 8 GB<br>Hard Disk: 50 GB available space<br>Graphics Card: NVIDIA GTX 660 2GB or AMD Radeon HD 7850 2GB<br>DirectX: Version 11",
+    "price": "FREE",
+    "image": "images/fifa1.png",
+    "screenshots": [
+      "images/fifa1.png",
+      "images/fifa2.png",
+      "images/fifa3.png"
+    ],
+    "downloadParts": [
+      { "name": "Part 01", "url": "https://www.mediafire.com/file_premium/kw5c1itj06orok5/FIFA_22_-_%2528Www.ApunKaGames.Net%2529.part01.rar/file" },
+      { "name": "Part 02", "url": "https://www.mediafire.com/file_premium/1sr655r3ws0z144/FIFA_22_-_%2528Www.ApunKaGames.Net%2529.part02.rar/file" },
+      { "name": "Part 03", "url": "https://www.mediafire.com/file_premium/9v4c780w5ls7fcv/FIFA_22_-_%2528Www.ApunKaGames.Net%2529.part03.rar/file" },
+      { "name": "Part 04", "url": "https://www.mediafire.com/file_premium/f03ebci78g2aza6/FIFA_22_-_%2528Www.ApunKaGames.Net%2529.part04.rar/file" },
+      { "name": "Part 05", "url": "https://www.mediafire.com/file_premium/orlyw9dos4q14j6/FIFA_22_-_%2528Www.ApunKaGames.Net%2529.part05.rar/file" },
+      { "name": "Part 06", "url": "https://www.mediafire.com/file_premium/mitgzfrj0lij0a6/FIFA_22_-_%2528Www.ApunKaGames.Net%2529.part07.rar/file" },
+      { "name": "Part 07", "url": "https://www.mediafire.com/file_premium/x6zxyo6zb21ix99/FIFA_22_-_%2528Www.ApunKaGames.Net%2529.part08.rar/file" },
+      { "name": "Part 08", "url": "https://www.mediafire.com/file_premium/f6nuu38e0lwvow0/FIFA_22_-_%2528Www.ApunKaGames.Net%2529.part09.rar/file" },
+      { "name": "Part 09", "url": "https://www.mediafire.com/file_premium/knjvmfvol33riz8/FIFA_22_-_%2528Www.ApunKaGames.Net%2529.part10.rar/file" },
+      { "name": "Part 10", "url": "https://www.mediafire.com/file_premium/sodw2pmzqi7bnpc/FIFA_22_-_%2528Www.ApunKaGames.Net%2529.part11.rar/file" }
+    ]
+  },
+  {
+    "id": "14",
+    "title": "Need for Speed: Carbon Collector’s Edition",
+    "platform": "PC",
+    "category": "Racing, Sports",
+    "description": "Need for Speed: Carbon Collector’s Edition (3.93 GB) is a racing gameplay. It is made and published by EA Black Box, Electronic Arts. It was released on October 31, 2006 for Windows. Need for Speed: Carbon Collector’s Edition throws players into dangerous nighttime street racing where crews battle for city control. Customize high-performance cars, dominate canyon duels, and build your racing team. The gameplay focuses on aggressive racing, territory wars, and intense high-speed action across open city roads.",
+    "requirements": "OS: Windows 2000 Service Pack 4 / Windows XP Service Pack 2<br>Processor: Intel Pentium 4 or equivalent, 1.7 GHz<br>RAM: 512 MB<br>Hard Disk: 5.3 GB available space<br>Graphics Card: 64 MB, (NVIDIA Geforce4 Ti+/ATI Radeon 8500+)<br>DirectX: Version 9.0c",
+    "price": "FREE",
+    "image": "images/nfsc.png",
+    "screenshots": [
+        "images/nfsc1.png",
+        "images/nfsc2.png",
+        "images/nfsc.png"
+    ],
+    "downloadUrl": "https://thefileslocker.net/iu3wtv5etzw3.html"
+  },
+  {
+    "id": "15",
+    "title": "Need for Speed Payback Deluxe Edition",
+    "platform": "PC",
+    "category": "Racing, Sports",
+    "description": "Need for Speed Payback Deluxe Edition, released by Electronic Arts and developed by Ghost Games for Windows on November 6, 2017, is a 15.5 GB open-world racing video game that immerses players in a cinematic, story-driven action adventure filled with high-stakes driving and revenge. Featuring accessible arcade-style handling and all the bonus content included in the Deluxe bundle, the gameplay combines intense street racing events, deep vehicle customization options, and thrilling, movie-like heists where you build powerful cars and fight to take down a corrupt cartel across a vast landscape.",
+    "requirements": "OS: Windows 7 or later (64‑bit)<br>Processor: Intel i3 6300 / 3.8GHz or AMD FX 8150 @ 3.6GHz with 4 hardware threads<br>RAM: 6 GB<br>Hard Disk: 30 GB available space<br>Graphics Card: NVIDIA GeForce GTX 750 Ti or AMD Radeon™ HD 7850 or equivalent DX11 compatible<br>Network: Broadband Internet connection<br>DirectX: Version 11",
+    "price": "FREE",
+    "image": "images/nfspde.png",
+    "screenshots": [
+        "images/nfspde1.png",
+        "images/nfspde2.png",
+        "images/nfspde3.png"
+    ],
+    "downloadParts": [
+      { "name": "Part 1", "url": "https://thefileslocker.net/6r30280iy8g7.html" },
+      { "name": "Part 2", "url": "https://thefileslocker.net/uokrp72o74rs.html" },
+      { "name": "Part 3", "url": "https://thefileslocker.net/zwn2acfu0pzl.html" },
+      { "name": "Part 4", "url": "https://thefileslocker.net/m2qvlrjguj0o.html" }
+    ]
+  },
+  {
+    "id": "16",
+    "title": "Need for Speed: Most Wanted 2012 Unofficial Remake",
+    "platform": "PC",
+    "category": "Racing, Sports",
+    "description": "Need for Speed: Most Wanted 2012 Unofficial Remake, developed and published by Tiny Repack as a custom modification for Windows with a file size of 3.48 GB, is an open-world racing video game that delivers high-speed driving action paired with enhanced visuals and intense police chases. Players can freely explore the city, customize a variety of high-performance cars, and dominate challenging events scattered across the map, all while experiencing fast-paced arcade handling and nonstop action that captures the true essence of the classic Most Wanted gameplay.",
+    "requirements": "OS: Windows 7 or later (64‑bit)<br>Processor: Intel i3 6300 / 3.8GHz or AMD FX 8150 @ 3.6GHz with 4 hardware threads<br>RAM: 6 GB<br>Hard Disk: 30 GB available space<br>Graphics Card: NVIDIA GeForce GTX 750 Ti or AMD Radeon™ HD 7850 or equivalent DX11 compatible<br>Network: Broadband Internet connection<br>DirectX: Version 11",
+    "price": "FREE",
+    "image": "images/nfsmw2012.png",
+    "screenshots": [
+        "images/nfsmw20121.png",
+        "images/nfsmw20122.png",
+        "images/nfsmw20123.png"
+    ],
+    "downloadUrl": "https://www.mediafire.com/file/xipwd29nh4dc20f/NFS_MW_2012_Unofficial_Remake_-_%2528Www.ApunKaGames.Net%2529.rar/file"
+  },
+  {
+    "id": "17",
+    "title": "Need for Speed Hot Pursuit Remastered",
+    "platform": "PC",
+    "category": "Racing, Action and Sports",
+    "description": "Need for Speed Hot Pursuit Remastered, released by Electronic Arts and developed by Stellar Entertainment Limited for Windows on November 6, 2020, is an action-packed, 30.1 GB racing video game that lets players experience the thrill of the chase and the rush of escape using the world's hottest high-performance cars. The gameplay delivers a savage sense of speed as you play on both sides of the law—either outsmarting the heat as an outlaw or taking down lawbreakers using tactical weaponry—all within a heart-pumping, socially competitive racing environment.",
+    "requirements": "OS: Windows 10 (64‑bit)<br>Processor: (AMD) Phenom II X4 965 or equivalent (Intel) Corei3-2120 or equivalent<br>RAM: 8 GB<br>Hard Disk: 45 GB available space<br>Graphics Card: (AMD) Radeon HD 5870 or equivalent (Nvidia) GeForce GT 640 or equivalent<br>Network: Broadband Internet connection<br>DirectX: Version 11",
+    "price": "FREE",
+    "image": "images/nfshp.png",
+    "screenshots": [
+        "images/nfshp1.png",
+        "images/nfshp2.png",
+        "images/nfshp3.png"
+    ],
+    "downloadParts": [
+      { "name": "Part 1", "url": "https://www.mediafire.com/file/r6ioytcekv5sn5h/Need_for_Speed_HP_Remastered_-_%2528Www.ApunKaGames.Com%2529%2529.part1.rar/file" },
+      { "name": "Part 2", "url": "https://www.mediafire.com/file/0a53fi0nzxvnqso/Need_for_Speed_HP_Remastered_-_%2528Www.ApunKaGames.Com%2529%2529.part2.rar/file" },
+      { "name": "Part 3", "url": "https://www.mediafire.com/file/sjqp6wjg80va4eg/Need_for_Speed_HP_Remastered_-_%2528Www.ApunKaGames.Com%2529%2529.part3.rar/file" },
+      { "name": "Part 4", "url": "https://www.mediafire.com/file/gpp0vr70275ulq8/Need_for_Speed_HP_Remastered_-_%2528Www.ApunKaGames.Com%2529%2529.part4.rar/file" },
+      { "name": "Part 5", "url": "https://www.mediafire.com/file/l2czk51o223wupx/Need_for_Speed_HP_Remastered_-_%2528Www.ApunKaGames.Com%2529%2529.part5.rar/file" },
+      { "name": "Part 6", "url": "https://www.mediafire.com/file/bdxyod0ud9iqnp5/Need_for_Speed_HP_Remastered_-_%2528Www.ApunKaGames.Com%2529%2529.part6.rar/file" },
+      { "name": "Part 7", "url": "https://www.mediafire.com/file/30v3kb02v1imimj/Need_for_Speed_HP_Remastered_-_%2528Www.ApunKaGames.Com%2529%2529.part7.rar/file" }
+    ]
+  },
+  {
+    "id": "18",
+    "title": "Need for Speed: Most Wanted Black Edition",
+    "platform": "PC",
+    "category": "Racing",
+    "description": "Need for Speed: Most Wanted Black Edition, developed and published by Electronic Arts for Windows on November 15, 2005, is an intense, 2.54 GB street racing video game that challenges players to climb the ranks and become the most wanted driver in Rockport City. The gameplay combines arcade-style racing, deep car upgrades, and thrilling open-city pursuits as you race high-speed vehicles, outsmart aggressive police chases, and defeat formidable rivals on the Blacklist to deliver an unforgettable experience for speed fans.",
+    "requirements": "OS: Windows XP/Vista/7<br>Processor: Intel Pentium 4 1.60GHz / AMD Athlon XP 1600+<br>RAM: 256 MB<br>Hard Disk: 3 GB available space<br>Graphics Card: 64 MB, (NVIDIA GeForce2 MX+ / ATI Radeon 7500+ / Intel 915+)<br>DirectX: Version 9.0c",
+    "price": "FREE",
+    "image": "images/nfsmwbe.png",
+    "screenshots": [
+        "images/nfsmwbe1.png",
+        "images/nfsmwbe2.png",
+        "images/nfsmwbe3.png"
+    ],
+    "downloadUrl": "https://www.mediafire.com/file/q29hs8zhu9ktuyp/NFS_MW_2005_Black_Edition_%2528RG_Mechanics_Setup%2529.rar/file"
+  },
+  {
+    "id": "19",
+    "title": "Need for Speed: Heat",
+    "platform": "PC",
+    "category": "Racing/Sports/Open World",
+    "description": "Need for Speed: Heat, developed by Ghost Games and published by Electronic Arts for Windows, is a 25.6 GB open-world racing video game set in a vibrant urban environment called Palm City. The gameplay combines fast-paced arcade handling and a large roster of licensed vehicles, allowing players to compete in legal Speedhunter Showdown events by day to earn cash and take part in risky, high-stakes street races by night to build their reputation. Featuring intense police chases, deep car customization options, and both solo and crew challenges, the title delivers a stylish racing experience centered entirely around speed, customization, and survival against corrupt local authorities",
+    "requirements": "OS: Windows 10<br>Processor: FX-6350 or Equivalent/Core i5-3570 or Equivalent<br>RAM: 8 GB Hard Drive: 50 GB available space<br>Video Card: Radeon 7970/Radeon R9 280x/GeForce GTX 760 or Equivalent<br>DirectX: Version 11",
+    "price": "FREE",
+    "image": "images/nfsh.png",
+    "screenshots": [
+        "images/nfsh1.png",
+        "images/nfsh2.png",
+        "images/nfsh3.png"
+    ],
+    "downloadParts": [
+      { "name": "Part 1", "url": "https://www.mediafire.com/file/msijpdpa9vjazaw/Need_For_Speed_Heat_-_%2528Www.ApunKaGames.Biz%2529.part1.rar/file" },
+      { "name": "Part 2", "url": "https://www.mediafire.com/file/1gd05gc5nml14a1/Need_For_Speed_Heat_-_%2528Www.ApunKaGames.Biz%2529.part2.rar/file" },
+      { "name": "Part 3", "url": "https://www.mediafire.com/file/mj5m2gcmvr8qkvp/Need_For_Speed_Heat_-_%2528Www.ApunKaGames.Biz%2529.part3.rar/file" },
+      { "name": "Part 4", "url": "https://www.mediafire.com/file/d00y1g6s17scwua/Need_For_Speed_Heat_-_%2528Www.ApunKaGames.Biz%2529.part4.rar/file" },
+      { "name": "Part 5", "url": "https://www.mediafire.com/file/752uhgta13yifp8/Need_For_Speed_Heat_-_%2528Www.ApunKaGames.Biz%2529.part5.rar/file" },
+      { "name": "Part 6", "url": "https://www.mediafire.com/file/n4o9rhrrlhs1j55/Need_For_Speed_Heat_-_%2528Www.ApunKaGames.Biz%2529.part6.rar/file" }
+    ]
+  },
+  {
+    "id": "20",
+    "title": "Need for Speed Rivals",
+    "platform": "PC",
+    "category": "Racing, Open world",
+    "description": "Need for Speed Rivals, developed by Criterion Games and published by Electronic Arts for Windows on November 19, 2013, is a 7.10 GB open-world racing video game that immerses players in intense street competition within a dynamic environment where they can choose to play as either relentless cops or reckless outlaw racers. The gameplay blends seamless multiplayer action with high-speed pursuits, advanced supercars, and risky challenges that reward aggressive driving, delivering a nonstop, adrenaline-fueled experience of speed and strategy on both sides of the law.",
+    "requirements": "OS: Windows Vista/7/8<br>Processor: Intel 2.4 GHz Core 2 Duo or AMD 2.8 GHz Athlon X2<br>RAM: 4 GB Hard Drive: 30 GB available space<br>Video Card: 512 MB, (AMD Radeon 3870 , NVIDIA GeForce 8800 GT or better)<br>Network: Broadband Internet connection<br>DirectX: 10.1",
+    "price": "FREE",
+    "image": "images/nfsr.png",
+    "screenshots": [
+        "images/nfsr1.png",
+        "images/nfsr2.png",
+        "images/nfsr3.png"
+    ],
+    "downloadUrl": "https://www.mediafire.com/file/c7x2za1nx3odcmh/Need_for_Speed_Rivals_-_%2528Www.ApunKaGames.Biz%2529.rar/file"
+  },
+  {
+    "id": "21",
+    "title": "Need for Speed: The Run",
+    "platform": "PC",
+    "category": "Racing",
+    "description": "Need for Speed: The Run, developed by EA Black Box and published by Electronic Arts for PC in 2011, is a 4.64 GB racing video game that follows street racer Jack Rourke through a high-stakes, cross-country race stretching all the way from San Francisco to New York. Utilizing one of the first implementations of the Frostbite 2 engine, the gameplay seamlessly mixes fast arcade-style driving across real-world locations with cinematic story moments, a wide range of licensed cars, and competitive multiplayer modes.",
+    "requirements": "Minimum System Requirements OS: Windows XP/Vista/7/8 Processor: 2.4 GHz Intel Core 2 Duo or AMD Equivalent RAM: 3 GB Hard Drive: 18 GB available space Video Card: 512 MB, ATI Radeon 4870 or NVIDIA GeForce 9800 GT DirectX: 10",
+    "price": "FREE",
+    "image": "images/nfstr.png",
+    "screenshots": [
+        "images/nfstr1.png",
+        "images/nfstr2.png",
+        "images/nfstr3.png"
+    ],
+    "downloadUrl": "https://www.mediafire.com/file/iv1p6ntyfhwh3k7/Need_For_Speed_-_The_Run_-_%2528Www.ApunKaGames.Biz%2529.rar/file"
+  },
+  {
+    "id": "22",
+    "title": "Call of Duty: Modern Warfare III",
+    "platform": "PC",
+    "category": "Action, First-person shooter",
+    "description": "Call of Duty: Modern Warfare III, developed by Sledgehammer Games and published by Activision for Windows on November 10, 2023, is a 41.5 GB action-packed first-person shooter video game that continues the gripping high-stakes global conflict of the modern military series. The gameplay features fast-paced gunfights, cinematic campaign missions, competitive multiplayer modes, and fluid tactical movement utilizing an arsenal of modern weapons to deliver a continuous wave of intense combat action.",
+    "requirements": "OS: Windows 10 (64‑bit Latest update)<br>Processor: Intel Core™ i5-6600 or AMD Ryzen™ 5 1400<br>RAM: 8 GB<br>Hard Disk: SSD with 102 GB<br>Graphics Card: NVIDIA GeForce GTX 960 / GTX 1650 or AMD Radeon™ RX 470<br>DirectX: Version 12",
+    "price": "FREE",
+    "image": "images/codmw3.png",
+    "screenshots": [
+        "images/codmw31.png",
+        "images/codmw32.png",
+        "images/codmw33.png"
+    ],
+    "downloadParts": [
+      { "name": "Part 1", "url": "https://www.mediafire.com/file/cbtxdyacljilon5/Call_of_Duty_MW_III_Campaign_-_%2528Www.ApunKaGames.Net%2529.part01.rar/file" },
+      { "name": "Part 2", "url": "https://www.mediafire.com/file/w6tg7ubml4nhv4z/Call_of_Duty_MW_III_Campaign_-_%2528Www.ApunKaGames.Net%2529.part02.rar/file" },
+      { "name": "Part 3", "url": "https://www.mediafire.com/file/nrydd14slw2oyz1/Call_of_Duty_MW_III_Campaign_-_%2528Www.ApunKaGames.Net%2529.part03.rar/file" },
+      { "name": "Part 4", "url": "https://www.mediafire.com/file/lf4gmq9ybktun0u/Call_of_Duty_MW_III_Campaign_-_%2528Www.ApunKaGames.Net%2529.part04.rar/file" },
+      { "name": "Part 5", "url": "https://www.mediafire.com/file/1wy177gqr8gfoqp/Call_of_Duty_MW_III_Campaign_-_%2528Www.ApunKaGames.Net%2529.part05.rar/file" },
+      { "name": "Part 6", "url": "https://www.mediafire.com/file/jp4eyd7k0db5i8w/Call_of_Duty_MW_III_Campaign_-_%2528Www.ApunKaGames.Net%2529.part06.rar/file" },
+      { "name": "Part 7", "url": "https://www.mediafire.com/file/plbbkbpepah4l4c/Call_of_Duty_MW_III_Campaign_-_%2528Www.ApunKaGames.Net%2529.part07.rar/file" },
+      { "name": "Part 8", "url": "https://www.mediafire.com/file/mocfs9pgj26b6r4/Call_of_Duty_MW_III_Campaign_-_%2528Www.ApunKaGames.Net%2529.part08.rar/file" },
+      { "name": "Part 9", "url": "https://www.mediafire.com/file/c4781yed9f5dzgw/Call_of_Duty_MW_III_Campaign_-_%2528Www.ApunKaGames.Net%2529.part09.rar/file" }
+    ]
+  },
+  {
+    "id": "23",
+    "title": "Call of Duty: Modern Warfare 2019",
+    "platform": "PC",
+    "category": "Action, First-person shooter",
+    "description": "Call of Duty: Modern Warfare, developed by Infinity Ward alongside Beenox, High Moon Studios, and Raven Software and published by Activision for Windows on March 8, 2023, is a massive 115 GB first-person shooter video game that delivers fast-paced, tactical combat with a strong emphasis on realism. The gameplay features intense gunfights across varied modes—including a cinematic campaign, cooperative play, and competitive multiplayer—where players utilize heavily customizable weapons with detailed mechanics, encouraging strategic movement, seamless teamwork, and precise aiming in a mix of close-quarters combat and larger-scale tactical battles.",
+    "requirements": "OS: Windows 10 (64‑bit)<br>Processor: Intel Core™ i3-4340 or AMD FX-6300<br>RAM: 8 GB<br>Hard Disk: 175 GB available space<br>Graphics Card: NVIDIA GeForce GTX 670 / NVIDIA® GeForce GTX 1650 or AMD Radeon™ HD 7950<br>Network: Broadband Internet connection<br>DirectX: Version 12",
+    "price": "FREE",
+    "image": "images/codmw2019plain.png",
+    "screenshots": [
+        "images/codmw2019plain1.png",
+        "images/codmw2019plain2.png",
+        "images/codmw2019plain3.png"
+    ],
+    "downloadParts": [
+      { "name": "Part 01", "url": "https://www.mediafire.com/file/4gor7fkcihqu0nm/Call_of_Duty_MW_2019_-_%2528Www.ApunKaGames.Net%2529.part01.rar/file" },
+      { "name": "Part 02", "url": "https://www.mediafire.com/file/hq2mqo1lisq400i/Call_of_Duty_MW_2019_-_%2528Www.ApunKaGames.Net%2529.part02.rar/file" },
+      { "name": "Part 03", "url": "https://www.mediafire.com/file/j62qvqky5kg4x6y/Call_of_Duty_MW_2019_-_%2528Www.ApunKaGames.Net%2529.part03.rar/file" },
+      { "name": "Part 04", "url": "https://www.mediafire.com/file/4mn5bn12a8z84e6/Call_of_Duty_MW_2019_-_%2528Www.ApunKaGames.Net%2529.part04.rar/file" },
+      { "name": "Part 05", "url": "https://www.mediafire.com/file/3766b6umh2hpcah/Call_of_Duty_MW_2019_-_%2528Www.ApunKaGames.Net%2529.part05.rar/file" },
+      { "name": "Part 06", "url": "https://www.mediafire.com/file/rm604pni6golpeq/Call_of_Duty_MW_2019_-_%2528Www.ApunKaGames.Net%2529.part06.rar/file" },
+      { "name": "Part 07", "url": "https://www.mediafire.com/file/3qi5e8y2aru3psc/Call_of_Duty_MW_2019_-_%2528Www.ApunKaGames.Net%2529.part07.rar/file" },
+      { "name": "Part 08", "url": "https://www.mediafire.com/file/bpkxim9ucc342g2/Call_of_Duty_MW_2019_-_%2528Www.ApunKaGames.Net%2529.part08.rar/file" },
+      { "name": "Part 09", "url": "https://www.mediafire.com/file/5gl6twurf883ewc/Call_of_Duty_MW_2019_-_%2528Www.ApunKaGames.Net%2529.part09.rar/file" },
+      { "name": "Part 10", "url": "https://www.mediafire.com/file/d1x4aivrw1yycq2/Call_of_Duty_MW_2019_-_%2528Www.ApunKaGames.Net%2529.part10.rar/file" },
+      { "name": "Part 11", "url": "https://www.mediafire.com/file/kj2jbhy066ci9qt/Call_of_Duty_MW_2019_-_%2528Www.ApunKaGames.Net%2529.part11.rar/file" },
+      { "name": "Part 12", "url": "https://www.mediafire.com/file/krh7k25j2hcn1dc/Call_of_Duty_MW_2019_-_%2528Www.ApunKaGames.Net%2529.part12.rar/file" },
+      { "name": "Part 13", "url": "https://www.mediafire.com/file/354g9fu0ft0rb3j/Call_of_Duty_MW_2019_-_%2528Www.ApunKaGames.Net%2529.part13.rar/file" },
+      { "name": "Part 14", "url": "https://www.mediafire.com/file/ca5896zzlvdv3nv/Call_of_Duty_MW_2019_-_%2528Www.ApunKaGames.Net%2529.part14.rar/file" },
+      { "name": "Part 15", "url": "https://www.mediafire.com/file/87510o7k44yxeg0/Call_of_Duty_MW_2019_-_%2528Www.ApunKaGames.Net%2529.part15.rar/file" },
+      { "name": "Part 16", "url": "https://www.mediafire.com/file/jwi8fjv45oyfk0s/Call_of_Duty_MW_2019_-_%2528Www.ApunKaGames.Net%2529.part16.rar/file" },
+      { "name": "Part 17", "url": "https://www.mediafire.com/file/k8gainuwsxzwboj/Call_of_Duty_MW_2019_-_%2528Www.ApunKaGames.Net%2529.part17.rar/file" },
+      { "name": "Part 18", "url": "https://www.mediafire.com/file/mmtgsco69i55t5b/Call_of_Duty_MW_2019_-_%2528Www.ApunKaGames.Net%2529.part18.rar/file" },
+      { "name": "Part 19", "url": "https://www.mediafire.com/file/r1nadwhhi88pqpy/Call_of_Duty_MW_2019_-_%2528Www.ApunKaGames.Net%2529.part19.rar/file" },
+      { "name": "Part 20", "url": "https://www.mediafire.com/file/5k6iqlgmnbdnnr9/Call_of_Duty_MW_2019_-_%2528Www.ApunKaGames.Net%2529.part20.rar/file" },
+      { "name": "Part 21", "url": "https://www.mediafire.com/file/ibl5t58o4eq3mzx/Call_of_Duty_MW_2019_-_%2528Www.ApunKaGames.Net%2529.part21.rar/file" },
+      { "name": "Part 22", "url": "https://www.mediafire.com/file/2ozaja3czv6neio/Call_of_Duty_MW_2019_-_%2528Www.ApunKaGames.Net%2529.part22.rar/file" },
+      { "name": "Part 23", "url": "https://www.mediafire.com/file/t3bmgm58kg906vv/Call_of_Duty_MW_2019_-_%2528Www.ApunKaGames.Net%2529.part23.rar/file" },
+      { "name": "Part 24", "url": "https://www.mediafire.com/file/f3bfk5bmf3vuns6/Call_of_Duty_MW_2019_-_%2528Www.ApunKaGames.Net%2529.part24.rar/file" }
+    ]
+  },
+  {
+    "id": "24",
+    "title": "Call of Duty: Modern Warfare 2019 (Campaign)",
+    "platform": "PC",
+    "category": "Action, First-person shooter",
+    "description": "Call of Duty: Modern Warfare 2019 (Campaign), developed by Infinity Ward and published by Activision for Windows on October 25, 2019, is a 76.3 GB action-packed first-person shooter video game that blends cinematic storytelling with a gritty depiction of realistic modern warfare. The gameplay features varied, high-stakes missions, tactical decision-making, and intense, immersive firefights that put players right in the middle of covert global operations.",
+    "requirements": "OS: Windows 10 (64‑bit)<br>Processor: Intel Core™ i3-4340 or AMD FX-6300<br>RAM: 8 GB Hard Disk: 100 GB available space<br>Graphics Card: NVIDIA GeForce GTX 670 / NVIDIA GeForce GTX 1650 or AMD Radeon™ HD 7950<br>Network: Broadband Internet connection<br>DirectX: Version 12",
+    "price": "FREE",
+    "image": "images/codmw2019.png",
+    "screenshots": [
+        "images/codmw20191.png",
+        "images/codmw20192.png",
+        "images/codmw20193.png"
+    ],
+    "downloadParts": [
+      { "name": "Part 1", "url": "https://www.mediafire.com/file/zqjubr5pyd6oqjk/Call_of_Duty_MW_2019_Campaign_-_%2528Www.ApunkaGames.Net%2529.part01.rar/file" },
+      { "name": "Part 2", "url": "https://www.mediafire.com/file/hthhrdyngx5uuxm/Call_of_Duty_MW_2019_Campaign_-_%2528Www.ApunkaGames.Net%2529.part02.rar/file" },
+      { "name": "Part 3", "url": "https://www.mediafire.com/file/ra1h8uw9c4wyokt/Call_of_Duty_MW_2019_Campaign_-_%2528Www.ApunkaGames.Net%2529.part03.rar/file" },
+      { "name": "Part 4", "url": "https://www.mediafire.com/file/8akc9016zuuw481/Call_of_Duty_MW_2019_Campaign_-_%2528Www.ApunkaGames.Net%2529.part04.rar/file" },
+      { "name": "Part 5", "url": "https://www.mediafire.com/file/cd1nk1osz23u2jm/Call_of_Duty_MW_2019_Campaign_-_%2528Www.ApunkaGames.Net%2529.part05.rar/file" },
+      { "name": "Part 6", "url": "https://www.mediafire.com/file/2lvm6tu2maapyok/Call_of_Duty_MW_2019_Campaign_-_%2528Www.ApunkaGames.Net%2529.part06.rar/file" },
+      { "name": "Part 7", "url": "https://www.mediafire.com/file/fuswk1pdg1fknj8/Call_of_Duty_MW_2019_Campaign_-_%2528Www.ApunkaGames.Net%2529.part07.rar/file" },
+      { "name": "Part 8", "url": "https://www.mediafire.com/file/nd6q07zons83zvr/Call_of_Duty_MW_2019_Campaign_-_%2528Www.ApunkaGames.Net%2529.part08.rar/file" },
+      { "name": "Part 9", "url": "https://www.mediafire.com/file/8ivdj23utgw8s0r/Call_of_Duty_MW_2019_Campaign_-_%2528Www.ApunkaGames.Net%2529.part09.rar/file" },
+      { "name": "Part 10", "url": "https://www.mediafire.com/file/tga3jtc20l1zgt3/Call_of_Duty_MW_2019_Campaign_-_%2528Www.ApunkaGames.Net%2529.part10.rar/file" },
+      { "name": "Part 11", "url": "https://www.mediafire.com/file/0yncq8jftj043jr/Call_of_Duty_MW_2019_Campaign_-_%2528Www.ApunkaGames.Net%2529.part11.rar/file" },
+      { "name": "Part 12", "url": "https://www.mediafire.com/file/5aouwhnl1wm7r12/Call_of_Duty_MW_2019_Campaign_-_%2528Www.ApunkaGames.Net%2529.part12.rar/file" },
+      { "name": "Part 13", "url": "https://www.mediafire.com/file/jvktc101wxwm2g0/Call_of_Duty_MW_2019_Campaign_-_%2528Www.ApunkaGames.Net%2529.part13.rar/file" },
+      { "name": "Part 14", "url": "https://www.mediafire.com/file/5t6xyiik7nkih5v/Call_of_Duty_MW_2019_Campaign_-_%2528Www.ApunkaGames.Net%2529.part14.rar/file" },
+      { "name": "Part 15", "url": "https://www.mediafire.com/file/afikp2ubdzqfooy/Call_of_Duty_MW_2019_Campaign_-_%2528Www.ApunkaGames.Net%2529.part15.rar/file" },
+      { "name": "Part 16", "url": "https://www.mediafire.com/file/w3vvyq850cnx65z/Call_of_Duty_MW_2019_Campaign_-_%2528Www.ApunkaGames.Net%2529.part16.rar/file" }
+    ]
+  },
+  {
+    "id": "25",
+    "title": "Call of Duty: Vanguard",
+    "platform": "PC",
+    "category": "Action, FPS",
+    "description": "Call of Duty: Vanguard, developed by a multi-studio collaboration led by Sledgehammer Games, Treyarch, High Moon Studios, Raven Software, Beenox, and Demonware, and published by Activision for Windows on March 8, 2023, is a 60.4 GB action-packed first-person shooter video game set across diverse global battlefronts of World War II. The gameplay features an intense, story-driven single-player campaign, cooperative missions, and fast-paced multiplayer battles where players utilize period-accurate weapons, tactical combat mechanics, and team-based strategies to survive relentless combat on historical frontlines.",
+    "requirements": "OS: Windows 10 64-Bit (latest update)<br>Processor: Intel Core i3-4340 or AMD FX-6300<br>RAM: 8 GB<br>Hard Disk: 60 GB available space<br>Graphics Card: NVIDIA GeForce GTX 960 or AMD Radeon RX 470<br>Network: Broadband Internet connection<br>DirectX: Version 12",
+    "price": "FREE",
+    "image": "images/codv.png",
+    "screenshots": [
+        "images/codv1.png",
+        "images/cod2v.png",
+        "images/codv3.png"
+    ],
+    "downloadParts": [
+      { "name": "Part 01", "url": "https://thefileslocker.net/952s8vw825p4.html" },
+      { "name": "Part 02", "url": "https://thefileslocker.net/sucqao2b6dux.html" },
+      { "name": "Part 03", "url": "https://thefileslocker.net/yw4l0kffyd6y.html" },
+      { "name": "Part 04", "url": "https://thefileslocker.net/tabdvnpzon9k.html" },
+      { "name": "Part 05", "url": "https://thefileslocker.net/ikoqc2m8u64a.html" },
+      { "name": "Part 06", "url": "https://thefileslocker.net/skxqjnirx0rf.html" },
+      { "name": "Part 07", "url": "https://thefileslocker.net/boftigmwh7eq.html" },
+      { "name": "Part 08", "url": "https://thefileslocker.net/jk527f6cq37x.html" },
+      { "name": "Part 09", "url": "https://thefileslocker.net/ueix2uxg66pc.html" },
+      { "name": "Part 10", "url": "https://thefileslocker.net/c0kvnwsfdpsj.html" },
+      { "name": "Part 11", "url": "https://thefileslocker.net/jw3q4owd8orj.html" },
+      { "name": "Part 12", "url": "https://thefileslocker.net/9pb4hi7d5q4w.html" },
+      { "name": "Part 13", "url": "https://thefileslocker.net/4qhazzzwrisi.html" }
+    ]
+  },
+  {
+    "id": "26",
+    "title": "Call of Duty: Black Ops 6",
+    "platform": "PC",
+    "category": "Action-FPS/Shooting",
+    "description": "Call of Duty: Black Ops 6, developed by Treyarch and Raven Software and published by Activision for Windows, is a 43.8 GB fast-paced first-person shooter video game set during the early 1990s in the post-Cold War era. The game follows a rogue covert team fighting against a shadowy organization secretly manipulating global events, delivering an intense modern experience through cinematic missions, advanced period-appropriate weapons, and dynamic gameplay systems that include competitive multiplayer with groundbreaking new movement mechanics alongside the triumphant return of the fan-favorite round-based Zombies mode.",
+    "requirements": "OS: Windows 10 64-Bit (latest update)<br>Processor: AMD Ryzen™ 5 1400 or Intel Core™ i5-6600<br>RAM: 8 GB<br>Hard Disk: SSD with 102 GB+ available space at launch<br>Graphics Card: AMD Radeon™ RX 470, NVIDIA GeForce GTX 960 or Intel® Arc™ A580<br>DirectX: Version 12<br>Network: Broadband Internet connection",
+    "price": "FREE",
+    "image": "images/codbo6.png",
+    "screenshots": [
+        "images/codbo61.png",
+        "images/codbo62.png",
+        "images/codbo63.png"
+    ],
+    "downloadParts": [
+      { "name": "Part 01", "url": "https://www.mediafire.com/file/c7g3cx9qayuel78/Call_of_Duty_Black_Ops_6_-_%2528Www.ApunKaGames.Com%2529.part01.rar/file" },
+      { "name": "Part 02", "url": "https://www.mediafire.com/file/bhr96arn80f4vz7/Call_of_Duty_Black_Ops_6_-_%2528Www.ApunKaGames.Com%2529.part02.rar/file" },
+      { "name": "Part 03", "url": "https://www.mediafire.com/file/e2idrrhc44wp9cg/Call_of_Duty_Black_Ops_6_-_%2528Www.ApunKaGames.Com%2529.part03.rar/file" },
+      { "name": "Part 04", "url": "https://www.mediafire.com/file/dzovvpqu9v7xbd2/Call_of_Duty_Black_Ops_6_-_%2528Www.ApunKaGames.Com%2529.part04.rar/file" },
+      { "name": "Part 05", "url": "https://www.mediafire.com/file/kxp5m6xt2ku71qc/Call_of_Duty_Black_Ops_6_-_%2528Www.ApunKaGames.Com%2529.part05.rar/file" },
+      { "name": "Part 06", "url": "https://www.mediafire.com/file/o2ovlbzclulq3jj/Call_of_Duty_Black_Ops_6_-_%2528Www.ApunKaGames.Com%2529.part06.rar/file" },
+      { "name": "Part 07", "url": "https://www.mediafire.com/file/bzkabeoueppexs4/Call_of_Duty_Black_Ops_6_-_%2528Www.ApunKaGames.Com%2529.part07.rar/file" },
+      { "name": "Part 08", "url": "https://www.mediafire.com/file/61ihpjzhdlf6a6x/Call_of_Duty_Black_Ops_6_-_%2528Www.ApunKaGames.Com%2529.part08.rar/file" },
+      { "name": "Part 09", "url": "https://www.mediafire.com/file/rr752igpwrzay4z/Call_of_Duty_Black_Ops_6_-_%2528Www.ApunKaGames.Com%2529.part09.rar/file" }
+    ]
+  },
+  {
+    "id": "27",
+    "title": "Call of Duty: Black Ops III Zombies Chronicles",
+    "platform": "PC",
+    "category": "Action, First-person shooter",
+    "description": "Call of Duty: Black Ops III - Zombies Chronicles, developed by Treyarch alongside Activision and Aspyr for Windows and released on June 15, 2017, is a massive 107 GB action-packed first-person shooter that lets players experience some of the most thrilling and iconic maps in undead history fully remastered in high-definition glory. The game bundles legendary cooperative settings such as Shangri-La, a treacherous underground labyrinth lost within an exotic jungle; Kino Der Toten, an eerie abandoned cinema swarming with crawler zombies and fiery traps; Shi No Numa, a sweltering and perilous swamp of death; and Origins, an abandoned German excavation site, delivering an ultimate, nostalgia-fueled survival experience packed with intense cooperative action.",
+    "requirements": "OS: Windows 7/8/10 (64-Bit)<br>Processor: Intel Core™ i3-530 2.93 GHz / AMD Phenom™ II X4 810 2.60 GHz<br>RAM: 4 GB<br>Hard Disk: 110 GB available space<br>Graphics Card: NVIDIA GeForce GTX 470 / ATI Radeon™ HD 6970 1GB<br>Network: Broadband Internet connection<br>DirectX: Version 11",
+    "price": "FREE",
+    "image": "images/codbo3.png",
+    "screenshots": [
+        "images/codbo31.png",
+        "images/codbo32.png",
+        "images/codbo33.png"
+    ],
+    "downloadParts": [
+      { "name": "Part 01", "url": "https://thefileslocker.net/u4dqydr8kfdi.html" },
+      { "name": "Part 02", "url": "https://thefileslocker.net/oj84ne36khr2.html" },
+      { "name": "Part 03", "url": "https://thefileslocker.net/uiertwtu318e.html" },
+      { "name": "Part 04", "url": "https://thefileslocker.net/c3y91dxkwzgg.html" },
+      { "name": "Part 05", "url": "https://thefileslocker.net/dy44m33nq6uq.html" },
+      { "name": "Part 06", "url": "https://thefileslocker.net/5ybx8vmelh7k.html" },
+      { "name": "Part 07", "url": "https://thefileslocker.net/eyq1q3zk7iit.html" },
+      { "name": "Part 08", "url": "https://thefileslocker.net/a731mfte4wro.html" },
+      { "name": "Part 09", "url": "https://thefileslocker.net/0krxma7uyczd.html" },
+      { "name": "Part 10", "url": "https://thefileslocker.net/ln7k86fov19c.html" },
+      { "name": "Part 11", "url": "https://thefileslocker.net/x2r7x458pegd.html" },
+      { "name": "Part 12", "url": "https://thefileslocker.net/rcotg72wkbk3.html" },
+      { "name": "Part 13", "url": "https://thefileslocker.net/fvqljry2pnv7.html" },
+      { "name": "Part 14", "url": "https://thefileslocker.net/egwlj6f0qalo.html" },
+      { "name": "Part 15", "url": "https://thefileslocker.net/n5k7g5fidvlc.html" },
+      { "name": "Part 16", "url": "https://thefileslocker.net/ebtjr072eu1v.html" },
+      { "name": "Part 17", "url": "https://thefileslocker.net/qqierk1z2lcv.html" },
+      { "name": "Part 18", "url": "https://thefileslocker.net/et4anv8q85hf.html" },
+      { "name": "Part 19", "url": "https://thefileslocker.net/3436qu4ce38s.html" },
+      { "name": "Part 20", "url": "https://thefileslocker.net/yojwx6dmupe9.html" },
+      { "name": "Part 21", "url": "https://thefileslocker.net/acm2aswerxal.html" },
+      { "name": "Part 22", "url": "https://thefileslocker.net/3fimsqvbpnfc.html" }
+    ]
+  },
+  {
+    "id": "28",
+    "title": "Call of Duty: WWII Digital Deluxe Edition",
+    "platform": "PC",
+    "category": "Action, First person-shooter",
+    "description": "Call of Duty: WWII Digital Deluxe Edition, developed by Sledgehammer Games and published by Activision for Windows, is a 36.5 GB first-person shooter video game set across the brutal and historic frontlines of World War II. The game follows a squad of Allied soldiers through major European battles, blending cinematic, story-driven missions with intense, boots-on-the-ground combat. Featuring the full base game alongside bonus digital content for players seeking extra value, the title delivers a comprehensive war-themed experience complete with a dramatic campaign mode, competitive multiplayer battles, and terrifying cooperative Nazi Zombie action.",
+    "requirements": "OS: Windows 7/10 (64-Bit)<br>Processor: Intel Core i3-3225<br>RAM: 8 GB<br>Hard Drive: 90 GB available space<br>Video Card: AMD Radeon HD 7850<br>DirectX: Version 11<br>Network: Broadband Internet connection",
+    "price": "FREE",
+    "image": "images/codww2.png",
+    "screenshots": [
+      "images/codww21.png",
+      "images/codww22.png",
+      "images/codww23.png"
+    ],
+    "downloadParts": [
+      { "name": "Part 1", "url": "https://www.mediafire.com/file/mpwpys7id36juai/Call_of_Duty_-_WWII_DDE_%2528Www.ApunKaGames.Biz%2529.part01.rar/file" },
+      { "name": "Part 2", "url": "https://www.mediafire.com/file/ttnhoha7jf00h2e/Call_of_Duty_-_WWII_DDE_%2528Www.ApunKaGames.Biz%2529.part02.rar/file" },
+      { "name": "Part 3", "url": "https://www.mediafire.com/file/2a81o9iql6rbjgn/Call_of_Duty_-_WWII_DDE_%2528Www.ApunKaGames.Biz%2529.part03.rar/file" },
+      { "name": "Part 4", "url": "https://www.mediafire.com/file/n38ysp5uiq1c594/Call_of_Duty_-_WWII_DDE_%2528Www.ApunKaGames.Biz%2529.part04.rar/file" },
+      { "name": "Part 5", "url": "https://www.mediafire.com/file/42olxxnljwc6lgn/Call_of_Duty_-_WWII_DDE_%2528Www.ApunKaGames.Biz%2529.part05.rar/file" },
+      { "name": "Part 6", "url": "https://www.mediafire.com/file/srmegiyrwi1guai/Call_of_Duty_-_WWII_DDE_%2528Www.ApunKaGames.Biz%2529.part06.rar/file" },
+      { "name": "Part 7", "url": "https://www.mediafire.com/file/adn5epa20bmxxdf/Call_of_Duty_-_WWII_DDE_%2528Www.ApunKaGames.Biz%2529.part07.rar/file" },
+      { "name": "Part 8", "url": "https://www.mediafire.com/file/3en31nfnowqyc7c/Call_of_Duty_-_WWII_DDE_%2528Www.ApunKaGames.Biz%2529.part08.rar/file" }
+    ]
+  },
+  {
+    "id": "29",
+    "title": "Call of Duty Modern Warfare 2 Campaign Remastered",
+    "platform": "PC",
+    "category": "Action, Shooting",
+    "description": "Call of Duty: Modern Warfare 2 Campaign Remastered, developed by Raven Software and published by Activision for Windows on May 4, 2020, is a 47.3 GB action-packed shooter video game that invites players to relive the epic, story-driven single-player campaign of the 2009 blockbuster in stunning, high-definition quality. The gameplay lets you experience legendary missions like Cliffhanger, The Gulag, and Whiskey Hotel as you fight alongside Soap MacTavish, Captain Price, Ghost, and the rest of Task Force 141 across a globe-spanning journey to restore global order against desperate threats.",
+    "requirements": "OS: Windows 7 (64-bit)<br>Processor: Intel Core i3-4340 3.6GHz / AMD FX-6300 Graphics: AMD Radeon HD 7950 or NVIDIA GeForce GTX 670<br>System Memory: 8 GB RAM<br>Storage: 80 GB Hard drive space",
+    "price": "FREE",
+    "image": "images/codmw2cr.png",
+    "screenshots": [
+      "images/codmw2cr1.png",
+      "images/codmw2cr2.png",
+      "images/codmw2cr3.png"
+    ],
+    "downloadParts": [
+      { "name": "Part 1", "url": "https://thefileslocker.net/3dmn2sid5rh3.html" },
+      { "name": "Part 2", "url": "https://thefileslocker.net/jnv4ond6897m.html" },
+      { "name": "Part 3", "url": "https://thefileslocker.net/u7fh05npxkbe.html" },
+      { "name": "Part 4", "url": "https://thefileslocker.net/otbv0u9463vc.html" },
+      { "name": "Part 5", "url": "https://thefileslocker.net/pb5jvo8y38kz.html" },
+      { "name": "Part 6", "url": "https://thefileslocker.net/5smlo1mks46k.html" },
+      { "name": "Part 7", "url": "https://thefileslocker.net/qe2c6oey7czj.html" },
+      { "name": "Part 8", "url": "https://thefileslocker.net/sr922toxy4oq.html" },
+      { "name": "Part 9", "url": "https://thefileslocker.net/73z5i2hg9m87.html" },
+      { "name": "Part 10", "url": "https://thefileslocker.net/wuk4biy88m2u.html" }
+    ]
+  },
+  {
+    "id": "30",
+    "title": "Call of Duty: WWII",
+    "platform": "PC",
+    "category": "Shooting",
+    "description": "Call of Duty: WWII, developed by Sledgehammer Games and published by Activision for Windows on November 3, 2017, is a 54 GB first-person shooter video game that takes the franchise back to its historical roots by removing the advanced movement mechanics of recent titles—such as double jumping and wall running—in favor of a traditional, immersive \"boots on the ground\" combat style. Set across the brutal battlefields of World War II, the gameplay combines a gritty historical campaign with a convenient unlimited sprint mechanic, delivering a classic and grounded tactical shooting experience.",
+    "requirements": "OS: Windows Vista/7/8/10 (32/64bits)<br>Processor: Windows 7 64-Bit or later<br>RAM: 8 GB<br>Hard Drive: 90 GB available space<br>Video Card: Nvidia GeForce GTX 660 @ 2 GB / GTX 1050 or ATI Radeon HD 7850 @ 2GB / AMD RX 550<br>DirectX: Version 9.0c",
+    "price": "FREE",
+    "image": "images/codwwII.png",
+    "screenshots": [
+      "images/codwwII1.png",
+      "images/codwwII2.png",
+      "images/codwwII3.png"
+    ],
+    "downloadParts": [
+      { "name": "Part 1", "url": "https://thefileslocker.net/x0i4mejrxn8e.html" },
+      { "name": "Part 2", "url": "https://thefileslocker.net/519ejofdp9gn.html" },
+      { "name": "Part 3", "url": "https://thefileslocker.net/ahk63p4evab9.html" },
+      { "name": "Part 4", "url": "https://thefileslocker.net/4092sbcpftkv.html" },
+      { "name": "Part 5", "url": "https://thefileslocker.net/a0m73cd3mn9b.html" },
+      { "name": "Part 6", "url": "https://thefileslocker.net/osd2qgo72uaz.html" },
+      { "name": "Part 7", "url": "https://thefileslocker.net/svt4ibmn2pgy.html" },
+      { "name": "Part 8", "url": "https://thefileslocker.net/kq9qwl2hkt45.html" },
+      { "name": "Part 9", "url": "https://thefileslocker.net/s8uc45uytd4k.html" },
+      { "name": "Part 10", "url": "https://thefileslocker.net/y499flgrs4s1.html" },
+      { "name": "Part 11", "url": "https://thefileslocker.net/1k2gece0ifka.html" }
+    ]
+  },
+  {
+    "id": "31",
+    "title": "Call of Duty: Modern Warfare Remastered",
+    "platform": "PC",
+    "category": "First-person shooter",
+    "description": "Call of Duty: Modern Warfare Remastered, developed by Raven Software and published by Activision for Windows on November 4, 2016, is a 37 GB first-person shooter video game that breathes new life into a legendary classic by delivering intense, cinematic combat with updated graphics. The gameplay immerses players in tactical single-player missions, competitive multiplayer battles, and realistic firefights across iconic war zones, blending strategic combat mechanics with modern visual fidelity to offer a definitive military shooter experience for fans of the genre.",
+    "requirements": "OS: Windows 7/Vista/8/10 (64-Bit)<br>Processor: Intel Core i3-3225 @ 3.30GHz or equivalent<br>RAM: 8 GB<br>Hard Drive: 55 GB available space<br>Video Card: 1 GB, NVIDIA GeForce GTS 450 / ATI Radeon HD 7850 Network:<br>Broadband Internet connection<br>DirectX: Version 11",
+    "price": "FREE",
+    "image": "images/codmwr.png",
+    "screenshots": [
+      "images/codmwr1.png",
+      "images/codmwr2.png",
+      "images/codmwr3.png"
+    ],
+    "downloadParts": [
+      { "name": "Part 1", "url": "https://thefileslocker.net/r7mt4rili4g9.html" },
+      { "name": "Part 2", "url": "https://thefileslocker.net/quofbgwa0rvd.html" },
+      { "name": "Part 3", "url": "https://thefileslocker.net/b7k4m1128f7b.html" },
+      { "name": "Part 4", "url": "https://thefileslocker.net/mvivk4zqzlj6.html" },
+      { "name": "Part 5", "url": "https://thefileslocker.net/vr04cyymkzvi.html" },
+      { "name": "Part 6", "url": "https://thefileslocker.net/bjnk7ukjem96.html" },
+      { "name": "Part 7", "url": "https://thefileslocker.net/b0ygbtlw56w0.html" },
+      { "name": "Part 8", "url": "https://thefileslocker.net/bzypkjla6j8p.html" }
+    ]
+  },
+  {
+    "id": "32",
+    "title": "Call of Duty: Black Ops 3",
+    "platform": "PC",
+    "category": "Action/Adventure/Shooting",
+    "description": "Call of Duty: Black Ops III, developed by Treyarch alongside Raven Software and Aspyr and published by Activision for Windows, is a 49.6 GB futuristic first-person shooter video game set in the year 2065 within a world transformed by advanced cybernetic technology that turns soldiers into powerful combat machines. The gameplay delivers a deep and action-packed experience featuring a cinematic campaign, fast-paced competitive multiplayer equipped with fluid advanced movement mechanics, and the iconic, fan-favorite cooperative Zombies mode, all anchored by heavily customizable weapons, unique specialist abilities, and intense futuristic combat scenarios.",
+    "requirements": "OS: Windows 7/Vista/8 (64-Bit)<br>Processor: Intel Core™ i3-530 @ 2.93 GHz / AMD Phenom™ II X4 810 @ 2.60 GHz<br>RAM: 6 GB<br>Hard Drive: 100 GB available space<br>Video Card: 1GB, NVIDIA® GeForce® GTX 470 / ATI® Radeon™ HD 6970<br>Network: Broadband Internet connection<br>DirectX: Version 11",
+    "price": "FREE",
+    "image": "images/codboIII.png",
+    "screenshots": [
+      "images/codboIII1.png",
+      "images/codboIII2.png",
+      "images/codboIII3.png"
+    ],
+    "downloadParts": [
+      { "name": "Part 1", "url": "https://www.mediafire.com/file/ip1io8zw3ubl86q/Call_of_Duty_Black_Ops_3_-_%2528Www.ApunKaGames.Net%2529.part01.rar/file" },
+      { "name": "Part 2", "url": "https://www.mediafire.com/file/clhqcebzgao3gyp/Call_of_Duty_Black_Ops_3_-_%2528Www.ApunKaGames.Net%2529.part02.rar/file" },
+      { "name": "Part 3", "url": "https://www.mediafire.com/file/ewtrlix3jt51mpv/Call_of_Duty_Black_Ops_3_-_%2528Www.ApunKaGames.Net%2529.part03.rar/file" },
+      { "name": "Part 4", "url": "https://www.mediafire.com/file/v855esnyc8q8cg3/Call_of_Duty_Black_Ops_3_-_%2528Www.ApunKaGames.Net%2529.part04.rar/file" },
+      { "name": "Part 5", "url": "https://www.mediafire.com/file/q2hiintmhv8y8ej/Call_of_Duty_Black_Ops_3_-_%2528Www.ApunKaGames.Net%2529.part05.rar/file" },
+      { "name": "Part 6", "url": "https://www.mediafire.com/file/vxvyex42ian47ts/Call_of_Duty_Black_Ops_3_-_%2528Www.ApunKaGames.Net%2529.part06.rar/file" },
+      { "name": "Part 7", "url": "https://www.mediafire.com/file/ik0nqdy51ch9pt7/Call_of_Duty_Black_Ops_3_-_%2528Www.ApunKaGames.Net%2529.part07.rar/file" },
+      { "name": "Part 8", "url": "https://www.mediafire.com/file/6pzsx01zohtpi2r/Call_of_Duty_Black_Ops_3_-_%2528Www.ApunKaGames.Net%2529.part08.rar/file" },
+      { "name": "Part 9", "url": "https://www.mediafire.com/file/4k166zt8qfug4qe/Call_of_Duty_Black_Ops_3_-_%2528Www.ApunKaGames.Net%2529.part09.rar/file" },
+      { "name": "Part 10", "url": "https://www.mediafire.com/file/ifyr8mdoinma4ct/Call_of_Duty_Black_Ops_3_-_%2528Www.ApunKaGames.Net%2529.part10.rar/file" }
+    ]
+  },
+  {
+    "id": "33",
+    "title": "Call of Duty: Ghosts",
+    "platform": "PC",
+    "category": "Action/Shooting",
+    "description": "Call of Duty: Ghosts, developed by Infinity Ward and published by Activision for Windows, is a 19.6 GB first-person shooter video game set in a near-future world where the United States has been crippled by a devastating orbital strike, leaving an elite remnant known as the Ghosts to wage a desperate guerrilla war against a powerful global federation. The gameplay combines cinematic storytelling, dynamic and interactive multiplayer maps, and modern combat mechanics with a thrilling single-player campaign alongside the unique cooperative Extinction mode, delivering a diverse and action-packed military shooter experience.",
+    "requirements": "OS: Windows 7 64-Bit / Windows 8 64-Bit<br>Processor: Intel Core™ 2 Duo E8200 2.66 GHZ /AMD Phenom™ X3 8750 2.4 GHZ or better<br>RAM: 6 GB Hard Drive: 40 GB available space<br>Video Card: NVIDIA GeForce™ GTS 450 / ATI® Radeon™ HD 5870 or better<br>DirectX: 11<br>Internet:Broadband Internet connection for Steam and Online Multiplayer",
+    "price": "FREE",
+    "image": "images/codg.png",
+    "screenshots": [
+        "images/codg1.png",
+        "images/codg2.png",
+        "images/codg3.png"
+    ],
+    "downloadParts": [
+      { "name": "Part 1", "url": "https://www.mediafire.com/file/q9vbwsgj8qfxinm/Call_of_Duty_Ghosts_-_%2528Www.ApunKaGames.Biz%2529.part1.rar/file" },
+      { "name": "Part 2", "url": "https://www.mediafire.com/file/q6j608s3apito9t/Call_of_Duty_Ghosts_-_%2528Www.ApunKaGames.Biz%2529.part2.rar/file" },
+      { "name": "Part 3", "url": "https://www.mediafire.com/file/w4oosbi3wh4y5bf/Call_of_Duty_Ghosts_-_%2528Www.ApunKaGames.Biz%2529.part3.rar/file" },
+      { "name": "Part 4", "url": "https://www.mediafire.com/file/yj13gi9abc11dpy/Call_of_Duty_Ghosts_-_%2528Www.ApunKaGames.Biz%2529.part4.rar/file" }
+    ]
+  },
+  {
+    "id": "34",
+    "title": "Call of Duty: Black Ops 2",
+    "platform": "PC",
+    "category": "First-person shooter",
+    "description": "Call of Duty: Black Ops 2, developed by Treyarch and published by Activision for Windows on November 12, 2012, is a 12.09 GB action-packed first-person shooter video game that immerses players in a thrilling futuristic global conflict featuring high-tech weaponry and strategic tactical combat. The gameplay seamlessly blends cinematic storytelling with fast-paced campaign missions, competitive multiplayer battles, and strategic objectives, delivering a nonstop, highly engaging FPS experience that bridges the gap between historical operations and near-future warfare.",
+    "requirements": "OS: Windows Vista SP2/7/10 (Windows XP is not supported)<br>Processor: Intel Core2 Duo E8200 2.66 GHz or AMD Phenom X3 8750 2.4 GHz<br>RAM: 2 GB for 32-bit OS or 4 GB for 64-bit OS<br>Hard Disk: 16 GB available space<br>Graphics Card: 512 MB, Nvidia GeForce 8800GT or ATI Radeon HD 3870<br>Network: Broadband Internet Connection for Online Multiplayer<br>DirectX: Version 9.0c",
+    "price": "FREE",
+    "image": "images/codbo2.png",
+    "screenshots": [
+        "images/codbo21.png",
+        "images/codbo22.png",
+        "images/codbo23.png"
+    ],
+    "downloadParts": [
+      { "name": "Part 1", "url": "https://www.mediafire.com/file/5wtawydplpcls7s/Call_of_Duty_Black_Ops_2_-_%2528Www.ApunKaGames.Net%2529.part1.rar/file" },
+      { "name": "Part 2", "url": "https://www.mediafire.com/file/2llothm3b7swgf5/Call_of_Duty_Black_Ops_2_-_%2528Www.ApunKaGames.Net%2529.part2.rar/file" },
+      { "name": "Part 3", "url": "https://www.mediafire.com/file/6pdjvkc1baloc2l/Call_of_Duty_Black_Ops_2_-_%2528Www.ApunKaGames.Net%2529.part3.rar/file" }
+    ]
+  },
+  {
+    "id": "35",
+    "title": "Call of Duty: Modern Warfare 3",
+    "platform": "PC",
+    "category": "First-person shooter",
+    "description": "Call of Duty: Modern Warfare 3 (2011), developed by Infinity Ward and Sledgehammer Games alongside Activision for Windows, is a 5.20 GB first-person shooter video game that directly continues the epic Modern Warfare saga amidst a sprawling global conflict. The gameplay delivers a classic and engaging shooter experience through fast-paced combat, cinematic missions across iconic locations worldwide, realistic weapon mechanics, and cooperative modes. Featuring refined tactical action and intense firefights, it stands as a memorable entry that wraps up a legendary trilogy.",
+    "requirements": "OS: Windows XP/Vista/7<br>Processor: Intel Core 2 Duo @ 2.4 GHz / AMD Athlon 64 X2 5000+<br>RAM: 2 GB<br>Hard Drive: 16 GB free<br>Video Card: 256 MB, NVIDIA GeForce 8600 / ATI Radeon HD 2600<br>Pro Sound Card:DirectX Compatible<br>Network: Broadband Internet Connection for Online Multiplayer<br>DirectX: 9.0c",
+    "price": "FREE",
+    "image": "images/codmwIII.png",
+    "screenshots": [
+        "images/codmwIII1.png",
+        "images/codmwIII2.png",
+        "images/codmwIII3.png"
+    ],
+    "downloadUrl": "https://www.mediafire.com/file/s4a2iloqyzbw8i2/Call_of_Duty_-_MW3_%2528Www.ApunKaGames.Biz%2529.rar/file"
+  },
+  {
+    "id": "36",
+    "title": "Call of Duty: Modern Warfare 2",
+    "platform": "PC",
+    "category": "Action-First Person shooter",
+    "description": "Developer/Publishers: Infinity Ward, Activision\nCall of Duty: Modern Warfare 2 (2009) (3.65 GB) is an FPS, Action video game. Developed and published by Infinity Ward, Activision. It was released on November 12, 2009 for Windows. Call of Duty: Modern Warfare 2 puts players in the middle of a global conflict through elite special forces operations. Fight across diverse locations using modern weapons, tactical assaults, and explosive combat sequences. The gameplay delivers fast-paced shooting, cinematic missions, and intense battlefield action from start to finish.",
+    "requirements": "OS: Windows XP/Vista/7<br>Processor: Intel Pentium 4 3.2 GHz or AMD Athlon 64 3200+ or better supported<br>RAM: 1 GB<br>Hard Disk: 12 GB available space<br>Graphics Card: 256 MB, NVIDIA GeForce 6600GT or better or ATI Radeon 1600XT or better<br>DirectX: Version 9.0c Multiplayer/Co-op: Requires a broadband connection.",
+    "price": "FREE",
+    "image": "images/codmw2plain.png",
+    "screenshots": [
+        "images/codmw2plain1.png",
+        "images/codmw2plain2.png",
+        "images/codmw2plain3.png",
+        "images/codmw2plain4.png"
+    ],
+    "downloadUrl": "https://www.mediafire.com/file/dqenvt1ac073v34/Call_of_Duty_Modern_Warfare_2_-_%2528Www.ApunKaGames.Biz%2529.rar/file"
+  },
+  {
+    "id": "37",
+    "title": "Call of Duty: World at War",
+    "platform": "PC",
+    "category": "First-person shooter",
+    "description": "Call of Duty: World at War, developed by Treyarch and published by Activision for Windows, is a 4.78 GB first-person shooter that plunges players into the brutal and gritty battlefields of the Pacific and Eastern Fronts during World War II. The gameplay emphasizes cinematic storytelling and explosive gunfights through intense, atmospheric war missions where players utilize authentic period weapons, operate vehicles, and employ tactical combat strategies alongside their squad. Delivering a thrilling military shooter experience, the title also features cooperative missions and proudly introduces the iconic, genre-defining Zombies mode to the franchise.",
+    "requirements": "OS: Windows XP/Vista/7<br>Processor: Pentium 4, 3 GHz/AMD 64 3200+<br>RAM: 512 MB (1 GB for Vista)<br>Hard Drive: 8 GB free,<br>Video Card: 256 MB (nVidia GeForce 6600/ATI Radeon X1600)<br>Sound Card:<br>DirectX 9.0c Compatible DirectX: 9.0c",
+    "price": "FREE",
+    "image": "images/codwaw.png",
+    "screenshots": [
+        "images/codwaw1.png",
+        "images/codwaw2.png",
+        "images/codwaw3.png"
+    ],
+    "downloadUrl": "https://www.mediafire.com/file_premium/8lz7h41bnpbb369/Call_of_Duty_World_at_War_-_%2528Www.ApunKaGames.Net%2529.zip/file"
+  },
+  {
+    "id": "38",
+    "title": "Call of Duty 4: Modern Warfare",
+    "platform": "PC",
+    "category": "Action/Shooting",
+    "description": "Call of Duty 4: Modern Warfare, developed by Infinity Ward and published by Activision for Windows in 2007, is a 2.56 GB groundbreaking first-person shooter that successfully shifted the franchise away from its historical World War II roots into a tense, contemporary military setting centered around a gripping global conflict. The gameplay delivers fast-paced gunplay and cinematic, highly influential campaign missions—such as the iconic stealth operations—while pioneering deep progression systems and modern combat mechanics in competitive multiplayer that permanently reshaped the entire genre.",
+    "requirements": "OS: Windows XP/Vista<br>Processor: Pentium 4 @ 2.4 GHz / AMD Athlon 2600+ or any Dual Core @ 1.8 GHz<br>RAM: 1 GB (XP) / 2 GB (Vista)<br>Hard Disk: 8 GB available space<br>Graphics Card: 256 MB NVIDIA GeForce 6600GT / ATI Radeon 1600XT or better<br>DirectX: Version 9.0c",
+    "price": "FREE",
+    "image": "images/cod4mw.png",
+    "screenshots": [
+      "images/cod4mw1.png",
+      "images/cod4mw2.png",
+      "images/cod4mw3.png"
+    ],
+    "downloadUrl": "https://www.mediafire.com/file/cod4-placeholder/file"
+  },
+ {
   "id": "39",
   "title": "FIFA 23",
   "platform": "PC",
@@ -27,6 +892,7 @@
     { "name": "Part 11", "url": "https://www.mediafire.com/file/m0auufdtolnfy7i/FIFA_23_-_%2528Www.ApunKaGames.Net%2529.part11.rar/file" },
     { "name": "Part 12", "url": "https://www.mediafire.com/file/f2hj3vc98eiag12/FIFA_23_-_%2528Www.ApunKaGames.Net%2529.part12.rar/file" }
   ]
+}
 },
   {
     "id": "40",
@@ -243,6 +1109,7 @@
         "images/trde2.png",
         "images/trde3.png"
     ],
+    "downloadUrl": "#",
     "downloadParts": [
         { "name": "Part 1", "url": "https://thefileslocker.net/epl14i787hck.html" },
         { "name": "Part 2", "url": "https://thefileslocker.net/2fajvmydidpv.html" },
@@ -267,6 +1134,7 @@
         "images/rottrplain2.png",
         "images/rottrplain3.png"
     ],
+    "downloadUrl": "#",
     "downloadParts": [
         { "name": "Part 1", "url": "https://www.mediafire.com/file/yujp9pfpb3vbbn5/Rise_of_the_Tomb_Raider_-_%2528Www.ApunKaGames.Net%2529.part1.rar/file" },
         { "name": "Part 2", "url": "https://www.mediafire.com/file/ytly9161asa1wqb/Rise_of_the_Tomb_Raider_-_%2528Www.ApunKaGames.Net%2529.part2.rar/file" },
@@ -288,6 +1156,7 @@
         "images/sottr2.png",
         "images/sottr3.png"
     ],
+    "downloadUrl": "#",
     "downloadParts": [
         { "name": "Part 1", "url": "https://thefileslocker.net/ommoia2lkrni.html" },
         { "name": "Part 2", "url": "https://thefileslocker.net/sro4xo55tjri.html" },
@@ -312,6 +1181,6 @@
         "images/tr2.png",
         "images/tr3.png"
     ],
-    "downloadUrl": "https://www.mediafire.com/file/ceoxolgxh67kwfn/Tomb_Raider_2013_-_%2528Www.ApunKaGames.Com%2529.rar/file"
-  }
+    "downloadUrl": "https://www.mediafire.com/file/ceoxolgxh67kwfn/Tomb_Raider_2013_-_%2528Www.ApunKaGames.Com%2529.rar/file",
+}
 ]
