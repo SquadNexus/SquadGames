@@ -1,4 +1,3 @@
-
 [
   {
     "id": "1",
@@ -863,37 +862,36 @@
     ],
     "downloadUrl": "https://www.mediafire.com/file/cod4-placeholder/file"
   },
- {
-  "id": "39",
-  "title": "FIFA 23",
-  "platform": "PC",
-  "category": "Sports",
-  "description": "EA Sports FIFA 23, developed by EA Vancouver and EA Romania alongside EA Sports and published for Windows on September 30, 2022, is a 55 GB football sports simulation video game that utilizes upgraded HyperMotion2 technology captured from real-world match data to deliver smoother, more lifelike player movement across over 6,000 true-to-life animations. The gameplay shines with enhanced ball physics, refined dribbling and shooting mechanics, cross-play support, and deep, immersive modes like Ultimate Team and Career, making every match feel exceptionally authentic and tactically rich.",
-  "requirements": "OS: Windows 10 (64‑bit)<br>Processor: Intel Core i5 6600k or AMD Ryzen 5 1600<br>RAM: 8 GB<br>Hard Disk: 100 GB available space<br>Graphics Card: 4 GB, NVIDIA GeForce GTX 1050 Ti or AMD Radeon RX 570<br>DirectX: Version 11",
-  "installGuide": "Extract the file using Winrar. (Download Winrar)\nOpen “FIFA 23” folder, double click on “Setup” and install it.\nAfter installation complete, go to the folder where you extract the game.\nOpen “MD5” folder, copy all files and paste it where you install the game.\nThen double click on “Game” icon to play the game. Done!",
-  "price": "FREE",
-  "image": "images/fifa23.png",
-  "screenshots": [
-    "images/fifa231.png",
-    "images/fifa232.png",
-    "images/fifa233.png"
-  ],
-  "downloadParts": [
-    { "name": "Part 01", "url": "https://www.mediafire.com/file/3iw3z7prmt75qfz/FIFA_23_-_%2528Www.ApunKaGames.Net%2529.part01.rar/file" },
-    { "name": "Part 02", "url": "https://www.mediafire.com/file/csroulu4hc78qf9/FIFA_23_-_%2528Www.ApunKaGames.Net%2529.part02.rar/file" },
-    { "name": "Part 03", "url": "https://www.mediafire.com/file/cn8r9a8gii2eab1/FIFA_23_-_%2528Www.ApunKaGames.Net%2529.part03.rar/file" },
-    { "name": "Part 04", "url": "https://www.mediafire.com/file/hp3w0swme68j7l6/FIFA_23_-_%2528Www.ApunKaGames.Net%2529.part04.rar/file" },
-    { "name": "Part 05", "url": "https://www.mediafire.com/file/rf3mv0s9pm5odoi/FIFA_23_-_%2528Www.ApunKaGames.Net%2529.part05.rar/file" },
-    { "name": "Part 06", "url": "https://www.mediafire.com/file/tay63rdu6515l6i/FIFA_23_-_%2528Www.ApunKaGames.Net%2529.part06.rar/file" },
-    { "name": "Part 07", "url": "https://www.mediafire.com/file/d3erx0fu35n72ri/FIFA_23_-_%2528Www.ApunKaGames.Net%2529.part07.rar/file" },
-    { "name": "Part 08", "url": "https://www.mediafire.com/file/x8knhyebsih3azo/FIFA_23_-_%2528Www.ApunKaGames.Net%2529.part08.rar/file" },
-    { "name": "Part 09", "url": "https://www.mediafire.com/file/x8jgcg2p92fexn1/FIFA_23_-_%2528Www.ApunKaGames.Net%2529.part09.rar/file" },
-    { "name": "Part 10", "url": "https://www.mediafire.com/file/dqzo8dfwv443bjy/FIFA_23_-_%2528Www.ApunKaGames.Net%2529.part10.rar/file" },
-    { "name": "Part 11", "url": "https://www.mediafire.com/file/m0auufdtolnfy7i/FIFA_23_-_%2528Www.ApunKaGames.Net%2529.part11.rar/file" },
-    { "name": "Part 12", "url": "https://www.mediafire.com/file/f2hj3vc98eiag12/FIFA_23_-_%2528Www.ApunKaGames.Net%2529.part12.rar/file" }
-  ]
-}
-},
+  {
+    "id": "39",
+    "title": "FIFA 23",
+    "platform": "PC",
+    "category": "Sports",
+    "description": "EA Sports FIFA 23, developed by EA Vancouver and EA Romania alongside EA Sports and published for Windows on September 30, 2022, is a 55 GB football sports simulation video game that utilizes upgraded HyperMotion2 technology captured from real-world match data to deliver smoother, more lifelike player movement across over 6,000 true-to-life animations. The gameplay shines with enhanced ball physics, refined dribbling and shooting mechanics, cross-play support, and deep, immersive modes like Ultimate Team and Career, making every match feel exceptionally authentic and tactically rich.",
+    "requirements": "OS: Windows 10 (64‑bit)<br>Processor: Intel Core i5 6600k or AMD Ryzen 5 1600<br>RAM: 8 GB<br>Hard Disk: 100 GB available space<br>Graphics Card: 4 GB, NVIDIA GeForce GTX 1050 Ti or AMD Radeon RX 570<br>DirectX: Version 11",
+    "installGuide": "Extract the file using Winrar. (Download Winrar)\nOpen “FIFA 23” folder, double click on “Setup” and install it.\nAfter installation complete, go to the folder where you extract the game.\nOpen “MD5” folder, copy all files and paste it where you install the game.\nThen double click on “Game” icon to play the game. Done!",
+    "price": "FREE",
+    "image": "images/fifa23.png",
+    "screenshots": [
+      "images/fifa231.png",
+      "images/fifa232.png",
+      "images/fifa233.png"
+    ],
+    "downloadParts": [
+      { "name": "Part 01", "url": "https://www.mediafire.com/file/3iw3z7prmt75qfz/FIFA_23_-_%2528Www.ApunKaGames.Net%2529.part01.rar/file" },
+      { "name": "Part 02", "url": "https://www.mediafire.com/file/csroulu4hc78qf9/FIFA_23_-_%2528Www.ApunKaGames.Net%2529.part02.rar/file" },
+      { "name": "Part 03", "url": "https://www.mediafire.com/file/cn8r9a8gii2eab1/FIFA_23_-_%2528Www.ApunKaGames.Net%2529.part03.rar/file" },
+      { "name": "Part 04", "url": "https://www.mediafire.com/file/hp3w0swme68j7l6/FIFA_23_-_%2528Www.ApunKaGames.Net%2529.part04.rar/file" },
+      { "name": "Part 05", "url": "https://www.mediafire.com/file/rf3mv0s9pm5odoi/FIFA_23_-_%2528Www.ApunKaGames.Net%2529.part05.rar/file" },
+      { "name": "Part 06", "url": "https://www.mediafire.com/file/tay63rdu6515l6i/FIFA_23_-_%2528Www.ApunKaGames.Net%2529.part06.rar/file" },
+      { "name": "Part 07", "url": "https://www.mediafire.com/file/d3erx0fu35n72ri/FIFA_23_-_%2528Www.ApunKaGames.Net%2529.part07.rar/file" },
+      { "name": "Part 08", "url": "https://www.mediafire.com/file/x8knhyebsih3azo/FIFA_23_-_%2528Www.ApunKaGames.Net%2529.part08.rar/file" },
+      { "name": "Part 09", "url": "https://www.mediafire.com/file/x8jgcg2p92fexn1/FIFA_23_-_%2528Www.ApunKaGames.Net%2529.part09.rar/file" },
+      { "name": "Part 10", "url": "https://www.mediafire.com/file/dqzo8dfwv443bjy/FIFA_23_-_%2528Www.ApunKaGames.Net%2529.part10.rar/file" },
+      { "name": "Part 11", "url": "https://www.mediafire.com/file/m0auufdtolnfy7i/FIFA_23_-_%2528Www.ApunKaGames.Net%2529.part11.rar/file" },
+      { "name": "Part 12", "url": "https://www.mediafire.com/file/f2hj3vc98eiag12/FIFA_23_-_%2528Www.ApunKaGames.Net%2529.part12.rar/file" }
+    ]
+  },
   {
     "id": "40",
     "title": "FIFA 21 Ultimate Edition",
@@ -922,7 +920,7 @@
         { "name": "Part 10", "url": "https://www.mediafire.com/file/v250gu5rla1v11z/FIFA_21_-_%2528Www.ApunKaGames.Net%2529.part10.rar/file" },
         { "name": "Part 11", "url": "https://www.mediafire.com/file/uewlwlptfna3bd0/FIFA_21_-_%2528Www.ApunKaGames.Net%2529.part11.rar/file" }
     ]
-},
+  },
   {
     "id": "41",
     "title": "FIFA 20 Ultimate Edition",
@@ -947,7 +945,7 @@
         { "name": "Part 06", "url": "https://www.mediafire.com/file/lyvmgkbwg4zmfsz/FIFA_20_Ultimate_Edition_-_%2528Www.ApunKaGames.Biz%2529.part6.rar/file" },
         { "name": "Part 07", "url": "https://www.mediafire.com/file/u8dt6cr718l5219/FIFA_20_Ultimate_Edition_-_%2528Www.ApunKaGames.Biz%2529.part7.rar/file" }
     ]
-},
+  },
   {
     "id": "42",
     "title": "Pro Evolution Soccer 2019",
@@ -970,12 +968,12 @@
         { "name": "Part 4", "url": "https://www.mediafire.com/file/7rmm0l3vrthw2vq/PES_2019_-_%2528Www.ApunkaGames.Net%2529.part4.rar/file" },
         { "name": "Part 5", "url": "https://www.mediafire.com/file/13y1pm68rpipvrp/PES_2019_-_%2528Www.ApunkaGames.Net%2529.part5.rar/file" }
     ]
-},
+  },
   {
     "id": "43",
     "title": "Pro Evolution Soccer 2018",
     "platform": "PC",
-    "category": " Sports",
+    "category": "Sports",
     "description": "Pro Evolution Soccer 2018, developed and published by Konami for Windows in 2017, is a 21.1 GB football simulation video game that builds upon the franchise with smoother player control, realistic movement, improved dribbling, and refined passing systems. The gameplay delivers a polished and tactically deep sports experience across popular modes like Master League, myClub, and online play, offering fans enhanced presentation and authentic pitch competition.",
     "requirements": "OS: Windows 7 SP1/8.1/10 (64-bit) Processor: Intel Core i5-3450（3.10GHz）/AMD FX 4100（3.60GHz) RAM: 8 GB Hard Drive: 30 GB available space Video Card: NVIDIA GTX 650/AMD Radeon HD 7750 DirectX: Version 11",
     "price": "FREE",
@@ -992,7 +990,7 @@
         { "name": "Part 4", "url": "https://www.mediafire.com/file/i85jwgtjbw4034s/Pro_Evolution_Soccer_2018.part4.rar/file" },
         { "name": "Part 5", "url": "https://www.mediafire.com/file/6liz2glioz6nc0q/Pro_Evolution_Soccer_2018.part5.rar/file" }
     ]
-},
+  },
   {
     "id": "44",
     "title": "Pro Evolution Soccer 2017",
@@ -1008,7 +1006,7 @@
         "images/pes173.png"
     ],
     "downloadUrl": "https://www.mediafire.com/file/lu789x3haol9mvd/Pro_Evolution_Soccer_2017_-_%2528Www.ApunKaGames.Biz%2529.rar/file"
-},
+  },
   {
     "id": "45",
     "title": "The Last of Us Part I",
@@ -1036,7 +1034,7 @@
         { "name": "Part 10", "url": "https://www.mediafire.com/file/tzd6li95fi7xyzo/The_Last_of_Us_Part_I_-_%2528Www.ApunKaGames.net%2529.part10.rar/file" },
         { "name": "Part 11", "url": "https://www.mediafire.com/file/kye5f8qtg82x322/The_Last_of_Us_Part_I_-_%2528Www.ApunKaGames.net%2529.part11.rar/file" }
     ]
-},
+  },
   {
     "id": "46",
     "title": "The Last of Us Part II Remastered",
@@ -1070,7 +1068,7 @@
         { "name": "Part 15", "url": "https://thefileslocker.net/0vhi5rwn4pib.html" },
         { "name": "Part 16", "url": "https://thefileslocker.net/6zd0wlr81bs3.html" }
     ]
-},
+  },
   {
     "id": "47",
     "title": "Rise of the Tomb Raider: 20 Year Celebration",
@@ -1093,7 +1091,7 @@
         { "name": "Part 4", "url": "https://thefileslocker.net/a4b9hcishysf.html" },
         { "name": "Part 5", "url": "https://thefileslocker.net/wxp4ef5c78xq.html" }
     ]
-},
+  },
   {
     "id": "48",
     "title": "Shadow of the Tomb Raider: Definitive Edition",
@@ -1118,7 +1116,7 @@
         { "name": "Part 5", "url": "https://thefileslocker.net/hmo77yqqba5y.html" },
         { "name": "Part 6", "url": "https://thefileslocker.net/l9inht0eshgk.html" }
     ]
-},
+  },
   {
     "id": "49",
     "title": "Rise of the Tomb Raider",
@@ -1140,12 +1138,12 @@
         { "name": "Part 2", "url": "https://www.mediafire.com/file/ytly9161asa1wqb/Rise_of_the_Tomb_Raider_-_%2528Www.ApunKaGames.Net%2529.part2.rar/file" },
         { "name": "Part 3", "url": "https://www.mediafire.com/file/481kiuig74akr04/Rise_of_the_Tomb_Raider_-_%2528Www.ApunKaGames.Net%2529.part3.rar/file" }
     ]
-},
+  },
   {
     "id": "50",
     "title": "Shadow of the Tomb Raider",
     "platform": "PC",
-    "category": " Action-adventure",
+    "category": "Action-adventure",
     "description": "Developer/Publishers: Eidos-Montréal, Square Enix\nShadow of the Tomb Raider (27.2 GB) is an action-adventure game that follows Lara Croft on her most dangerous journey as she races to stop a global apocalypse. Players explore ancient tombs, solve challenging puzzles, survive deadly environments, and engage in stealth-based combat. Set across beautiful jungles and hidden civilizations, the game offers stunning visuals and immersive storytelling. Shadow of the Tomb Raider is perfect for PC players who enjoy exploration, action, and cinematic adventures.",
     "requirements": "OS: Windows 7 64-bit or higher<br>Processor: i3-3220 INTEL or AMD Equivalent<br>RAM: 8 GB<br>Hard Drive: 40 GB available space<br>Video Card: Nvidia GTX 660/GTX 1050 or AMD Radeon HD 7770<br>DirectX: Version 11",
     "installGuide": "",
@@ -1165,7 +1163,7 @@
         { "name": "Part 5", "url": "https://thefileslocker.net/ysfejmlf43kk.html" },
         { "name": "Part 6", "url": "https://thefileslocker.net/cx9069bm3oci.html" }
     ]
-},
+  },
   {
     "id": "51",
     "title": "Tomb Raider",
@@ -1181,6 +1179,6 @@
         "images/tr2.png",
         "images/tr3.png"
     ],
-    "downloadUrl": "https://www.mediafire.com/file/ceoxolgxh67kwfn/Tomb_Raider_2013_-_%2528Www.ApunKaGames.Com%2529.rar/file",
-}
+    "downloadUrl": "https://www.mediafire.com/file/ceoxolgxh67kwfn/Tomb_Raider_2013_-_%2528Www.ApunKaGames.Com%2529.rar/file"
+  }
 ]
