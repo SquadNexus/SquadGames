@@ -1,6 +1,6 @@
 /**
  * Squad Games Store TZ - Core Application Script
- * Fully synchronized with games.json ("parts" array support)
+ * Fully synchronized with dynamic categories, clean franchise filters, and dual payment modals.
  */
 
 let loadedGamesData = [];
@@ -34,11 +34,14 @@ document.addEventListener("DOMContentLoaded", () => {
             const gameDropdown = document.getElementById('gameTypesDropdownList');
             if (gameDropdown) gameDropdown.style.display = 'none';
         }
+        if (e.target.closest('#payment-options-modal')) {
+            if (e.target.id === 'payment-options-modal') closePaymentOptionsModal();
+        }
     });
 
-    // 3. Universal Multi-part popup trigger handler
+    // 3. Universal Multi-part popup trigger handler for downloads
     document.addEventListener('click', function(e) {
-        if (e.target.closest('#download-parts-modal')) return;
+        if (e.target.closest('#download-parts-modal') || e.target.closest('#payment-options-modal')) return;
 
         const downloadBtn = e.target.closest('.btn-download, .btn-get, .btn-action');
         if (!downloadBtn) return;
@@ -58,7 +61,6 @@ document.addEventListener("DOMContentLoaded", () => {
             }
         }
 
-        // Support both "parts" (from your JSON) and "downloadParts"
         const gameParts = targetGame && (targetGame.parts || targetGame.downloadParts);
         if (targetGame && gameParts && gameParts.length > 0) {
             e.preventDefault();
@@ -131,7 +133,7 @@ function initStore(games) {
     const loaderElements = document.querySelectorAll('#loader, #catalog-loader, .loading-state');
     loaderElements.forEach(el => el.style.display = 'none');
 
-    renderThreeMainCategories(games);
+    renderNavbarDropdowns(games);
 
     const featuredGames = games.filter(game => {
         const title = (game.title || "").toLowerCase();
@@ -165,19 +167,48 @@ function initStore(games) {
     }
 }
 
-function renderThreeMainCategories(games) {
+/**
+ * Dynamically builds navbar dropdowns with future-proof categories and clean game franchises (types)
+ */
+function renderNavbarDropdowns(games) {
     const container = document.getElementById('dynamic-game-types');
     if (!container) return;
 
     let uniqueCategories = new Set();
+    let franchisesMap = new Map();
+
     games.forEach(game => {
+        // Extract Categories dynamically
         const rawCategory = game.category || game.Category || game.genre || "";
         if (rawCategory) {
-            String(rawCategory).split('/').forEach(cat => {
+            String(rawCategory).split(/[\/,]+/).forEach(cat => {
                 let cleanCat = cat.trim();
-                if (cleanCat) uniqueCategories.add(cleanCat);
+                if (cleanCat) {
+                    uniqueCategories.add(cleanCat.charAt(0).toUpperCase() + cleanCat.slice(1));
+                }
             });
         }
+
+        // Group into clean Franchises / Game Types without repeating individual game titles
+        const title = (game.title || "").toLowerCase();
+        let franchiseName = "";
+
+        if (title.includes("need for speed") || title.includes("nfs")) franchiseName = "Need for Speed";
+        else if (title.includes("gta") || title.includes("grand theft auto")) franchiseName = "Grand Theft Auto (GTA)";
+        else if (title.includes("euro truck") || title.includes("truckers")) franchiseName = "Truck Simulator";
+        else if (title.includes("spider-man") || title.includes("spiderman")) franchiseName = "Spider-Man";
+        else if (title.includes("call of duty") || title.includes("black ops") || title.includes("advanced warfare") || title.includes("vanguard") || title.includes("ghosts")) franchiseName = "Call of Duty";
+        else if (title.includes("fifa") || title.includes("pes") || title.includes("pro evolution soccer")) franchiseName = "Football / Sports";
+        else if (title.includes("tomb raider")) franchiseName = "Tomb Raider";
+        else if (title.includes("the last of us")) franchiseName = "The Last of Us";
+        else {
+            franchiseName = game.category ? game.category.split('/')[0].trim() : (game.platform || "PC Action");
+        }
+
+        if (!franchisesMap.has(franchiseName)) {
+            franchisesMap.set(franchiseName, []);
+        }
+        franchisesMap.get(franchiseName).push(game);
     });
 
     let categoriesListHTML = `<a href="#" onclick="filterByCategory('all'); return false;" style="display: block; padding: 10px 14px; color: #f1c40f; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.1); font-weight: 600;"><i class="fa-solid fa-layer-group" style="margin-right: 6px;"></i> All Categories (${uniqueCategories.size})</a>`;
@@ -185,10 +216,9 @@ function renderThreeMainCategories(games) {
         categoriesListHTML += `<a href="#" onclick="filterByCategory('${cat}'); return false;" style="display: block; padding: 10px 14px; color: #fff; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.05);">${cat}</a>`;
     });
 
-    let gamesListHTML = `<a href="#" onclick="filterByCategory('all'); return false;" style="display: block; padding: 10px 14px; color: #f1c40f; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.1); font-weight: 600;"><i class="fa-solid fa-gamepad" style="margin-right: 6px;"></i> All Available Games (${games.length})</a>`;
-    games.forEach(game => {
-        const gameId = game.id || game.title;
-        gamesListHTML += `<a href="#" onclick="openDetailsById('${encodeURIComponent(gameId)}'); return false;" style="display: block; padding: 10px 14px; color: #fff; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.05); white-space: nowrap; overflow: hidden; text-overflow: ellipsis;"><i class="fa-solid fa-play" style="margin-right: 6px; color: var(--accent-blue); font-size: 0.7rem;"></i> ${game.title}</a>`;
+    let gameTypesListHTML = `<a href="#" onclick="filterByCategory('all'); return false;" style="display: block; padding: 10px 14px; color: #f1c40f; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.1); font-weight: 600;"><i class="fa-solid fa-gamepad" style="margin-right: 6px;"></i> All Game Types (${franchisesMap.size})</a>`;
+    Array.from(franchisesMap.keys()).sort().forEach(franchise => {
+        gameTypesListHTML += `<a href="#" onclick="filterByFranchise('${franchise}'); return false;" style="display: block; padding: 10px 14px; color: #fff; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.05);"><i class="fa-solid fa-fire" style="margin-right: 6px; color: #ff9500; font-size: 0.75rem;"></i> ${franchise}</a>`;
     });
 
     container.innerHTML = `
@@ -208,8 +238,8 @@ function renderThreeMainCategories(games) {
                 <button class="nav-tab" onclick="toggleDropdown('gameTypesDropdownList', event)">
                     <i class="fa-solid fa-gamepad"></i> Game Type <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem; margin-left: 4px;"></i>
                 </button>
-                <div id="gameTypesDropdownList" style="display: none; position: absolute; top: 100%; left: 0; background: #1e1e1e; min-width: 280px; border-radius: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.7); z-index: 9999; margin-top: 6px; max-height: 300px; overflow-y: auto; border: 1px solid rgba(255,255,255,0.15);">
-                    ${gamesListHTML}
+                <div id="gameTypesDropdownList" style="display: none; position: absolute; top: 100%; left: 0; background: #1e1e1e; min-width: 260px; border-radius: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.7); z-index: 9999; margin-top: 6px; max-height: 300px; overflow-y: auto; border: 1px solid rgba(255,255,255,0.15);">
+                    ${gameTypesListHTML}
                 </div>
             </div>
         </div>
@@ -234,14 +264,40 @@ function filterByCategory(category) {
     currentCategory = (lowerCat === 'home' || lowerCat === 'all') ? 'all' : lowerCat;
     currentSearchQuery = '';
 
+    closeAllDropdowns();
+    applyFilters();
+}
+window.filterByCategory = filterByCategory;
+
+function filterByFranchise(franchiseKeyword) {
+    currentSearchQuery = "";
+    const lowerKey = franchiseKeyword.toLowerCase();
+
+    closeAllDropdowns();
+
+    const filteredGames = loadedGamesData.filter(game => {
+        const title = (game.title || "").toLowerCase();
+        if (lowerKey.includes("need for speed")) return title.includes("need for speed") || title.includes("nfs");
+        if (lowerKey.includes("grand theft auto")) return title.includes("gta") || title.includes("grand theft auto");
+        if (lowerKey.includes("truck")) return title.includes("euro truck") || title.includes("truckers");
+        if (lowerKey.includes("spider-man")) return title.includes("spider-man") || title.includes("spiderman");
+        if (lowerKey.includes("call of duty")) return title.includes("call of duty") || title.includes("black ops") || title.includes("advanced warfare");
+        if (lowerKey.includes("football")) return title.includes("fifa") || title.includes("pes");
+        if (lowerKey.includes("tomb raider")) return title.includes("tomb raider");
+        if (lowerKey.includes("the last of us")) return title.includes("the last of us");
+        return title.includes(lowerKey) || (game.category || "").toLowerCase().includes(lowerKey);
+    });
+
+    renderGameStore(filteredGames);
+}
+window.filterByFranchise = filterByFranchise;
+
+function closeAllDropdowns() {
     const catList = document.getElementById('categoriesDropdownList');
     if (catList) catList.style.display = 'none';
     const gameList = document.getElementById('gameTypesDropdownList');
     if (gameList) gameList.style.display = 'none';
-
-    applyFilters();
 }
-window.filterByCategory = filterByCategory;
 
 function renderFeaturedMarquee(sliderGames) {
     const track = document.getElementById("featuredTrack");
@@ -357,23 +413,24 @@ function renderGameStore(gameList) {
         const card = document.createElement("div");
         card.classList.add("game-card");
 
-        // Only IDs "1" and "2" are paid games with WhatsApp checkout
+        // Only IDs "1" and "2" are paid games
         const isPaid = String(game.id) === "1" || String(game.id) === "2";
         
         let actionBtnText = isPaid ? "Buy Now" : "Get";
         let actionBtnClass = isPaid ? "btn-download" : "btn-get";
         
-        let gameParts = game.parts || game.downloadParts;
-        let targetUrl = game.downloadUrl || (gameParts && gameParts.length > 0 ? "#" : "");
-
+        let actionButtonsHTML = '';
         if (isPaid) {
-            const orderMessage = encodeURIComponent(`Hello SquadGames, I want to buy ${game.title} (${game.platform})`);
-            targetUrl = `https://wa.me/255692752060?text=${orderMessage}`;
+            actionButtonsHTML = `
+                <button class="btn-action ${actionBtnClass}" onclick="showPaymentOptionsModal(loadedGamesData[${originalIndex}])">${actionBtnText}</button>
+            `;
+        } else {
+            let gameParts = game.parts || game.downloadParts;
+            let targetUrl = game.downloadUrl || (gameParts && gameParts.length > 0 ? "#" : "");
+            actionButtonsHTML = `
+                <a href="${targetUrl}" target="_blank" class="btn-action ${actionBtnClass}" data-game-id="${encodeURIComponent(gameId)}" data-game-index="${originalIndex}">${actionBtnText}</a>
+            `;
         }
-
-        let actionButtonsHTML = `
-            <a href="${targetUrl}" target="_blank" class="btn-action ${actionBtnClass}" data-game-id="${encodeURIComponent(gameId)}" data-game-index="${originalIndex}">${actionBtnText}</a>
-        `;
 
         card.innerHTML = `
             <span class="card-badge">${game.platform || "PC"}</span>
@@ -417,6 +474,67 @@ function closeFullScreen() {
 }
 window.closeFullScreen = closeFullScreen;
 
+/**
+ * Dual Payment Modal for Paid Games (Selar vs. Vodacom WhatsApp)
+ */
+function showPaymentOptionsModal(game) {
+    let modal = document.getElementById('payment-options-modal');
+    if (!modal) {
+        modal = document.createElement('div');
+        modal.id = 'payment-options-modal';
+        modal.className = 'modal-overlay';
+        modal.innerHTML = `
+            <div class="modal-content" style="max-width: 440px; background: #16161a; padding: 25px; border-radius: 14px; color: #fff; position: relative; box-shadow: 0 15px 35px rgba(0,0,0,0.8); border: 1px solid rgba(255,255,255,0.12);">
+                <button onclick="closePaymentOptionsModal()" style="position: absolute; top: 15px; right: 15px; background: none; border: none; color: #aaa; font-size: 1.2rem; cursor: pointer;"><i class="fa-solid fa-xmark"></i></button>
+                <h3 id="payment-modal-title" style="margin-top: 0; margin-bottom: 8px; font-size: 1.25rem; color: #fff;">Choose Payment Method</h3>
+                <p id="payment-modal-subtitle" style="color: #94a3b8; font-size: 0.85rem; margin-bottom: 20px; line-height: 1.4;">Select your preferred payment option below to complete your order securely.</p>
+                
+                <div style="display: flex; flex-direction: column; gap: 12px;">
+                    <!-- Selar Online Payment Option -->
+                    <a id="selar-pay-btn" href="#" target="_blank" class="btn-action" style="background: linear-gradient(135deg, #007aff, #0056b3); padding: 14px 16px; border-radius: 10px; font-weight: bold; display: flex; align-items: center; justify-content: space-between; text-decoration: none; color: #fff; box-shadow: 0 4px 15px rgba(0,122,255,0.3);">
+                        <span><i class="fa-solid fa-credit-card" style="margin-right: 8px;"></i> Pay Online via Selar</span>
+                        <i class="fa-solid fa-external-link-alt" style="font-size: 0.8rem;"></i>
+                    </a>
+
+                    <!-- Vodacom WhatsApp Payment Option -->
+                    <a id="vodacom-pay-btn" href="#" target="_blank" class="btn-action" style="background: linear-gradient(135deg, #25d366, #128c7e); padding: 14px 16px; border-radius: 10px; font-weight: bold; display: flex; align-items: center; justify-content: space-between; text-decoration: none; color: #fff; box-shadow: 0 4px 15px rgba(37,211,102,0.3);">
+                        <span><i class="fa-brands fa-whatsapp" style="margin-right: 8px; font-size: 1.1rem;"></i> Pay via Vodacom (WhatsApp)</span>
+                        <i class="fa-solid fa-arrow-right" style="font-size: 0.8rem;"></i>
+                    </a>
+                </div>
+            </div>
+        `;
+        document.body.appendChild(modal);
+
+        modal.addEventListener('click', function(event) {
+            if (event.target === modal) {
+                closePaymentOptionsModal();
+            }
+        });
+    }
+
+    const displayPrice = String(game.id) === "1" ? "TZS 20,000" : String(game.id) === "2" ? "TZS 10,000" : "Paid Game";
+    document.getElementById('payment-modal-title').innerText = `Buy: ${game.title}`;
+    document.getElementById('payment-modal-subtitle').innerHTML = `Choose how you want to purchase <b>${displayPrice}</b>. Selar supports card and mobile money, or you can order directly through Vodacom via WhatsApp.`;
+
+    // Extract Selar link from game.parts[0] (or fallback)
+    const selarLink = (game.parts && game.parts.length > 0 && game.parts[0].startsWith('http')) ? game.parts[0] : "https://selar.co/m/SquadGamesTZ";
+    document.getElementById('selar-pay-btn').href = selarLink;
+
+    // Set WhatsApp Vodacom Link
+    const orderMessage = encodeURIComponent(`Hello SquadGames, I want to buy ${game.title} (${game.platform}) using Vodacom mobile money.`);
+    document.getElementById('vodacom-pay-btn').href = `https://wa.me/255692752060?text=${orderMessage}`;
+
+    modal.classList.add('active');
+}
+window.showPaymentOptionsModal = showPaymentOptionsModal;
+
+function closePaymentOptionsModal() {
+    const modal = document.getElementById('payment-options-modal');
+    if (modal) modal.classList.remove('active');
+}
+window.closePaymentOptionsModal = closePaymentOptionsModal;
+
 function showDownloadPartsModal(game) {
     let modal = document.getElementById('download-parts-modal');
     if (!modal) {
@@ -424,7 +542,7 @@ function showDownloadPartsModal(game) {
         modal.id = 'download-parts-modal';
         modal.className = 'modal-overlay';
         modal.innerHTML = `
-            <div class="modal-content" style="max-width: 450px; background: var(--bg-card, #1e1e1e); padding: 25px; border-radius: 12px; color: #fff; position: relative; box-shadow: 0 10px 25px rgba(0,0,0,0.5);">
+            <div class="modal-content" style="max-width: 450px; background: #16161a; padding: 25px; border-radius: 14px; color: #fff; position: relative; box-shadow: 0 15px 35px rgba(0,0,0,0.8); border: 1px solid rgba(255,255,255,0.12);">
                 <button onclick="closeDownloadPartsModal()" style="position: absolute; top: 15px; right: 15px; background: none; border: none; color: #aaa; font-size: 1.2rem; cursor: pointer;"><i class="fa-solid fa-xmark"></i></button>
                 <h3 id="parts-modal-title" style="margin-bottom: 8px; font-size: 1.25rem;">Select Download Part</h3>
                 
