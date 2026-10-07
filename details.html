@@ -173,12 +173,12 @@
         <div class="installation-guide">
             <h3><i class="fa-solid fa-circle-question" style="color: var(--accent-red);"></i> How to Install Games</h3>
             <ol>
-                <li><strong>Download All Parts:</strong> Ensure all multi-part archive files are downloaded completely into the same folder on your computer.</li>
-                <li><strong>Extract Files:</strong> Select all the files to assure that all your essentials are fully extracted and use extraction software like WinRAR or 7-Zip to extract the game files.</li>
-                <li><strong>Run Setup:</strong> Open the extracted folder, locate the setup file or installer, and run it as Administrator.</li>
-                <li><strong>Complete Installation:</strong> Follow the on-screen prompts to install the game to your preferred directory. Make sure to install any required redistributables (DirectX, VCRedist) if prompted.</li>
-                <li><strong>Apply Crack / Fix (If Applicable):</strong> If the release requires a manual crack, copy the contents from the crack/codex folder and paste them into the main game installation directory, replacing existing files.</li>
-                <li><strong>Launch Game:</strong> Run the game executable as Administrator and enjoy your game!</li>
+                <li><strong>Download All Parts:</strong> Ensure all multi-part archive files are downloaded completely into the same folder on your computer[cite: 11].</li>
+                <li><strong>Extract Files:</strong> Select all the files to assure that all your essentials are fully extracted and use extraction software like WinRAR or 7-Zip to extract the game files[cite: 11].</li>
+                <li><strong>Run Setup:</strong> Open the extracted folder, locate the setup file or installer, and run it as Administrator[cite: 11].</li>
+                <li><strong>Complete Installation:</strong> Follow the on-screen prompts to install the game to your preferred directory. Make sure to install any required redistributables (DirectX, VCRedist) if prompted[cite: 11].</li>
+                <li><strong>Apply Crack / Fix (If Applicable):</strong> If the release requires a manual crack, copy the contents from the crack/codex folder and paste them into the main game installation directory, replacing existing files[cite: 11].</li>
+                <li><strong>Launch Game:</strong> Run the game executable as Administrator and enjoy your game![cite: 11]</li>
             </ol>
         </div>
 
@@ -239,6 +239,11 @@
                     const description = game.description || game.desc || game.about || 'No description available for this release.';
                     const screenshots = game.screenshots || game.gallery || game.images || [];
 
+                    // Check if game is ID 1 or 2 (Paid games)
+                    const isPaid = String(game.id) === "1" || String(game.id) === "2";
+                    const orderMessage = encodeURIComponent(`Hello, I want to buy ${title} (${game.platform || 'PC'})`);
+                    const buyUrl = `https://wa.me/255692752060?text=${orderMessage}`;
+
                     container.innerHTML = `
                         <div class="details-grid">
                             <!-- Left Column: Big Cover Image & Screenshots Below -->
@@ -264,7 +269,7 @@
                                 ` : ''}
                             </div>
 
-                            <!-- Right Column: Title, Description, Requirements & Download Links -->
+                            <!-- Right Column: Title, Description, Requirements & Action Button -->
                             <div style="display: flex; flex-direction: column; gap: 20px;">
                                 <div>
                                     <span style="background: var(--accent-red); color: #fff; padding: 5px 12px; border-radius: 6px; font-size: 12px; font-weight: bold; text-transform: uppercase; letter-spacing: 0.5px;">${category}</span>
@@ -282,16 +287,22 @@
                                 ` : ''}
 
                                 <div class="download-section" style="margin-top: 10px;">
-                                    <button onclick="toggleDownloadLinks()" style="width: 100%; padding: 14px 20px; background: linear-gradient(135deg, #28a745, #218838); color: #fff; border: none; border-radius: 10px; font-size: 18px; font-weight: bold; display: flex; align-items: center; justify-content: space-between; cursor: pointer; box-shadow: 0 4px 15px rgba(40,167,69,0.3); transition: background 0.2s;">
-                                        <span style="display: flex; align-items: center; gap: 10px;">
-                                            <i class="fa-solid fa-download"></i> Download Links
-                                        </span>
-                                        <i id="download-chevron" class="fa-solid fa-chevron-down" style="transition: transform 0.3s;"></i>
-                                    </button>
-                                    
-                                    <div id="download-links-container" style="display: none; flex-direction: column; gap: 12px; margin-top: 15px;">
-                                        ${renderDownloadLinks(game)}
-                                    </div>
+                                    ${isPaid ? `
+                                        <a href="${buyUrl}" target="_blank" style="width: 100%; box-sizing: border-box; padding: 14px 20px; background: linear-gradient(135deg, #e50914, #b20710); color: #fff; text-decoration: none; border-radius: 10px; font-size: 18px; font-weight: bold; display: flex; align-items: center; justify-content: center; gap: 10px; box-shadow: 0 4px 15px rgba(229,9,20,0.4); transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
+                                            <i class="fa-brands fa-whatsapp" style="font-size: 22px;"></i> Buy Now via WhatsApp (${game.price || 'Paid'})
+                                        </a>
+                                    ` : `
+                                        <button onclick="toggleDownloadLinks()" style="width: 100%; padding: 14px 20px; background: linear-gradient(135deg, #28a745, #218838); color: #fff; border: none; border-radius: 10px; font-size: 18px; font-weight: bold; display: flex; align-items: center; justify-content: space-between; cursor: pointer; box-shadow: 0 4px 15px rgba(40,167,69,0.3); transition: background 0.2s;">
+                                            <span style="display: flex; align-items: center; gap: 10px;">
+                                                <i class="fa-solid fa-download"></i> Download Links
+                                            </span>
+                                            <i id="download-chevron" class="fa-solid fa-chevron-down" style="transition: transform 0.3s;"></i>
+                                        </button>
+                                        
+                                        <div id="download-links-container" style="display: none; flex-direction: column; gap: 12px; margin-top: 15px;">
+                                            ${renderDownloadLinks(game)}
+                                        </div>
+                                    `}
                                 </div>
                             </div>
                         </div>
