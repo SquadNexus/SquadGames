@@ -95,8 +95,6 @@
         .installation-guide li strong {
             color: #fff;
         }
-
-        /* Added Styles for Loading Spinner & Fullscreen Modal */
         .spinner {
             width: 40px;
             height: 40px;
@@ -148,9 +146,7 @@
 </head>
 <body>
 
-    <!-- Main Container -->
     <div class="container">
-
         <!-- Navigation Bar / Back Button -->
         <div class="portal-header-wrapper">
             <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px;">
@@ -173,15 +169,14 @@
         <div class="installation-guide">
             <h3><i class="fa-solid fa-circle-question" style="color: var(--accent-red);"></i> How to Install Games</h3>
             <ol>
-                <li><strong>Download All Parts:</strong> Ensure all multi-part archive files are downloaded completely into the same folder on your computer[cite: 11].</li>
-                <li><strong>Extract Files:</strong> Select all the files to assure that all your essentials are fully extracted and use extraction software like WinRAR or 7-Zip to extract the game files[cite: 11].</li>
-                <li><strong>Run Setup:</strong> Open the extracted folder, locate the setup file or installer, and run it as Administrator[cite: 11].</li>
-                <li><strong>Complete Installation:</strong> Follow the on-screen prompts to install the game to your preferred directory. Make sure to install any required redistributables (DirectX, VCRedist) if prompted[cite: 11].</li>
-                <li><strong>Apply Crack / Fix (If Applicable):</strong> If the release requires a manual crack, copy the contents from the crack/codex folder and paste them into the main game installation directory, replacing existing files[cite: 11].</li>
-                <li><strong>Launch Game:</strong> Run the game executable as Administrator and enjoy your game![cite: 11]</li>
+                <li><strong>Download All Parts:</strong> Ensure all multi-part archive files are downloaded completely into the same folder on your computer.</li>
+                <li><strong>Extract Files:</strong> Select all files and use extraction software like WinRAR or 7-Zip to extract the game files.</li>
+                <li><strong>Run Setup:</strong> Open the extracted folder, locate the setup file or installer, and run it as Administrator.</li>
+                <li><strong>Complete Installation:</strong> Follow on-screen prompts and install any required redistributables (DirectX, VCRedist) if prompted.</li>
+                <li><strong>Apply Crack / Fix:</strong> If required, copy contents from the crack folder into the main game installation directory.</li>
+                <li><strong>Launch Game:</strong> Run the game executable as Administrator and enjoy!</li>
             </ol>
         </div>
-
     </div>
 
     <!-- Fullscreen Image Modal Overlay -->
@@ -215,10 +210,11 @@
                     return response.json();
                 })
                 .then(games => {
-                    const game = games.find(g => 
-                        g.id == gameId || 
-                        String(g.title).toLowerCase() === String(gameId).toLowerCase() ||
-                        String(g.title).toLowerCase().replace(/[^a-z0-9]/g, '-') === String(gameId).toLowerCase()
+                    let gamesArray = Array.isArray(games) ? games : (games.games || games.data || games.list || Object.values(games).find(Array.isArray) || []);
+
+                    const game = gamesArray.find(g => 
+                        String(g.id) === String(gameId) || 
+                        String(g.title).toLowerCase() === String(gameId).toLowerCase()
                     );
 
                     if (!game) {
@@ -226,37 +222,50 @@
                             <div style="text-align: center; padding: 50px;">
                                 <i class="fa-solid fa-circle-xmark" style="font-size: 54px; color: var(--accent-red); margin-bottom: 20px;"></i>
                                 <h2 style="color: #fff; margin-bottom: 10px;">Game Not Found</h2>
-                                <p style="color: var(--text-muted); margin-bottom: 25px;">The game you are looking for does not exist or has been removed from the catalog.</p>
+                                <p style="color: var(--text-muted); margin-bottom: 25px;">The game you are looking for does not exist or has been removed.</p>
                                 <a href="index.html" class="nav-back-btn" style="background: var(--accent-red);">Go to Home Store</a>
                             </div>
                         `;
                         return;
                     }
 
-                    const title = game.title || game.name || 'Untitled Game';
-                    const category = game.category || game.genre || 'Game';
-                    const image = game.image || game.cover || 'placeholder.jpg';
-                    const description = game.description || game.desc || game.about || 'No description available for this release.';
-                    const screenshots = game.screenshots || game.gallery || game.images || [];
-
-                    // Check if game is ID 1 or 2 (Paid games)
+                    const title = game.title || 'Untitled Game';
+                    const category = game.category || 'Game';
+                    const image = game.image || 'placeholder.jpg';
+                    const description = game.description || 'Full game release with secure direct downloads.';
+                    const screenshots = game.screenshots || [];
+                    const gameSize = game.size || 'N/A';
+                    const platform = game.platform || 'PC';
+                    
                     const isPaid = String(game.id) === "1" || String(game.id) === "2";
-                    const orderMessage = encodeURIComponent(`Hello, I want to buy ${title} (${game.platform || 'PC'})`);
+                    const displayPrice = String(game.id) === "1" ? "TZS 20,000" : String(game.id) === "2" ? "TZS 10,000" : "FREE";
+                    const orderMessage = encodeURIComponent(`Hello SquadGames, I want to buy ${title} (${platform})`);
                     const buyUrl = `https://wa.me/255692752060?text=${orderMessage}`;
+
+                    let sysReqHTML = '';
+                    if (game.systemRequirements && typeof game.systemRequirements === 'object') {
+                        sysReqHTML = `
+                            <p style="margin: 4px 0;"><strong>OS:</strong> ${game.systemRequirements.os || 'Not specified'}</p>
+                            <p style="margin: 4px 0;"><strong>Processor:</strong> ${game.systemRequirements.processor || 'Not specified'}</p>
+                            <p style="margin: 4px 0;"><strong>RAM:</strong> ${game.systemRequirements.ram || 'Not specified'}</p>
+                            <p style="margin: 4px 0;"><strong>Storage:</strong> ${game.systemRequirements.storage || 'Not specified'}</p>
+                        `;
+                    } else {
+                        sysReqHTML = `<p style="margin: 0; color: var(--text-muted);">Standard PC system requirements apply.</p>`;
+                    }
 
                     container.innerHTML = `
                         <div class="details-grid">
-                            <!-- Left Column: Big Cover Image & Screenshots Below -->
+                            <!-- Left Column: Cover Image & Screenshots -->
                             <div style="display: flex; flex-direction: column; gap: 20px;">
                                 <div style="position: relative; border-radius: 12px; overflow: hidden; box-shadow: 0 6px 20px rgba(0,0,0,0.5); background: #000;">
-                                    <img src="${image}" alt="${title}" style="width: 100%; max-height: 420px; object-fit: cover; cursor: pointer; display: block; transition: transform 0.3s;" onclick="openFullScreen(event, this.src)" title="Click to enlarge main picture" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
+                                    <img src="${image}" alt="${title}" style="width: 100%; max-height: 420px; object-fit: cover; cursor: pointer; display: block; transition: transform 0.3s;" onclick="openFullScreen(event, this.src)" title="Click to enlarge" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
                                 </div>
 
-                                <!-- Screenshots Gallery -->
                                 ${screenshots.length > 0 ? `
                                     <div style="display: flex; flex-direction: column; gap: 12px;">
                                         <h4 style="color: #fff; font-size: 16px; margin: 0; display: flex; align-items: center; gap: 8px;">
-                                            <i class="fa-solid fa-images" style="color: var(--accent-red);"></i> Screenshots Gallery (${screenshots.length})
+                                            <i class="fa-solid fa-images" style="color: var(--accent-red);"></i> Screenshots (${screenshots.length})
                                         </h4>
                                         <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 10px;">
                                             ${screenshots.map(shot => `
@@ -269,32 +278,36 @@
                                 ` : ''}
                             </div>
 
-                            <!-- Right Column: Title, Description, Requirements & Action Button -->
+                            <!-- Right Column: Title, Metadata, Requirements & Action -->
                             <div style="display: flex; flex-direction: column; gap: 20px;">
                                 <div>
-                                    <span style="background: var(--accent-red); color: #fff; padding: 5px 12px; border-radius: 6px; font-size: 12px; font-weight: bold; text-transform: uppercase; letter-spacing: 0.5px;">${category}</span>
-                                    <h2 style="margin: 12px 0 15px; font-size: 32px; color: #fff; line-height: 1.2;">${title}</h2>
+                                    <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap; margin-bottom: 10px;">
+                                        <span style="background: var(--accent-red); color: #fff; padding: 5px 12px; border-radius: 6px; font-size: 12px; font-weight: bold; text-transform: uppercase;">${category}</span>
+                                        <span style="background: rgba(255,255,255,0.1); color: #fff; padding: 5px 10px; border-radius: 6px; font-size: 12px; font-weight: bold;">📁 Size: ${gameSize}</span>
+                                        <span style="background: rgba(40,167,69,0.2); color: #28a745; border: 1px solid #28a745; padding: 4px 10px; border-radius: 6px; font-size: 12px; font-weight: bold;">🏷️ ${displayPrice}</span>
+                                    </div>
+                                    <h2 style="margin: 0 0 15px; font-size: 32px; color: #fff; line-height: 1.2;">${title}</h2>
                                     <p style="color: var(--text-muted); line-height: 1.7; margin: 0; white-space: pre-line; font-size: 15px;">${description}</p>
                                 </div>
 
-                                ${game.requirements ? `
-                                    <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); padding: 20px; border-radius: 10px;">
-                                        <h4 style="margin: 0 0 10px 0; color: #fff; font-size: 16px; display: flex; align-items: center; gap: 8px;">
-                                            <i class="fa-solid fa-laptop-code" style="color: #ffc107;"></i> System Requirements
-                                        </h4>
-                                        <p style="margin: 0; color: var(--text-muted); font-size: 14px; line-height: 1.6; white-space: pre-line;">${game.requirements}</p>
+                                <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); padding: 20px; border-radius: 10px;">
+                                    <h4 style="margin: 0 0 10px 0; color: #fff; font-size: 16px; display: flex; align-items: center; gap: 8px;">
+                                        <i class="fa-solid fa-laptop-code" style="color: #ffc107;"></i> System Requirements
+                                    </h4>
+                                    <div style="color: var(--text-muted); font-size: 14px; line-height: 1.6;">
+                                        ${sysReqHTML}
                                     </div>
-                                ` : ''}
+                                </div>
 
                                 <div class="download-section" style="margin-top: 10px;">
                                     ${isPaid ? `
                                         <a href="${buyUrl}" target="_blank" style="width: 100%; box-sizing: border-box; padding: 14px 20px; background: linear-gradient(135deg, #e50914, #b20710); color: #fff; text-decoration: none; border-radius: 10px; font-size: 18px; font-weight: bold; display: flex; align-items: center; justify-content: center; gap: 10px; box-shadow: 0 4px 15px rgba(229,9,20,0.4); transition: transform 0.2s;" onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
-                                            <i class="fa-brands fa-whatsapp" style="font-size: 22px;"></i> Buy Now via WhatsApp (${game.price || 'Paid'})
+                                            <i class="fa-brands fa-whatsapp" style="font-size: 22px;"></i> Buy Now via WhatsApp (${displayPrice})
                                         </a>
                                     ` : `
                                         <button onclick="toggleDownloadLinks()" style="width: 100%; padding: 14px 20px; background: linear-gradient(135deg, #28a745, #218838); color: #fff; border: none; border-radius: 10px; font-size: 18px; font-weight: bold; display: flex; align-items: center; justify-content: space-between; cursor: pointer; box-shadow: 0 4px 15px rgba(40,167,69,0.3); transition: background 0.2s;">
                                             <span style="display: flex; align-items: center; gap: 10px;">
-                                                <i class="fa-solid fa-download"></i> Download Links
+                                                <i class="fa-solid fa-download"></i> Download Links (${gameSize})
                                             </span>
                                             <i id="download-chevron" class="fa-solid fa-chevron-down" style="transition: transform 0.3s;"></i>
                                         </button>
@@ -314,36 +327,35 @@
                         <div style="text-align: center; padding: 50px; color: var(--accent-red);">
                             <i class="fa-solid fa-triangle-exclamation" style="font-size: 54px; margin-bottom: 20px;"></i>
                             <h2 style="color: #fff; margin-bottom: 10px;">Error Loading Data</h2>
-                            <p style="color: var(--text-muted);">Could not load catalog information. Please check your JSON file structure or connection.</p>
+                            <p style="color: var(--text-muted);">Could not load catalog information. Please check your JSON file.</p>
                         </div>
                     `;
                 });
         });
 
         function renderDownloadLinks(game) {
-            const multiLinks = game.downloadParts || game.downloadLinks || game.links || game.parts || game.download_links;
-            const singleLink = game.downloadUrl || game.url || game.download || game.fileUrl || game.link || game.altDownloadUrl;
+            const linksArray = game.parts || game.downloadParts || game.links || [];
 
-            if (multiLinks && Array.isArray(multiLinks) && multiLinks.length > 0) {
-                return multiLinks.map((link, index) => {
-                    const url = typeof link === 'object' ? (link.url || link.link || link.downloadUrl || link.href) : link;
-                    const name = typeof link === 'object' ? (link.name || link.title || 'Part ' + (index + 1)) : 'Download Part ' + (index + 1);
+            if (linksArray.length > 0) {
+                return linksArray.map((link, index) => {
+                    const url = typeof link === 'object' ? (link.url || link.link || '#') : link;
+                    const name = typeof link === 'object' ? (link.name || `Part ${index + 1}`) : `Download Part ${index + 1} (${game.size})`;
                     return `
                         <a href="${url}" target="_blank" style="width: 100%; box-sizing: border-box; padding: 14px 20px; background: linear-gradient(135deg, #28a745, #218838); color: #fff; text-decoration: none; border-radius: 8px; font-weight: bold; display: flex; align-items: center; gap: 10px; box-shadow: 0 4px 15px rgba(40,167,69,0.3); transition: transform 0.2s;" onmouseover="this.style.transform='translateX(4px)'" onmouseout="this.style.transform='translateX(0)'">
                             <i class="fa-solid fa-cloud-arrow-down"></i> ${name}
                         </a>
                     `;
                 }).join('');
-            } else if (singleLink) {
+            } else if (game.downloadUrl) {
                 return `
-                    <a href="${singleLink}" target="_blank" style="width: 100%; box-sizing: border-box; padding: 14px 20px; background: linear-gradient(135deg, #28a745, #218838); color: #fff; text-decoration: none; border-radius: 8px; font-weight: bold; display: flex; align-items: center; gap: 10px; font-size: 16px; box-shadow: 0 4px 15px rgba(40,167,69,0.3); transition: transform 0.2s;" onmouseover="this.style.transform='translateX(4px)'" onmouseout="this.style.transform='translateX(0)'">
-                        <i class="fa-solid fa-cloud-arrow-down"></i> Download Game ${game.size ? '(' + game.size + ')' : ''}
+                    <a href="${game.downloadUrl}" target="_blank" style="width: 100%; box-sizing: border-box; padding: 14px 20px; background: linear-gradient(135deg, #28a745, #218838); color: #fff; text-decoration: none; border-radius: 8px; font-weight: bold; display: flex; align-items: center; gap: 10px; box-shadow: 0 4px 15px rgba(40,167,69,0.3);">
+                        <i class="fa-solid fa-cloud-arrow-down"></i> Download Game (${game.size})
                     </a>
                 `;
             } else {
                 return `
-                    <div style="background: rgba(255, 193, 7, 0.1); border: 1px solid rgba(255, 193, 7, 0.3); padding: 15px 20px; border-radius: 8px; color: #ffc107; width: 100%; box-sizing: border-box;">
-                        <i class="fa-solid fa-circle-info"></i> Download links are currently being updated for this title. Please check back shortly!
+                    <div style="background: rgba(255, 193, 7, 0.1); border: 1px solid rgba(255, 193, 7, 0.3); padding: 15px; border-radius: 8px; color: #ffc107;">
+                        <i class="fa-solid fa-circle-info"></i> Download links are being updated for this title. Check back soon!
                     </div>
                 `;
             }
