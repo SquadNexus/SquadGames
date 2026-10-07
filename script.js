@@ -1,6 +1,6 @@
 /**
  * Squad Games Store TZ - Core Application Script
- * Fully synchronized with dynamic categories, clean franchise filters, and dual payment modals.
+ * Fully synchronized with dynamic categories, clean franchise filters, floating dropdowns, and dual payment options.
  */
 
 let loadedGamesData = [];
@@ -26,22 +26,15 @@ document.addEventListener("DOMContentLoaded", () => {
             localStorage.setItem('scrollPosition', window.scrollY);
         }
         
-        if (!e.target.closest('.category-dropdown-wrapper')) {
-            const catDropdown = document.getElementById('categoriesDropdownList');
-            if (catDropdown) catDropdown.style.display = 'none';
-        }
-        if (!e.target.closest('.gametype-dropdown-wrapper')) {
-            const gameDropdown = document.getElementById('gameTypesDropdownList');
-            if (gameDropdown) gameDropdown.style.display = 'none';
-        }
-        if (e.target.closest('#payment-options-modal')) {
-            if (e.target.id === 'payment-options-modal') closePaymentOptionsModal();
+        // Close floating dropdowns if clicked outside
+        if (!e.target.closest('.nav-dropdown-btn') && !e.target.closest('.global-floating-dropdown')) {
+            closeAllDropdowns();
         }
     });
 
     // 3. Universal Multi-part popup trigger handler for downloads
     document.addEventListener('click', function(e) {
-        if (e.target.closest('#download-parts-modal') || e.target.closest('#payment-options-modal')) return;
+        if (e.target.closest('#download-parts-modal') || e.target.closest('#payment-options-modal') || e.target.closest('.global-floating-dropdown')) return;
 
         const downloadBtn = e.target.closest('.btn-download, .btn-get, .btn-action');
         if (!downloadBtn) return;
@@ -168,7 +161,7 @@ function initStore(games) {
 }
 
 /**
- * Dynamically builds navbar dropdowns with future-proof categories and clean game franchises (types)
+ * Dynamically builds navbar dropdowns with future-proof categories and clean game franchises
  */
 function renderNavbarDropdowns(games) {
     const container = document.getElementById('dynamic-game-types');
@@ -178,7 +171,7 @@ function renderNavbarDropdowns(games) {
     let franchisesMap = new Map();
 
     games.forEach(game => {
-        // Extract Categories dynamically
+        // Extract Categories dynamically from games.json
         const rawCategory = game.category || game.Category || game.genre || "";
         if (rawCategory) {
             String(rawCategory).split(/[\/,]+/).forEach(cat => {
@@ -211,14 +204,14 @@ function renderNavbarDropdowns(games) {
         franchisesMap.get(franchiseName).push(game);
     });
 
-    let categoriesListHTML = `<a href="#" onclick="filterByCategory('all'); return false;" style="display: block; padding: 10px 14px; color: #f1c40f; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.1); font-weight: 600;"><i class="fa-solid fa-layer-group" style="margin-right: 6px;"></i> All Categories (${uniqueCategories.size})</a>`;
+    let categoriesListHTML = `<div onclick="filterByCategory('all');" style="padding: 10px 14px; color: #f1c40f; cursor: pointer; border-bottom: 1px solid rgba(255,255,255,0.1); font-weight: 600;"><i class="fa-solid fa-layer-group" style="margin-right: 6px;"></i> All Categories (${uniqueCategories.size})</div>`;
     Array.from(uniqueCategories).sort().forEach(cat => {
-        categoriesListHTML += `<a href="#" onclick="filterByCategory('${cat}'); return false;" style="display: block; padding: 10px 14px; color: #fff; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.05);">${cat}</a>`;
+        categoriesListHTML += `<div onclick="filterByCategory('${cat}');" style="padding: 10px 14px; color: #fff; cursor: pointer; border-bottom: 1px solid rgba(255,255,255,0.05); transition: background 0.2s;" onmouseover="this.style.background='rgba(0,122,255,0.2)'" onmouseout="this.style.background='transparent'">${cat}</div>`;
     });
 
-    let gameTypesListHTML = `<a href="#" onclick="filterByCategory('all'); return false;" style="display: block; padding: 10px 14px; color: #f1c40f; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.1); font-weight: 600;"><i class="fa-solid fa-gamepad" style="margin-right: 6px;"></i> All Game Types (${franchisesMap.size})</a>`;
+    let gameTypesListHTML = `<div onclick="filterByCategory('all');" style="padding: 10px 14px; color: #f1c40f; cursor: pointer; border-bottom: 1px solid rgba(255,255,255,0.1); font-weight: 600;"><i class="fa-solid fa-gamepad" style="margin-right: 6px;"></i> All Game Types (${franchisesMap.size})</div>`;
     Array.from(franchisesMap.keys()).sort().forEach(franchise => {
-        gameTypesListHTML += `<a href="#" onclick="filterByFranchise('${franchise}'); return false;" style="display: block; padding: 10px 14px; color: #fff; text-decoration: none; border-bottom: 1px solid rgba(255,255,255,0.05);"><i class="fa-solid fa-fire" style="margin-right: 6px; color: #ff9500; font-size: 0.75rem;"></i> ${franchise}</a>`;
+        gameTypesListHTML += `<div onclick="filterByFranchise('${franchise}');" style="padding: 10px 14px; color: #fff; cursor: pointer; border-bottom: 1px solid rgba(255,255,255,0.05); transition: background 0.2s;" onmouseover="this.style.background='rgba(0,122,255,0.2)'" onmouseout="this.style.background='transparent'"><i class="fa-solid fa-fire" style="margin-right: 6px; color: #ff9500; font-size: 0.75rem;"></i> ${franchise}</div>`;
     });
 
     container.innerHTML = `
@@ -226,38 +219,58 @@ function renderNavbarDropdowns(games) {
             <button class="nav-tab active" onclick="filterByCategory('all')">
                 <i class="fa-solid fa-house"></i> Home
             </button>
-            <div class="category-dropdown-wrapper" style="position: relative; display: inline-block;">
-                <button class="nav-tab" onclick="toggleDropdown('categoriesDropdownList', event)">
-                    <i class="fa-solid fa-layer-group"></i> All Categories <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem; margin-left: 4px;"></i>
-                </button>
-                <div id="categoriesDropdownList" style="display: none; position: absolute; top: 100%; left: 0; background: #1e1e1e; min-width: 240px; border-radius: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.7); z-index: 9999; margin-top: 6px; max-height: 300px; overflow-y: auto; border: 1px solid rgba(255,255,255,0.15);">
-                    ${categoriesListHTML}
-                </div>
-            </div>
-            <div class="gametype-dropdown-wrapper" style="position: relative; display: inline-block;">
-                <button class="nav-tab" onclick="toggleDropdown('gameTypesDropdownList', event)">
-                    <i class="fa-solid fa-gamepad"></i> Game Type <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem; margin-left: 4px;"></i>
-                </button>
-                <div id="gameTypesDropdownList" style="display: none; position: absolute; top: 100%; left: 0; background: #1e1e1e; min-width: 260px; border-radius: 10px; box-shadow: 0 10px 30px rgba(0,0,0,0.7); z-index: 9999; margin-top: 6px; max-height: 300px; overflow-y: auto; border: 1px solid rgba(255,255,255,0.15);">
-                    ${gameTypesListHTML}
-                </div>
-            </div>
+            <button class="nav-tab nav-dropdown-btn" onclick="toggleFloatingDropdown(event, 'categories-dropdown-menu', \`${escapeHtml(categoriesListHTML)}\`)">
+                <i class="fa-solid fa-layer-group"></i> All Categories <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem; margin-left: 4px;"></i>
+            </button>
+            <button class="nav-tab nav-dropdown-btn" onclick="toggleFloatingDropdown(event, 'gametypes-dropdown-menu', \`${escapeHtml(gameTypesListHTML)}\`)">
+                <i class="fa-solid fa-gamepad"></i> Game Type <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem; margin-left: 4px;"></i>
+            </button>
         </div>
     `;
 }
 
-function toggleDropdown(elementId, e) {
-    e.stopPropagation();
-    const otherId = elementId === 'categoriesDropdownList' ? 'gameTypesDropdownList' : 'categoriesDropdownList';
-    const otherEl = document.getElementById(otherId);
-    if (otherEl) otherEl.style.display = 'none';
-
-    const dropdownList = document.getElementById(elementId);
-    if (dropdownList) {
-        dropdownList.style.display = dropdownList.style.display === 'block' ? 'none' : 'block';
-    }
+function escapeHtml(str) {
+    return str.replace(/"/g, '&quot;').replace(/'/g, '&#39;');
 }
-window.toggleDropdown = toggleDropdown;
+
+function toggleFloatingDropdown(event, menuId, htmlContent) {
+    event.stopPropagation();
+    
+    let existingMenu = document.getElementById(menuId);
+    if (existingMenu) {
+        existingMenu.remove();
+        return;
+    }
+
+    closeAllDropdowns();
+
+    const btnRect = event.currentTarget.getBoundingClientRect();
+
+    const dropdown = document.createElement('div');
+    dropdown.id = menuId;
+    dropdown.className = 'global-floating-dropdown';
+    dropdown.innerHTML = htmlContent;
+    
+    dropdown.style.position = 'fixed';
+    dropdown.style.top = `${btnRect.bottom + 8}px`;
+    dropdown.style.left = `${btnRect.left}px`;
+    dropdown.style.background = '#18181c';
+    dropdown.style.minWidth = '240px';
+    dropdown.style.maxHeight = '320px';
+    dropdown.style.overflowY = 'auto';
+    dropdown.style.borderRadius = '12px';
+    dropdown.style.boxShadow = '0 15px 40px rgba(0,0,0,0.8)';
+    dropdown.style.zIndex = '99999';
+    dropdown.style.border = '1px solid rgba(255,255,255,0.15)';
+
+    document.body.appendChild(dropdown);
+}
+window.toggleFloatingDropdown = toggleFloatingDropdown;
+
+function closeAllDropdowns() {
+    document.querySelectorAll('.global-floating-dropdown').forEach(el => el.remove());
+}
+window.closeAllDropdowns = closeAllDropdowns;
 
 function filterByCategory(category) {
     const lowerCat = category.toLowerCase();
@@ -291,13 +304,6 @@ function filterByFranchise(franchiseKeyword) {
     renderGameStore(filteredGames);
 }
 window.filterByFranchise = filterByFranchise;
-
-function closeAllDropdowns() {
-    const catList = document.getElementById('categoriesDropdownList');
-    if (catList) catList.style.display = 'none';
-    const gameList = document.getElementById('gameTypesDropdownList');
-    if (gameList) gameList.style.display = 'none';
-}
 
 function renderFeaturedMarquee(sliderGames) {
     const track = document.getElementById("featuredTrack");
@@ -413,7 +419,6 @@ function renderGameStore(gameList) {
         const card = document.createElement("div");
         card.classList.add("game-card");
 
-        // Only IDs "1" and "2" are paid games
         const isPaid = String(game.id) === "1" || String(game.id) === "2";
         
         let actionBtnText = isPaid ? "Buy Now" : "Get";
@@ -517,11 +522,9 @@ function showPaymentOptionsModal(game) {
     document.getElementById('payment-modal-title').innerText = `Buy: ${game.title}`;
     document.getElementById('payment-modal-subtitle').innerHTML = `Choose how you want to purchase <b>${displayPrice}</b>. Selar supports card and mobile money, or you can order directly through Vodacom via WhatsApp.`;
 
-    // Extract Selar link from game.parts[0] (or fallback)
     const selarLink = (game.parts && game.parts.length > 0 && game.parts[0].startsWith('http')) ? game.parts[0] : "https://selar.co/m/SquadGamesTZ";
     document.getElementById('selar-pay-btn').href = selarLink;
 
-    // Set WhatsApp Vodacom Link
     const orderMessage = encodeURIComponent(`Hello SquadGames, I want to buy ${game.title} (${game.platform}) using Vodacom mobile money.`);
     document.getElementById('vodacom-pay-btn').href = `https://wa.me/255692752060?text=${orderMessage}`;
 
