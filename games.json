@@ -1180,5 +1180,31 @@
         "images/tr3.png"
     ],
     "downloadUrl": "https://www.mediafire.com/file/ceoxolgxh67kwfn/Tomb_Raider_2013_-_%2528Www.ApunKaGames.Com%2529.rar/file"
-  }
+  },
+  {
+    "id": "52",
+    "title": "Tom Clancy’s Ghost Recon: Wildlands",
+    "platform": "PC",
+    "category": "Action, Adventure, Shooting",
+    "description": "Tom Clancy's Ghost Recon: Wildlands, developed by Ubisoft Paris and published by Ubisoft for Windows on March 7, 2017, is a 36.6 GB open-world tactical shooter video game that places players in the role of the \"Ghosts\"—an elite U.S. Army special operations unit—tasked with dismantling a powerful drug cartel in a massive, modern-day Bolivia. The gameplay blends third-person exploration and tactical gunplay with an optional first-person aiming view, emphasizing cooperative strategy, authentic military gear, and customizable equipment like tactical reconnaissance drones to plan and execute operations.",
+    "requirements": "OS: Windows 7 SP1/8.1/10 (64-bit versions only)<br>Processor: Intel Core i5-2400S @ 2.5 GHz or AMD FX-4320 @ 4 GHz or equivalent<br>RAM: 6 GB<br>Hard Drive: 50 GB available space<br>Video Card: NVIDIA GeForce GTX660 / AMD R9 270X (2GB VRAM with Shader Model 5.0 or better)<br>Sound Card:<br>DirectX-compatible using the latest drivers",
+    "installGuide": "",
+    "price": "FREE",
+    "image": "images/tcgr.png",
+    "screenshots": [
+        "images/tcgr1.png",
+        "images/tcgr2.png",
+        "images/tcgr3.png"
+    ],
+    "downloadParts": [
+        { "name": "Part 1", "url": "https://thefileslocker.net/v7o9n2qudnm3.html" },
+        { "name": "Part 2", "url": "https://thefileslocker.net/aoud52b3gbhi.html" },
+        { "name": "Part 3", "url": "https://thefileslocker.net/mofdv7uexgb9.html" },
+        { "name": "Part 4", "url": "https://thefileslocker.net/e1cnnxgso7fo.html" },
+        { "name": "Part 5", "url": "https://thefileslocker.net/p4rgodu6rs15.html" },
+        { "name": "Part 6", "url": "https://thefileslocker.net/lzlmg07thwjd.html" },
+        { "name": "Part 7", "url": "https://thefileslocker.net/6a4yxn4yzvmo.html" },
+        { "name": "Part 8", "url": "https://thefileslocker.net/6a4yxn4yzvmo.html" }
+    ]
+}
 ]
