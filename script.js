@@ -1,15 +1,16 @@
 /**
  * Squad Games Store TZ - Core Application Script
- * Synchronized with ApunKaGames Layout: Hero Featured Slider, Latest Games Grid, Text Popular Posts Sidebar, and Checkout Modals.
+ * Features: 3-Second Automatic Hero Slider, Curated Featured Games, Text Popular Posts Sidebar, and Checkout Modals.
  */
 
 let loadedGamesData = [];
 let currentSearchQuery = "";
 let currentCategory = "all";
 
-// Hero Slider State
+// Hero Slider State & Autoplay Timer
 let currentFeaturedIndex = 0;
 let featuredSliderList = [];
+let autoplayInterval = null;
 
 document.addEventListener("DOMContentLoaded", () => {
     console.log("Squad Games Store initialized successfully.");
@@ -30,7 +31,6 @@ document.addEventListener("DOMContentLoaded", () => {
             localStorage.setItem('scrollPosition', window.scrollY);
         }
         
-        // Close floating dropdowns if clicked outside
         if (!e.target.closest('.nav-dropdown-btn') && !e.target.closest('.global-floating-dropdown')) {
             closeAllDropdowns();
         }
@@ -91,7 +91,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 /**
- * Smart Helper: Automatically extracts file size from game data if 'size' property is missing
+ * Smart Helper: Extracts file size from game data if 'size' property is missing
  */
 function getGameSize(game) {
     if (game.size) return game.size;
@@ -143,14 +143,23 @@ function initStore(games) {
 
     renderNavbarDropdowns(games);
 
-    // Initialize ApunKaGames Layout Components
-    const featuredGames = games.filter(game => {
+    // Filter or match your requested custom Featured Games list
+    const featuredKeywords = [
+        "euro truck simulator 2", "truckers of europe", "nfs heat", 
+        "gta v", "gta 5", "fifa 22", "spider-man", "last of us", 
+        "carx street", "black ops iii", "tomb raider"
+    ];
+
+    let matchedFeatured = games.filter(game => {
         const title = (game.title || "").toLowerCase();
-        return title.includes("modern warfare") || title.includes("spider-man") || title.includes("gta v") || title.includes("heat") || title.includes("fifa 22") || title.includes("black ops");
+        return featuredKeywords.some(keyword => title.includes(keyword));
     });
+
+    // Fallback if some games aren't in games.json yet so the slider is never empty
+    featuredSliderList = matchedFeatured.length >= 3 ? matchedFeatured : games.slice(0, 10);
     
-    featuredSliderList = featuredGames.length ? featuredGames : games.slice(0, 8);
     updateHeroSlider(0);
+    initAutoplay();
 
     renderLatestGamesAdded(games.slice(0, 12));
     renderPopularPostsTextSidebar(games);
@@ -167,7 +176,7 @@ function initStore(games) {
 }
 
 /**
- * Hero Featured Slider Functions
+ * Hero Featured Slider & 3-Second Autoplay Functions
  */
 function updateHeroSlider(index) {
     if (!featuredSliderList.length) return;
@@ -183,6 +192,7 @@ function updateHeroSlider(index) {
 
 function moveFeaturedSlide(direction) {
     updateHeroSlider(currentFeaturedIndex + direction);
+    resetAutoplay(); // Reset timer when user manually clicks arrows
 }
 window.moveFeaturedSlide = moveFeaturedSlide;
 
@@ -193,6 +203,29 @@ function openFeaturedDetails() {
     }
 }
 window.openFeaturedDetails = openFeaturedDetails;
+
+function initAutoplay() {
+    if (autoplayInterval) clearInterval(autoplayInterval);
+    autoplayInterval = setInterval(() => {
+        moveFeaturedSlide(1);
+    }, 3000); // 3 seconds interval
+
+    // Pause autoplay when mouse hovers over the slider wrapper
+    const sliderWrapper = document.querySelector('.hero-slider-wrapper');
+    if (sliderWrapper) {
+        sliderWrapper.addEventListener('mouseenter', () => {
+            clearInterval(autoplayInterval);
+        });
+        sliderWrapper.addEventListener('mouseleave', () => {
+            initAutoplay();
+        });
+    }
+}
+
+function resetAutoplay() {
+    clearInterval(autoplayInterval);
+    initAutoplay();
+}
 
 function renderLatestGamesAdded(games) {
     const container = document.getElementById('latestGamesGrid');
@@ -259,10 +292,11 @@ function renderNavbarDropdowns(games) {
         else if (title.includes("gta") || title.includes("grand theft auto")) franchiseName = "Grand Theft Auto (GTA)";
         else if (title.includes("euro truck") || title.includes("truckers")) franchiseName = "Truck Simulator";
         else if (title.includes("spider-man") || title.includes("spiderman")) franchiseName = "Spider-Man";
-        else if (title.includes("call of duty") || title.includes("black ops") || title.includes("advanced warfare") || title.includes("vanguard") || title.includes("ghosts")) franchiseName = "Call of Duty";
-        else if (title.includes("fifa") || title.includes("pes") || title.includes("pro evolution soccer")) franchiseName = "Football / Sports";
+        else if (title.includes("call of duty") || title.includes("black ops") || title.includes("advanced warfare")) franchiseName = "Call of Duty";
+        else if (title.includes("fifa") || title.includes("pes")) franchiseName = "Football / Sports";
         else if (title.includes("tomb raider")) franchiseName = "Tomb Raider";
         else if (title.includes("the last of us")) franchiseName = "The Last of Us";
+        else if (title.includes("carx")) franchiseName = "CarX Street";
         else {
             franchiseName = game.category ? game.category.split('/')[0].trim() : (game.platform || "PC Action");
         }
@@ -359,14 +393,10 @@ function filterByFranchise(franchiseKeyword) {
 
     const filteredGames = loadedGamesData.filter(game => {
         const title = (game.title || "").toLowerCase();
-        if (lowerKey.includes("need for speed")) return title.includes("need for speed") || title.includes("nfs");
-        if (lowerKey.includes("grand theft auto")) return title.includes("gta") || title.includes("grand theft auto");
         if (lowerKey.includes("truck")) return title.includes("euro truck") || title.includes("truckers");
+        if (lowerKey.includes("grand theft auto")) return title.includes("gta") || title.includes("grand theft auto");
         if (lowerKey.includes("spider-man")) return title.includes("spider-man") || title.includes("spiderman");
-        if (lowerKey.includes("call of duty")) return title.includes("call of duty") || title.includes("black ops") || title.includes("advanced warfare");
-        if (lowerKey.includes("football")) return title.includes("fifa") || title.includes("pes");
-        if (lowerKey.includes("tomb raider")) return title.includes("tomb raider");
-        if (lowerKey.includes("the last of us")) return title.includes("the last of us");
+        if (lowerKey.includes("call of duty")) return title.includes("call of duty") || title.includes("black ops");
         return title.includes(lowerKey) || (game.category || "").toLowerCase().includes(lowerKey);
     });
 
@@ -581,7 +611,7 @@ function showDownloadPartsModal(game) {
         `;
     }).join('');
 
-    modal.classList.add('active');
+modal.classList.add('active');
 }
 window.showDownloadPartsModal = showDownloadPartsModal;
 
