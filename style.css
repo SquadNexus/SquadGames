@@ -19,7 +19,7 @@ body {
     -webkit-font-smoothing: antialiased;
 }
 
-/* Top Utility Header Bar (ApunKaGames Style) */
+/* Top Utility Header Bar (ApunKaGames Style)[cite: 16] */
 .top-utility-bar {
     background: #0b0b0e;
     border-bottom: 1px solid rgba(255, 255, 255, 0.08);
@@ -62,7 +62,7 @@ body {
     font-weight: 600;
 }
 
-/* Permanent Portal Header & Styled Navigation Box */
+/* Permanent Portal Header & Styled Navigation Box[cite: 16] */
 .portal-header-wrapper {
     background: var(--bg-card);
     border: 1px solid var(--border-color);
@@ -92,7 +92,7 @@ body {
     margin: 0;
 }
 
-/* Sleek Modern Search Box Styling */
+/* Sleek Modern Search Box Styling[cite: 16] */
 .portal-search-wrapper {
     position: relative;
     width: 300px;
@@ -177,7 +177,7 @@ body {
     box-shadow: 0 4px 15px rgba(0, 122, 255, 0.4);
 }
 
-/* Main Container & ApunKaGames Style Two-Column Grid Layout */
+/* Main Container & ApunKaGames Style Two-Column Grid Layout[cite: 16] */
 .container {
     max-width: 1200px;
     margin: 0 auto;
@@ -186,7 +186,7 @@ body {
 
 .portal-layout-grid {
     display: grid;
-    grid-template-columns: 1fr 310px; /* Left content area + Right Sidebar */
+    grid-template-columns: 1fr 310px;
     gap: 24px;
     align-items: start;
 }
@@ -229,7 +229,7 @@ body {
     letter-spacing: 0.5px;
 }
 
-/* ApunKaGames Style Hero Featured Slider */
+/* ApunKaGames Style Hero Featured Slider[cite: 16] */
 .apunka-featured-box, .apunka-section-box {
     background: var(--bg-card);
     border: 1px solid var(--border-color);
@@ -304,7 +304,7 @@ body {
     letter-spacing: 0.3px;
 }
 
-/* Latest Games Added Compact Grid (Horizontal Row Cards) */
+/* Latest Games Added Compact Grid (Horizontal Row Cards)[cite: 16] */
 .latest-games-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -371,7 +371,7 @@ body {
     margin-top: 3px;
 }
 
-/* Popular Posts Text Sidebar */
+/* Popular Posts Text Sidebar[cite: 16] */
 .popular-posts-text-list {
     display: flex;
     flex-direction: column;
@@ -398,7 +398,7 @@ body {
     padding-left: 6px;
 }
 
-/* Trust Bar */
+/* Trust Bar[cite: 16] */
 .trust-bar {
     display: flex;
     justify-content: space-around;
@@ -420,7 +420,7 @@ body {
     gap: 8px;
 }
 
-/* Strict 4-Column Game Catalog Grid (4 items per line, 2 rows = 8 games total) */
+/* Strict 4-Column Game Catalog Grid (4 items per line, 2 rows = 8 games total)[cite: 16] */
 .game-grid {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -439,7 +439,7 @@ body {
     }
 }
 
-/* Game Card */
+/* Game Card[cite: 16] */
 .game-card {
     background: var(--bg-card);
     border: 1px solid var(--border-color);
@@ -592,7 +592,7 @@ body {
     color: #ffffff;
 }
 
-/* Modal and Lightbox Styles */
+/* Modal and Lightbox Styles[cite: 16] */
 .modal-overlay, .fullscreen-overlay {
     position: fixed;
     top: 0;
@@ -631,7 +631,36 @@ body {
     cursor: pointer;
 }
 
-/* Professional Footer Styling */
+/* Uniform Screenshots Gallery Styling (Fixed Height & Uniform Resolution) */
+.apunka-screenshots-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-bottom: 24px;
+}
+
+.shot-wrapper {
+    width: 100%;
+    height: 280px;
+    border-radius: 10px;
+    overflow: hidden;
+    background: #000;
+    cursor: pointer;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.shot-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+}
+
+.shot-wrapper:hover img {
+    transform: scale(1.04);
+}
+
+/* Professional Footer Styling[cite: 16] */
 .portal-professional-footer {
     background: var(--bg-card);
     border: 1px solid var(--border-color);
