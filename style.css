@@ -193,7 +193,7 @@ body {
 
 @media (max-width: 992px) {
     .portal-layout-grid {
-        grid-template-columns: 1fr; /* Stacks nicely on tablets and mobile */
+        grid-template-columns: 1fr; 
     }
 }
 
@@ -420,11 +420,23 @@ body {
     gap: 8px;
 }
 
-/* Game Cards Grid */
+/* Strict 4-Column Game Catalog Grid (4 items per line, 2 rows = 8 games total) */
 .game-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
-    gap: 18px;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 16px;
+}
+
+@media (max-width: 992px) {
+    .game-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 576px) {
+    .game-grid {
+        grid-template-columns: repeat(1, minmax(0, 1fr));
+    }
 }
 
 /* Game Card */
