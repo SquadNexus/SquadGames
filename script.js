@@ -1,11 +1,15 @@
 /**
  * Squad Games Store TZ - Core Application Script
- * Fully synchronized with dynamic categories, clean franchise filters, floating dropdowns, dual payment options, and smart auto-size detection.
+ * Synchronized with ApunKaGames Layout: Hero Featured Slider, Latest Games Grid, Text Popular Posts Sidebar, and Checkout Modals.
  */
 
 let loadedGamesData = [];
 let currentSearchQuery = "";
 let currentCategory = "all";
+
+// Hero Slider State
+let currentFeaturedIndex = 0;
+let featuredSliderList = [];
 
 document.addEventListener("DOMContentLoaded", () => {
     console.log("Squad Games Store initialized successfully.");
@@ -22,7 +26,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // 2. Save scroll position on action/details click & close dropdowns on outside click
     document.addEventListener('click', function(e) {
-        if (e.target.closest('.btn-action') || e.target.closest('.btn-details')) {
+        if (e.target.closest('.btn-action') || e.target.closest('.btn-details') || e.target.closest('.hero-slider-img-container')) {
             localStorage.setItem('scrollPosition', window.scrollY);
         }
         
@@ -90,12 +94,9 @@ document.addEventListener("DOMContentLoaded", () => {
  * Smart Helper: Automatically extracts file size from game data if 'size' property is missing
  */
 function getGameSize(game) {
-    if (game.size) return game.size; // If explicitly defined in JSON
-    
-    // Search both description and requirements for patterns like "25 GB", "70.5 GB", "512 MB"
+    if (game.size) return game.size;
     const textToSearch = (game.description || '') + ' ' + (game.requirements || '');
     const match = textToSearch.match(/(\d+(\.\d+)?\s*(GB|MB))/i);
-    
     return match ? match[0] : 'N/A';
 }
 window.getGameSize = getGameSize;
@@ -142,26 +143,17 @@ function initStore(games) {
 
     renderNavbarDropdowns(games);
 
+    // Initialize ApunKaGames Layout Components
     const featuredGames = games.filter(game => {
         const title = (game.title || "").toLowerCase();
-        if (title.includes("1.57")) return false;
-        const isEtsTanzaniaOrMobile = title.includes("euro truck") && (title.includes("tanzania") || title.includes("tz") || title.includes("mobile") || title.includes("android"));
-        return isEtsTanzaniaOrMobile || 
-               title.includes("spider-man") || 
-               title.includes("gta v") || 
-               title.includes("gta 5") || 
-               title.includes("heat") || 
-               title.includes("fifa 22") || 
-               title.includes("black ops 3");
+        return title.includes("modern warfare") || title.includes("spider-man") || title.includes("gta v") || title.includes("heat") || title.includes("fifa 22") || title.includes("black ops");
     });
     
-    renderFeaturedMarquee(featuredGames.length ? featuredGames : games); 
+    featuredSliderList = featuredGames.length ? featuredGames : games.slice(0, 8);
+    updateHeroSlider(0);
 
-    const popularGames = games.filter(game => {
-        const title = (game.title || "").toLowerCase();
-        return title.includes("euro truck simulator") || title.includes("gta") || title.includes("spider-man");
-    });
-    renderPopularList(popularGames.length ? popularGames : games);
+    renderLatestGamesAdded(games.slice(0, 12));
+    renderPopularPostsTextSidebar(games);
 
     applyFilters(); 
 
@@ -175,7 +167,72 @@ function initStore(games) {
 }
 
 /**
- * Dynamically builds navbar dropdowns with future-proof categories and clean game franchises
+ * Hero Featured Slider Functions
+ */
+function updateHeroSlider(index) {
+    if (!featuredSliderList.length) return;
+    currentFeaturedIndex = (index + featuredSliderList.length) % featuredSliderList.length;
+    const game = featuredSliderList[currentFeaturedIndex];
+
+    const imgEl = document.getElementById('heroSliderImg');
+    const titleEl = document.getElementById('heroSliderTitle');
+
+    if (imgEl) imgEl.src = game.image || 'images/nfsmw-shot1.png';
+    if (titleEl) titleEl.innerText = game.title;
+}
+
+function moveFeaturedSlide(direction) {
+    updateHeroSlider(currentFeaturedIndex + direction);
+}
+window.moveFeaturedSlide = moveFeaturedSlide;
+
+function openFeaturedDetails() {
+    if (featuredSliderList.length > 0) {
+        const game = featuredSliderList[currentFeaturedIndex];
+        openDetailsById(game.id || game.title);
+    }
+}
+window.openFeaturedDetails = openFeaturedDetails;
+
+function renderLatestGamesAdded(games) {
+    const container = document.getElementById('latestGamesGrid');
+    if (!container) return;
+
+    container.innerHTML = games.map((game, idx) => {
+        const gameId = game.id || game.title;
+        const dates = ["October 9, 2026", "October 8, 2026", "October 7, 2026", "October 5, 2026"];
+        const gameDate = dates[idx % dates.length];
+
+        return `
+            <div class="latest-game-card" onclick="openDetailsById('${encodeURIComponent(gameId)}')">
+                <img src="${game.image}" alt="${game.title}" loading="lazy" onerror="this.src='images/nfsmw-shot1.png';">
+                <div class="latest-game-info">
+                    <h5>${game.title}</h5>
+                    <span>${gameDate}</span>
+                    <span class="badge-latest">Latest</span>
+                </div>
+            </div>
+        `;
+    }).join('');
+}
+
+function renderPopularPostsTextSidebar(games) {
+    const container = document.getElementById('popularPostsTextList');
+    if (!container) return;
+
+    const popularSubset = games.slice(0, 10);
+    container.innerHTML = popularSubset.map(game => {
+        const gameId = game.id || game.title;
+        return `
+            <a href="#" onclick="openDetailsById('${encodeURIComponent(gameId)}'); return false;" class="popular-text-item">
+                <i class="fa-solid fa-angle-right" style="font-size: 0.75rem; margin-right: 6px; color: #e50914;"></i> ${game.title}
+            </a>
+        `;
+    }).join('');
+}
+
+/**
+ * Dynamically builds navbar dropdowns
  */
 function renderNavbarDropdowns(games) {
     const container = document.getElementById('dynamic-game-types');
@@ -317,80 +374,6 @@ function filterByFranchise(franchiseKeyword) {
 }
 window.filterByFranchise = filterByFranchise;
 
-function renderFeaturedMarquee(sliderGames) {
-    const track = document.getElementById("featuredTrack");
-    if (!track) return;
-
-    const cardsHTML = sliderGames.map((game) => {
-        const gameId = game.id || game.title;
-        const gameSize = getGameSize(game);
-        return `
-            <div class="marquee-game-card">
-                <img class="marquee-game-img" src="${game.image}" alt="${game.title}" loading="lazy" onerror="this.src='images/nfsmw-shot1.png';">
-                <div class="marquee-game-content">
-                    <span class="marquee-game-badge">${game.platform || 'Game'} • ${gameSize}</span>
-                    <h4>${game.title}</h4>
-                    <p>${game.description || ''}</p>
-                    <div class="marquee-game-footer">
-                        <span class="marquee-price">${String(game.id) === "1" ? "TZS 20,000" : String(game.id) === "2" ? "TZS 10,000" : "FREE"}</span>
-                        <button class="btn-details" onclick="openDetailsById('${encodeURIComponent(gameId)}')" style="padding: 4px 8px; font-size: 0.75rem;">View</button>
-                    </div>
-                </div>
-            </div>
-        `;
-    }).join('');
-
-    track.innerHTML = cardsHTML + cardsHTML;
-    initSmoothMarquee(track);
-}
-
-function initSmoothMarquee(track) {
-    if (track.dataset.scrollingActive === "true") return;
-    track.dataset.scrollingActive = "true";
-
-    let scrollAmount = 0;
-    const speed = 1.0; 
-    let isPaused = false;
-
-    track.addEventListener('mouseenter', () => isPaused = true);
-    track.addEventListener('mouseleave', () => isPaused = false);
-    track.addEventListener('touchstart', () => isPaused = true);
-    track.addEventListener('touchend', () => isPaused = false);
-
-    function scrollStep() {
-        if (!isPaused) {
-            scrollAmount += speed;
-            if (scrollAmount >= track.scrollWidth / 2) {
-                scrollAmount = 0;
-            }
-            track.style.transform = `translateX(-${scrollAmount}px)`;
-        }
-        requestAnimationFrame(scrollStep);
-    }
-
-    requestAnimationFrame(scrollStep);
-}
-
-function renderPopularList(popularGames) {
-    const container = document.getElementById("popularList");
-    if (!container) return;
-
-    container.innerHTML = popularGames.map((game) => {
-        const gameId = game.id || game.title;
-        const displayPrice = String(game.id) === "1" ? "TZS 20,000" : String(game.id) === "2" ? "TZS 10,000" : "FREE";
-        return `
-            <div class="popular-item" onclick="openDetailsById('${encodeURIComponent(gameId)}')" style="cursor: pointer;">
-                <img src="${game.image}" alt="${game.title}" loading="lazy" onerror="this.src='images/nfsmw-shot1.png';">
-                <div class="popular-item-info">
-                    <h5>${game.title}</h5>
-                    <span>${displayPrice}</span>
-                </div>
-                <i class="fa-solid fa-chevron-right" style="font-size: 0.75rem; color: var(--text-muted);"></i>
-            </div>
-        `;
-    }).join('');
-}
-
 function applyFilters() {
     const filteredGames = loadedGamesData.filter(game => {
         const title = (game.title || "").toLowerCase();
@@ -508,13 +491,11 @@ function showPaymentOptionsModal(game) {
                 <p id="payment-modal-subtitle" style="color: #94a3b8; font-size: 0.85rem; margin-bottom: 20px; line-height: 1.4;">Select your preferred payment option below to complete your order securely.</p>
                 
                 <div style="display: flex; flex-direction: column; gap: 12px;">
-                    <!-- Selar Online Payment Option -->
                     <a id="selar-pay-btn" href="#" target="_blank" class="btn-action" style="background: linear-gradient(135deg, #007aff, #0056b3); padding: 14px 16px; border-radius: 10px; font-weight: bold; display: flex; align-items: center; justify-content: space-between; text-decoration: none; color: #fff; box-shadow: 0 4px 15px rgba(0,122,255,0.3);">
                         <span><i class="fa-solid fa-credit-card" style="margin-right: 8px;"></i> Pay Online via Selar</span>
                         <i class="fa-solid fa-external-link-alt" style="font-size: 0.8rem;"></i>
                     </a>
 
-                    <!-- Vodacom WhatsApp Payment Option -->
                     <a id="vodacom-pay-btn" href="#" target="_blank" class="btn-action" style="background: linear-gradient(135deg, #25d366, #128c7e); padding: 14px 16px; border-radius: 10px; font-weight: bold; display: flex; align-items: center; justify-content: space-between; text-decoration: none; color: #fff; box-shadow: 0 4px 15px rgba(37,211,102,0.3);">
                         <span><i class="fa-brands fa-whatsapp" style="margin-right: 8px; font-size: 1.1rem;"></i> Pay via Vodacom (WhatsApp)</span>
                         <i class="fa-solid fa-arrow-right" style="font-size: 0.8rem;"></i>
