@@ -1,118 +1,83 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Squad Games Store TZ - PC & Mobile Games Portal</title>
-    <!-- FontAwesome Icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-
-    <!-- Top Utility Link Bar (ApunKaGames Style Header) -->
-    <div class="top-utility-bar">
-        <div class="top-utility-container">
-            <div class="top-links">
-                <a href="index.html"><i class="fa-solid fa-house"></i> Home</a>
-                <a href="#games-grid"><i class="fa-solid fa-gamepad"></i> PC Games List</a>
-                <a href="https://wa.me/255692752060?text=Hello%20SquadGames%2C%20I%20want%20to%20request%20a%20game." target="_blank"><i class="fa-solid fa-paper-plane"></i> Request Game</a>
-                <a href="https://wa.me/255692752060?text=Hello%20SquadGames%2C%20I%20need%20help%20with%20installation." target="_blank"><i class="fa-solid fa-circle-question"></i> How to Download</a>
-                <a href="https://wa.me/255692752060?text=Hello%20SquadGames" target="_blank"><i class="fa-solid fa-headset"></i> Contact Us</a>
-            </div>
-            <div class="top-social-badge">
-                <span><i class="fa-solid fa-shield-halved" style="color: #22c55e;"></i> TZ Verified Store</span>
-            </div>
+<!-- Top Utility Link Bar -->
+<div class="top-utility-bar">
+    <div class="top-utility-container">
+        <div class="top-links">
+            <a href="index.html"><i class="fa-solid fa-house"></i> Home</a>
+            <a href="#games-grid"><i class="fa-solid fa-gamepad"></i> PC Games List</a>
+            <a href="https://wa.me/255692752060?text=Hello%20SquadGames%2C%20I%20want%20to%20request%20a%20game." target="_blank"><i class="fa-solid fa-paper-plane"></i> Request Game</a>
+            <a href="https://wa.me/255692752060?text=Hello%20SquadGames%2C%20I%20need%20help%20with%20installation." target="_blank"><i class="fa-solid fa-circle-question"></i> How to Download</a>
+            <a href="https://wa.me/255692752060?text=Hello%20SquadGames" target="_blank"><i class="fa-solid fa-headset"></i> Contact Us</a>
+        </div>
+        <div class="top-social-badge">
+            <span><i class="fa-solid fa-shield-halved" style="color: #22c55e;"></i> TZ Verified Store</span>
         </div>
     </div>
+</div>
 
-    <!-- Main Container -->
-    <div class="container">
-
-        <!-- Permanent Portal Header & Styled Navigation Box -->
-        <div class="portal-header-wrapper">
-            <div class="portal-logo-area">
-                <h1 class="portal-logo">Squad Games Store TZ</h1>
-
-                <!-- Sleek Modern Search Box Styling -->
-                <div class="portal-search-wrapper">
-                    <i class="fa-solid fa-magnifying-glass search-icon"></i>
-                    <input type="text" id="gameSearchInput" placeholder="Search games, mods, simulator...">
-                </div>
-            </div>
-
-            <!-- Portal Navigation Container (Dynamic Expandable Dropdowns & Categories) -->
-            <div id="dynamic-game-types" class="portal-navbar">
-                <!-- Dropdown buttons load here dynamically via JavaScript -->
+<div class="container">
+    <!-- Header & Search -->
+    <div class="portal-header-wrapper">
+        <div class="portal-logo-area">
+            <h1 class="portal-logo">Squad Games Store TZ</h1>
+            <div class="portal-search-wrapper">
+                <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                <input type="text" id="gameSearchInput" placeholder="Search games, mods, simulator...">
             </div>
         </div>
+        <div id="dynamic-game-types" class="portal-navbar"></div>
+    </div>
 
-        <!-- ApunKaGames Style Two-Column Portal Layout -->
-        <div class="portal-layout-grid">
+    <!-- ApunKaGames Style Two-Column Portal Grid -->
+    <div class="portal-layout-grid">
+        
+        <!-- LEFT COLUMN: Featured Hero Slider & Latest Games -->
+        <div class="portal-main-content">
             
-            <!-- LEFT COLUMN: Featured Slider & Main Catalog -->
-            <div class="portal-main-content">
-                
-                <!-- Featured Marquee Section -->
-                <div class="featured-epic-wrapper">
-                    <h3 class="section-title"><i class="fa-solid fa-fire" style="color: #ff9500;"></i> Featured Games</h3>
-                    <div class="featured-marquee-container">
-                        <div id="featuredTrack" class="featured-marquee-track">
-                            <!-- Featured items load here via JavaScript -->
-                        </div>
+            <!-- 1. Featured Games Hero Slider with Arrows & Title Below -->
+            <div class="apunka-featured-box">
+                <h3 class="section-title"><span style="margin-right: 6px;">🎮</span> Featured Games</h3>
+                <div class="hero-slider-wrapper">
+                    <button class="slider-arrow slider-prev" onclick="moveFeaturedSlide(-1)"><i class="fa-solid fa-chevron-left"></i></button>
+                    <div id="heroSliderImageContainer" class="hero-slider-img-container" onclick="openFeaturedDetails()">
+                        <img id="heroSliderImg" src="" alt="Featured Game" class="hero-slider-img">
                     </div>
+                    <button class="slider-arrow slider-next" onclick="moveFeaturedSlide(1)"><i class="fa-solid fa-chevron-right"></i></button>
                 </div>
-
-                <!-- Trust Bar -->
-                <div class="trust-bar" style="margin-top: 20px;">
-                    <div class="trust-item"><span class="trust-icon">⚡</span> Fast Downloads</div>
-                    <div class="trust-item"><span class="trust-icon">🛡️</span> Verified Safe Files</div>
-                    <div class="trust-item"><span class="trust-icon">🇹🇿</span> Local TZ Support</div>
-                </div>
-
-                <!-- Main Game Catalog Grid Section -->
-                <section style="margin-top: 25px;">
-                    <h3 class="section-title"><i class="fa-solid fa-layer-group"></i> Latest Games Catalog</h3>
-                    <div id="games-grid" class="game-grid">
-                        <!-- Dynamic game cards load here via JavaScript -->
-                        <div class="loading-state">
-                            <div class="spinner"></div>
-                            <p>Loading games catalog...</p>
-                        </div>
-                    </div>
-                </section>
-
+                <h2 id="heroSliderTitle" class="hero-slider-title">Loading Featured Game...</h2>
             </div>
 
-            <!-- RIGHT COLUMN: Popular Posts Sidebar (ApunKaGames Style) -->
-            <div class="portal-sidebar">
-                <div class="sidebar-box">
-                    <h3 class="section-title sidebar-title"><i class="fa-solid fa-star" style="color: #f1c40f;"></i> Popular Posts</h3>
-                    <div id="popularList" class="popular-list">
-                        <!-- Popular items load here via JavaScript[cite: 12] -->
-                    </div>
+            <!-- 2. Latest Games Added Section (Horizontal Grid Cards with Dates & Badges) -->
+            <div class="apunka-section-box">
+                <h3 class="section-title"><span style="margin-right: 6px;">🔥</span> Latest Games Added</h3>
+                <div id="latestGamesGrid" class="latest-games-grid">
+                    <!-- Populated dynamically -->
                 </div>
+            </div>
 
-                <!-- Extra Sidebar Widget: Quick Help -->
-                <div class="sidebar-box" style="margin-top: 20px;">
-                    <h3 class="section-title sidebar-title"><i class="fa-solid fa-circle-info" style="color: #007aff;"></i> TZ Payment Info</h3>
-                    <p style="font-size: 0.82rem; color: var(--text-muted); line-height: 1.5; margin: 0;">
-                        Paid games like Tanzania ETS2 can be bought instantly via <b>Selar</b> online or directly through <b>Vodacom M-Pesa</b> via WhatsApp support!
-                    </p>
+            <!-- 3. Main Game Catalog Grid -->
+            <div class="apunka-section-box" style="margin-top: 20px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                    <h3 class="section-title" style="margin: 0;"><span style="margin-right: 6px;">🛒</span> Game Catalog & Store</h3>
+                </div>
+                <div id="games-grid" class="game-grid">
+                    <div class="loading-state">
+                        <div class="spinner"></div>
+                        <p>Loading catalog...</p>
+                    </div>
                 </div>
             </div>
 
         </div>
 
-    </div>
+        <!-- RIGHT COLUMN: Popular Posts Sidebar -->
+        <div class="portal-sidebar">
+            <div class="sidebar-box">
+                <h3 class="sidebar-title">Popular Posts</h3>
+                <div id="popularPostsTextList" class="popular-posts-text-list">
+                    <!-- Text links list matching reference image -->
+                </div>
+            </div>
+        </div>
 
-    <!-- Fullscreen Image Modal -->
-    <div id="fullscreen-overlay" class="fullscreen-overlay" onclick="closeFullScreen()">
-        <span class="fullscreen-close">&times;</span>
-        <img id="fullscreen-img" class="fullscreen-img" src="" alt="Fullscreen View">
     </div>
-
-    <!-- Script File -->
-    <script src="script.js"></script>
-</body>
-</html>
+</div>
