@@ -43,16 +43,11 @@
                 <!-- Main Article Box -->
                 <div class="apunka-article-box">
                     
-                    <!-- Title & Meta Info -->
+                    <!-- Title Only (Meta info removed per request) -->
                     <h1 id="gameTitle" class="apunka-game-title">Loading Game Details...</h1>
-                    <div class="apunka-post-meta">
-                        <span><i class="fa-regular fa-calendar"></i> October 9, 2026</span> • 
-                        <span><i class="fa-regular fa-user"></i> by <b>SquadGamesTZ</b></span> • 
-                        <span><i class="fa-regular fa-comments"></i> 343 Comments</span>
-                    </div>
 
                     <!-- Featured Cover Image -->
-                    <div class="apunka-cover-wrapper" onclick="openFullScreenImg()">
+                    <div class="apunka-cover-wrapper" onclick="openFullScreenImg()" style="margin-top: 16px;">
                         <img id="gameCoverImg" src="" alt="Game Cover" class="apunka-cover-img">
                     </div>
 
@@ -111,9 +106,9 @@
                         
                         <div class="apunka-download-box-card">
                             <h2 id="downloadBoxTitle">Download Game</h2>
-                            <a id="mainDownloadBtn" href="#" target="_blank" class="btn-apunka-download">
+                            <button id="mainDownloadBtn" onclick="handleMainDownloadClick()" class="btn-apunka-download">
                                 <i class="fa-solid fa-download"></i> Click Here to Download This Game
-                            </a>
+                            </button>
                             <div class="download-meta-info">
                                 <span><b>Game Size:</b> <span id="gameSizeText">35.7 GB</span></span>
                                 <span><b>Password:</b> www.squadgamestz.com / apunkagames</span>
@@ -154,6 +149,8 @@
 
     <!-- Details Page Logic Script -->
     <script>
+        let currentGameData = null;
+
         document.addEventListener("DOMContentLoaded", async () => {
             const urlParams = new URLSearchParams(window.location.search);
             const gameId = urlParams.get('id');
@@ -168,41 +165,32 @@
                 const rawData = await response.json();
                 let gamesArray = Array.isArray(rawData) ? rawData : (rawData.games || rawData.data || Object.values(rawData).find(Array.isArray) || []);
 
-                const game = gamesArray.find(g => String(g.id || g.title) === decodeURIComponent(gameId));
+                currentGameData = gamesArray.find(g => String(g.id || g.title) === decodeURIComponent(gameId));
 
-                if (!game) {
+                if (!currentGameData) {
                     document.getElementById('gameTitle').innerText = "Game Not Found in Catalog";
                     return;
                 }
 
                 // Populate Details
-                document.title = `${game.title} - Squad Games Store TZ`;
-                document.getElementById('crumbCategory').innerText = (game.category || game.platform || "PC GAME").toUpperCase();
-                document.getElementById('crumbTitle').innerText = game.title.toUpperCase();
-                document.getElementById('gameTitle').innerText = game.title;
+                document.title = `${currentGameData.title} - Squad Games Store TZ`;
+                document.getElementById('crumbCategory').innerText = (currentGameData.category || currentGameData.platform || "PC GAME").toUpperCase();
+                document.getElementById('crumbTitle').innerText = currentGameData.title.toUpperCase();
+                document.getElementById('gameTitle').innerText = currentGameData.title;
                 
-                const coverImg = game.image || 'images/nfsmw-shot1.png';
+                const coverImg = currentGameData.image || 'images/nfsmw-shot1.png';
                 document.getElementById('gameCoverImg').src = coverImg;
 
                 document.getElementById('gameOverviewText').innerHTML = `
-                    <p><b>${game.title} (${game.platform || "PC"})</b> — ${game.description || "Experience high-definition gaming with immersive gameplay, stunning visuals, and incredible missions."}</p>
+                    <p><b>${currentGameData.title} (${currentGameData.platform || "PC"})</b> — ${currentGameData.description || "Experience high-definition gaming with immersive gameplay, stunning visuals, and incredible missions."}</p>
                     <p>Developed and published with high performance standards. Enjoy seamless controls, custom mods support, and optimized performance for your machine.</p>
                 `;
 
-                document.getElementById('gameSizeText').innerText = game.size || "35.7 GB";
-                
-                const downloadBtn = document.getElementById('mainDownloadBtn');
-                if (game.downloadUrl) {
-                    downloadBtn.href = game.downloadUrl;
-                } else if (game.parts && game.parts.length > 0) {
-                    downloadBtn.href = game.parts[0];
-                } else {
-                    downloadBtn.href = "https://wa.me/255692752060?text=Hello%20SquadGames%2C%20I%20want%20to%20download%20" + encodeURIComponent(game.title);
-                }
+                document.getElementById('gameSizeText').innerText = currentGameData.size || "35.7 GB";
 
                 // Screenshots
                 const gallery = document.getElementById('screenshotsGallery');
-                let shots = game.screenshots || [coverImg, coverImg, coverImg];
+                let shots = currentGameData.screenshots || [coverImg, coverImg, coverImg];
                 gallery.innerHTML = shots.map(shot => `
                     <div class="shot-wrapper" onclick="openFullScreenImgCustom('${shot}')">
                         <img src="${shot}" alt="Gameplay Screenshot" loading="lazy">
@@ -222,6 +210,115 @@
                 document.getElementById('gameTitle').innerText = "Error Loading Game Details";
             }
         });
+
+        function handleMainDownloadClick() {
+            if (!currentGameData) return;
+
+            const isPaid = String(currentGameData.id) === "1" || String(currentGameData.id) === "2";
+            if (isPaid) {
+                showPaymentOptionsModal(currentGameData);
+                return;
+            }
+
+            const partsArray = currentGameData.parts || currentGameData.downloadParts;
+            if (partsArray && partsArray.length > 0) {
+                showDownloadPartsModal(currentGameData);
+            } else if (currentGameData.downloadUrl) {
+                window.open(currentGameData.downloadUrl, '_blank');
+            } else {
+                alert("Download links are currently being updated for this game.");
+            }
+        }
+
+        function showPaymentOptionsModal(game) {
+            let modal = document.getElementById('payment-options-modal');
+            if (!modal) {
+                modal = document.createElement('div');
+                modal.id = 'payment-options-modal';
+                modal.className = 'modal-overlay';
+                modal.innerHTML = `
+                    <div class="modal-content" style="max-width: 440px; background: #16161a; padding: 25px; border-radius: 14px; color: #fff; position: relative; box-shadow: 0 15px 35px rgba(0,0,0,0.8); border: 1px solid rgba(255,255,255,0.12);">
+                        <button onclick="closePaymentOptionsModal()" style="position: absolute; top: 15px; right: 15px; background: none; border: none; color: #aaa; font-size: 1.2rem; cursor: pointer;"><i class="fa-solid fa-xmark"></i></button>
+                        <h3 id="payment-modal-title" style="margin-top: 0; margin-bottom: 8px; font-size: 1.25rem; color: #fff;">Choose Payment Method</h3>
+                        <p id="payment-modal-subtitle" style="color: #94a3b8; font-size: 0.85rem; margin-bottom: 20px; line-height: 1.4;">Select your preferred payment option below to complete your order securely.</p>
+                        
+                        <div style="display: flex; flex-direction: column; gap: 12px;">
+                            <a id="selar-pay-btn" href="#" target="_blank" class="btn-action" style="background: linear-gradient(135deg, #007aff, #0056b3); padding: 14px 16px; border-radius: 10px; font-weight: bold; display: flex; align-items: center; justify-content: space-between; text-decoration: none; color: #fff; box-shadow: 0 4px 15px rgba(0,122,255,0.3);">
+                                <span><i class="fa-solid fa-credit-card" style="margin-right: 8px;"></i> Pay Online via Selar</span>
+                                <i class="fa-solid fa-external-link-alt" style="font-size: 0.8rem;"></i>
+                            </a>
+
+                            <a id="vodacom-pay-btn" href="#" target="_blank" class="btn-action" style="background: linear-gradient(135deg, #25d366, #128c7e); padding: 14px 16px; border-radius: 10px; font-weight: bold; display: flex; align-items: center; justify-content: space-between; text-decoration: none; color: #fff; box-shadow: 0 4px 15px rgba(37,211,102,0.3);">
+                                <span><i class="fa-brands fa-whatsapp" style="margin-right: 8px; font-size: 1.1rem;"></i> Pay via Vodacom (WhatsApp)</span>
+                                <i class="fa-solid fa-arrow-right" style="font-size: 0.8rem;"></i>
+                            </a>
+                        </div>
+                    </div>
+                `;
+                document.body.appendChild(modal);
+                modal.addEventListener('click', (e) => { if (e.target === modal) closePaymentOptionsModal(); });
+            }
+
+            const displayPrice = String(game.id) === "1" ? "TZS 20,000" : "TZS 10,000";
+            document.getElementById('payment-modal-title').innerText = `Buy: ${game.title}`;
+            document.getElementById('payment-modal-subtitle').innerHTML = `Choose how you want to purchase <b>${displayPrice}</b> via Selar or Vodacom M-Pesa.`;
+            document.getElementById('selar-pay-btn').href = "https://selar.co/m/SquadGamesTZ";
+            document.getElementById('vodacom-pay-btn').href = `https://wa.me/255692752060?text=${encodeURIComponent(`Hello SquadGames, I want to buy ${game.title} using Vodacom mobile money.`)}`;
+            modal.classList.add('active');
+        }
+
+        function closePaymentOptionsModal() {
+            const modal = document.getElementById('payment-options-modal');
+            if (modal) modal.classList.remove('active');
+        }
+
+        function showDownloadPartsModal(game) {
+            let modal = document.getElementById('download-parts-modal');
+            if (!modal) {
+                modal = document.createElement('div');
+                modal.id = 'download-parts-modal';
+                modal.className = 'modal-overlay';
+                modal.innerHTML = `
+                    <div class="modal-content" style="max-width: 450px; background: #16161a; padding: 25px; border-radius: 14px; color: #fff; position: relative; box-shadow: 0 15px 35px rgba(0,0,0,0.8); border: 1px solid rgba(255,255,255,0.12);">
+                        <button onclick="closeDownloadPartsModal()" style="position: absolute; top: 15px; right: 15px; background: none; border: none; color: #aaa; font-size: 1.2rem; cursor: pointer;"><i class="fa-solid fa-xmark"></i></button>
+                        <h3 id="parts-modal-title" style="margin-bottom: 8px; font-size: 1.25rem;">Select Download Part</h3>
+                        
+                        <p style="color: #f1c40f; font-size: 0.85rem; margin-bottom: 12px; font-weight: 600; line-height: 1.4;">
+                            <i class="fa-solid fa-triangle-exclamation"></i> To get this game you are required to download all these parts for proper installation.
+                        </p>
+                        <div id="parts-list-container" style="display: flex; flex-direction: column; gap: 10px;"></div>
+                    </div>
+                `;
+                document.body.appendChild(modal);
+                modal.addEventListener('click', (e) => { if (e.target === modal) closeDownloadPartsModal(); });
+            }
+
+            document.getElementById('parts-modal-title').innerText = `Download: ${game.title}`;
+            let partsArray = game.parts || game.downloadParts || [];
+            if (typeof partsArray === 'string') {
+                try { partsArray = JSON.parse(partsArray); } catch (e) { partsArray = []; }
+            }
+
+            const container = document.getElementById('parts-list-container');
+            container.innerHTML = partsArray.map((part, idx) => {
+                const partUrl = (typeof part === 'object' && part !== null) ? (part.url || part.link || '#') : part;
+                const partName = (typeof part === 'object' && part !== null) ? (part.name || `Part ${idx + 1}`) : `Part ${idx + 1}`;
+
+                return `
+                    <a href="${partUrl}" target="_blank" class="btn-action btn-get" style="display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; text-decoration: none;">
+                        <span><i class="fa-solid fa-download"></i> ${partName}</span>
+                        <i class="fa-solid fa-external-link-alt" style="font-size: 0.8rem;"></i>
+                    </a>
+                `;
+            }).join('');
+
+            modal.classList.add('active');
+        }
+
+        function closeDownloadPartsModal() {
+            const modal = document.getElementById('download-parts-modal');
+            if (modal) modal.classList.remove('active');
+        }
 
         function openFullScreenImg() {
             const src = document.getElementById('gameCoverImg').src;
