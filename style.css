@@ -220,13 +220,17 @@ body {
 
 .sidebar-title {
     font-size: 0.95rem !important;
+    color: #f1c40f;
+    margin-top: 0;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     padding-bottom: 8px;
     margin-bottom: 12px !important;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
-/* Featured & Popular Wrappers */
-.featured-epic-wrapper {
+/* ApunKaGames Style Hero Featured Slider */
+.apunka-featured-box, .apunka-section-box {
     background: var(--bg-card);
     border: 1px solid var(--border-color);
     border-radius: 16px;
@@ -245,156 +249,153 @@ body {
     gap: 8px;
 }
 
-.featured-marquee-container {
-    overflow: hidden;
-    width: 100%;
+.hero-slider-wrapper {
     position: relative;
-    display: flex;
-    align-items: center;
-}
-
-.featured-marquee-track {
-    display: flex;
-    gap: 16px;
-    width: max-content;
-    will-change: transform;
-}
-
-.marquee-game-card {
-    width: 260px;
-    background: #141419;
+    width: 100%;
+    height: 360px;
+    background: #000;
     border-radius: 12px;
     overflow: hidden;
-    border: 1px solid var(--border-color);
-    flex-shrink: 0;
     display: flex;
-    flex-direction: column;
-    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
-    transition: transform 0.3s ease;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 6px 25px rgba(0,0,0,0.6);
 }
 
-.marquee-game-card:hover {
-    transform: translateY(-4px);
-    border-color: rgba(0, 122, 255, 0.4);
-}
-
-.marquee-game-img {
+.hero-slider-img {
     width: 100%;
-    height: 140px;
+    height: 100%;
     object-fit: cover;
-    background-color: #000;
+    transition: opacity 0.3s ease;
 }
 
-.marquee-game-content {
-    padding: 12px;
-    display: flex;
-    flex-direction: column;
-    flex-grow: 1;
-}
-
-.marquee-game-badge {
-    background: var(--accent-blue);
+.slider-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.65);
     color: #fff;
-    font-size: 0.65rem;
-    padding: 3px 8px;
-    border-radius: 4px;
-    font-weight: 700;
-    text-transform: uppercase;
-    align-self: flex-start;
-    margin-bottom: 6px;
-}
-
-.marquee-game-content h4 {
-    margin: 0 0 4px 0;
-    font-size: 0.9rem;
-    color: #fff;
-    font-weight: 700;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-.marquee-game-content p {
-    margin: 0 0 10px 0;
-    font-size: 0.75rem;
-    color: var(--text-muted);
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    line-height: 1.3;
-}
-
-.marquee-game-footer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: auto;
-    padding-top: 8px;
-    border-top: 1px solid rgba(255,255,255,0.05);
-}
-
-.marquee-price {
-    font-size: 0.85rem;
-    font-weight: 800;
-    color: #22c55e;
-}
-
-/* Popular Sidebar List */
-.popular-list {
-    display: flex;
-    flex-direction: column;
-    gap: 8px;
-    max-height: 480px;
-    overflow-y: auto;
-    padding-right: 4px;
-}
-
-.popular-item {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    background: rgba(255, 255, 255, 0.03);
-    padding: 8px 10px;
-    border-radius: 10px;
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    transition: all 0.2s ease;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
     cursor: pointer;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s, transform 0.2s;
 }
 
-.popular-item:hover {
-    background: rgba(0, 122, 255, 0.12);
-    border-color: rgba(0, 122, 255, 0.35);
-    transform: translateX(3px);
+.slider-arrow:hover {
+    background: #e50914;
+    transform: translateY(-50%) scale(1.08);
 }
 
-.popular-item img {
-    width: 44px;
-    height: 44px;
+.slider-prev { left: 15px; }
+.slider-next { right: 15px; }
+
+.hero-slider-title {
+    text-align: center;
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: #fff;
+    margin: 14px 0 4px 0;
+    letter-spacing: 0.3px;
+}
+
+/* Latest Games Added Compact Grid (Horizontal Row Cards) */
+.latest-games-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 12px;
+}
+
+.latest-game-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: 10px;
+    padding: 10px;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    cursor: pointer;
+    transition: transform 0.2s, border-color 0.2s, background 0.2s;
+}
+
+.latest-game-card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(229, 9, 20, 0.4);
+    background: rgba(229, 9, 20, 0.08);
+}
+
+.latest-game-card img {
+    width: 58px;
+    height: 58px;
     object-fit: cover;
     border-radius: 8px;
     background: #000;
 }
 
-.popular-item-info {
-    flex-grow: 1;
+.latest-game-info {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
     overflow: hidden;
 }
 
-.popular-item-info h5 {
-    margin: 0 0 2px 0;
-    font-size: 0.82rem;
+.latest-game-info h5 {
+    margin: 0;
+    font-size: 0.85rem;
     color: #fff;
-    font-weight: 700;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
 }
 
-.popular-item-info span {
+.latest-game-info span {
     font-size: 0.72rem;
-    color: #22c55e;
-    font-weight: 700;
+    color: #94a3b8;
+}
+
+.badge-latest {
+    display: inline-block;
+    background: rgba(40, 167, 69, 0.15);
+    color: #28a745;
+    border: 1px solid rgba(40, 167, 69, 0.3);
+    font-size: 0.62rem;
+    padding: 1px 6px;
+    border-radius: 4px;
+    font-weight: bold;
+    width: max-content;
+    margin-top: 3px;
+}
+
+/* Popular Posts Text Sidebar */
+.popular-posts-text-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    max-height: 500px;
+    overflow-y: auto;
+}
+
+.popular-text-item {
+    padding: 9px 4px;
+    font-size: 0.85rem;
+    color: #cbd5e1;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    text-decoration: none;
+    transition: color 0.2s, padding-left 0.2s;
+    display: block;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.popular-text-item:hover {
+    color: #38bdf8;
+    padding-left: 6px;
 }
 
 /* Trust Bar */
