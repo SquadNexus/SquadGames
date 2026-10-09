@@ -3,12 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Squad Games Store TZ</title>
-    <!-- FontAwesome Icons for buttons & spinners -->
+    <title>Squad Games Store TZ - PC & Mobile Games Portal</title>
+    <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+
+    <!-- Top Utility Link Bar (ApunKaGames Style Header) -->
+    <div class="top-utility-bar">
+        <div class="top-utility-container">
+            <div class="top-links">
+                <a href="index.html"><i class="fa-solid fa-house"></i> Home</a>
+                <a href="#games-grid"><i class="fa-solid fa-gamepad"></i> PC Games List</a>
+                <a href="https://wa.me/255692752060?text=Hello%20SquadGames%2C%20I%20want%20to%20request%20a%20game." target="_blank"><i class="fa-solid fa-paper-plane"></i> Request Game</a>
+                <a href="https://wa.me/255692752060?text=Hello%20SquadGames%2C%20I%20need%20help%20with%20installation." target="_blank"><i class="fa-solid fa-circle-question"></i> How to Download</a>
+                <a href="https://wa.me/255692752060?text=Hello%20SquadGames" target="_blank"><i class="fa-solid fa-headset"></i> Contact Us</a>
+            </div>
+            <div class="top-social-badge">
+                <span><i class="fa-solid fa-shield-halved" style="color: #22c55e;"></i> TZ Verified Store</span>
+            </div>
+        </div>
+    </div>
 
     <!-- Main Container -->
     <div class="container">
@@ -25,56 +41,68 @@
                 </div>
             </div>
 
-            <!-- Portal Navigation Container (Dynamic Expandable Dropdowns & Home) -->
+            <!-- Portal Navigation Container (Dynamic Expandable Dropdowns & Categories) -->
             <div id="dynamic-game-types" class="portal-navbar">
                 <!-- Dropdown buttons load here dynamically via JavaScript -->
             </div>
         </div>
 
-        <!-- Intro Banner -->
-        <div class="intro-banner">
-            <h2>Welcome to Squad Games Store TZ</h2>
-            <p>Get your favorite PC and Mobile games & mods in Tanzania</p>
-        </div>
-
-        <!-- Top Split Section Layout (Featured Marquee & Most Popular) -->
-        <div class="top-split-container">
-            <!-- Featured Marquee Section -->
-            <div class="featured-epic-wrapper">
-                <h3 class="section-title">🔥 Featured</h3>
-                <div class="featured-marquee-container">
-                    <div id="featuredTrack" class="featured-marquee-track">
-                        <!-- Featured items load here via JavaScript -->
+        <!-- ApunKaGames Style Two-Column Portal Layout -->
+        <div class="portal-layout-grid">
+            
+            <!-- LEFT COLUMN: Featured Slider & Main Catalog -->
+            <div class="portal-main-content">
+                
+                <!-- Featured Marquee Section -->
+                <div class="featured-epic-wrapper">
+                    <h3 class="section-title"><i class="fa-solid fa-fire" style="color: #ff9500;"></i> Featured Games</h3>
+                    <div class="featured-marquee-container">
+                        <div id="featuredTrack" class="featured-marquee-track">
+                            <!-- Featured items load here via JavaScript -->
+                        </div>
                     </div>
                 </div>
+
+                <!-- Trust Bar -->
+                <div class="trust-bar" style="margin-top: 20px;">
+                    <div class="trust-item"><span class="trust-icon">⚡</span> Fast Downloads</div>
+                    <div class="trust-item"><span class="trust-icon">🛡️</span> Verified Safe Files</div>
+                    <div class="trust-item"><span class="trust-icon">🇹🇿</span> Local TZ Support</div>
+                </div>
+
+                <!-- Main Game Catalog Grid Section -->
+                <section style="margin-top: 25px;">
+                    <h3 class="section-title"><i class="fa-solid fa-layer-group"></i> Latest Games Catalog</h3>
+                    <div id="games-grid" class="game-grid">
+                        <!-- Dynamic game cards load here via JavaScript -->
+                        <div class="loading-state">
+                            <div class="spinner"></div>
+                            <p>Loading games catalog...</p>
+                        </div>
+                    </div>
+                </section>
+
             </div>
 
-            <!-- Most Popular Games Section -->
-            <div class="most-popular-wrapper">
-                <h3 class="org-section-title section-title">⭐ Popular</h3>
-                <div id="popularList" class="popular-list">
-                    <!-- Popular items load here via JavaScript -->
+            <!-- RIGHT COLUMN: Popular Posts Sidebar (ApunKaGames Style) -->
+            <div class="portal-sidebar">
+                <div class="sidebar-box">
+                    <h3 class="section-title sidebar-title"><i class="fa-solid fa-star" style="color: #f1c40f;"></i> Popular Posts</h3>
+                    <div id="popularList" class="popular-list">
+                        <!-- Popular items load here via JavaScript[cite: 12] -->
+                    </div>
+                </div>
+
+                <!-- Extra Sidebar Widget: Quick Help -->
+                <div class="sidebar-box" style="margin-top: 20px;">
+                    <h3 class="section-title sidebar-title"><i class="fa-solid fa-circle-info" style="color: #007aff;"></i> TZ Payment Info</h3>
+                    <p style="font-size: 0.82rem; color: var(--text-muted); line-height: 1.5; margin: 0;">
+                        Paid games like Tanzania ETS2 can be bought instantly via <b>Selar</b> online or directly through <b>Vodacom M-Pesa</b> via WhatsApp support!
+                    </p>
                 </div>
             </div>
-        </div>
 
-        <!-- Trust Bar -->
-        <div class="trust-bar">
-            <div class="trust-item"><span class="trust-icon">⚡</span> Fast Downloads</div>
-            <div class="trust-item"><span class="trust-icon">🛡️</span> Verified Safe Files</div>
-            <div class="trust-item"><span class="trust-icon">🇹🇿</span> Local TZ Support</div>
         </div>
-
-        <!-- Main Game Catalog Grid Section -->
-        <section>
-            <div id="games-grid" class="game-grid">
-                <!-- Dynamic game cards load here via JavaScript -->
-                <div class="loading-state">
-                    <div class="spinner"></div>
-                    <p>Loading games catalog...</p>
-                </div>
-            </div>
-        </section>
 
     </div>
 
