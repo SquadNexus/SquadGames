@@ -1,6 +1,6 @@
 /**
  * Squad Games Store TZ - Core Application Script
- * Synchronized with ApunKaGames Layout: 3-Second Auto Hero Slider, Exact 10 Featured Games, Text Popular Posts Sidebar, and Checkout Modals.
+ * Synchronized with ApunKaGames Layout: 3-Second Auto Hero Slider, Exact 10 Featured Games, Text Popular Posts Sidebar, and 8-Game Curated Catalog Grid.
  */
 
 let loadedGamesData = [];
@@ -144,7 +144,7 @@ function initStore(games) {
 
     renderNavbarDropdowns(games);
 
-    // Exact 10 Featured Games requested by user (Matched by ID or title keywords)
+    // Exact 10 Featured Games requested by user
     const featuredTargetIds = ["1", "2", "19", "8", "13", "12", "46", "7", "27", "51"];
     const featuredGames = games.filter(game => {
         if (featuredTargetIds.includes(String(game.id))) return true;
@@ -196,7 +196,7 @@ function updateHeroSlider(index) {
 
 function moveFeaturedSlide(direction) {
     updateHeroSlider(currentFeaturedIndex + direction);
-    resetAutoSlide(); // Reset timer when user clicks arrows manually
+    resetAutoSlide(); 
 }
 window.moveFeaturedSlide = moveFeaturedSlide;
 
@@ -212,9 +212,8 @@ function initAutoSlide() {
     if (autoSlideTimer) clearInterval(autoSlideTimer);
     autoSlideTimer = setInterval(() => {
         updateHeroSlider(currentFeaturedIndex + 1);
-    }, 3000); // 3 seconds interval
+    }, 3000);
 
-    // Pause auto-slide when mouse enters the slider container
     const sliderContainer = document.querySelector('.hero-slider-wrapper');
     if (sliderContainer) {
         sliderContainer.addEventListener('mouseenter', () => {
@@ -412,7 +411,7 @@ function filterByFranchise(franchiseKeyword) {
 window.filterByFranchise = filterByFranchise;
 
 function applyFilters() {
-    const filteredGames = loadedGamesData.filter(game => {
+    let filteredGames = loadedGamesData.filter(game => {
         const title = (game.title || "").toLowerCase();
         const description = (game.description || "").toLowerCase();
         const category = (game.category || game.Category || "").toLowerCase();
@@ -427,6 +426,36 @@ function applyFilters() {
 
         return matchesSearch && matchesCategory;
     });
+
+    // If on homepage ('all' category and no search), strictly limit to 8 curated games (4 columns x 2 rows)
+    if (currentCategory === 'all' && !currentSearchQuery) {
+        const priorityTitles = [
+            "tanzania euro truck simulator 2 + 50 tz mods packs",
+            "tanzania euro truck simulator 2 mobile",
+            "need for speed most wanted 2005",
+            "need for speed payback",
+            "grand theft auto v legacy",
+            "call of duty: advanced warfare",
+            "fifa 22",
+            "carx street"
+        ];
+
+        let curatedList = [];
+        priorityTitles.forEach(pTitle => {
+            const found = filteredGames.find(g => (g.title || "").toLowerCase().includes(pTitle));
+            if (found && !curatedList.includes(found)) {
+                curatedList.push(found);
+            }
+        });
+
+        filteredGames.forEach(g => {
+            if (!curatedList.includes(g) && curatedList.length < 8) {
+                curatedList.push(g);
+            }
+        });
+
+        filteredGames = curatedList.slice(0, 8);
+    }
 
     renderGameStore(filteredGames);
 }
