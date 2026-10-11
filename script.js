@@ -481,7 +481,7 @@ function renderGameStore(gameList) {
         const card = document.createElement("div");
         card.classList.add("game-card");
 
-        // Dynamically checks if the game has a price set in games.json
+        // Dynamic price check: treats any game with a price as paid
         const isPaid = game.price && game.price.toUpperCase() !== "FREE" && game.price.trim() !== "";
         
         let actionBtnText = isPaid ? "Buy Now" : "Get";
@@ -581,9 +581,9 @@ function showPaymentOptionsModal(game) {
 
     const displayPrice = game.price || "Paid Game";
     document.getElementById('payment-modal-title').innerText = `Buy: ${game.title}`;
-    document.getElementById('payment-modal-subtitle').innerHTML = `Choose how you want to purchase for <b>${displayPrice}</b>. Selar supports card and mobile money, or you can order directly through Vodacom via WhatsApp.`;
+    document.getElementById('payment-modal-subtitle').innerHTML = `Choose how you want to purchase for <b>${displayPrice}</b> via Selar or Vodacom M-Pesa.`;
 
-    // Safely reads the game's specific Selar downloadUrl, falling back to your main store profile if needed
+    // Safely validates that downloadUrl is a valid Selar link, otherwise falls back to store profile
     const selarLink = (game.downloadUrl && game.downloadUrl.includes('selar.co')) 
         ? game.downloadUrl 
         : "https://selar.co/m/SquadGamesTZ";
