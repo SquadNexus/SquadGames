@@ -1206,5 +1206,37 @@
         { "name": "Part 7", "url": "https://thefileslocker.net/6a4yxn4yzvmo.html" },
         { "name": "Part 8", "url": "https://thefileslocker.net/mqd2pip1h4xx.html" }
     ]
+},
+  {
+    "id": "53",
+    "title": "GTA 5",
+    "platform": "PC",
+    "category": "Action,Adventure",
+    "description": "Grand Theft Auto V, developed by Rockstar North and published by Rockstar Games for Windows on September 17, 2013, is a 59 GB open-world action-adventure video game set in the sprawling fictional state of San Andreas, encompassing the sun-soaked metropolis of Los Santos and the expansive countryside of Blaine County. The gameplay seamlessly alternates between story-driven missions with specific objectives and unrestricted free-roaming exploration across one of the largest, most detailed, and vibrant sandbox worlds in the franchise.",
+    "requirements": "OS: Windows Vista Service Pack 2 / 7Service Pack 1 / 8 / 8.1* (*NVIDIA video card recommended if running Vista OS) Processor: Intel Core 2 Quad CPU Q6600 @ 2.40GHz (4 CPUs) / AMD Phenom 9850 Quad-Core Processor (4 CPUs) @ 2.5GHz RAM: 4 GB Hard Drive: 65 GB free Video Card: NVIDIA 9800 GT 1GB / AMD HD 4870 1GB (DX 10, 10.1, 11) Sound Card: 100% DirectX 10 compatible DirectX: 10 Keyboard and Mouse",
+    "installGuide": "",
+    "price": "FREE",
+    "image": "images/gta5.png",
+    "screenshots": [
+        "images/gta51.png",
+        "images/gta52.png",
+        "images/gta53.png",
+        "images/gta54.png"
+    ],
+    "downloadUrl": "https://www.mediafire.com/file/03krako9wi785do/G.1.T.Aa.5_-_Www.ApunKaGames.Net%2529.part01.rar/file",
+    "downloadParts": [
+        { "part": "Part 01", "url": "https://www.mediafire.com/file/03krako9wi785do/G.1.T.Aa.5_-_Www.ApunKaGames.Net%2529.part01.rar/file" },
+        { "part": "Part 02", "url": "https://www.mediafire.com/file/q0tmyw4uatkolvv/G.1.T.Aa.5_-_Www.ApunKaGames.Net%2529.part02.rar/file" },
+        { "part": "Part 03", "url": "https://www.mediafire.com/file/qjq808gh1u92zfr/G.1.T.Aa.5_-_Www.ApunKaGames.Net%2529.part03.rar/file" },
+        { "part": "Part 04", "url": "https://www.mediafire.com/file/scaj8n9tdfn1i87/G.1.T.Aa.5_-_Www.ApunKaGames.Net%2529.part04.rar/file" },
+        { "part": "Part 05", "url": "https://www.mediafire.com/file/9ov8jmu2j6sgpp5/G.1.T.Aa.5_-_Www.ApunKaGames.Net%2529.part05.rar/file" },
+        { "part": "Part 06", "url": "https://www.mediafire.com/file/27wgfirkpietrxu/G.1.T.Aa.5_-_Www.ApunKaGames.Net%2529.part06.rar/file" },
+        { "part": "Part 07", "url": "https://www.mediafire.com/file/edwgksbjgp5p6ge/G.1.T.Aa.5_-_Www.ApunKaGames.Net%2529.part07.rar/file" },
+        { "part": "Part 08", "url": "https://www.mediafire.com/file/u27h6v2weed7pqh/G.1.T.Aa.5_-_Www.ApunKaGames.Net%2529.part08.rar/file" },
+        { "part": "Part 09", "url": "https://www.mediafire.com/file/lcgyfcu1d7rrcn7/G.1.T.Aa.5_-_Www.ApunKaGames.Net%2529.part09.rar/file" },
+        { "part": "Part 10", "url": "https://www.mediafire.com/file/kcwi1w6q9sjwh95/G.1.T.Aa.5_-_Www.ApunKaGames.Net%2529.part10.rar/file" },
+        { "part": "Part 11", "url": "https://www.mediafire.com/file/9vyewiwcfija20x/G.1.T.Aa.5_-_Www.ApunKaGames.Net%2529.part11.rar/file" },
+        { "part": "Part 12", "url": "https://www.mediafire.com/file/ipbwzss1j654fs2/G.1.T.Aa.5_-_Www.ApunKaGames.Net%2529.part12.rar/file" }
+    ]
 }
 ]
