@@ -1213,7 +1213,7 @@
     "platform": "PC",
     "category": "Action,Adventure",
     "description": "Grand Theft Auto V, developed by Rockstar North and published by Rockstar Games for Windows on September 17, 2013, is a 59 GB open-world action-adventure video game set in the sprawling fictional state of San Andreas, encompassing the sun-soaked metropolis of Los Santos and the expansive countryside of Blaine County. The gameplay seamlessly alternates between story-driven missions with specific objectives and unrestricted free-roaming exploration across one of the largest, most detailed, and vibrant sandbox worlds in the franchise.",
-    "requirements": "OS: Windows Vista Service Pack 2 / 7Service Pack 1 / 8 / 8.1* (*NVIDIA video card recommended if running Vista OS) Processor: Intel Core 2 Quad CPU Q6600 @ 2.40GHz (4 CPUs) / AMD Phenom 9850 Quad-Core Processor (4 CPUs) @ 2.5GHz RAM: 4 GB Hard Drive: 65 GB free Video Card: NVIDIA 9800 GT 1GB / AMD HD 4870 1GB (DX 10, 10.1, 11) Sound Card: 100% DirectX 10 compatible DirectX: 10 Keyboard and Mouse",
+    "requirements": "OS: Windows Vista Service Pack 2 / 7Service Pack 1 / 8 / 8.1* (*NVIDIA video card recommended if running Vista OS)<br>Processor: Intel Core 2 Quad CPU Q6600 @ 2.40GHz (4 CPUs) / AMD Phenom 9850 Quad-Core Processor (4 CPUs) @ 2.5GHz<br>RAM: 4 GBb<br>Hard Drive: 65 GB free<br>Video Card: NVIDIA 9800 GT 1GB / AMD HD 4870 1GB (DX 10, 10.1, 11)<br>Sound Card: 100% DirectX 10 compatible<br>DirectX: 10 Keyboard and Mouse",
     "installGuide": "",
     "price": "FREE",
     "image": "images/gta5.png",
