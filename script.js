@@ -481,7 +481,8 @@ function renderGameStore(gameList) {
         const card = document.createElement("div");
         card.classList.add("game-card");
 
-        const isPaid = String(game.id) === "1" || String(game.id) === "2";
+        // Dynamically checks if the game has a price set in games.json
+        const isPaid = game.price && game.price.toUpperCase() !== "FREE" && game.price.trim() !== "";
         
         let actionBtnText = isPaid ? "Buy Now" : "Get";
         let actionBtnClass = isPaid ? "btn-download" : "btn-get";
@@ -509,7 +510,7 @@ function renderGameStore(gameList) {
                 <h3>${game.title}</h3>
                 <p>${game.description || ""}</p>
                 <div class="card-action">
-                    <span class="price">${String(game.id) === "1" ? "TZS 20,000" : String(game.id) === "2" ? "TZS 10,000" : "FREE"}</span>
+                    <span class="price">${game.price || "FREE"}</span>
                     <div class="action-group">
                         <button class="btn-details" onclick="openDetailsById('${encodeURIComponent(gameId)}')">Details &rarr;</button>
                         ${actionButtonsHTML}
@@ -578,11 +579,11 @@ function showPaymentOptionsModal(game) {
         });
     }
 
-    const displayPrice = String(game.id) === "1" ? "TZS 20,000" : String(game.id) === "2" ? "TZS 10,000" : "Paid Game";
+    const displayPrice = game.price || "Paid Game";
     document.getElementById('payment-modal-title').innerText = `Buy: ${game.title}`;
-    document.getElementById('payment-modal-subtitle').innerHTML = `Choose how you want to purchase <b>${displayPrice}</b>. Selar supports card and mobile money, or you can order directly through Vodacom via WhatsApp.`;
+    document.getElementById('payment-modal-subtitle').innerHTML = `Choose how you want to purchase for <b>${displayPrice}</b>. Selar supports card and mobile money, or you can order directly through Vodacom via WhatsApp.`;
 
-    // Safely check if downloadUrl is a valid Selar link, otherwise fallback to your main Selar store profile
+    // Safely reads the game's specific Selar downloadUrl, falling back to your main store profile if needed
     const selarLink = (game.downloadUrl && game.downloadUrl.includes('selar.co')) 
         ? game.downloadUrl 
         : "https://selar.co/m/SquadGamesTZ";
