@@ -583,7 +583,7 @@ function showPaymentOptionsModal(game) {
     document.getElementById('payment-modal-title').innerText = `Buy: ${game.title}`;
     document.getElementById('payment-modal-subtitle').innerHTML = `Choose how you want to purchase for <b>${displayPrice}</b> via Selar or Vodacom M-Pesa.`;
 
-    // Safely validates that downloadUrl contains 'selar' (accepting both .com and .co), otherwise falls back to store profile
+    // Safely validates that downloadUrl contains 'selar' (accepting both .com and .co)
     const selarLink = (game.downloadUrl && game.downloadUrl.includes('selar')) 
         ? game.downloadUrl 
         : "https://selar.co/m/SquadGamesTZ";
