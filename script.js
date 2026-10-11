@@ -582,11 +582,15 @@ function showPaymentOptionsModal(game) {
     document.getElementById('payment-modal-title').innerText = `Buy: ${game.title}`;
     document.getElementById('payment-modal-subtitle').innerHTML = `Choose how you want to purchase <b>${displayPrice}</b>. Selar supports card and mobile money, or you can order directly through Vodacom via WhatsApp.`;
 
-    const selarLink = (game.parts && game.parts.length > 0 && game.parts[0].startsWith('http')) ? game.parts[0] : "https://selar.co/m/SquadGamesTZ";
+    // Prioritize game.downloadUrl for the specific Selar product link, with fallback to main store shop
+    const selarLink = (game.downloadUrl && game.downloadUrl.startsWith('http')) 
+        ? game.downloadUrl 
+        : "https://selar.co/m/SquadGamesTZ";
+
     document.getElementById('selar-pay-btn').href = selarLink;
 
     const orderMessage = encodeURIComponent(`Hello SquadGames, I want to buy ${game.title} (${game.platform}) using Vodacom mobile money.`);
-    document.getElementById('vodacom-pay-btn').href = `https://wa.me/255692752060?text=${orderMessage}`;
+    document.getElementById('vodauth-pay-btn') || (document.getElementById('vodacom-pay-btn').href = `https://wa.me/255692752060?text=${orderMessage}`);
 
     modal.classList.add('active');
 }
