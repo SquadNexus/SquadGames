@@ -47,7 +47,7 @@
                     <h1 id="gameTitle" class="apunka-game-title">Loading Game Details...</h1>
 
                     <!-- Featured Cover Image -->
-                    <div class="apunka-cover-wrapper" onclick="openFullScreenImg()" style="margin-top: 16px;">
+                    <div class="apunka-cover-wrapper" onclick="openFullScreenImg()" style="margin-top: 16px; cursor: pointer;">
                         <img id="gameCoverImg" src="" alt="Game Cover" class="apunka-cover-img">
                     </div>
 
@@ -143,8 +143,8 @@
 
     <!-- Fullscreen Image Modal -->
     <div id="fullscreen-overlay" class="fullscreen-overlay" onclick="closeFullScreen()">
-        <span class="fullscreen-close">&times;</span>
-        <img id="fullscreen-img" class="fullscreen-img" src="" alt="Fullscreen View">
+        <span class="fullscreen-close" onclick="closeFullScreen()">&times;</span>
+        <img id="fullscreen-img" class="fullscreen-img" src="" alt="Fullscreen View" onclick="event.stopPropagation()">
     </div>
 
     <!-- Details Page Logic Script -->
@@ -264,7 +264,6 @@
             document.getElementById('payment-modal-title').innerText = `Buy: ${game.title}`;
             document.getElementById('payment-modal-subtitle').innerHTML = `Choose how you want to purchase for <b>${displayPrice}</b> via Selar or Vodacom M-Pesa.`;
             
-            // Dynamically pulls the game's actual downloadUrl and checks for 'selar'
             const selarLink = (game.downloadUrl && game.downloadUrl.includes('selar')) 
                 ? game.downloadUrl 
                 : "https://selar.co/m/SquadGamesTZ";
