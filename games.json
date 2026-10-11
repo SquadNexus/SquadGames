@@ -1238,5 +1238,38 @@
         { "part": "Part 11", "url": "https://www.mediafire.com/file/9vyewiwcfija20x/G.1.T.Aa.5_-_Www.ApunKaGames.Net%2529.part11.rar/file" },
         { "part": "Part 12", "url": "https://www.mediafire.com/file/ipbwzss1j654fs2/G.1.T.Aa.5_-_Www.ApunKaGames.Net%2529.part12.rar/file" }
     ]
+},
+  {
+    "id": "54",
+    "title": "Red Dead Redemption 2",
+    "platform": "PC",
+    "category": "Action-adventure, Open World",
+    "description": "Red Dead Redemption 2, developed and published by Rockstar Games for Windows, is a 66.5 GB open-world action-adventure video game set in 1899 that follows outlaw Arthur Morgan and the Van der Linde gang as they struggle to survive across a rapidly changing American frontier. The gameplay combines a vast, meticulously detailed world with dynamic NPC interactions, hunting, horse bonding, and visceral gunplay, seamlessly blending an emotionally rich, character-driven narrative with unprecedented exploration and survival mechanics.",
+    "requirements": "     OS: Windows 7/8/10 Requires a 64-bit processor and operating system<br>Processor: Intel® Core™ i5-2500K / AMD FX-6300<br>RAM: 8 GB<br>Hard Disk: 150 GB available space<br>Graphics Card: Nvidia GeForce GTX 770 2GB / AMD Radeon R9 280 3GB<br>Network: Broadband Internet connection<br>DirectX: Version 12",
+    "installGuide": "",
+    "price": "FREE",
+    "image": "images/reddead.png",
+    "screenshots": [
+        "images/reddead1.png",
+        "images/reddead2.png",
+        "images/reddead3.png"
+    ],
+    "downloadUrl": "https://www.mediafire.com/file/cuaq6e4s7rbmpta/Red_Dead_Redemption_2_-_%2528Www.ApunKaGames.Com%2529.part01.rar/file",
+    "downloadParts": [
+        { "part": "Part 01", "url": "https://www.mediafire.com/file/cuaq6e4s7rbmpta/Red_Dead_Redemption_2_-_%2528Www.ApunKaGames.Com%2529.part01.rar/file" },
+        { "part": "Part 02", "url": "https://www.mediafire.com/file/p6cg6hgpdrval9p/Red_Dead_Redemption_2_-_%2528Www.ApunKaGames.Com%2529.part02.rar/file" },
+        { "part": "Part 03", "url": "https://www.mediafire.com/file/y1vs7wu2b5nkh7o/Red_Dead_Redemption_2_-_%2528Www.ApunKaGames.Com%2529.part03.rar/file" },
+        { "part": "Part 04", "url": "https://www.mediafire.com/file/7357lqc1bo0e11s/Red_Dead_Redemption_2_-_%2528Www.ApunKaGames.Com%2529.part04.rar/file" },
+        { "part": "Part 05", "url": "https://www.mediafire.com/file/fb1tx5wmmh7wq5f/Red_Dead_Redemption_2_-_%2528Www.ApunKaGames.Com%2529.part05.rar/file" },
+        { "part": "Part 06", "url": "https://www.mediafire.com/file/1b8392k816qjw5g/Red_Dead_Redemption_2_-_%2528Www.ApunKaGames.Com%2529.part06.rar/file" },
+        { "part": "Part 07", "url": "https://www.mediafire.com/file/uj5z0dranqpkjnj/Red_Dead_Redemption_2_-_%2528Www.ApunKaGames.Com%2529.part07.rar/file" },
+        { "part": "Part 08", "url": "https://www.mediafire.com/file/0aq47n36mg3bmeq/Red_Dead_Redemption_2_-_%2528Www.ApunKaGames.Com%2529.part08.rar/file" },
+        { "part": "Part 09", "url": "https://www.mediafire.com/file/8w2adzt98vpyjg7/Red_Dead_Redemption_2_-_%2528Www.ApunKaGames.Com%2529.part09.rar/file" },
+        { "part": "Part 10", "url": "https://www.mediafire.com/file/mrny8irk65dsu06/Red_Dead_Redemption_2_-_%2528Www.ApunKaGames.Com%2529.part10.rar/file" },
+        { "part": "Part 11", "url": "https://www.mediafire.com/file/lp5zjx5blzt3xe9/Red_Dead_Redemption_2_-_%2528Www.ApunKaGames.Com%2529.part11.rar/file" },
+        { "part": "Part 12", "url": "https://www.mediafire.com/file/pphe7if17h0p2xb/Red_Dead_Redemption_2_-_%2528Www.ApunKaGames.Com%2529.part12.rar/file" },
+        { "part": "Part 13", "url": "https://www.mediafire.com/file/5p4u99brzku7eer/Red_Dead_Redemption_2_-_%2528Www.ApunKaGames.Com%2529.part13.rar/file" },
+        { "part": "Part 14", "url": "https://www.mediafire.com/file/6tljef4ktt572oe/Red_Dead_Redemption_2_-_%2528Www.ApunKaGames.Com%2529.part14.rar/file" }
+    ]
 }
 ]
