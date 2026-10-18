@@ -1293,5 +1293,27 @@
         { "part": "Part 02", "url": "https://thefileslocker.net/csec4sjv5sju.html" },
         { "part": "Part 03", "url": "https://thefileslocker.net/qp8tsojakp2a.html" }
     ]
+},
+   {
+     "id": "56",
+    "title": "Assetto Corsa – Ready To Race",
+    "platform": "PC",
+    "category": "Racing, Simulation",
+    "description": "Assetto Corsa – Ready To Race, developed for PC as a 12.8 GB racing simulation expansion, enhances the core driving simulator with a premier selection of officially licensed high-performance sports cars and fresh competitive challenges. The gameplay focuses on authentic driving physics, intricate vehicle handling, and detailed track layouts, delivering a deeper, highly immersive motor racing experience for simulator enthusiasts.\n",
+    "requirements": "OS: Windows Vista Sp2/7 Sp1/8/8.1/10 Processor: AMD Athlon X2 2.8 GHZ, Intel Core 2 Duo 2.4 GHZ RAM: 2 GB Hard Disk: 20 GB available space Graphics Card: DirectX 10.1 (e.g. AMD Radeon HD 6450, Nvidia GeForce GT 460) DirectX: Version 11",
+    "installGuide": "",
+    "price": "FREE",
+    "image": "images/acrtr.png",
+    "screenshots": [
+        "images/acrtr1.png",
+        "images/acrtr2.png",
+        "images/acrtr3.png"
+    ],
+    "downloadUrl": "https://www.mediafire.com/file_premium/3gf7l5333p6odsg/Assetto_Corsa_Ready_To_Race_-_%2528Www.ApunKaGames.Net%2529.part1.rar/file",
+    "downloadParts": [
+        { "part": "Part 01", "url": "https://www.mediafire.com/file_premium/3gf7l5333p6odsg/Assetto_Corsa_Ready_To_Race_-_%2528Www.ApunKaGames.Net%2529.part1.rar/file" },
+        { "part": "Part 02", "url": "https://www.mediafire.com/file_premium/agz9n2nrdywb7v2/Assetto_Corsa_Ready_To_Race_-_%2528Www.ApunKaGames.Net%2529.part2.rar/file" },
+        { "part": "Part 03", "url": "https://www.mediafire.com/file_premium/gc5awhw8z7hy6bm/Assetto_Corsa_Ready_To_Race_-_%2528Www.ApunKaGames.Net%2529.part3.rar/file" }
+    ]
 }
 ]
