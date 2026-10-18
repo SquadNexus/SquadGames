@@ -1271,5 +1271,27 @@
         { "part": "Part 13", "url": "https://www.mediafire.com/file/5p4u99brzku7eer/Red_Dead_Redemption_2_-_%2528Www.ApunKaGames.Com%2529.part13.rar/file" },
         { "part": "Part 14", "url": "https://www.mediafire.com/file/6tljef4ktt572oe/Red_Dead_Redemption_2_-_%2528Www.ApunKaGames.Com%2529.part14.rar/file" }
     ]
+},
+  {
+    "id": "55",
+    "title": "Assetto Corsa Rally",
+    "platform": "PC",
+    "category": "Racing, Simulation",
+    "description": " Assetto Corsa Rally (13 GB) is an Racing, Simulation video game. Developed and published by Supernova Games Studios, 505 Games. It was released on November 13, 2025 for Windows. Assetto Corsa Rally v0.2 is a rally-focused mod for Assetto Corsa that brings off-road racing and stage-based driving to the simulator. Gameplay emphasizes realistic handling on gravel and dirt tracks, precise car control, and high-speed rally stages that test driving skill and concentration.\n\nAssetto Corsa Rally, developed by Supernova Games Studios and published by 505 Games for Windows on November 13, 2025, is a 13 GB racing simulation video game that introduces off-road racing and stage-based driving mechanics to the core simulator experience. The gameplay emphasizes realistic physics and car handling across dirt and gravel tracks, challenging players to master high-speed rally stages requiring intense concentration and precise vehicle control.\n",
+    "requirements": "OS: Windows 10/11 (64‑bit) Processor: Intel Core i7-10700K or Ryzen 5 3600X RAM: 16 GB Hard Disk: 50 GB available space Graphics Card: NVIDIA GeForce RTX 2080, 8 GB or AMD Radeon RX 6650 XT, 8 GB Network: Broadband Internet connection DirectX: Version 12",
+    "installGuide": "",
+    "price": "FREE",
+    "image": "images/acr.png",
+    "screenshots": [
+        "images/acr1.png",
+        "images/acr2.png",
+        "images/acr3.png"
+    ],
+    "downloadUrl": "https://thefileslocker.net/oz635ubtj5u1.html",
+    "downloadParts": [
+        { "part": "Part 01", "url": "https://thefileslocker.net/oz635ubtj5u1.html" },
+        { "part": "Part 02", "url": "https://thefileslocker.net/csec4sjv5sju.html" },
+        { "part": "Part 03", "url": "https://thefileslocker.net/qp8tsojakp2a.html" }
+    ]
 }
 ]
