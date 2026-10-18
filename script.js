@@ -268,45 +268,52 @@ function renderPopularPostsTextSidebar(games) {
 }
 
 /**
- * Dynamically builds navbar dropdowns
+ * Dynamically builds navbar dropdowns ensuring all game types & categories are included
  */
 function renderNavbarDropdowns(games) {
     const container = document.getElementById('dynamic-game-types');
     if (!container) return;
 
     let uniqueCategories = new Set();
-    let franchisesMap = new Map();
+    let gameTypesMap = new Map();
+
+    function addGameToType(typeName, game) {
+        if (!gameTypesMap.has(typeName)) {
+            gameTypesMap.set(typeName, []);
+        }
+        gameTypesMap.get(typeName).push(game);
+    }
 
     games.forEach(game => {
         const rawCategory = game.category || game.Category || game.genre || "";
+        
         if (rawCategory) {
-            String(rawCategory).split(/[\/,]+/).forEach(cat => {
+            const catParts = String(rawCategory).split(/[\/,|]+/);
+            catParts.forEach(cat => {
                 let cleanCat = cat.trim();
                 if (cleanCat) {
-                    uniqueCategories.add(cleanCat.charAt(0).toUpperCase() + cleanCat.slice(1));
+                    let formattedCat = cleanCat.charAt(0).toUpperCase() + cleanCat.slice(1);
+                    uniqueCategories.add(formattedCat);
+                    addGameToType(formattedCat, game);
                 }
             });
         }
 
         const title = (game.title || "").toLowerCase();
-        let franchiseName = "";
-
-        if (title.includes("need for speed") || title.includes("nfs")) franchiseName = "Need for Speed";
-        else if (title.includes("gta") || title.includes("grand theft auto")) franchiseName = "Grand Theft Auto (GTA)";
-        else if (title.includes("euro truck") || title.includes("truckers")) franchiseName = "Truck Simulator";
-        else if (title.includes("spider-man") || title.includes("spiderman")) franchiseName = "Spider-Man";
-        else if (title.includes("call of duty") || title.includes("black ops") || title.includes("advanced warfare") || title.includes("vanguard") || title.includes("ghosts")) franchiseName = "Call of Duty";
-        else if (title.includes("fifa") || title.includes("pes") || title.includes("pro evolution soccer")) franchiseName = "Football / Sports";
-        else if (title.includes("tomb raider")) franchiseName = "Tomb Raider";
-        else if (title.includes("the last of us")) franchiseName = "The Last of Us";
+        if (title.includes("need for speed") || title.includes("nfs")) addGameToType("Need for Speed", game);
+        else if (title.includes("gta") || title.includes("grand theft auto")) addGameToType("Grand Theft Auto (GTA)", game);
+        else if (title.includes("euro truck") || title.includes("truckers")) addGameToType("Truck Simulator", game);
+        else if (title.includes("spider-man") || title.includes("spiderman")) addGameToType("Spider-Man", game);
+        else if (title.includes("call of duty") || title.includes("black ops") || title.includes("advanced warfare")) addGameToType("Call of Duty", game);
+        else if (title.includes("fifa") || title.includes("pes") || title.includes("pro evolution soccer")) addGameToType("Football / Sports", game);
+        else if (title.includes("tomb raider")) addGameToType("Tomb Raider", game);
+        else if (title.includes("red dead")) addGameToType("Red Dead Redemption", game);
+        else if (title.includes("assetto corsa")) addGameToType("Assetto Corsa", game);
         else {
-            franchiseName = game.category ? game.category.split('/')[0].trim() : (game.platform || "PC Action");
+            const defaultType = game.category ? game.category.split(/[\/,|]+/)[0].trim() : (game.platform || "PC Action");
+            const formattedDefault = defaultType.charAt(0).toUpperCase() + defaultType.slice(1);
+            addGameToType(formattedDefault, game);
         }
-
-        if (!franchisesMap.has(franchiseName)) {
-            franchisesMap.set(franchiseName, []);
-        }
-        franchisesMap.get(franchiseName).push(game);
     });
 
     let categoriesListHTML = `<div onclick="filterByCategory('all');" style="padding: 10px 14px; color: #f1c40f; cursor: pointer; border-bottom: 1px solid rgba(255,255,255,0.1); font-weight: 600;"><i class="fa-solid fa-layer-group" style="margin-right: 6px;"></i> All Categories (${uniqueCategories.size})</div>`;
@@ -314,9 +321,9 @@ function renderNavbarDropdowns(games) {
         categoriesListHTML += `<div onclick="filterByCategory('${cat}');" style="padding: 10px 14px; color: #fff; cursor: pointer; border-bottom: 1px solid rgba(255,255,255,0.05); transition: background 0.2s;" onmouseover="this.style.background='rgba(0,122,255,0.2)'" onmouseout="this.style.background='transparent'">${cat}</div>`;
     });
 
-    let gameTypesListHTML = `<div onclick="filterByCategory('all');" style="padding: 10px 14px; color: #f1c40f; cursor: pointer; border-bottom: 1px solid rgba(255,255,255,0.1); font-weight: 600;"><i class="fa-solid fa-gamepad" style="margin-right: 6px;"></i> All Game Types (${franchisesMap.size})</div>`;
-    Array.from(franchisesMap.keys()).sort().forEach(franchise => {
-        gameTypesListHTML += `<div onclick="filterByFranchise('${franchise}');" style="padding: 10px 14px; color: #fff; cursor: pointer; border-bottom: 1px solid rgba(255,255,255,0.05); transition: background 0.2s;" onmouseover="this.style.background='rgba(0,122,255,0.2)'" onmouseout="this.style.background='transparent'"><i class="fa-solid fa-fire" style="margin-right: 6px; color: #ff9500; font-size: 0.75rem;"></i> ${franchise}</div>`;
+    let gameTypesListHTML = `<div onclick="filterByCategory('all');" style="padding: 10px 14px; color: #f1c40f; cursor: pointer; border-bottom: 1px solid rgba(255,255,255,0.1); font-weight: 600;"><i class="fa-solid fa-gamepad" style="margin-right: 6px;"></i> All Game Types (${gameTypesMap.size})</div>`;
+    Array.from(gameTypesMap.keys()).sort().forEach(type => {
+        gameTypesListHTML += `<div onclick="filterByFranchise('${type}');" style="padding: 10px 14px; color: #fff; cursor: pointer; border-bottom: 1px solid rgba(255,255,255,0.05); transition: background 0.2s;" onmouseover="this.style.background='rgba(0,122,255,0.2)'" onmouseout="this.style.background='transparent'"><i class="fa-solid fa-fire" style="margin-right: 6px; color: #ff9500; font-size: 0.75rem;"></i> ${type}</div>`;
     });
 
     container.innerHTML = `
@@ -395,6 +402,8 @@ function filterByFranchise(franchiseKeyword) {
 
     const filteredGames = loadedGamesData.filter(game => {
         const title = (game.title || "").toLowerCase();
+        const category = (game.category || game.Category || "").toLowerCase();
+
         if (lowerKey.includes("need for speed")) return title.includes("need for speed") || title.includes("nfs");
         if (lowerKey.includes("grand theft auto")) return title.includes("gta") || title.includes("grand theft auto");
         if (lowerKey.includes("truck")) return title.includes("euro truck") || title.includes("truckers");
@@ -402,8 +411,10 @@ function filterByFranchise(franchiseKeyword) {
         if (lowerKey.includes("call of duty")) return title.includes("call of duty") || title.includes("black ops") || title.includes("advanced warfare");
         if (lowerKey.includes("football")) return title.includes("fifa") || title.includes("pes");
         if (lowerKey.includes("tomb raider")) return title.includes("tomb raider");
-        if (lowerKey.includes("the last of us")) return title.includes("the last of us");
-        return title.includes(lowerKey) || (game.category || "").toLowerCase().includes(lowerKey);
+        if (lowerKey.includes("red dead")) return title.includes("red dead");
+        if (lowerKey.includes("assetto corsa")) return title.includes("assetto corsa");
+
+        return title.includes(lowerKey) || category.includes(lowerKey);
     });
 
     renderGameStore(filteredGames);
@@ -642,7 +653,7 @@ function showDownloadPartsModal(game) {
     const container = document.getElementById('parts-list-container');
     container.innerHTML = partsArray.map((part, idx) => {
         const partUrl = (typeof part === 'object' && part !== null) ? (part.url || part.link || '#') : part;
-        const partName = (typeof part === 'object' && part !== null) ? (part.name || `Part ${idx + 1}`) : `Part ${idx + 1}`;
+        const partName = (typeof part === 'object' && part !== null) ? (part.name || part.part || `Part ${idx + 1}`) : `Part ${idx + 1}`;
 
         return `
             <a href="${partUrl}" target="_blank" class="btn-action btn-get" style="display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; text-decoration: none;">
