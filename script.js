@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (e.target.closest('.btn-action') || e.target.closest('.btn-details') || e.target.closest('.hero-slider-img-container')) {
             localStorage.setItem('scrollPosition', window.scrollY);
         }
-
+        
         // Close floating dropdowns if clicked outside
         if (!e.target.closest('.nav-dropdown-btn') && !e.target.closest('.global-floating-dropdown')) {
             closeAllDropdowns();
@@ -72,7 +72,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         e.preventDefault();
         downloadBtn.classList.add('preparing');
-
+        
         const originalHTML = downloadBtn.innerHTML;
         downloadBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Preparing Link...`;
 
@@ -160,7 +160,7 @@ function initStore(games) {
                title.includes("black ops iii zombies chronicles") ||
                title === "tomb raider";
     });
-
+    
     featuredSliderList = featuredGames.length ? featuredGames : games.slice(0, 10);
     updateHeroSlider(0);
     initAutoSlide();
@@ -573,7 +573,6 @@ function showPaymentOptionsModal(game) {
     document.getElementById('payment-modal-title').innerText = `Buy: ${game.title}`;
     document.getElementById('payment-modal-subtitle').innerHTML = `Choose how you want to purchase for <b>${displayPrice}</b> via Selar or Vodacom M-Pesa.`;
 
-    // Safely validates that downloadUrl contains 'selar' (accepting both .com and .co)
     const selarLink = (game.downloadUrl && game.downloadUrl.includes('selar')) 
         ? game.downloadUrl 
         : "https://selar.co/m/SquadGamesTZ";
