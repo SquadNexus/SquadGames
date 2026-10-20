@@ -676,17 +676,66 @@ body {
     transform: scale(1.1);
 }
 
-/* Uniform Screenshots Gallery Styling (Fixed Height & Uniform Resolution) */
+/* ==========================================================================
+   ApunKaGames Style Article & Screenshot Grid Layout (Unified Width)
+   ================================================================---------- */
+
+.apunka-article-box {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 24px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    width: 100%;
+    box-sizing: border-box;
+    margin: 0 auto;
+}
+
+.apunka-cover-wrapper {
+    width: 100%;
+    border-radius: 12px;
+    overflow: hidden;
+    background: #000;
+    margin-top: 16px;
+    margin-bottom: 20px;
+    cursor: pointer;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.apunka-cover-img {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+    aspect-ratio: 16 / 9;
+    transition: transform 0.4s ease;
+}
+
+.apunka-cover-wrapper:hover .apunka-cover-img {
+    transform: scale(1.02);
+}
+
+.apunka-screenshots-section {
+    margin: 24px 0;
+    width: 100%;
+}
+
+.apunka-screenshots-section h3 {
+    font-size: 1.1rem;
+    color: #ffffff;
+    margin-bottom: 14px;
+}
+
 .apunka-screenshots-grid {
     display: flex;
     flex-direction: column;
     gap: 14px;
-    margin-bottom: 24px;
+    width: 100%;
 }
 
 .shot-wrapper {
     width: 100%;
-    height: 280px;
+    height: auto;
     border-radius: 10px;
     overflow: hidden;
     background: #000;
@@ -696,13 +745,22 @@ body {
 
 .shot-wrapper img {
     width: 100%;
-    height: 100%;
+    height: auto;
+    display: block;
     object-fit: cover;
+    aspect-ratio: 16 / 9;
     transition: transform 0.4s ease;
 }
 
 .shot-wrapper:hover img {
-    transform: scale(1.04);
+    transform: scale(1.02);
+}
+
+@media (max-width: 768px) {
+    .apunka-article-box {
+        padding: 14px;
+        border-radius: 10px;
+    }
 }
 
 /* Professional Footer Styling */
