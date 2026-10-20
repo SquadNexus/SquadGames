@@ -151,7 +151,6 @@ function initStore(games) {
     const catalogTitleEl = document.getElementById('catalogSectionTitle');
 
     if (urlCategory || urlFranchise) {
-        // Hide homepage sections when viewing a dedicated category/franchise page
         const featuredBox = document.querySelector('.apunka-featured-box');
         if (featuredBox) featuredBox.style.display = 'none';
 
@@ -437,6 +436,32 @@ function applyFilters() {
     const urlCategory = urlParams.get('category');
     const urlFranchise = urlParams.get('franchise');
 
+    const featuredBox = document.querySelector('.apunka-featured-box');
+    const latestBox = document.querySelector('.apunka-section-box');
+    const trustBar = document.querySelector('.trust-bar');
+    const catalogTitleEl = document.getElementById('catalogSectionTitle');
+
+    const isFiltering = urlCategory || urlFranchise || currentSearchQuery;
+
+    if (isFiltering) {
+        if (featuredBox) featuredBox.style.display = 'none';
+        if (latestBox) latestBox.style.display = 'none';
+        if (trustBar) trustBar.style.display = 'none';
+
+        if (currentSearchQuery) {
+            if (catalogTitleEl) catalogTitleEl.innerHTML = `<i class="fa-solid fa-magnifying-glass"></i> Search Results: "${currentSearchQuery}"`;
+        } else if (urlCategory) {
+            if (catalogTitleEl) catalogTitleEl.innerHTML = `<i class="fa-solid fa-layer-group"></i> Category: ${urlCategory}`;
+        } else if (urlFranchise) {
+            if (catalogTitleEl) catalogTitleEl.innerHTML = `<i class="fa-solid fa-gamepad"></i> Game Type: ${urlFranchise}`;
+        }
+    } else {
+        if (featuredBox) featuredBox.style.display = 'block';
+        if (latestBox) latestBox.style.display = 'block';
+        if (trustBar) trustBar.style.display = 'flex';
+        if (catalogTitleEl) catalogTitleEl.innerHTML = `<i class="fa-solid fa-layer-group"></i> Game Catalog & Store`;
+    }
+
     let filteredGames = loadedGamesData.filter(game => {
         const title = (game.title || "").toLowerCase();
         const description = (game.description || "").toLowerCase();
@@ -640,7 +665,7 @@ function showPaymentOptionsModal(game) {
 }
 window.showPaymentOptionsModal = showPaymentOptionsModal;
 
-function closePaymentOptionsModal() {
+def closePaymentOptionsModal() {
     const modal = document.getElementById('payment-options-modal');
     if (modal) modal.classList.remove('active');
 }
