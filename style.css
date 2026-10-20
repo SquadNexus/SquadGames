@@ -849,3 +849,55 @@ body {
 .footer-bottom-links a:hover {
     text-decoration: underline;
 }
+
+/* ==========================================================================
+   Eye-Catching Premium Call-To-Action Download Button Styling
+   ========================================================================== */
+.btn-download-cta {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: linear-gradient(135deg, #e50914 0%, #ff3b30 100%);
+    color: #ffffff !important;
+    font-size: 0.95rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 12px 24px;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    text-decoration: none !important;
+    box-shadow: 0 8px 25px rgba(229, 9, 20, 0.45);
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    cursor: pointer;
+    margin: 14px 0;
+}
+
+.btn-download-cta:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 12px 32px rgba(229, 9, 20, 0.65);
+    background: linear-gradient(135deg, #ff1e27 0%, #ff5247 100%);
+}
+
+.btn-download-cta:active {
+    transform: translateY(1px) scale(0.98);
+    box-shadow: 0 4px 15px rgba(229, 9, 20, 0.3);
+}
+
+.btn-download-cta i {
+    font-size: 1.15rem;
+    animation: bounceDown 2s infinite;
+}
+
+@keyframes bounceDown {
+    0%, 20%, 50%, 80%, 100% {
+        transform: translateY(0);
+    }
+    40% {
+        transform: translateY(-4px);
+    }
+    60% {
+        transform: translateY(-2px);
+    }
+}
