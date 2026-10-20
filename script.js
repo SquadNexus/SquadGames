@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (e.target.closest('.btn-action') || e.target.closest('.btn-details') || e.target.closest('.hero-slider-img-container')) {
             localStorage.setItem('scrollPosition', window.scrollY);
         }
-        
+
         // Close floating dropdowns if clicked outside
         if (!e.target.closest('.nav-dropdown-btn') && !e.target.closest('.global-floating-dropdown')) {
             closeAllDropdowns();
@@ -72,7 +72,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
         e.preventDefault();
         downloadBtn.classList.add('preparing');
-        
+
         const originalHTML = downloadBtn.innerHTML;
         downloadBtn.innerHTML = `<i class="fa-solid fa-spinner fa-spin"></i> Preparing Link...`;
 
@@ -160,7 +160,7 @@ function initStore(games) {
                title.includes("black ops iii zombies chronicles") ||
                title === "tomb raider";
     });
-    
+
     featuredSliderList = featuredGames.length ? featuredGames : games.slice(0, 10);
     updateHeroSlider(0);
     initAutoSlide();
@@ -338,7 +338,7 @@ function escapeHtml(str) {
 
 function toggleFloatingDropdown(event, menuId, htmlContent) {
     event.stopPropagation();
-    
+
     let existingMenu = document.getElementById(menuId);
     if (existingMenu) {
         existingMenu.remove();
@@ -353,7 +353,7 @@ function toggleFloatingDropdown(event, menuId, htmlContent) {
     dropdown.id = menuId;
     dropdown.className = 'global-floating-dropdown';
     dropdown.innerHTML = htmlContent;
-    
+
     dropdown.style.position = 'fixed';
     dropdown.style.top = `${btnRect.bottom + 8}px`;
     dropdown.style.left = `${btnRect.left}px`;
@@ -473,10 +473,10 @@ function renderGameStore(gameList) {
 
         // Dynamic price check: treats any game with a price as paid
         const isPaid = game.price && game.price.toUpperCase() !== "FREE" && game.price.trim() !== "";
-        
+
         let actionBtnText = isPaid ? "Buy Now" : "Get";
         let actionBtnClass = isPaid ? "btn-download" : "btn-get";
-        
+
         let actionButtonsHTML = '';
         if (isPaid) {
             actionButtonsHTML = `
@@ -613,7 +613,7 @@ function showDownloadPartsModal(game) {
             </div>
         `;
         document.body.appendChild(modal);
-        
+
         modal.addEventListener('click', function(event) {
             if (event.target === modal) {
                 closeDownloadPartsModal();
@@ -622,7 +622,7 @@ function showDownloadPartsModal(game) {
     }
 
     document.getElementById('parts-modal-title').innerText = `Download: ${game.title}`;
-    
+
     let partsArray = game.parts || game.downloadParts;
     if (typeof partsArray === 'string') {
         try { partsArray = JSON.parse(partsArray); } catch (e) { partsArray = []; }
