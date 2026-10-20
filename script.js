@@ -144,30 +144,54 @@ function initStore(games) {
 
     renderNavbarDropdowns(games);
 
-    // Exact 10 Featured Games requested by user
-    const featuredTargetIds = ["1", "2", "19", "8", "13", "12", "46", "7", "27", "51"];
-    const featuredGames = games.filter(game => {
-        if (featuredTargetIds.includes(String(game.id))) return true;
-        const title = (game.title || "").toLowerCase();
-        return title.includes("tanzania euro truck simulator 2 + 50 tz mods") ||
-               title.includes("tanzania euro truck simulator 2 mobile") ||
-               title.includes("need for speed: heat") ||
-               title.includes("grand theft auto v legacy") ||
-               title.includes("fifa 22") ||
-               title.includes("spider-man: miles morales") ||
-               title.includes("the last of us part ii") ||
-               title.includes("carx street") ||
-               title.includes("black ops iii zombies chronicles") ||
-               title === "tomb raider";
-    });
-    
-    featuredSliderList = featuredGames.length ? featuredGames : games.slice(0, 10);
-    updateHeroSlider(0);
-    initAutoSlide();
+    const urlParams = new URLSearchParams(window.location.search);
+    const urlCategory = urlParams.get('category');
+    const urlFranchise = urlParams.get('franchise');
 
-    renderLatestGamesAdded(games.slice(0, 12));
+    const catalogTitleEl = document.getElementById('catalogSectionTitle');
+
+    if (urlCategory || urlFranchise) {
+        // Hide homepage sections when viewing a dedicated category/franchise page
+        const featuredBox = document.querySelector('.apunka-featured-box');
+        if (featuredBox) featuredBox.style.display = 'none';
+
+        const latestBox = document.querySelector('.apunka-section-box');
+        if (latestBox) latestBox.style.display = 'none';
+
+        const trustBar = document.querySelector('.trust-bar');
+        if (trustBar) trustBar.style.display = 'none';
+
+        if (urlCategory && catalogTitleEl) {
+            catalogTitleEl.innerHTML = `<i class="fa-solid fa-layer-group"></i> Category: ${urlCategory}`;
+        } else if (urlFranchise && catalogTitleEl) {
+            catalogTitleEl.innerHTML = `<i class="fa-solid fa-gamepad"></i> Game Type: ${urlFranchise}`;
+        }
+    } else {
+        // Exact 10 Featured Games requested by user for homepage
+        const featuredTargetIds = ["1", "2", "19", "8", "13", "12", "46", "7", "27", "51"];
+        const featuredGames = games.filter(game => {
+            if (featuredTargetIds.includes(String(game.id))) return true;
+            const title = (game.title || "").toLowerCase();
+            return title.includes("tanzania euro truck simulator 2 + 50 tz mods") ||
+                   title.includes("tanzania euro truck simulator 2 mobile") ||
+                   title.includes("need for speed: heat") ||
+                   title.includes("grand theft auto v legacy") ||
+                   title.includes("fifa 22") ||
+                   title.includes("spider-man: miles morales") ||
+                   title.includes("the last of us part ii") ||
+                   title.includes("carx street") ||
+                   title.includes("black ops iii zombies chronicles") ||
+                   title === "tomb raider";
+        });
+        
+        featuredSliderList = featuredGames.length ? featuredGames : games.slice(0, 10);
+        updateHeroSlider(0);
+        initAutoSlide();
+
+        renderLatestGamesAdded(games.slice(0, 12));
+    }
+
     renderPopularPostsTextSidebar(games);
-
     applyFilters(); 
 
     const searchInput = document.getElementById('gameSearchInput');
@@ -335,7 +359,7 @@ function renderNavbarDropdowns(games) {
 
     container.innerHTML = `
         <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap; width: 100%;">
-            <button class="nav-tab active" onclick="filterByCategory('all')">
+            <button class="nav-tab active" onclick="window.location.href='index.html'">
                 <i class="fa-solid fa-house"></i> Home
             </button>
             <button class="nav-tab nav-dropdown-btn" onclick="toggleFloatingDropdown(event, 'categories-dropdown-menu', \`${escapeHtml(categoriesListHTML)}\`)">
@@ -391,63 +415,27 @@ function closeAllDropdowns() {
 }
 window.closeAllDropdowns = closeAllDropdowns;
 
-/**
- * Helper to show/hide homepage-only sections (Hero Slider & Latest Games)
- */
-function toggleHomepageSections(show) {
-    const featuredBox = document.querySelector('.apunka-featured-box');
-    const latestBox = document.querySelector('.latest-games-grid')?.closest('.apunka-section-box');
-    const trustBar = document.querySelector('.trust-bar');
-    
-    const displayVal = show ? 'block' : 'none';
-    if (featuredBox) featuredBox.style.display = displayVal;
-    if (latestBox) latestBox.style.display = displayVal;
-    if (trustBar) trustBar.style.display = displayVal;
-}
-
 function filterByCategory(category) {
     const lowerCat = category.toLowerCase();
-    currentCategory = (lowerCat === 'home' || lowerCat === 'all') ? 'all' : lowerCat;
-    currentSearchQuery = '';
-
     closeAllDropdowns();
-    applyFilters();
+    if (lowerCat === 'home' || lowerCat === 'all') {
+        window.location.href = 'index.html';
+    } else {
+        window.location.href = `index.html?category=${encodeURIComponent(category)}`;
+    }
 }
 window.filterByCategory = filterByCategory;
 
 function filterByFranchise(franchiseKeyword) {
-    currentSearchQuery = "";
-    const lowerKey = franchiseKeyword.toLowerCase();
-
     closeAllDropdowns();
-    toggleHomepageSections(false); // Hide hero slider & latest games when viewing a game type
-
-    const filteredGames = loadedGamesData.filter(game => {
-        const title = (game.title || "").toLowerCase();
-        
-        if (lowerKey.includes("need for speed")) return title.includes("need for speed") || title.includes("nfs");
-        if (lowerKey.includes("grand theft auto")) return title.includes("gta") || title.includes("grand theft auto");
-        if (lowerKey.includes("euro truck")) return title.includes("euro truck") || title.includes("truckers");
-        if (lowerKey.includes("spider-man")) return title.includes("spider-man") || title.includes("spiderman");
-        if (lowerKey.includes("call of duty")) return title.includes("call of duty") || title.includes("black ops") || title.includes("modern warfare") || title.includes("advanced warfare");
-        if (lowerKey.includes("football") || lowerKey.includes("sports")) return title.includes("fifa") || title.includes("pes") || title.includes("nba") || title.includes("fc ");
-        if (lowerKey.includes("tomb raider")) return title.includes("tomb raider");
-        if (lowerKey.includes("the last of us")) return title.includes("the last of us");
-        if (lowerKey.includes("red dead")) return title.includes("red dead");
-        if (lowerKey.includes("assetto corsa")) return title.includes("assetto corsa");
-        if (lowerKey.includes("carx")) return title.includes("carx");
-
-        const gameFranchise = getGameFranchise(game.title).toLowerCase();
-        return gameFranchise === lowerKey || title.includes(lowerKey);
-    });
-
-    renderGameStore(filteredGames);
+    window.location.href = `index.html?franchise=${encodeURIComponent(franchiseKeyword)}`;
 }
 window.filterByFranchise = filterByFranchise;
 
 function applyFilters() {
-    let isFiltered = (currentCategory !== 'all') || (currentSearchQuery !== '');
-    toggleHomepageSections(!isFiltered); // Show slider only on homepage ('all' without search)
+    const urlParams = new URLSearchParams(window.location.search);
+    const urlCategory = urlParams.get('category');
+    const urlFranchise = urlParams.get('franchise');
 
     let filteredGames = loadedGamesData.filter(game => {
         const title = (game.title || "").toLowerCase();
@@ -458,15 +446,34 @@ function applyFilters() {
         const matchesSearch = title.includes(currentSearchQuery) || description.includes(currentSearchQuery);
 
         let matchesCategory = true;
-        if (currentCategory !== 'all') {
-            matchesCategory = category.includes(currentCategory) || platform.includes(currentCategory);
+        if (urlFranchise) {
+            const lowerKey = urlFranchise.toLowerCase();
+            let matchType = false;
+            if (lowerKey.includes("need for speed")) matchType = title.includes("need for speed") || title.includes("nfs");
+            else if (lowerKey.includes("grand theft auto")) matchType = title.includes("gta") || title.includes("grand theft auto");
+            else if (lowerKey.includes("euro truck")) matchType = title.includes("euro truck") || title.includes("truckers");
+            else if (lowerKey.includes("spider-man")) matchType = title.includes("spider-man") || title.includes("spiderman");
+            else if (lowerKey.includes("call of duty")) matchType = title.includes("call of duty") || title.includes("black ops") || title.includes("modern warfare") || title.includes("advanced warfare");
+            else if (lowerKey.includes("football") || lowerKey.includes("sports")) matchType = title.includes("fifa") || title.includes("pes") || title.includes("nba") || title.includes("fc ");
+            else if (lowerKey.includes("tomb raider")) matchType = title.includes("tomb raider");
+            else if (lowerKey.includes("the last of us")) matchType = title.includes("the last of us");
+            else if (lowerKey.includes("red dead")) matchType = title.includes("red dead");
+            else if (lowerKey.includes("assetto corsa")) matchType = title.includes("assetto corsa");
+            else if (lowerKey.includes("carx")) matchType = title.includes("carx");
+            else {
+                const gameFranchise = getGameFranchise(game.title).toLowerCase();
+                matchType = gameFranchise === lowerKey || title.includes(lowerKey);
+            }
+            matchesCategory = matchType;
+        } else if (urlCategory) {
+            matchesCategory = category.toLowerCase().includes(urlCategory.toLowerCase()) || platform.toLowerCase().includes(urlCategory.toLowerCase());
         }
 
         return matchesSearch && matchesCategory;
     });
 
-    // If on homepage ('all' category and no search), strictly limit to 8 curated games (4 columns x 2 rows)
-    if (currentCategory === 'all' && !currentSearchQuery) {
+    // If on homepage ('all' category and no search parameters), strictly limit to 8 curated games
+    if (!urlCategory && !urlFranchise && !currentSearchQuery) {
         const priorityTitles = [
             "tanzania euro truck simulator 2 + 50 tz mods packs",
             "tanzania euro truck simulator 2 mobile",
@@ -519,7 +526,6 @@ function renderGameStore(gameList) {
         const card = document.createElement("div");
         card.classList.add("game-card");
 
-        // Dynamic price check: treats any game with a price as paid
         const isPaid = game.price && game.price.toUpperCase() !== "FREE" && game.price.trim() !== "";
         
         let actionBtnText = isPaid ? "Buy Now" : "Get";
