@@ -268,7 +268,34 @@ function renderPopularPostsTextSidebar(games) {
 }
 
 /**
- * Dynamically builds navbar dropdowns by scanning all games automatically
+ * Intelligent Franchise / Game Series Grouper
+ */
+function getGameFranchise(title) {
+    const t = (title || "").toLowerCase();
+    
+    if (t.includes("need for speed") || t.includes("nfs")) return "Need for Speed";
+    if (t.includes("gta") || t.includes("grand theft auto")) return "Grand Theft Auto (GTA)";
+    if (t.includes("euro truck") || t.includes("truckers")) return "Euro Truck Simulator";
+    if (t.includes("spider-man") || t.includes("spiderman")) return "Spider-Man";
+    if (t.includes("call of duty") || t.includes("black ops") || t.includes("modern warfare") || t.includes("advanced warfare")) return "Call of Duty";
+    if (t.includes("fifa") || t.includes("pes") || t.includes("pro evolution soccer") || t.includes("nba") || t.includes("fc ")) return "Football / Sports";
+    if (t.includes("tomb raider")) return "Tomb Raider";
+    if (t.includes("the last of us")) return "The Last of Us";
+    if (t.includes("red dead")) return "Red Dead Redemption";
+    if (t.includes("assetto corsa")) return "Assetto Corsa";
+    if (t.includes("carx")) return "CarX Games";
+    if (t.includes("battlefield")) return "Battlefield";
+    if (t.includes("far cry")) return "Far Cry";
+    if (t.includes("resident evil")) return "Resident Evil";
+    if (t.includes("assassin")) return "Assassin's Creed";
+    
+    // Future-proof dynamic fallback: extracts clean franchise name before colons or dashes
+    let cleanTitle = title.split(/[:\-\+]/)[0].trim();
+    return cleanTitle;
+}
+
+/**
+ * Dynamically builds navbar dropdowns (Grouped by Game Series / Franchises)
  */
 function renderNavbarDropdowns(games) {
     const container = document.getElementById('dynamic-game-types');
@@ -278,7 +305,7 @@ function renderNavbarDropdowns(games) {
     let gameTypesMap = new Map();
 
     games.forEach(game => {
-        // 1. Dynamically scan and collect categories
+        // 1. Scan and collect categories
         const rawCategory = game.category || game.Category || game.genre || "";
         if (rawCategory) {
             String(rawCategory).split(/[\/,|]+/).forEach(cat => {
@@ -289,22 +316,14 @@ function renderNavbarDropdowns(games) {
             });
         }
 
-        // 2. Automatically extract Game Type / Franchise from Title (fully dynamic for future games)
-        const title = (game.title || "").trim();
-        let franchiseName = title;
-
-        if (title) {
-            if (title.includes(':')) {
-                franchiseName = title.split(':')[0].trim();
-            } else if (title.includes(' - ')) {
-                franchiseName = title.split(' - ')[0].trim();
+        // 2. Group by Franchise / Game Series
+        const franchiseName = getGameFranchise(game.title);
+        if (franchiseName) {
+            if (!gameTypesMap.has(franchiseName)) {
+                gameTypesMap.set(franchiseName, []);
             }
+            gameTypesMap.get(franchiseName).push(game);
         }
-
-        if (!gameTypesMap.has(franchiseName)) {
-            gameTypesMap.set(franchiseName, []);
-        }
-        gameTypesMap.get(franchiseName).push(game);
     });
 
     let categoriesListHTML = `<div onclick="filterByCategory('all');" style="padding: 10px 14px; color: #f1c40f; cursor: pointer; border-bottom: 1px solid rgba(255,255,255,0.1); font-weight: 600;"><i class="fa-solid fa-layer-group" style="margin-right: 6px;"></i> All Categories (${uniqueCategories.size})</div>`;
@@ -393,7 +412,21 @@ function filterByFranchise(franchiseKeyword) {
 
     const filteredGames = loadedGamesData.filter(game => {
         const title = (game.title || "").toLowerCase();
-        return title.includes(lowerKey);
+        
+        if (lowerKey.includes("need for speed")) return title.includes("need for speed") || title.includes("nfs");
+        if (lowerKey.includes("grand theft auto")) return title.includes("gta") || title.includes("grand theft auto");
+        if (lowerKey.includes("euro truck")) return title.includes("euro truck") || title.includes("truckers");
+        if (lowerKey.includes("spider-man")) return title.includes("spider-man") || title.includes("spiderman");
+        if (lowerKey.includes("call of duty")) return title.includes("call of duty") || title.includes("black ops") || title.includes("modern warfare") || title.includes("advanced warfare");
+        if (lowerKey.includes("football") || lowerKey.includes("sports")) return title.includes("fifa") || title.includes("pes") || title.includes("nba") || title.includes("fc ");
+        if (lowerKey.includes("tomb raider")) return title.includes("tomb raider");
+        if (lowerKey.includes("the last of us")) return title.includes("the last of us");
+        if (lowerKey.includes("red dead")) return title.includes("red dead");
+        if (lowerKey.includes("assetto corsa")) return title.includes("assetto corsa");
+        if (lowerKey.includes("carx")) return title.includes("carx");
+
+        const gameFranchise = getGameFranchise(game.title).toLowerCase();
+        return gameFranchise === lowerKey || title.includes(lowerKey);
     });
 
     renderGameStore(filteredGames);
@@ -473,10 +506,10 @@ function renderGameStore(gameList) {
 
         // Dynamic price check: treats any game with a price as paid
         const isPaid = game.price && game.price.toUpperCase() !== "FREE" && game.price.trim() !== "";
-
+        
         let actionBtnText = isPaid ? "Buy Now" : "Get";
         let actionBtnClass = isPaid ? "btn-download" : "btn-get";
-
+        
         let actionButtonsHTML = '';
         if (isPaid) {
             actionButtonsHTML = `
