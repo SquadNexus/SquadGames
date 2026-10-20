@@ -289,7 +289,6 @@ function getGameFranchise(title) {
     if (t.includes("resident evil")) return "Resident Evil";
     if (t.includes("assassin")) return "Assassin's Creed";
     
-    // Future-proof dynamic fallback: extracts clean franchise name before colons or dashes
     let cleanTitle = title.split(/[:\-\+]/)[0].trim();
     return cleanTitle;
 }
@@ -305,7 +304,6 @@ function renderNavbarDropdowns(games) {
     let gameTypesMap = new Map();
 
     games.forEach(game => {
-        // 1. Scan and collect categories
         const rawCategory = game.category || game.Category || game.genre || "";
         if (rawCategory) {
             String(rawCategory).split(/[\/,|]+/).forEach(cat => {
@@ -316,7 +314,6 @@ function renderNavbarDropdowns(games) {
             });
         }
 
-        // 2. Group by Franchise / Game Series
         const franchiseName = getGameFranchise(game.title);
         if (franchiseName) {
             if (!gameTypesMap.has(franchiseName)) {
@@ -394,6 +391,20 @@ function closeAllDropdowns() {
 }
 window.closeAllDropdowns = closeAllDropdowns;
 
+/**
+ * Helper to show/hide homepage-only sections (Hero Slider & Latest Games)
+ */
+function toggleHomepageSections(show) {
+    const featuredBox = document.querySelector('.apunka-featured-box');
+    const latestBox = document.querySelector('.latest-games-grid')?.closest('.apunka-section-box');
+    const trustBar = document.querySelector('.trust-bar');
+    
+    const displayVal = show ? 'block' : 'none';
+    if (featuredBox) featuredBox.style.display = displayVal;
+    if (latestBox) latestBox.style.display = displayVal;
+    if (trustBar) trustBar.style.display = displayVal;
+}
+
 function filterByCategory(category) {
     const lowerCat = category.toLowerCase();
     currentCategory = (lowerCat === 'home' || lowerCat === 'all') ? 'all' : lowerCat;
@@ -409,6 +420,7 @@ function filterByFranchise(franchiseKeyword) {
     const lowerKey = franchiseKeyword.toLowerCase();
 
     closeAllDropdowns();
+    toggleHomepageSections(false); // Hide hero slider & latest games when viewing a game type
 
     const filteredGames = loadedGamesData.filter(game => {
         const title = (game.title || "").toLowerCase();
@@ -434,6 +446,9 @@ function filterByFranchise(franchiseKeyword) {
 window.filterByFranchise = filterByFranchise;
 
 function applyFilters() {
+    let isFiltered = (currentCategory !== 'all') || (currentSearchQuery !== '');
+    toggleHomepageSections(!isFiltered); // Show slider only on homepage ('all' without search)
+
     let filteredGames = loadedGamesData.filter(game => {
         const title = (game.title || "").toLowerCase();
         const description = (game.description || "").toLowerCase();
