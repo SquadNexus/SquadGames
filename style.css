@@ -681,7 +681,7 @@ body {
 
 /* ==========================================================================
    ApunKaGames Style Article & Screenshot Grid Layout (Unified Width)
-   ================================================================---------- */
+   ========================================================================== */
 
 .apunka-article-box {
     background: var(--bg-card);
@@ -899,5 +899,50 @@ body {
     }
     60% {
         transform: translateY(-2px);
+    }
+}
+
+/* ==========================================================================
+   SMART MOBILE RESPONSIVE ADAPTATION (ANDROID DEVICES)
+   ========================================================================== */
+@media (max-width: 768px) {
+    .container {
+        padding: 12px;
+    }
+
+    .portal-logo-area {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .portal-search-wrapper {
+        width: 100%;
+    }
+
+    .hero-slider-wrapper {
+        height: 220px;
+    }
+
+    .hero-slider-title {
+        font-size: 1.05rem;
+    }
+
+    .game-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+        gap: 12px;
+    }
+
+    .game-img-wrapper {
+        height: 120px;
+    }
+
+    .latest-games-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .trust-bar {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
     }
 }
