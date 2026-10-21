@@ -160,10 +160,12 @@ function initStore(games) {
         const trustBar = document.querySelector('.trust-bar');
         if (trustBar) trustBar.style.display = 'none';
 
-        if (urlCategory && catalogTitleEl) {
+        if (urlCategory === 'all_games' && catalogTitleEl) {
+            catalogTitleEl.innerHTML = `<i class="fa-solid fa-gamepad"></i> All Available Games (${games.length})`;
+        } else if (urlCategory && catalogTitleEl) {
             catalogTitleEl.innerHTML = `<i class="fa-solid fa-layer-group"></i> Category: ${urlCategory}`;
         } else if (urlFranchise && catalogTitleEl) {
-            catalogTitleEl.innerHTML = `<i class="fa-solid fa-gamepad"></i> Game Type: ${urlFranchise}`;
+            catalogTitleEl.innerHTML = `<i class="fa-solid fa-fire"></i> Game Type: ${urlFranchise}`;
         }
     } else {
         // Exact 10 Featured Games requested by user for homepage
@@ -317,7 +319,7 @@ function getGameFranchise(title) {
 }
 
 /**
- * Dynamically builds navbar dropdowns (Grouped by Game Series / Franchises)
+ * Dynamically builds navbar dropdowns (Includes Home, All Games, Categories, Game Types)
  */
 function renderNavbarDropdowns(games) {
     const container = document.getElementById('dynamic-game-types');
@@ -346,26 +348,32 @@ function renderNavbarDropdowns(games) {
         }
     });
 
-    let categoriesListHTML = `<div onclick="filterByCategory('all');" style="padding: 10px 14px; color: #f1c40f; cursor: pointer; border-bottom: 1px solid rgba(255,255,255,0.1); font-weight: 600;"><i class="fa-solid fa-layer-group" style="margin-right: 6px;"></i> All Categories (${uniqueCategories.size})</div>`;
+    let categoriesListHTML = `<div onclick="filterByCategory('all_games');" style="padding: 10px 14px; color: #f1c40f; cursor: pointer; border-bottom: 1px solid rgba(255,255,255,0.1); font-weight: 600;"><i class="fa-solid fa-layer-group" style="margin-right: 6px;"></i> All Categories (${uniqueCategories.size})</div>`;
     Array.from(uniqueCategories).sort().forEach(cat => {
         categoriesListHTML += `<div onclick="filterByCategory('${cat}');" style="padding: 10px 14px; color: #fff; cursor: pointer; border-bottom: 1px solid rgba(255,255,255,0.05); transition: background 0.2s;" onmouseover="this.style.background='rgba(0,122,255,0.2)'" onmouseout="this.style.background='transparent'">${cat}</div>`;
     });
 
-    let gameTypesListHTML = `<div onclick="filterByCategory('all');" style="padding: 10px 14px; color: #f1c40f; cursor: pointer; border-bottom: 1px solid rgba(255,255,255,0.1); font-weight: 600;"><i class="fa-solid fa-gamepad" style="margin-right: 6px;"></i> All Game Types (${gameTypesMap.size})</div>`;
+    let gameTypesListHTML = `<div onclick="filterByCategory('all_games');" style="padding: 10px 14px; color: #f1c40f; cursor: pointer; border-bottom: 1px solid rgba(255,255,255,0.1); font-weight: 600;"><i class="fa-solid fa-gamepad" style="margin-right: 6px;"></i> All Game Types (${gameTypesMap.size})</div>`;
     Array.from(gameTypesMap.keys()).sort().forEach(type => {
         gameTypesListHTML += `<div onclick="filterByFranchise('${escapeHtml(type)}');" style="padding: 10px 14px; color: #fff; cursor: pointer; border-bottom: 1px solid rgba(255,255,255,0.05); transition: background 0.2s;" onmouseover="this.style.background='rgba(0,122,255,0.2)'" onmouseout="this.style.background='transparent'"><i class="fa-solid fa-fire" style="margin-right: 6px; color: #ff9500; font-size: 0.75rem;"></i> ${type}</div>`;
     });
 
+    const urlParams = new URLSearchParams(window.location.search);
+    const urlCat = urlParams.get('category');
+
     container.innerHTML = `
         <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap; width: 100%;">
-            <button class="nav-tab active" onclick="window.location.href='index.html'">
+            <button class="nav-tab ${!urlCat ? 'active' : ''}" onclick="window.location.href='index.html'">
                 <i class="fa-solid fa-house"></i> Home
+            </button>
+            <button class="nav-tab ${urlCat === 'all_games' ? 'active' : ''}" onclick="filterByCategory('all_games')">
+                <i class="fa-solid fa-gamepad"></i> All Games (${games.length})
             </button>
             <button class="nav-tab nav-dropdown-btn" onclick="toggleFloatingDropdown(event, 'categories-dropdown-menu', \`${escapeHtml(categoriesListHTML)}\`)">
                 <i class="fa-solid fa-layer-group"></i> All Categories <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem; margin-left: 4px;"></i>
             </button>
             <button class="nav-tab nav-dropdown-btn" onclick="toggleFloatingDropdown(event, 'gametypes-dropdown-menu', \`${escapeHtml(gameTypesListHTML)}\`)">
-                <i class="fa-solid fa-gamepad"></i> Game Type <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem; margin-left: 4px;"></i>
+                <i class="fa-solid fa-fire"></i> Game Type <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem; margin-left: 4px;"></i>
             </button>
         </div>
     `;
@@ -450,10 +458,12 @@ function applyFilters() {
 
         if (currentSearchQuery) {
             if (catalogTitleEl) catalogTitleEl.innerHTML = `<i class="fa-solid fa-magnifying-glass"></i> Search Results: "${currentSearchQuery}"`;
+        } else if (urlCategory === 'all_games') {
+            if (catalogTitleEl) catalogTitleEl.innerHTML = `<i class="fa-solid fa-gamepad"></i> All Available Games (${loadedGamesData.length})`;
         } else if (urlCategory) {
             if (catalogTitleEl) catalogTitleEl.innerHTML = `<i class="fa-solid fa-layer-group"></i> Category: ${urlCategory}`;
         } else if (urlFranchise) {
-            if (catalogTitleEl) catalogTitleEl.innerHTML = `<i class="fa-solid fa-gamepad"></i> Game Type: ${urlFranchise}`;
+            if (catalogTitleEl) catalogTitleEl.innerHTML = `<i class="fa-solid fa-fire"></i> Game Type: ${urlFranchise}`;
         }
     } else {
         if (featuredBox) featuredBox.style.display = 'block';
@@ -471,7 +481,9 @@ function applyFilters() {
         const matchesSearch = title.includes(currentSearchQuery) || description.includes(currentSearchQuery);
 
         let matchesCategory = true;
-        if (urlFranchise) {
+        if (urlCategory === 'all_games') {
+            matchesCategory = true; // Show all games without restriction
+        } else if (urlFranchise) {
             const lowerKey = urlFranchise.toLowerCase();
             let matchType = false;
             if (lowerKey.includes("need for speed")) matchType = title.includes("need for speed") || title.includes("nfs");
@@ -497,7 +509,7 @@ function applyFilters() {
         return matchesSearch && matchesCategory;
     });
 
-    // If on homepage ('all' category and no search parameters), strictly limit to 8 curated games
+    // If on default homepage (no query params), strictly limit to 8 curated games
     if (!urlCategory && !urlFranchise && !currentSearchQuery) {
         const priorityTitles = [
             "tanzania euro truck simulator 2 + 50 tz mods packs",
