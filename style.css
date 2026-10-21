@@ -851,42 +851,57 @@ body {
 }
 
 /* ==========================================================================
-   Eye-Catching Premium Call-To-Action Download Button Styling
+   Eye-Catching Premium Call-To-Action Download Section & Button Styling
    ========================================================================== */
+
+.download-cta-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    margin: 16px 0;
+    width: 100%;
+}
+
 .btn-download-cta {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 10px;
+    gap: 12px;
     background: linear-gradient(135deg, #e50914 0%, #ff3b30 100%);
     color: #ffffff !important;
-    font-size: 0.95rem;
+    font-size: 1rem;
     font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    padding: 12px 24px;
+    padding: 16px 32px;
     border-radius: 12px;
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.25);
     text-decoration: none !important;
-    box-shadow: 0 8px 25px rgba(229, 9, 20, 0.45);
-    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    box-shadow: 0 8px 30px rgba(229, 9, 20, 0.5);
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     cursor: pointer;
-    margin: 14px 0;
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    box-sizing: border-box;
 }
 
+/* Hover Pulse & Scale Effect */
 .btn-download-cta:hover {
-    transform: translateY(-3px) scale(1.02);
-    box-shadow: 0 12px 32px rgba(229, 9, 20, 0.65);
+    transform: translateY(-4px) scale(1.02);
+    box-shadow: 0 14px 40px rgba(229, 9, 20, 0.75);
     background: linear-gradient(135deg, #ff1e27 0%, #ff5247 100%);
 }
 
 .btn-download-cta:active {
     transform: translateY(1px) scale(0.98);
-    box-shadow: 0 4px 15px rgba(229, 9, 20, 0.3);
+    box-shadow: 0 4px 15px rgba(229, 9, 20, 0.4);
 }
 
+/* Animated Download Icon */
 .btn-download-cta i {
-    font-size: 1.15rem;
+    font-size: 1.35rem;
     animation: bounceDown 2s infinite;
 }
 
@@ -895,11 +910,38 @@ body {
         transform: translateY(0);
     }
     40% {
-        transform: translateY(-4px);
+        transform: translateY(-5px);
     }
     60% {
         transform: translateY(-2px);
     }
+}
+
+/* Game Meta Badge Line (Size & Password Box) */
+.game-meta-info,
+.download-meta-info {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+    font-size: 0.88rem;
+    color: #cbd5e1;
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 10px 16px;
+    border-radius: 10px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.game-meta-info i,
+.download-meta-info i {
+    color: #38bdf8;
+    margin-right: 5px;
+}
+
+.game-meta-info strong,
+.download-meta-info b {
+    color: #ffffff;
 }
 
 /* ==========================================================================
@@ -943,6 +985,17 @@ body {
     .trust-bar {
         flex-direction: column;
         align-items: flex-start;
+        gap: 8px;
+    }
+
+    .btn-download-cta {
+        padding: 14px 20px;
+        font-size: 0.88rem;
+    }
+
+    .game-meta-info,
+    .download-meta-info {
+        flex-direction: column;
         gap: 8px;
     }
 }
