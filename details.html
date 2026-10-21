@@ -106,7 +106,7 @@
                                 </a>
                                 
                                 <div class="game-meta-info">
-                                    <span><i class="fa-solid fa-hard-drive"></i> <strong>Game Size:</strong> <span id="gameSizeText">35.7 GB</span></span>
+                                    <span><i class="fa-solid fa-hard-drive"></i> <strong>Game Size:</strong> <span id="gameSizeText">Loading...</span></span>
                                     <span><i class="fa-solid fa-key"></i> <strong>Password:</strong> www.squadgamestz.com / apunkagames</span>
                                 </div>
                             </div>
@@ -148,6 +148,17 @@
     <script>
         let currentGameData = null;
 
+        // Smart Game Size Extractor to read exact size from games.json properties or description
+        function extractGameSize(game) {
+            if (game.size) return game.size;
+            if (game.gameSize) return game.gameSize;
+            if (game.fileSize) return game.fileSize;
+
+            const fullText = `${game.description || ''} ${game.requirements || ''}`;
+            const match = fullText.match(/(\d+(\.\d+)?\s*(GB|MB))/i);
+            return match ? match[0] : "N/A";
+        }
+
         document.addEventListener("DOMContentLoaded", async () => {
             const urlParams = new URLSearchParams(window.location.search);
             const gameId = urlParams.get('id');
@@ -183,7 +194,8 @@
                     <p>Developed and published with high performance standards. Enjoy seamless controls, custom mods support, and optimized performance for your machine.</p>
                 `;
 
-                document.getElementById('gameSizeText').innerText = currentGameData.size || "35.7 GB";
+                // Display dynamic size from games.json
+                document.getElementById('gameSizeText').innerText = extractGameSize(currentGameData);
 
                 // Screenshots
                 const gallery = document.getElementById('screenshotsGallery');
@@ -211,7 +223,6 @@
         function handleMainDownloadClick() {
             if (!currentGameData) return;
 
-            // Checks if price exists and is not FREE
             const isPaid = currentGameData.price && currentGameData.price.toUpperCase() !== "FREE" && currentGameData.price.trim() !== "";
             if (isPaid) {
                 showPaymentOptionsModal(currentGameData);
