@@ -1,6 +1,6 @@
 /**
  * Squad Games Store TZ - Core Application Script
- * Synchronized with ApunKaGames Layout: 3-Second Auto Hero Slider, Exact 10 Featured Games, Text Popular Posts Sidebar, and 8-Game Curated Catalog Grid.
+ * Synchronized with ApunKaGames Layout: 3-Second Auto Hero Slider, Exact 10 Featured Games, Text Popular Posts Sidebar, and ID-Sorted Latest Games.
  */
 
 let loadedGamesData = [];
@@ -168,7 +168,7 @@ function initStore(games) {
             catalogTitleEl.innerHTML = `<i class="fa-solid fa-fire"></i> Game Type: ${urlFranchise}`;
         }
     } else {
-        // Exact 10 Featured Games requested by user for homepage
+        // Featured games slider list (homepage)
         const featuredTargetIds = ["1", "2", "19", "8", "13", "12", "46", "7", "27", "51"];
         const featuredGames = games.filter(game => {
             if (featuredTargetIds.includes(String(game.id))) return true;
@@ -189,7 +189,14 @@ function initStore(games) {
         updateHeroSlider(0);
         initAutoSlide();
 
-        renderLatestGamesAdded(games.slice(0, 12));
+        // SORT BY ID DESCENDING: Highest ID (newest added) comes first
+        const latestGamesSorted = [...games].sort((a, b) => {
+            const idA = parseInt(a.id, 10) || 0;
+            const idB = parseInt(b.id, 10) || 0;
+            return idB - idA;
+        });
+
+        renderLatestGamesAdded(latestGamesSorted.slice(0, 12));
     }
 
     renderPopularPostsTextSidebar(games);
@@ -259,17 +266,16 @@ function renderLatestGamesAdded(games) {
     const container = document.getElementById('latestGamesGrid');
     if (!container) return;
 
-    container.innerHTML = games.map((game, idx) => {
+    container.innerHTML = games.map((game) => {
         const gameId = game.id || game.title;
-        const dates = ["October 9, 2026", "October 8, 2026", "October 7, 2026", "October 5, 2026"];
-        const gameDate = dates[idx % dates.length];
+        let displayDate = game.date || game.addedDate || "October 20, 2026";
 
         return `
             <div class="latest-game-card" onclick="openDetailsById('${encodeURIComponent(gameId)}')">
-                <img src="${game.image}" alt="${game.title}" loading="lazy" onerror="this.src='images/nfsmw-shot1.png';">
+                <img src="${game.image || 'images/nfsmw-shot1.png'}" alt="${game.title}" loading="lazy" onerror="this.src='images/nfsmw-shot1.png';">
                 <div class="latest-game-info">
                     <h5>${game.title}</h5>
-                    <span>${gameDate}</span>
+                    <span>${displayDate}</span>
                     <span class="badge-latest">Latest</span>
                 </div>
             </div>
@@ -482,7 +488,7 @@ function applyFilters() {
 
         let matchesCategory = true;
         if (urlCategory === 'all_games') {
-            matchesCategory = true; // Show all games without restriction
+            matchesCategory = true;
         } else if (urlFranchise) {
             const lowerKey = urlFranchise.toLowerCase();
             let matchType = false;
@@ -509,7 +515,7 @@ function applyFilters() {
         return matchesSearch && matchesCategory;
     });
 
-    // If on default homepage (no query params), strictly limit to 8 curated games
+    // If on homepage ('all' category and no search parameters), strictly limit to 8 curated games
     if (!urlCategory && !urlFranchise && !currentSearchQuery) {
         const priorityTitles = [
             "tanzania euro truck simulator 2 + 50 tz mods packs",
