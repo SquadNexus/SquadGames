@@ -506,6 +506,7 @@ function applyFilters() {
     const featuredBox = document.querySelector('.apunka-featured-box');
     const latestBox = document.querySelector('.apunka-section-box');
     const trustBar = document.querySelector('.trust-bar');
+    const popularSidebar = document.querySelector('.portal-sidebar');
     const catalogTitleEl = document.getElementById('catalogSectionTitle');
 
     const isFiltering = urlCategory || urlFranchise || currentSearchQuery;
@@ -514,6 +515,7 @@ function applyFilters() {
         if (featuredBox) featuredBox.style.display = 'none';
         if (latestBox) latestBox.style.display = 'none';
         if (trustBar) trustBar.style.display = 'none';
+        if (popularSidebar) popularSidebar.style.display = 'none'; // Hides Popular Posts sidebar on category/search views
 
         if (currentSearchQuery) {
             if (catalogTitleEl) catalogTitleEl.innerHTML = `<i class="fa-solid fa-magnifying-glass"></i> Search Results: "${currentSearchQuery}"`;
@@ -528,6 +530,7 @@ function applyFilters() {
         if (featuredBox) featuredBox.style.display = 'block';
         if (latestBox) latestBox.style.display = 'block';
         if (trustBar) trustBar.style.display = 'flex';
+        if (popularSidebar) popularSidebar.style.display = 'block'; // Shows Popular Posts ONLY on Home Page
         if (catalogTitleEl) catalogTitleEl.innerHTML = `<i class="fa-solid fa-layer-group"></i> Game Catalog & Store`;
     }
 
@@ -692,9 +695,9 @@ function showPaymentOptionsModal(game) {
         modal.id = 'payment-options-modal';
         modal.className = 'modal-overlay';
         modal.innerHTML = `
-            <div class="modal-content" style="max-width: 440px; background: #16161a; padding: 25px; border-radius: 14px; color: #fff; position: relative; box-shadow: 0 15px 35px rgba(0,0,0,0.8); border: 1px solid rgba(255,255,255,0.12);">
-                <button onclick="closePaymentOptionsModal()" style="position: absolute; top: 15px; right: 15px; background: none; border: none; color: #aaa; font-size: 1.2rem; cursor: pointer;"><i class="fa-solid fa-xmark"></i></button>
-                <h3 id="payment-modal-title" style="margin-top: 0; margin-bottom: 8px; font-size: 1.25rem; color: #fff;">Choose Payment Method</h3>
+            <div class="modal-content">
+                <button onclick="closePaymentOptionsModal()" style="position: absolute; top: 15px; right: 15px; background: rgba(255,255,255,0.08); border: none; color: #fff; font-size: 1.1rem; cursor: pointer; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 10;"><i class="fa-solid fa-xmark"></i></button>
+                <h3 id="payment-modal-title" style="margin-top: 0; margin-bottom: 8px; font-size: 1.2rem; color: #fff; padding-right: 30px;">Choose Payment Method</h3>
                 <p id="payment-modal-subtitle" style="color: #94a3b8; font-size: 0.85rem; margin-bottom: 20px; line-height: 1.4;">Select your preferred payment option below to complete your order securely.</p>
                 
                 <div style="display: flex; flex-direction: column; gap: 12px;">
@@ -749,16 +752,16 @@ function showDownloadPartsModal(game) {
         modal.id = 'download-parts-modal';
         modal.className = 'modal-overlay';
         modal.innerHTML = `
-            <div class="modal-content" style="max-width: 450px; background: #16161a; padding: 25px; border-radius: 14px; color: #fff; position: relative; box-shadow: 0 15px 35px rgba(0,0,0,0.8); border: 1px solid rgba(255,255,255,0.12);">
-                <button onclick="closeDownloadPartsModal()" style="position: absolute; top: 15px; right: 15px; background: none; border: none; color: #aaa; font-size: 1.2rem; cursor: pointer;"><i class="fa-solid fa-xmark"></i></button>
-                <h3 id="parts-modal-title" style="margin-bottom: 8px; font-size: 1.25rem;">Select Download Part</h3>
+            <div class="modal-content">
+                <button onclick="closeDownloadPartsModal()" style="position: absolute; top: 15px; right: 15px; background: rgba(255,255,255,0.08); border: none; color: #fff; font-size: 1.1rem; cursor: pointer; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 10;"><i class="fa-solid fa-xmark"></i></button>
+                <h3 id="parts-modal-title" style="margin-top: 0; margin-bottom: 8px; font-size: 1.15rem; color: #fff; padding-right: 30px;">Select Download Part</h3>
                 
-                <p style="color: #f1c40f; font-size: 0.85rem; margin-bottom: 12px; font-weight: 600; line-height: 1.4;">
+                <p style="color: #f1c40f; font-size: 0.82rem; margin-bottom: 12px; font-weight: 600; line-height: 1.4;">
                     <i class="fa-solid fa-triangle-exclamation"></i> To get this game you are required to download all these parts for proper installation and extraction of the game.
                 </p>
 
                 <p style="color: #aaa; font-size: 0.85rem; margin-bottom: 20px;">Choose a specific part series below to start your direct download link:</p>
-                <div id="parts-list-container" style="display: flex; flex-direction: column; gap: 10px;"></div>
+                <div id="parts-list-container"></div>
             </div>
         `;
         document.body.appendChild(modal);
@@ -784,8 +787,8 @@ function showDownloadPartsModal(game) {
         const partName = (typeof part === 'object' && part !== null) ? (part.name || `Part ${idx + 1}`) : `Part ${idx + 1}`;
 
         return `
-            <a href="${partUrl}" target="_blank" class="btn-action btn-get" style="display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; text-decoration: none;">
-                <span><i class="fa-solid fa-download"></i> ${partName}</span>
+            <a href="${partUrl}" target="_blank" class="btn-action btn-get" style="display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; text-decoration: none; border-radius: 10px;">
+                <span><i class="fa-solid fa-download" style="margin-right: 8px;"></i> ${partName}</span>
                 <i class="fa-solid fa-external-link-alt" style="font-size: 0.8rem;"></i>
             </a>
         `;
