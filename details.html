@@ -60,13 +60,7 @@
                     <div class="apunka-req-box">
                         <h3>Minimum System Requirements</h3>
                         <ul id="systemReqList">
-                            <li><b>OS:</b> Windows 10 (64-bit)</li>
-                            <li><b>Processor:</b> Intel Core 2 Quad CPU Q6600 @ 2.40GHz / AMD Phenom 9850 Quad-Core Processor</li>
-                            <li><b>Memory:</b> 4 GB RAM</li>
-                            <li><b>Storage:</b> 72 GB available space</li>
-                            <li><b>Graphics Card:</b> NVIDIA 9800 GT 1GB / AMD HD 4870 1GB (DX 10, 10.1, 11)</li>
-                            <li><b>Sound Card:</b> 100% DirectX 10 compatible</li>
-                            <li><b>DirectX:</b> Version 11</li>
+                            <!-- Populated dynamically from games.json -->
                         </ul>
                     </div>
 
@@ -196,6 +190,24 @@
 
                 // Display dynamic size from games.json
                 document.getElementById('gameSizeText').innerText = extractGameSize(currentGameData);
+
+                // Populate System Requirements Dynamically from games.json
+                const reqListEl = document.getElementById('systemReqList');
+                if (currentGameData.requirements) {
+                    if (Array.isArray(currentGameData.requirements)) {
+                        reqListEl.innerHTML = currentGameData.requirements.map(req => `<li>${req}</li>`).join('');
+                    } else if (typeof currentGameData.requirements === 'string') {
+                        reqListEl.innerHTML = `<li>${currentGameData.requirements}</li>`;
+                    }
+                } else {
+                    reqListEl.innerHTML = `
+                        <li><b>OS:</b> Windows 10 / 11 (64-bit)</li>
+                        <li><b>Processor:</b> Intel Core i3 / AMD Equivalent</li>
+                        <li><b>Memory:</b> 4 GB RAM</li>
+                        <li><b>Storage:</b> Available space matching game size</li>
+                        <li><b>Graphics:</b> DirectX 11 compatible graphics card</li>
+                    `;
+                }
 
                 // Screenshots
                 const gallery = document.getElementById('screenshotsGallery');
