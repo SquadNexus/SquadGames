@@ -592,27 +592,74 @@ body {
     color: #ffffff;
 }
 
-/* Modal Styles */
+/* ==========================================================================
+   PERFECT CENTERING & SCROLLABLE MODAL STYLING (FIXED FOR MOBILE VIEW)
+   ========================================================================== */
 .modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: rgba(0, 0, 0, 0.88);
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    background: rgba(0, 0, 0, 0.88) !important;
     backdrop-filter: blur(8px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 9999;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    z-index: 999999 !important;
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.3s ease;
+    padding: 16px !important;
+    box-sizing: border-box !important;
 }
 
 .modal-overlay.active {
-    opacity: 1;
-    pointer-events: auto;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+}
+
+.modal-content {
+    width: 100% !important;
+    max-width: 450px !important;
+    max-height: 85vh !important;
+    background: #16161a !important;
+    padding: 22px !important;
+    border-radius: 16px !important;
+    color: #ffffff !important;
+    position: relative !important;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.9) !important;
+    border: 1px solid rgba(255, 255, 255, 0.15) !important;
+    display: flex !important;
+    flex-direction: column !important;
+    box-sizing: border-box !important;
+    margin: auto !important;
+}
+
+/* Internal scrollable list for games with many parts */
+#parts-list-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-height: 55vh;
+    overflow-y: auto;
+    padding-right: 4px;
+    margin-top: 10px;
+}
+
+/* Custom smooth scrollbar for parts list */
+#parts-list-container::-webkit-scrollbar {
+    width: 6px;
+}
+
+#parts-list-container::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 4px;
+}
+
+#parts-list-container::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.25);
+    border-radius: 4px;
 }
 
 /* ==========================================================================
@@ -997,5 +1044,14 @@ body {
     .download-meta-info {
         flex-direction: column;
         gap: 8px;
+    }
+
+    .modal-content {
+        max-height: 80vh !important;
+        padding: 18px !important;
+    }
+
+    #parts-list-container {
+        max-height: 50vh !important;
     }
 }
