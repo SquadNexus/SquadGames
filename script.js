@@ -1,6 +1,7 @@
 /**
  * Squad Games Store TZ - Core Application Script
- * Synchronized with ApunKaGames Layout: 3-Second Auto Hero Slider, Exact 10 Featured Games, Text Popular Posts Sidebar, and ID-Sorted Latest Games.
+ * Synchronized with ApunKaGames Layout: 3-Second Auto Hero Slider, Text Popular Posts Sidebar, 
+ * ID-Sorted Latest Games with Dynamic Pagination (1 / X + Next/Prev Buttons).
  */
 
 let loadedGamesData = [];
@@ -11,6 +12,11 @@ let currentCategory = "all";
 let currentFeaturedIndex = 0;
 let featuredSliderList = [];
 let autoSlideTimer = null;
+
+// Latest Games Pagination State
+let latestCurrentPage = 1;
+const latestPerPage = 12; // Displays 12 games per page in the grid
+let latestGamesSorted = [];
 
 document.addEventListener("DOMContentLoaded", () => {
     console.log("Squad Games Store initialized successfully.");
@@ -189,14 +195,15 @@ function initStore(games) {
         updateHeroSlider(0);
         initAutoSlide();
 
-        // SORT BY ID DESCENDING: Highest ID (newest added) comes first
-        const latestGamesSorted = [...games].sort((a, b) => {
+        // SORT BY ID DESCENDING: Highest ID (newest added) comes first down to ID #1
+        latestGamesSorted = [...games].sort((a, b) => {
             const idA = parseInt(a.id, 10) || 0;
             const idB = parseInt(b.id, 10) || 0;
             return idB - idA;
         });
 
-        renderLatestGamesAdded(latestGamesSorted.slice(0, 12));
+        latestCurrentPage = 1;
+        renderLatestGamesPage();
     }
 
     renderPopularPostsTextSidebar(games);
@@ -262,11 +269,18 @@ function resetAutoSlide() {
     initAutoSlide();
 }
 
-function renderLatestGamesAdded(games) {
+/**
+ * Renders the Latest Games Added section with dynamic page numbers & Next/Prev buttons
+ */
+function renderLatestGamesPage() {
     const container = document.getElementById('latestGamesGrid');
     if (!container) return;
 
-    container.innerHTML = games.map((game) => {
+    const totalPages = Math.ceil(latestGamesSorted.length / latestPerPage) || 1;
+    const startIndex = (latestCurrentPage - 1) * latestPerPage;
+    const currentBatch = latestGamesSorted.slice(startIndex, startIndex + latestPerPage);
+
+    let gridHTML = currentBatch.map((game) => {
         const gameId = game.id || game.title;
         let displayDate = game.date || game.addedDate || "October 20, 2026";
 
@@ -281,7 +295,46 @@ function renderLatestGamesAdded(games) {
             </div>
         `;
     }).join('');
+
+    container.innerHTML = gridHTML;
+
+    // Render / Update Pagination Controls below Latest Games Grid
+    let paginationContainer = document.getElementById('latestGamesPagination');
+    if (!paginationContainer) {
+        paginationContainer = document.createElement('div');
+        paginationContainer.id = 'latestGamesPagination';
+        paginationContainer.style.cssText = "display: flex; justify-content: center; align-items: center; gap: 12px; margin-top: 20px; padding-top: 10px; border-top: 1px solid rgba(255,255,255,0.08);";
+        container.parentElement.appendChild(paginationContainer);
+    }
+
+    paginationContainer.innerHTML = `
+        ${latestCurrentPage > 1 ? `
+            <button onclick="changeLatestPage(-1)" style="background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); color: #fff; padding: 6px 14px; border-radius: 20px; cursor: pointer; font-size: 0.82rem; font-weight: 700; transition: background 0.2s;">
+                <i class="fa-solid fa-chevron-left" style="margin-right: 4px;"></i> Prev
+            </button>
+        ` : ''}
+        
+        <span style="background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1); color: #cbd5e1; padding: 6px 16px; border-radius: 20px; font-size: 0.82rem; font-weight: bold;">
+            ${latestCurrentPage} / ${totalPages}
+        </span>
+
+        ${latestCurrentPage < totalPages ? `
+            <button onclick="changeLatestPage(1)" style="background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.15); color: #fff; padding: 6px 14px; border-radius: 20px; cursor: pointer; font-size: 0.82rem; font-weight: 700; transition: background 0.2s;">
+                Next <i class="fa-solid fa-chevron-right" style="margin-left: 4px;"></i>
+            </button>
+        ` : ''}
+    `;
 }
+
+function changeLatestPage(direction) {
+    const totalPages = Math.ceil(latestGamesSorted.length / latestPerPage) || 1;
+    latestCurrentPage += direction;
+    if (latestCurrentPage < 1) latestCurrentPage = 1;
+    if (latestCurrentPage > totalPages) latestCurrentPage = totalPages;
+
+    renderLatestGamesPage();
+}
+window.changeLatestPage = changeLatestPage;
 
 function renderPopularPostsTextSidebar(games) {
     const container = document.getElementById('popularPostsTextList');
