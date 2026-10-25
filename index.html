@@ -66,7 +66,7 @@
             margin: 0 auto 25px;
         }
 
-        /* Call To Action Buttons */
+        /* Call To Action Button */
         .btn-enter-store-main {
             display: inline-flex;
             align-items: center;
@@ -160,14 +160,14 @@
         }
 
         /* ------------------------------------------------------------- */
-        /* LATEST GAMES ADDED - EXACT MATCHING COMPACT HORIZONTAL GRID   */
+        /* EXACT STORE-MATCHING "LATEST GAMES ADDED" HORIZONTAL LIST GRID */
         /* ------------------------------------------------------------- */
         .latest-games-grid-container {
-            background: #111115;
+            background: #16161a;
             border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 16px;
             padding: 24px;
-            margin-top: 20px;
+            margin-bottom: 30px;
         }
 
         .latest-grid-header-title {
@@ -183,18 +183,18 @@
 
         .latest-games-grid-intro {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
             gap: 16px;
         }
 
         .latest-intro-card {
-            background: #18181c;
+            background: #1e1e24;
             border: 1px solid rgba(255, 255, 255, 0.07);
-            border-radius: 12px;
+            border-radius: 10px;
             padding: 12px;
             display: flex;
             align-items: center;
-            gap: 14px;
+            gap: 12px;
             text-decoration: none;
             transition: transform 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
         }
@@ -202,13 +202,13 @@
         .latest-intro-card:hover {
             transform: translateY(-3px);
             border-color: rgba(229, 9, 20, 0.5);
-            background-color: #1f1f24;
+            background-color: #25252b;
         }
 
         .latest-intro-thumb {
-            width: 60px;
-            height: 60px;
-            border-radius: 10px;
+            width: 55px;
+            height: 55px;
+            border-radius: 8px;
             object-fit: cover;
             background: #000;
             flex-shrink: 0;
@@ -223,9 +223,9 @@
 
         .latest-intro-title {
             color: #ffffff;
-            font-size: 0.92rem;
+            font-size: 0.9rem;
             font-weight: 700;
-            margin: 0 0 4px 0;
+            margin: 0 0 3px 0;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
@@ -233,7 +233,7 @@
 
         .latest-intro-date {
             color: #94a3b8;
-            font-size: 0.76rem;
+            font-size: 0.75rem;
             margin: 0 0 6px 0;
         }
 
@@ -241,7 +241,6 @@
             display: inline-block;
             background: rgba(34, 197, 94, 0.15);
             color: #22c55e;
-            border: 1px solid rgba(34, 197, 94, 0.3);
             font-size: 0.65rem;
             font-weight: 800;
             padding: 2px 8px;
@@ -250,7 +249,7 @@
             width: fit-content;
         }
 
-        /* Comparison Table */
+        /* Comparison Table & FAQs */
         .comparison-table {
             width: 100%;
             border-collapse: collapse;
@@ -274,7 +273,6 @@
             background: rgba(255, 255, 255, 0.02);
         }
 
-        /* FAQ Section */
         .faq-item {
             margin-bottom: 18px;
         }
@@ -327,22 +325,22 @@
             </div>
         </section>
 
-        <!-- EXACT LATEST GAMES ADDED GRID (MATCHES YOUR STORE FRONT) -->
+        <!-- EXACT LATEST GAMES ADDED HORIZONTAL LIST (MATCHES STORE FRONT) -->
         <section class="latest-games-grid-container">
             <h2 class="latest-grid-header-title">
                 <i class="fa-solid fa-fire"></i> Latest Games Added
             </h2>
 
             <div id="introLatestGamesList" class="latest-games-grid-intro">
-                <div style="grid-column: 1 / -1; text-align: center; padding: 30px; color: #94a3b8;">
-                    <i class="fa-solid fa-circle-notch fa-spin" style="font-size: 1.5rem; margin-bottom: 8px;"></i>
-                    <p>Loading latest games from store...</p>
+                <div style="grid-column: 1 / -1; text-align: center; padding: 25px; color: #94a3b8;">
+                    <i class="fa-solid fa-circle-notch fa-spin" style="font-size: 1.4rem; margin-bottom: 8px;"></i>
+                    <p>Loading latest games...</p>
                 </div>
             </div>
         </section>
 
         <!-- Categories and Optimization -->
-        <section class="content-section" style="margin-top: 30px;">
+        <section class="content-section">
             <h2>Game Categories & Selection</h2>
             <ul class="styled-list">
                 <li><b>Action & High-Octane Driving Games:</b> Including Need for Speed, Assetto Corsa, and GTA V[cite: 1].</li>
@@ -445,7 +443,7 @@
 
     </div>
 
-    <!-- DYNAMIC LATEST GAMES AUTO-LOADER -->
+    <!-- DYNAMIC LATEST GAMES AUTO-LOADER SCRIPT -->
     <script>
         document.addEventListener('DOMContentLoaded', async () => {
             const container = document.getElementById('introLatestGamesList');
@@ -461,7 +459,7 @@
                     return;
                 }
 
-                // Get the top 12 newest games from games.json
+                // Pull the newest 12 games to match your main store page
                 const latestGames = games.slice(0, 12);
                 container.innerHTML = '';
 
