@@ -88,7 +88,7 @@
             box-shadow: 0 12px 35px rgba(37, 211, 102, 0.55);
         }
 
-        /* Editorial Sections & Article Content */
+        /* Editorial Content Sections */
         .content-section {
             background: rgba(22, 22, 26, 0.6);
             border: 1px solid rgba(255, 255, 255, 0.07);
@@ -137,7 +137,7 @@
             font-size: 0.85rem;
         }
 
-        /* Banner Graphics Box */
+        /* Graphic Banner Box */
         .banner-graphic-box {
             text-align: center;
             background: linear-gradient(135deg, #16161a, #0f172a);
@@ -159,121 +159,95 @@
             font-size: 1.3rem;
         }
 
-        /* Dynamic Equal-Size Game Grid Setup */
-        .curated-games-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 20px;
+        /* ------------------------------------------------------------- */
+        /* LATEST GAMES ADDED - EXACT MATCHING COMPACT HORIZONTAL GRID   */
+        /* ------------------------------------------------------------- */
+        .latest-games-grid-container {
+            background: #111115;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            padding: 24px;
             margin-top: 20px;
         }
 
-        .curated-card {
-            background: #16161a;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 14px;
-            overflow: hidden;
-            display: flex;
-            flex-direction: column;
-            height: 100%; /* Ensures equal height across all cards */
-            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .curated-card:hover {
-            transform: translateY(-5px);
-            border-color: rgba(229, 9, 20, 0.5);
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
-        }
-
-        .curated-img-wrapper {
-            position: relative;
-            width: 100%;
-            height: 170px;
-            background: #000;
-            overflow: hidden;
-        }
-
-        .curated-img-wrapper img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover; /* Keeps all images strictly uniform */
-            transition: transform 0.4s ease;
-        }
-
-        .curated-card:hover .curated-img-wrapper img {
-            transform: scale(1.06);
-        }
-
-        .curated-badge {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: #007aff;
-            color: #fff;
-            font-size: 0.7rem;
+        .latest-grid-header-title {
+            color: #ff9500;
+            font-size: 1.25rem;
             font-weight: 800;
-            padding: 3px 8px;
-            border-radius: 4px;
-            text-transform: uppercase;
-        }
-
-        .curated-content {
-            padding: 16px;
-            display: flex;
-            flex-direction: column;
-            flex-grow: 1; /* Pushes price and action button to equal bottoms */
-            justify-content: space-between;
-        }
-
-        .curated-category {
-            font-size: 0.72rem;
-            color: #e50914;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 4px;
-        }
-
-        .curated-title {
-            font-size: 1rem;
-            font-weight: 800;
-            color: #ffffff;
-            margin: 4px 0 8px;
-            line-height: 1.3;
-        }
-
-        .curated-desc {
-            font-size: 0.8rem;
-            color: #94a3b8;
-            line-height: 1.45;
-            margin-bottom: 14px;
-            display: -webkit-box;
-            -webkit-line-clamp: 3;
-            -webkit-box-orient: vertical;
-            overflow: hidden; /* Truncates long text to keep cards identical size */
-        }
-
-        .curated-footer {
+            margin: 0 0 20px 0;
             display: flex;
             align-items: center;
-            justify-content: space-between;
-            border-top: 1px solid rgba(255, 255, 255, 0.08);
-            padding-top: 10px;
-            margin-top: auto;
+            gap: 10px;
+            text-transform: uppercase;
         }
 
-        .btn-card-action {
-            background: linear-gradient(135deg, #e50914, #b20710);
-            color: #fff !important;
-            padding: 6px 14px;
-            border-radius: 6px;
-            font-size: 0.78rem;
-            font-weight: 700;
+        .latest-games-grid-intro {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+            gap: 16px;
+        }
+
+        .latest-intro-card {
+            background: #18181c;
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            border-radius: 12px;
+            padding: 12px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
             text-decoration: none;
-            transition: background 0.2s ease;
+            transition: transform 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
         }
 
-        .btn-card-action:hover {
-            background: linear-gradient(135deg, #ff1e27, #e50914);
+        .latest-intro-card:hover {
+            transform: translateY(-3px);
+            border-color: rgba(229, 9, 20, 0.5);
+            background-color: #1f1f24;
+        }
+
+        .latest-intro-thumb {
+            width: 60px;
+            height: 60px;
+            border-radius: 10px;
+            object-fit: cover;
+            background: #000;
+            flex-shrink: 0;
+        }
+
+        .latest-intro-info {
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            flex-grow: 1;
+        }
+
+        .latest-intro-title {
+            color: #ffffff;
+            font-size: 0.92rem;
+            font-weight: 700;
+            margin: 0 0 4px 0;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .latest-intro-date {
+            color: #94a3b8;
+            font-size: 0.76rem;
+            margin: 0 0 6px 0;
+        }
+
+        .latest-intro-badge {
+            display: inline-block;
+            background: rgba(34, 197, 94, 0.15);
+            color: #22c55e;
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            font-size: 0.65rem;
+            font-weight: 800;
+            padding: 2px 8px;
+            border-radius: 4px;
+            text-transform: uppercase;
+            width: fit-content;
         }
 
         /* Comparison Table */
@@ -322,7 +296,7 @@
 
     <div class="intro-wrapper">
 
-        <!-- Top Header & Hero -->
+        <!-- Header Hero -->
         <header class="portal-brand-header">
             <div class="brand-badge">
                 <i class="fa-solid fa-shield-halved"></i> TZ Verified Gaming Portal
@@ -336,7 +310,7 @@
             </a>
         </header>
 
-        <!-- Overview Section -->
+        <!-- Store Overview -->
         <section class="content-section">
             <h2>Overview of Squad Games Store TZ</h2>
             <p>
@@ -353,22 +327,22 @@
             </div>
         </section>
 
-        <!-- DYNAMIC LATEST GAMES GRID SECTION -->
-        <section class="content-section">
-            <h2><i class="fa-solid fa-fire" style="color: #ff9500; margin-right: 8px;"></i> Latest Games Added</h2>
-            <p>Browse our newest uploads dynamically synced from our store database[cite: 1]:</p>
+        <!-- EXACT LATEST GAMES ADDED GRID (MATCHES YOUR STORE FRONT) -->
+        <section class="latest-games-grid-container">
+            <h2 class="latest-grid-header-title">
+                <i class="fa-solid fa-fire"></i> Latest Games Added
+            </h2>
 
-            <!-- Container auto-populated via JavaScript -->
-            <div id="introLatestGamesGrid" class="curated-games-grid">
+            <div id="introLatestGamesList" class="latest-games-grid-intro">
                 <div style="grid-column: 1 / -1; text-align: center; padding: 30px; color: #94a3b8;">
-                    <i class="fa-solid fa-spinner fa-spin" style="font-size: 1.5rem; margin-bottom: 8px;"></i>
-                    <p>Fetching latest games...</p>
+                    <i class="fa-solid fa-circle-notch fa-spin" style="font-size: 1.5rem; margin-bottom: 8px;"></i>
+                    <p>Loading latest games from store...</p>
                 </div>
             </div>
         </section>
 
-        <!-- Categories and Optimization Approach -->
-        <section class="content-section">
+        <!-- Categories and Optimization -->
+        <section class="content-section" style="margin-top: 30px;">
             <h2>Game Categories & Selection</h2>
             <ul class="styled-list">
                 <li><b>Action & High-Octane Driving Games:</b> Including Need for Speed, Assetto Corsa, and GTA V[cite: 1].</li>
@@ -403,7 +377,7 @@
             </ol>
         </section>
 
-        <!-- Feature Comparison Table -->
+        <!-- Platform Comparison -->
         <section class="content-section">
             <h2>Platform Comparison</h2>
             <table class="comparison-table">
@@ -439,7 +413,7 @@
             </table>
         </section>
 
-        <!-- Frequently Asked Questions -->
+        <!-- FAQs -->
         <section class="content-section">
             <h2>Frequently Asked Questions (FAQs)</h2>
 
@@ -459,7 +433,7 @@
             </div>
         </section>
 
-        <!-- Bottom CTA -->
+        <!-- Bottom Call to Action -->
         <div style="text-align: center; margin-top: 40px;">
             <a href="store.html" class="btn-enter-store-main">
                 <i class="fa-solid fa-arrow-right-to-bracket"></i> Enter Main Game Store Catalog
@@ -471,11 +445,11 @@
 
     </div>
 
-    <!-- DYNAMIC DATA POPULATOR SCRIPT -->
+    <!-- DYNAMIC LATEST GAMES AUTO-LOADER -->
     <script>
         document.addEventListener('DOMContentLoaded', async () => {
-            const gridContainer = document.getElementById('introLatestGamesGrid');
-            if (!gridContainer) return;
+            const container = document.getElementById('introLatestGamesList');
+            if (!container) return;
 
             try {
                 const res = await fetch('games.json');
@@ -483,48 +457,36 @@
                 const games = Array.isArray(data) ? data : (data.games || data.data || []);
 
                 if (!games || games.length === 0) {
-                    gridContainer.innerHTML = `<p style="grid-column: 1 / -1; color: #94a3b8; text-align: center;">No games available at the moment.</p>`;
+                    container.innerHTML = `<p style="grid-column: 1 / -1; color: #94a3b8; text-align: center;">No games available.</p>`;
                     return;
                 }
 
-                // Get the latest 6 games dynamically matching games.json
-                const latestGames = games.slice(0, 6);
-                gridContainer.innerHTML = '';
+                // Get the top 12 newest games from games.json
+                const latestGames = games.slice(0, 12);
+                container.innerHTML = '';
 
                 latestGames.forEach(game => {
                     const title = game.title || 'Untitled Game';
-                    const platform = game.platform || 'PC';
-                    const category = game.category || game.genre || 'Action, Gaming';
-                    const price = game.price || 'FREE';
+                    const date = game.date || game.releaseDate || 'October 20, 2026';
                     const image = game.image || 'images/nfsmw-shot1.png';
-                    const desc = game.description || game.shortDesc || 'Download high-performance gaming setups with fast direct server links.';
                     const gameId = encodeURIComponent(game.id || game.title);
 
                     const cardHTML = `
-                        <div class="curated-card">
-                            <div class="curated-img-wrapper">
-                                <span class="curated-badge">${platform}</span>
-                                <img src="${image}" alt="${title}" onerror="this.src='images/nfsmw-shot1.png';">
+                        <a href="details.html?id=${gameId}" class="latest-intro-card">
+                            <img src="${image}" alt="${title}" class="latest-intro-thumb" onerror="this.src='images/nfsmw-shot1.png';">
+                            <div class="latest-intro-info">
+                                <h4 class="latest-intro-title" title="${title}">${title}</h4>
+                                <p class="latest-intro-date">${date}</p>
+                                <span class="latest-intro-badge">Latest</span>
                             </div>
-                            <div class="curated-content">
-                                <div>
-                                    <span class="curated-category">${category}</span>
-                                    <h3 class="curated-title">${title}</h3>
-                                    <p class="curated-desc">${desc}</p>
-                                </div>
-                                <div class="curated-footer">
-                                    <span style="color: #22c55e; font-weight: 800; font-size: 0.85rem;">${price}</span>
-                                    <a href="details.html?id=${gameId}" class="btn-card-action">Details &rarr;</a>
-                                </div>
-                            </div>
-                        </div>
+                        </a>
                     `;
-                    gridContainer.innerHTML += cardHTML;
+                    container.innerHTML += cardHTML;
                 });
 
             } catch (e) {
-                console.warn("Could not load latest games onto intro grid:", e);
-                gridContainer.innerHTML = `<p style="grid-column: 1 / -1; color: #e50914; text-align: center;">Unable to load latest games from store database.</p>`;
+                console.warn("Could not load latest games list:", e);
+                container.innerHTML = `<p style="grid-column: 1 / -1; color: #e50914; text-align: center;">Failed to load latest games from store database.</p>`;
             }
         });
     </script>
