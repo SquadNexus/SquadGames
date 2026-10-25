@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Squad Games Store TZ - Free & Premium PC Games Download | Official Portal</title>
+    <title>Squad Games Store TZ - Free & Paid PC Games Download | Official Portal</title>
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
@@ -159,7 +159,7 @@
             font-size: 1.3rem;
         }
 
-        /* 6 Curated Game Grid */
+        /* Dynamic Equal-Size Game Grid Setup */
         .curated-games-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -174,25 +174,33 @@
             overflow: hidden;
             display: flex;
             flex-direction: column;
-            transition: transform 0.3s ease, border-color 0.3s ease;
+            height: 100%; /* Ensures equal height across all cards */
+            transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
         }
 
         .curated-card:hover {
             transform: translateY(-5px);
             border-color: rgba(229, 9, 20, 0.5);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
         }
 
         .curated-img-wrapper {
             position: relative;
             width: 100%;
-            height: 160px;
+            height: 170px;
             background: #000;
+            overflow: hidden;
         }
 
         .curated-img-wrapper img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
+            object-fit: cover; /* Keeps all images strictly uniform */
+            transition: transform 0.4s ease;
+        }
+
+        .curated-card:hover .curated-img-wrapper img {
+            transform: scale(1.06);
         }
 
         .curated-badge {
@@ -205,13 +213,15 @@
             font-weight: 800;
             padding: 3px 8px;
             border-radius: 4px;
+            text-transform: uppercase;
         }
 
         .curated-content {
             padding: 16px;
             display: flex;
             flex-direction: column;
-            flex-grow: 1;
+            flex-grow: 1; /* Pushes price and action button to equal bottoms */
+            justify-content: space-between;
         }
 
         .curated-category {
@@ -219,6 +229,8 @@
             color: #e50914;
             font-weight: 700;
             text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 4px;
         }
 
         .curated-title {
@@ -226,13 +238,18 @@
             font-weight: 800;
             color: #ffffff;
             margin: 4px 0 8px;
+            line-height: 1.3;
         }
 
         .curated-desc {
             font-size: 0.8rem;
             color: #94a3b8;
-            line-height: 1.4;
+            line-height: 1.45;
             margin-bottom: 14px;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden; /* Truncates long text to keep cards identical size */
         }
 
         .curated-footer {
@@ -252,6 +269,11 @@
             font-size: 0.78rem;
             font-weight: 700;
             text-decoration: none;
+            transition: background 0.2s ease;
+        }
+
+        .btn-card-action:hover {
+            background: linear-gradient(135deg, #ff1e27, #e50914);
         }
 
         /* Comparison Table */
@@ -307,7 +329,7 @@
             </div>
             <h1 class="portal-main-title">Squad Games Store TZ - Free & Paid PC Games Download</h1>
             <p class="portal-intro-lead">
-                Finding dependable, highly-compressed PC game repacks and custom regional simulation mods can be challenging. Squad Games Store TZ stands out as Tanzania’s dedicated gaming repository, offering ultra-fast direct downloads, verified installer packages, and exclusive regional content like Tanzania Euro Truck Simulator 2 map mods.
+                Finding dependable, highly-compressed PC game repacks and custom regional simulation mods can be challenging. Squad Games Store TZ stands out as Tanzania’s dedicated gaming repository, offering ultra-fast direct downloads, verified installer packages, and exclusive regional content like Tanzania Euro Truck Simulator 2 map mods[cite: 1].
             </p>
             <a href="store.html" class="btn-enter-store-main">
                 <i class="fa-solid fa-gamepad"></i> Go to Homepage & Store
@@ -318,7 +340,7 @@
         <section class="content-section">
             <h2>Overview of Squad Games Store TZ</h2>
             <p>
-                Squad Games Store TZ was crafted specifically for Tanzanian and African gamers who demand high performance without absurd bandwidth consumption. Our store library features thousands of compressed game repacks, offline action blockbusters, tactical shooters, and open-world simulators[cite: 1].
+                Squad Games Store TZ was crafted specifically for Tanzanian and African gamers who demand high performance without absurd bandwidth consumption[cite: 1]. Our store library features thousands of compressed game repacks, offline action blockbusters, tactical shooters, and open-world simulators[cite: 1].
             </p>
             <p>
                 Whether you play on a mid-range laptop or a high-end gaming PC, our collection ensures stable installation setups, pre-configured game updates, and clean multi-part downloads[cite: 1].
@@ -331,115 +353,17 @@
             </div>
         </section>
 
-        <!-- Curated 6-Game Grid Section -->
+        <!-- DYNAMIC LATEST GAMES GRID SECTION -->
         <section class="content-section">
-            <h2>Featured Highlight Games</h2>
-            <p>Check out some of our top downloaded blockbusters available directly in our main catalog[cite: 1]:</p>
+            <h2><i class="fa-solid fa-fire" style="color: #ff9500; margin-right: 8px;"></i> Latest Games Added</h2>
+            <p>Browse our newest uploads dynamically synced from our store database[cite: 1]:</p>
 
-            <div class="curated-games-grid">
-
-                <!-- 1. Need for Speed Payback -->
-                <div class="curated-card">
-                    <div class="curated-img-wrapper">
-                        <span class="curated-badge">PC</span>
-                        <img id="landing-img-1" src="images/nfsmw-shot1.png" alt="Need for Speed Payback">
-                    </div>
-                    <div class="curated-content">
-                        <span class="curated-category">Racing, Action</span>
-                        <h3 class="curated-title">Need for Speed Payback</h3>
-                        <p class="curated-desc">High-stakes driving action set in Fortune Valley's underworld[cite: 1]. Customize rides and pull off heists[cite: 1].</p>
-                        <div class="curated-footer">
-                            <span style="color: #22c55e; font-weight: 800; font-size: 0.85rem;">FREE</span>
-                            <a href="details.html?id=Need%20for%20Speed%20Payback" class="btn-card-action">Details &rarr;</a>
-                        </div>
-                    </div>
+            <!-- Container auto-populated via JavaScript -->
+            <div id="introLatestGamesGrid" class="curated-games-grid">
+                <div style="grid-column: 1 / -1; text-align: center; padding: 30px; color: #94a3b8;">
+                    <i class="fa-solid fa-spinner fa-spin" style="font-size: 1.5rem; margin-bottom: 8px;"></i>
+                    <p>Fetching latest games...</p>
                 </div>
-
-                <!-- 2. The Last of Us Part II -->
-                <div class="curated-card">
-                    <div class="curated-img-wrapper">
-                        <span class="curated-badge">PC</span>
-                        <img id="landing-img-2" src="images/nfsmw-shot1.png" alt="The Last of Us Part II">
-                    </div>
-                    <div class="curated-content">
-                        <span class="curated-category">Action, Story</span>
-                        <h3 class="curated-title">The Last of Us Part II</h3>
-                        <p class="curated-desc">An intense survival journey across post-apocalyptic Seattle with emotional narrative[cite: 1].</p>
-                        <div class="curated-footer">
-                            <span style="color: #22c55e; font-weight: 800; font-size: 0.85rem;">FREE</span>
-                            <a href="details.html?id=The%20Last%20of%20Us%20Part%20II" class="btn-card-action">Details &rarr;</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 3. Assetto Corsa – Ready To Race -->
-                <div class="curated-card">
-                    <div class="curated-img-wrapper">
-                        <span class="curated-badge">PC</span>
-                        <img id="landing-img-3" src="images/nfsmw-shot1.png" alt="Assetto Corsa">
-                    </div>
-                    <div class="curated-content">
-                        <span class="curated-category">Racing, Simulation</span>
-                        <h3 class="curated-title">Assetto Corsa – Ready To Race</h3>
-                        <p class="curated-desc">Ultra-realistic driving physics with iconic sports cars and track layouts[cite: 1].</p>
-                        <div class="curated-footer">
-                            <span style="color: #22c55e; font-weight: 800; font-size: 0.85rem;">FREE</span>
-                            <a href="details.html?id=Assetto%20Corsa%20%E2%80%93%20Ready%20To%20Race" class="btn-card-action">Details &rarr;</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 4. COD: BO3 Zombies Chronicles -->
-                <div class="curated-card">
-                    <div class="curated-img-wrapper">
-                        <span class="curated-badge">PC</span>
-                        <img id="landing-img-4" src="images/nfsmw-shot1.png" alt="Call of Duty Zombies">
-                    </div>
-                    <div class="curated-content">
-                        <span class="curated-category">Shooter, Zombies</span>
-                        <h3 class="curated-title">COD: BO3 Zombies Chronicles</h3>
-                        <p class="curated-desc">Features 8 remastered classic undead maps with full weapon packs and wonder weapons[cite: 1].</p>
-                        <div class="curated-footer">
-                            <span style="color: #22c55e; font-weight: 800; font-size: 0.85rem;">FREE</span>
-                            <a href="details.html?id=Call%20of%20Duty%3A%20Black%20Ops%20III%20Zombies%20Chronicles" class="btn-card-action">Details &rarr;</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 5. Tomb Raider -->
-                <div class="curated-card">
-                    <div class="curated-img-wrapper">
-                        <span class="curated-badge">PC</span>
-                        <img id="landing-img-5" src="images/nfsmw-shot1.png" alt="Tomb Raider">
-                    </div>
-                    <div class="curated-content">
-                        <span class="curated-category">Action, Adventure</span>
-                        <h3 class="curated-title">Tomb Raider</h3>
-                        <p class="curated-desc">Explore Lara Croft's origin story as she survives a hostile island and uncovers tombs[cite: 1].</p>
-                        <div class="curated-footer">
-                            <span style="color: #22c55e; font-weight: 800; font-size: 0.85rem;">FREE</span>
-                            <a href="details.html?id=Tomb%20Raider" class="btn-card-action">Details &rarr;</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 6. GTA V Legacy -->
-                <div class="curated-card">
-                    <div class="curated-img-wrapper">
-                        <span class="curated-badge">PC</span>
-                        <img id="landing-img-6" src="images/nfsmw-shot1.png" alt="Grand Theft Auto V">
-                    </div>
-                    <div class="curated-content">
-                        <span class="curated-category">Open World, Action</span>
-                        <h3 class="curated-title">Grand Theft Auto V Legacy</h3>
-                        <p class="curated-desc">Explore Los Santos with Michael, Franklin, and Trevor in full open-world sandbox action[cite: 1].</p>
-                        <div class="curated-footer">
-                            <span style="color: #22c55e; font-weight: 800; font-size: 0.85rem;">FREE</span>
-                            <a href="details.html?id=Grand%20Theft%20Auto%20V%20Legacy" class="btn-card-action">Details &rarr;</a>
-                        </div>
-                    </div>
-                </div>
-
             </div>
         </section>
 
@@ -547,32 +471,60 @@
 
     </div>
 
-    <!-- Auto-Sync Landing Images from games.json -->
+    <!-- DYNAMIC DATA POPULATOR SCRIPT -->
     <script>
         document.addEventListener('DOMContentLoaded', async () => {
+            const gridContainer = document.getElementById('introLatestGamesGrid');
+            if (!gridContainer) return;
+
             try {
                 const res = await fetch('games.json');
                 const data = await res.json();
                 const games = Array.isArray(data) ? data : (data.games || data.data || []);
 
-                const targets = [
-                    { id: 'landing-img-1', title: 'Need for Speed Payback' },
-                    { id: 'landing-img-2', title: 'The Last of Us Part II' },
-                    { id: 'landing-img-3', title: 'Assetto Corsa' },
-                    { id: 'landing-img-4', title: 'Black Ops' },
-                    { id: 'landing-img-5', title: 'Tomb Raider' },
-                    { id: 'landing-img-6', title: 'Grand Theft Auto V Legacy' }
-                ];
+                if (!games || games.length === 0) {
+                    gridContainer.innerHTML = `<p style="grid-column: 1 / -1; color: #94a3b8; text-align: center;">No games available at the moment.</p>`;
+                    return;
+                }
 
-                targets.forEach(target => {
-                    const match = games.find(g => (g.title || '').toLowerCase().includes(target.title.toLowerCase()));
-                    if (match && match.image) {
-                        const imgEl = document.getElementById(target.id);
-                        if (imgEl) imgEl.src = match.image;
-                    }
+                // Get the latest 6 games dynamically matching games.json
+                const latestGames = games.slice(0, 6);
+                gridContainer.innerHTML = '';
+
+                latestGames.forEach(game => {
+                    const title = game.title || 'Untitled Game';
+                    const platform = game.platform || 'PC';
+                    const category = game.category || game.genre || 'Action, Gaming';
+                    const price = game.price || 'FREE';
+                    const image = game.image || 'images/nfsmw-shot1.png';
+                    const desc = game.description || game.shortDesc || 'Download high-performance gaming setups with fast direct server links.';
+                    const gameId = encodeURIComponent(game.id || game.title);
+
+                    const cardHTML = `
+                        <div class="curated-card">
+                            <div class="curated-img-wrapper">
+                                <span class="curated-badge">${platform}</span>
+                                <img src="${image}" alt="${title}" onerror="this.src='images/nfsmw-shot1.png';">
+                            </div>
+                            <div class="curated-content">
+                                <div>
+                                    <span class="curated-category">${category}</span>
+                                    <h3 class="curated-title">${title}</h3>
+                                    <p class="curated-desc">${desc}</p>
+                                </div>
+                                <div class="curated-footer">
+                                    <span style="color: #22c55e; font-weight: 800; font-size: 0.85rem;">${price}</span>
+                                    <a href="details.html?id=${gameId}" class="btn-card-action">Details &rarr;</a>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    gridContainer.innerHTML += cardHTML;
                 });
+
             } catch (e) {
-                console.warn("Could not sync landing images:", e);
+                console.warn("Could not load latest games onto intro grid:", e);
+                gridContainer.innerHTML = `<p style="grid-column: 1 / -1; color: #e50914; text-align: center;">Unable to load latest games from store database.</p>`;
             }
         });
     </script>
