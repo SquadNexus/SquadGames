@@ -81,17 +81,9 @@
                     <div class="trust-item"><span class="trust-icon">🇹🇿</span> Local TZ Support</div>
                 </div>
 
-                <!-- POPULAR POSTS (Moved here between Trust Bar and Game Catalog) -->
-                <div class="apunka-section-box" style="margin-top: 20px;">
-                    <h3 class="section-title"><i class="fa-solid fa-star" style="color: #f1c40f;"></i> Popular Posts</h3>
-                    <div id="popularPostsTextList" class="popular-posts-text-list">
-                        <!-- Populated dynamically -->
-                    </div>
-                </div>
-
                 <!-- 3. Main Game Catalog Grid Section -->
                 <section style="margin-top: 20px;">
-                    <h3 class="section-title"><i class="fa-solid fa-layer-group"></i> Game Catalog & Store</h3>
+                    <h3 id="catalogSectionTitle" class="section-title"><i class="fa-solid fa-layer-group"></i> Game Catalog & Store</h3>
                     <div id="games-grid" class="game-grid">
                         <!-- Dynamic game cards load here via JavaScript -->
                         <div class="loading-state" style="grid-column: 1 / -1; text-align: center; padding: 40px;">
@@ -103,24 +95,33 @@
 
             </div>
 
-            <!-- RIGHT COLUMN: Sidebar (Payment Info only now) -->
+            <!-- RIGHT COLUMN: Sidebar (Popular Posts + Payment Info) -->
             <div class="portal-sidebar">
-                <!-- Extra Sidebar Widget: Payment Info -->
+
+                <!-- Popular Posts Sidebar Box -->
                 <div class="sidebar-box">
+                    <h3 class="sidebar-title"><i class="fa-solid fa-star" style="color: #f1c40f; margin-right: 6px;"></i> Popular Posts</h3>
+                    <div id="popularPostsTextList" class="popular-posts-text-list">
+                        <!-- Populated dynamically via script.js -->
+                    </div>
+                </div>
+
+                <!-- Payment Info Sidebar Box -->
+                <div class="sidebar-box" style="margin-top: 20px;">
                     <h3 class="sidebar-title"><i class="fa-solid fa-circle-info" style="color: #007aff; margin-right: 6px;"></i> TZ Payment Info</h3>
                     <p style="font-size: 0.82rem; color: var(--text-muted); line-height: 1.5; margin: 0;">
                         Paid games like Tanzania ETS2 can be bought instantly via <b>Selar</b> online or directly through <b>Vodacom M-Pesa</b> via WhatsApp support!
                     </p>
                 </div>
+
             </div>
 
         </div>
 
-        <!-- PROFESSIONAL FOOTER SECTION WITH BROWSING & SEARCH GUIDES -->
+        <!-- PROFESSIONAL FOOTER SECTION -->
         <footer class="portal-professional-footer">
             <div class="footer-grid">
 
-                <!-- Column 1: About Portal -->
                 <div class="footer-col">
                     <h3><i class="fa-solid fa-gamepad" style="color: #38bdf8; margin-right: 8px;"></i> Squad Games Store TZ</h3>
                     <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; margin: 0 0 12px 0;">
@@ -131,7 +132,6 @@
                     </span>
                 </div>
 
-                <!-- Column 2: How to Find Games (Categories & Game Types Guide) -->
                 <div class="footer-col">
                     <h3><i class="fa-solid fa-layer-group" style="color: #ff9500; margin-right: 8px;"></i> Browse Categories & Genres</h3>
                     <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; margin: 0 0 10px 0;">
@@ -143,7 +143,6 @@
                     </ul>
                 </div>
 
-                <!-- Column 3: Search Index & Quick Assistance Guide -->
                 <div class="footer-col">
                     <h3><i class="fa-solid fa-magnifying-glass" style="color: #007aff; margin-right: 8px;"></i> Instant Search Index</h3>
                     <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; margin: 0 0 10px 0;">
@@ -157,7 +156,6 @@
 
             </div>
 
-            <!-- Copyright Bar -->
             <div class="footer-bottom-bar">
                 <span>&copy; 2013-2026 Squad Games Store TZ. All rights reserved. Built for Tanzanian Gamers.</span>
                 <div class="footer-bottom-links">
