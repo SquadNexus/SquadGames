@@ -137,31 +137,26 @@
             font-size: 0.85rem;
         }
 
-        /* Graphic Banner Box */
-        .banner-graphic-box {
-            text-align: center;
-            background: linear-gradient(135deg, #16161a, #0f172a);
-            border: 1px solid rgba(56, 189, 248, 0.2);
-            border-radius: 14px;
-            padding: 30px 20px;
+        /* CUSTOM INTRO IMAGE BANNER CONTAINER */
+        .custom-intro-banner {
+            width: 100%;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(56, 189, 248, 0.25);
+            background: #000;
             margin: 25px 0;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
         }
 
-        .banner-graphic-box i {
-            font-size: 3rem;
-            color: #38bdf8;
-            margin-bottom: 10px;
+        .custom-intro-banner img {
+            width: 100%;
+            height: auto;
+            max-height: 450px;
+            object-fit: cover;
+            display: block;
         }
 
-        .banner-graphic-box h3 {
-            color: #ffffff;
-            margin: 5px 0;
-            font-size: 1.3rem;
-        }
-
-        /* ------------------------------------------------------------- */
         /* EXACT STORE-MATCHING "LATEST GAMES ADDED" HORIZONTAL LIST GRID */
-        /* ------------------------------------------------------------- */
         .latest-games-grid-container {
             background: #16161a;
             border: 1px solid rgba(255, 255, 255, 0.08);
@@ -308,7 +303,7 @@
             </a>
         </header>
 
-        <!-- Store Overview -->
+        <!-- Store Overview with Custom intro.jpg Banner -->
         <section class="content-section">
             <h2>Overview of Squad Games Store TZ</h2>
             <p>
@@ -318,10 +313,9 @@
                 Whether you play on a mid-range laptop or a high-end gaming PC, our collection ensures stable installation setups, pre-configured game updates, and clean multi-part downloads[cite: 1].
             </p>
 
-            <div class="banner-graphic-box">
-                <i class="fa-solid fa-laptop-code"></i>
-                <h3>SQUAD GAMES STORE TZ</h3>
-                <p style="color: #38bdf8; margin: 0; font-size: 0.9rem;">Popular platform for downloading compressed PC games, low-spec repacks & Tanzania ETS2 mods[cite: 1].</p>
+            <!-- Custom User Image Banner inserted here -->
+            <div class="custom-intro-banner">
+                <img src="images/intro.jpg" alt="Squad Games Store TZ Custom Banner" onerror="this.src='images/nfsmw-shot1.png';">
             </div>
         </section>
 
