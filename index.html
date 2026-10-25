@@ -325,7 +325,7 @@
             </div>
         </section>
 
-        <!-- EXACT LATEST GAMES ADDED HORIZONTAL LIST (MATCHES STORE FRONT) -->
+        <!-- EXACT LATEST GAMES ADDED HORIZONTAL LIST (DESCENDING ORDER) -->
         <section class="latest-games-grid-container">
             <h2 class="latest-grid-header-title">
                 <i class="fa-solid fa-fire"></i> Latest Games Added
@@ -443,7 +443,7 @@
 
     </div>
 
-    <!-- DYNAMIC LATEST GAMES AUTO-LOADER SCRIPT -->
+    <!-- DYNAMIC LATEST GAMES AUTO-LOADER SCRIPT (DESCENDING / NEWEST FIRST) -->
     <script>
         document.addEventListener('DOMContentLoaded', async () => {
             const container = document.getElementById('introLatestGamesList');
@@ -452,14 +452,17 @@
             try {
                 const res = await fetch('games.json');
                 const data = await res.json();
-                const games = Array.isArray(data) ? data : (data.games || data.data || []);
+                let games = Array.isArray(data) ? data : (data.games || data.data || []);
 
                 if (!games || games.length === 0) {
                     container.innerHTML = `<p style="grid-column: 1 / -1; color: #94a3b8; text-align: center;">No games available.</p>`;
                     return;
                 }
 
-                // Pull the newest 12 games to match your main store page
+                // Reverse array so the last added games in games.json are displayed first
+                games = games.slice().reverse();
+
+                // Select top 12 newest games
                 const latestGames = games.slice(0, 12);
                 container.innerHTML = '';
 
