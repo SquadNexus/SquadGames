@@ -3,444 +3,483 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Squad Games Store TZ - Official PC & Mobile Games Portal</title>
+    <title>Squad Games Store TZ - PC & Mobile Games Portal</title>
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
     <style>
-        /* Modern Landing Portal Styling */
-        body {
-            background-color: #0b0c10;
-            background-image: 
-                radial-gradient(circle at 15% 20%, rgba(229, 9, 20, 0.15) 0%, transparent 40%),
-                radial-gradient(circle at 85% 80%, rgba(37, 211, 102, 0.12) 0%, transparent 40%);
-            color: #e0e6ed;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-
-        .hero-banner {
+        /* Landing Hero Styles */
+        .landing-hero-container {
+            background: rgba(18, 18, 24, 0.92);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 35px 20px;
+            margin-bottom: 24px;
             text-align: center;
-            padding: 50px 20px 30px;
-            position: relative;
+            backdrop-filter: blur(14px);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
         }
 
-        .brand-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: rgba(229, 9, 20, 0.15);
-            border: 1px solid rgba(229, 9, 20, 0.4);
-            color: #ff3b30;
-            padding: 6px 18px;
-            border-radius: 30px;
-            font-size: 0.85rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 15px;
-        }
-
-        .hero-title {
-            font-size: 2.5rem;
+        .landing-title {
+            font-size: 2.2rem;
             font-weight: 900;
             color: #ffffff;
-            margin: 10px 0;
+            margin: 12px 0;
             text-transform: uppercase;
-            letter-spacing: 1px;
-            text-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+            letter-spacing: -0.5px;
+            background: linear-gradient(135deg, #ffffff 30%, #38bdf8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        .hero-subtitle {
+        .landing-subtitle {
             max-width: 720px;
-            margin: 0 auto 25px;
-            color: #94a3b8;
-            font-size: 1rem;
+            margin: 0 auto 20px;
+            color: var(--text-muted);
+            font-size: 0.92rem;
             line-height: 1.6;
         }
 
-        /* Glassmorphism Feature Grid */
-        .feature-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-            gap: 15px;
-            max-width: 1100px;
-            margin: 0 auto 40px;
-            padding: 0 20px;
-        }
-
-        .feature-card {
-            background: rgba(22, 22, 26, 0.7);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 14px;
-            padding: 20px;
-            text-align: center;
-            backdrop-filter: blur(10px);
-            transition: transform 0.3s ease, border-color 0.3s ease;
-        }
-
-        .feature-card:hover {
-            transform: translateY(-5px);
-            border-color: rgba(38, 166, 255, 0.4);
-        }
-
-        .feature-card i {
-            font-size: 1.8rem;
-            margin-bottom: 10px;
-            color: #38bdf8;
-        }
-
-        .feature-card h4 {
-            margin: 8px 0 4px;
+        .btn-enter-store {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(135deg, #25d366, #128c7e);
+            color: #ffffff !important;
             font-size: 1rem;
-            color: #fff;
+            font-weight: 800;
+            text-transform: uppercase;
+            padding: 14px 32px;
+            border-radius: 30px;
+            text-decoration: none !important;
+            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.4);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
         }
 
-        .feature-card p {
-            font-size: 0.82rem;
-            color: #94a3b8;
+        .btn-enter-store:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(37, 211, 102, 0.6);
+        }
+
+        /* Feature Grid */
+        .landing-features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 14px;
+            margin: 25px 0 35px;
+        }
+
+        .landing-feature-card {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            padding: 16px;
+            text-align: center;
+        }
+
+        .landing-feature-card i {
+            font-size: 1.5rem;
+            margin-bottom: 8px;
+        }
+
+        .landing-feature-card h4 {
+            margin: 4px 0;
+            font-size: 0.95rem;
+            color: #ffffff;
+        }
+
+        .landing-feature-card p {
             margin: 0;
+            font-size: 0.78rem;
+            color: var(--text-muted);
         }
 
         /* Curated 6-Game Grid */
-        .games-section-title {
-            text-align: center;
-            font-size: 1.6rem;
-            font-weight: 800;
-            color: #ffffff;
-            margin-bottom: 25px;
-            text-transform: uppercase;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-        }
-
-        .curated-games-grid {
+        .landing-curated-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 22px;
-            max-width: 1100px;
-            margin: 0 auto 40px;
-            padding: 0 20px;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 18px;
+            text-align: left;
+            margin-top: 15px;
         }
 
-        .curated-card {
-            background: #16161a;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 16px;
+        @media (max-width: 992px) {
+            .landing-curated-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (max-width: 576px) {
+            .landing-curated-grid {
+                grid-template-columns: repeat(1, minmax(0, 1fr));
+            }
+        }
+
+        .landing-game-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
             overflow: hidden;
             display: flex;
             flex-direction: column;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            position: relative;
+            transition: transform 0.3s ease, border-color 0.3s ease;
         }
 
-        .curated-card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.8), 0 0 15px rgba(229, 9, 20, 0.3);
+        .landing-game-card:hover {
+            transform: translateY(-5px);
             border-color: rgba(229, 9, 20, 0.5);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
         }
 
-        .curated-img-wrapper {
-            position: relative;
+        .landing-card-img {
             width: 100%;
-            height: 180px;
-            overflow: hidden;
-        }
-
-        .curated-img-wrapper img {
-            width: 100%;
-            height: 100%;
+            height: 160px;
             object-fit: cover;
-            transition: transform 0.4s ease;
+            background: #000;
         }
 
-        .curated-card:hover .curated-img-wrapper img {
-            transform: scale(1.08);
-        }
-
-        .curated-badge {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: #007aff;
-            color: #fff;
-            font-size: 0.72rem;
-            font-weight: 800;
-            padding: 4px 10px;
-            border-radius: 6px;
-            text-transform: uppercase;
-        }
-
-        .curated-content {
-            padding: 18px;
+        .landing-card-body {
+            padding: 14px;
             display: flex;
             flex-direction: column;
             flex-grow: 1;
-            justify-content: space-between;
         }
 
-        .curated-category {
-            font-size: 0.75rem;
-            color: #e50914;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            margin-bottom: 6px;
-        }
-
-        .curated-title {
-            font-size: 1.1rem;
+        .landing-card-title {
+            font-size: 0.98rem;
             font-weight: 800;
             color: #ffffff;
-            margin: 0 0 8px;
-            line-height: 1.3;
+            margin: 4px 0 6px;
         }
 
-        .curated-desc {
-            font-size: 0.83rem;
-            color: #94a3b8;
-            line-height: 1.5;
-            margin-bottom: 16px;
-        }
-
-        .curated-footer {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            border-top: 1px solid rgba(255, 255, 255, 0.08);
-            padding-top: 12px;
-            margin-top: auto;
-        }
-
-        .curated-price {
-            font-weight: 800;
-            color: #22c55e;
-            font-size: 0.95rem;
-        }
-
-        .btn-card-action {
-            background: linear-gradient(135deg, #e50914, #b20710);
-            color: #fff !important;
-            padding: 8px 16px;
-            border-radius: 8px;
-            font-size: 0.82rem;
-            font-weight: 700;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            transition: background 0.2s;
-        }
-
-        .btn-card-action:hover {
-            background: linear-gradient(135deg, #ff1e27, #e50914);
-        }
-
-        /* Large CTA Bar */
-        .cta-banner {
-            max-width: 1100px;
-            margin: 20px auto 60px;
-            padding: 0 20px;
-            text-align: center;
-        }
-
-        .cta-box {
-            background: linear-gradient(135deg, rgba(22, 22, 26, 0.9), rgba(15, 23, 42, 0.95));
-            border: 1px solid rgba(37, 211, 102, 0.3);
-            border-radius: 20px;
-            padding: 40px 25px;
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.6);
-        }
-
-        .btn-main-enter {
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-            background: linear-gradient(135deg, #25d366, #128c7e);
-            color: #ffffff !important;
-            font-size: 1.15rem;
-            font-weight: 800;
-            text-transform: uppercase;
-            padding: 16px 40px;
-            border-radius: 35px;
-            text-decoration: none;
-            box-shadow: 0 10px 30px rgba(37, 211, 102, 0.4);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .btn-main-enter:hover {
-            transform: translateY(-3px) scale(1.02);
-            box-shadow: 0 15px 40px rgba(37, 211, 102, 0.6);
+        .landing-card-desc {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            line-height: 1.4;
+            margin-bottom: 12px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
         }
     </style>
 </head>
 <body>
 
-    <!-- Hero Header -->
-    <div class="hero-banner">
-        <div class="brand-badge">
-            <i class="fa-solid fa-shield-halved"></i> TZ Verified Store
-        </div>
-        <h1 class="hero-title">Squad Games Store TZ</h1>
-        <p class="hero-subtitle">
-            Tanzania's ultimate hub for high-performance PC games, Euro Truck Simulator 2 custom Tanzanian mods, compressed action blockbusters, and fast direct downloads.
-        </p>
-
-        <a href="index.html" class="btn-main-enter">
-            <i class="fa-solid fa-gamepad"></i> Explore Full Catalog & Store
-        </a>
-    </div>
-
-    <!-- Feature Highlights -->
-    <div class="feature-grid">
-        <div class="feature-card">
-            <i class="fa-solid fa-bolt" style="color: #f1c40f;"></i>
-            <h4>Fast Direct Links</h4>
-            <p>Direct download servers & clean multi-part downloads.</p>
-        </div>
-        <div class="feature-card">
-            <i class="fa-solid fa-map-location-dot" style="color: #22c55e;"></i>
-            <h4>TZ Custom Mods</h4>
-            <p>Exclusive Tanzanian Euro Truck Simulator 2 map packs.</p>
-        </div>
-        <div class="feature-card">
-            <i class="fa-solid fa-mobile-screen-button" style="color: #007aff;"></i>
-            <h4>Local TZ Support</h4>
-            <p>Instant mobile payments & WhatsApp setup support.</p>
-        </div>
-        <div class="feature-card">
-            <i class="fa-solid fa-shield-check" style="color: #e50914;"></i>
-            <h4>Verified Safe</h4>
-            <p>Tested installation setups with clear instructions.</p>
+    <!-- Top Utility Link Bar -->
+    <div class="top-utility-bar">
+        <div class="top-utility-container">
+            <div class="top-links">
+                <a href="index.html"><i class="fa-solid fa-house"></i> Home</a>
+                <a href="#games-grid"><i class="fa-solid fa-gamepad"></i> PC Games List</a>
+                <a href="https://wa.me/255692752060?text=Hello%20SquadGames%2C%20I%20want%20to%20request%20a%20game." target="_blank"><i class="fa-solid fa-paper-plane"></i> Request Game</a>
+                <a href="https://wa.me/255692752060?text=Hello%20SquadGames%2C%20I%20need%20help%20with%20installation." target="_blank"><i class="fa-solid fa-circle-question"></i> How to Download</a>
+                <a href="https://wa.me/255692752060?text=Hello%20SquadGames" target="_blank"><i class="fa-solid fa-headset"></i> Contact Us</a>
+            </div>
+            <div class="top-social-badge">
+                <span><i class="fa-solid fa-shield-halved" style="color: #22c55e;"></i> TZ Verified Store</span>
+            </div>
         </div>
     </div>
 
-    <!-- Curated 6-Game Grid Section -->
-    <div class="games-section-title">
-        <i class="fa-solid fa-fire" style="color: #ff9500;"></i> Featured Highlight Games
-    </div>
+    <!-- Main Container -->
+    <div class="container">
 
-    <div class="curated-games-grid">
+        <!-- Permanent Portal Header & Navigation -->
+        <div class="portal-header-wrapper">
+            <div class="portal-logo-area">
+                <h1 class="portal-logo">Squad Games Store TZ</h1>
 
-        <!-- Game 1: Need for Speed Payback -->
-        <div class="curated-card">
-            <div class="curated-img-wrapper">
-                <span class="curated-badge">PC</span>
-                <img src="images/nfsmw-shot1.png" alt="Need for Speed Payback" onerror="this.src='https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=600&q=80';">
-            </div>
-            <div class="curated-content">
-                <span class="curated-category">Racing, Action</span>
-                <h3 class="curated-title">Need for Speed Payback</h3>
-                <p class="curated-desc">High-stakes driving action set in Fortune Valley's underworld. Customize your dream ride and execute daring heist missions.</p>
-                <div class="curated-footer">
-                    <span class="curated-price">FREE</span>
-                    <a href="details.html?id=Need%20for%20Speed%20Payback" class="btn-card-action">Details <i class="fa-solid fa-arrow-right"></i></a>
+                <!-- Search Box -->
+                <div class="portal-search-wrapper">
+                    <i class="fa-solid fa-magnifying-glass search-icon"></i>
+                    <input type="text" id="gameSearchInput" placeholder="Search games, mods, simulator...">
                 </div>
+            </div>
+
+            <!-- Portal Navigation Bar -->
+            <div id="dynamic-game-types" class="portal-navbar">
+                <!-- Loaded dynamically -->
             </div>
         </div>
 
-        <!-- Game 2: The Last of Us Part II -->
-        <div class="curated-card">
-            <div class="curated-img-wrapper">
-                <span class="curated-badge">PC</span>
-                <img src="images/nfsmw-shot1.png" alt="The Last of Us Part II" onerror="this.src='https://images.unsplash.com/photo-1538481199705-c710c4e965fc?auto=format&fit=crop&w=600&q=80';">
-            </div>
-            <div class="curated-content">
-                <span class="curated-category">Action, Story</span>
-                <h3 class="curated-title">The Last of Us Part II</h3>
-                <p class="curated-desc">An intense survival journey across post-apocalyptic Seattle with jaw-dropping graphics and emotional narrative.</p>
-                <div class="curated-footer">
-                    <span class="curated-price">FREE</span>
-                    <a href="details.html?id=The%20Last%20of%20Us%20Part%20II" class="btn-card-action">Details <i class="fa-solid fa-arrow-right"></i></a>
-                </div>
-            </div>
-        </div>
+        <!-- LANDING HERO SECTION (Top Intro Banner + Features + 6 Curated Games) -->
+        <div class="landing-hero-container">
+            <span class="badge-latest" style="font-size: 0.75rem; padding: 4px 12px; border-radius: 20px; background: rgba(37, 211, 102, 0.15); color: #25d366; border: 1px solid rgba(37,211,102,0.3);">
+                <i class="fa-solid fa-shield-halved"></i> TZ VERIFIED STORE
+            </span>
 
-        <!-- Game 3: Assetto Corsa – Ready To Race -->
-        <div class="curated-card">
-            <div class="curated-img-wrapper">
-                <span class="curated-badge">PC</span>
-                <img src="images/nfsmw-shot1.png" alt="Assetto Corsa" onerror="this.src='https://images.unsplash.com/photo-1511512578047-dfb367046420?auto=format&fit=crop&w=600&q=80';">
-            </div>
-            <div class="curated-content">
-                <span class="curated-category">Racing, Simulation</span>
-                <h3 class="curated-title">Assetto Corsa – Ready To Race</h3>
-                <p class="curated-desc">Ultra-realistic driving physics with iconic sports cars, track layouts, and full custom steering wheel support.</p>
-                <div class="curated-footer">
-                    <span class="curated-price">FREE</span>
-                    <a href="details.html?id=Assetto%20Corsa%20%E2%80%93%20Ready%20To%20Race" class="btn-card-action">Details <i class="fa-solid fa-arrow-right"></i></a>
-                </div>
-            </div>
-        </div>
-
-        <!-- Game 4: Call of Duty Zombies Chronicles -->
-        <div class="curated-card">
-            <div class="curated-img-wrapper">
-                <span class="curated-badge">PC</span>
-                <img src="images/nfsmw-shot1.png" alt="Call of Duty Zombies" onerror="this.src='https://images.unsplash.com/photo-1552824722-b2fae20e36b8?auto=format&fit=crop&w=600&q=80';">
-            </div>
-            <div class="curated-content">
-                <span class="curated-category">Shooter, Zombies</span>
-                <h3 class="curated-title">COD: BO3 Zombies Chronicles</h3>
-                <p class="curated-desc">Features 8 remastered classic undead maps with full weapon packs, custom wonder weapons, and co-op gameplay.</p>
-                <div class="curated-footer">
-                    <span class="curated-price">FREE</span>
-                    <a href="details.html?id=Call%20of%20Duty%3A%20Black%20Ops%20III%20Zombies%20Chronicles" class="btn-card-action">Details <i class="fa-solid fa-arrow-right"></i></a>
-                </div>
-            </div>
-        </div>
-
-        <!-- Game 5: Tomb Raider -->
-        <div class="curated-card">
-            <div class="curated-img-wrapper">
-                <span class="curated-badge">PC</span>
-                <img src="images/nfsmw-shot1.png" alt="Tomb Raider" onerror="this.src='https://images.unsplash.com/photo-1518709268805-4e9042af9f23?auto=format&fit=crop&w=600&q=80';">
-            </div>
-            <div class="curated-content">
-                <span class="curated-category">Action, Adventure</span>
-                <h3 class="curated-title">Tomb Raider</h3>
-                <p class="curated-desc">Explore the origin story of Lara Croft as she survives a hostile island, uncovers mysterious tombs, and fights for survival.</p>
-                <div class="curated-footer">
-                    <span class="curated-price">FREE</span>
-                    <a href="details.html?id=Tomb%20Raider" class="btn-card-action">Details <i class="fa-solid fa-arrow-right"></i></a>
-                </div>
-            </div>
-        </div>
-
-        <!-- Game 6: GTA V Legacy -->
-        <div class="curated-card">
-            <div class="curated-img-wrapper">
-                <span class="curated-badge">PC</span>
-                <img src="images/nfsmw-shot1.png" alt="Grand Theft Auto V" onerror="this.src='https://images.unsplash.com/photo-1563089145-599997674d42?auto=format&fit=crop&w=600&q=80';">
-            </div>
-            <div class="curated-content">
-                <span class="curated-category">Open World, Action</span>
-                <h3 class="curated-title">Grand Theft Auto V Legacy</h3>
-                <p class="curated-desc">Dive into Los Santos with Michael, Franklin, and Trevor. High-resolution textures, custom cars, and full open-world sandbox action.</p>
-                <div class="curated-footer">
-                    <span class="curated-price">FREE</span>
-                    <a href="details.html?id=Grand%20Theft%20Auto%20V%20Legacy" class="btn-card-action">Details <i class="fa-solid fa-arrow-right"></i></a>
-                </div>
-            </div>
-        </div>
-
-    </div>
-
-    <!-- Bottom CTA Card -->
-    <div class="cta-banner">
-        <div class="cta-box">
-            <h2 style="color: #ffffff; margin-top: 0; font-size: 1.6rem; text-transform: uppercase;">Ready to Start Gaming?</h2>
-            <p style="color: #94a3b8; max-width: 600px; margin: 10px auto 25px; font-size: 0.95rem;">
-                Explore over 50+ games, Euro Truck Simulator 2 Tanzanian mod packs, and fast download links.
+            <h1 class="landing-title">Squad Games Store TZ</h1>
+            <p class="landing-subtitle">
+                Tanzania's ultimate hub for high-performance PC games, Euro Truck Simulator 2 custom Tanzanian mods, compressed action blockbusters, and fast direct downloads.
             </p>
-            <a href="index.html" class="btn-main-enter">
-                <i class="fa-solid fa-arrow-right-to-bracket"></i> Enter Main Game Store
+
+            <a href="#games-grid" class="btn-enter-store">
+                <i class="fa-solid fa-gamepad"></i> Explore Full Catalog & Store
             </a>
+
+            <!-- 4 Key Feature Cards -->
+            <div class="landing-features-grid">
+                <div class="landing-feature-card">
+                    <i class="fa-solid fa-bolt" style="color: #f1c40f;"></i>
+                    <h4>Fast Direct Links</h4>
+                    <p>Direct download servers & clean multi-part files.</p>
+                </div>
+                <div class="landing-feature-card">
+                    <i class="fa-solid fa-map-location-dot" style="color: #22c55e;"></i>
+                    <h4>TZ Custom Mods</h4>
+                    <p>Exclusive Tanzanian Euro Truck Simulator 2 map packs.</p>
+                </div>
+                <div class="landing-feature-card">
+                    <i class="fa-solid fa-mobile-screen-button" style="color: #007aff;"></i>
+                    <h4>Local TZ Support</h4>
+                    <p>Instant mobile payments & WhatsApp support.</p>
+                </div>
+                <div class="landing-feature-card">
+                    <i class="fa-solid fa-shield-check" style="color: #e50914;"></i>
+                    <h4>Verified Safe</h4>
+                    <p>Tested installation setups with clear guides.</p>
+                </div>
+            </div>
+
+            <!-- Curated 6 Highlight Games -->
+            <div style="text-align: left;">
+                <h3 class="section-title"><i class="fa-solid fa-fire" style="color: #ff9500;"></i> Featured Highlight Games</h3>
+                
+                <div class="landing-curated-grid">
+
+                    <!-- 1. Need for Speed Payback -->
+                    <div class="landing-game-card">
+                        <img src="images/nfsmw-shot1.png" id="landing-img-1" alt="Need for Speed Payback" class="landing-card-img" onerror="this.src='images/nfsmw-shot1.png';">
+                        <div class="landing-card-body">
+                            <span class="category-tag">Racing, Action</span>
+                            <h4 class="landing-card-title">Need for Speed Payback</h4>
+                            <p class="landing-card-desc">High-stakes driving action set in Fortune Valley's underworld. Customize your dream ride and execute daring heist missions.</p>
+                            <div class="card-action" style="padding-top: 8px;">
+                                <span class="price">FREE</span>
+                                <a href="details.html?id=Need%20for%20Speed%20Payback" class="btn-details">Details &rarr;</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 2. The Last of Us Part II -->
+                    <div class="landing-game-card">
+                        <img src="images/nfsmw-shot1.png" id="landing-img-2" alt="The Last of Us Part II" class="landing-card-img" onerror="this.src='images/nfsmw-shot1.png';">
+                        <div class="landing-card-body">
+                            <span class="category-tag">Action, Story</span>
+                            <h4 class="landing-card-title">The Last of Us Part II</h4>
+                            <p class="landing-card-desc">An intense survival journey across post-apocalyptic Seattle with jaw-dropping graphics and emotional narrative.</p>
+                            <div class="card-action" style="padding-top: 8px;">
+                                <span class="price">FREE</span>
+                                <a href="details.html?id=The%20Last%20of%20Us%20Part%20II" class="btn-details">Details &rarr;</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 3. Assetto Corsa – Ready To Race -->
+                    <div class="landing-game-card">
+                        <img src="images/nfsmw-shot1.png" id="landing-img-3" alt="Assetto Corsa" class="landing-card-img" onerror="this.src='images/nfsmw-shot1.png';">
+                        <div class="landing-card-body">
+                            <span class="category-tag">Racing, Simulation</span>
+                            <h4 class="landing-card-title">Assetto Corsa – Ready To Race</h4>
+                            <p class="landing-card-desc">Ultra-realistic driving physics with iconic sports cars, track layouts, and full custom steering wheel support.</p>
+                            <div class="card-action" style="padding-top: 8px;">
+                                <span class="price">FREE</span>
+                                <a href="details.html?id=Assetto%20Corsa%20%E2%80%93%20Ready%20To%20Race" class="btn-details">Details &rarr;</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 4. COD: BO3 Zombies Chronicles -->
+                    <div class="landing-game-card">
+                        <img src="images/nfsmw-shot1.png" id="landing-img-4" alt="Call of Duty Zombies" class="landing-card-img" onerror="this.src='images/nfsmw-shot1.png';">
+                        <div class="landing-card-body">
+                            <span class="category-tag">Shooter, Zombies</span>
+                            <h4 class="landing-card-title">COD: BO3 Zombies Chronicles</h4>
+                            <p class="landing-card-desc">Features 8 remastered classic undead maps with full weapon packs, custom wonder weapons, and co-op gameplay.</p>
+                            <div class="card-action" style="padding-top: 8px;">
+                                <span class="price">FREE</span>
+                                <a href="details.html?id=Call%20of%20Duty%3A%20Black%20Ops%20III%20Zombies%20Chronicles" class="btn-details">Details &rarr;</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 5. Tomb Raider -->
+                    <div class="landing-game-card">
+                        <img src="images/nfsmw-shot1.png" id="landing-img-5" alt="Tomb Raider" class="landing-card-img" onerror="this.src='images/nfsmw-shot1.png';">
+                        <div class="landing-card-body">
+                            <span class="category-tag">Action, Adventure</span>
+                            <h4 class="landing-card-title">Tomb Raider</h4>
+                            <p class="landing-card-desc">Explore the origin story of Lara Croft as she survives a hostile island, uncovers mysterious tombs, and fights for survival.</p>
+                            <div class="card-action" style="padding-top: 8px;">
+                                <span class="price">FREE</span>
+                                <a href="details.html?id=Tomb%20Raider" class="btn-details">Details &rarr;</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 6. Grand Theft Auto V Legacy -->
+                    <div class="landing-game-card">
+                        <img src="images/nfsmw-shot1.png" id="landing-img-6" alt="Grand Theft Auto V" class="landing-card-img" onerror="this.src='images/nfsmw-shot1.png';">
+                        <div class="landing-card-body">
+                            <span class="category-tag">Open World, Action</span>
+                            <h4 class="landing-card-title">Grand Theft Auto V Legacy</h4>
+                            <p class="landing-card-desc">Dive into Los Santos with Michael, Franklin, and Trevor. High-resolution textures, custom cars, and full open-world sandbox action.</p>
+                            <div class="card-action" style="padding-top: 8px;">
+                                <span class="price">FREE</span>
+                                <a href="details.html?id=Grand%20Theft%20Auto%20V%20Legacy" class="btn-details">Details &rarr;</a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
         </div>
+
+        <!-- MAIN STORE LAYOUT (Hero Slider, Latest Games, Sidebar & Full Catalog Grid) -->
+        <div class="portal-layout-grid">
+
+            <!-- LEFT COLUMN -->
+            <div class="portal-main-content">
+
+                <!-- 1. Featured Games Hero Slider -->
+                <div class="apunka-featured-box">
+                    <h3 class="section-title"><i class="fa-solid fa-gamepad" style="color: #ff9500;"></i> Featured Games</h3>
+                    <div class="hero-slider-wrapper">
+                        <button class="slider-arrow slider-prev" onclick="moveFeaturedSlide(-1)"><i class="fa-solid fa-chevron-left"></i></button>
+                        <div id="heroSliderImageContainer" class="hero-slider-img-container" onclick="openFeaturedDetails()" style="width: 100%; height: 100%; cursor: pointer;">
+                            <img id="heroSliderImg" src="" alt="Featured Game" class="hero-slider-img">
+                        </div>
+                        <button class="slider-arrow slider-next" onclick="moveFeaturedSlide(1)"><i class="fa-solid fa-chevron-right"></i></button>
+                    </div>
+                    <h2 id="heroSliderTitle" class="hero-slider-title">Loading Featured Game...</h2>
+                </div>
+
+                <!-- 2. Latest Games Added Section -->
+                <div class="apunka-section-box" style="margin-top: 20px;">
+                    <h3 class="section-title"><i class="fa-solid fa-fire" style="color: #ff9500;"></i> Latest Games Added</h3>
+                    <div id="latestGamesGrid" class="latest-games-grid">
+                        <!-- Populated dynamically -->
+                    </div>
+                </div>
+
+                <!-- Trust Bar -->
+                <div class="trust-bar" style="margin-top: 20px;">
+                    <div class="trust-item"><span class="trust-icon">⚡</span> Fast Downloads</div>
+                    <div class="trust-item"><span class="trust-icon">🛡️</span> Verified Safe Files</div>
+                    <div class="trust-item"><span class="trust-icon">🇹🇿</span> Local TZ Support</div>
+                </div>
+
+                <!-- Popular Posts -->
+                <div class="apunka-section-box" style="margin-top: 20px;">
+                    <h3 class="section-title"><i class="fa-solid fa-star" style="color: #f1c40f;"></i> Popular Posts</h3>
+                    <div id="popularPostsTextList" class="popular-posts-text-list">
+                        <!-- Populated dynamically -->
+                    </div>
+                </div>
+
+                <!-- 3. Main Game Catalog Grid Section -->
+                <section style="margin-top: 20px;">
+                    <h3 id="catalogSectionTitle" class="section-title"><i class="fa-solid fa-layer-group"></i> Game Catalog & Store</h3>
+                    <div id="games-grid" class="game-grid">
+                        <!-- Loaded dynamically -->
+                        <div class="loading-state" style="grid-column: 1 / -1; text-align: center; padding: 40px;">
+                            <div class="spinner" style="margin: 0 auto 10px;"></div>
+                            <p style="color: var(--text-muted);">Loading games catalog...</p>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+
+            <!-- RIGHT COLUMN: Sidebar -->
+            <div class="portal-sidebar">
+                <div class="sidebar-box">
+                    <h3 class="sidebar-title"><i class="fa-solid fa-circle-info" style="color: #007aff; margin-right: 6px;"></i> TZ Payment Info</h3>
+                    <p style="font-size: 0.82rem; color: var(--text-muted); line-height: 1.5; margin: 0;">
+                        Paid games like Tanzania ETS2 can be bought instantly via <b>Selar</b> online or directly through <b>Vodacom M-Pesa</b> via WhatsApp support!
+                    </p>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- FOOTER -->
+        <footer class="portal-professional-footer">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3><i class="fa-solid fa-gamepad" style="color: #38bdf8; margin-right: 8px;"></i> Squad Games Store TZ</h3>
+                    <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; margin: 0 0 12px 0;">
+                        Tanzania's ultimate PC & mobile gaming hub. Featuring high-speed repacks, custom regional mods (such as Tanzania ETS2 packs), and dedicated local support.
+                    </p>
+                    <span style="display: inline-block; background: rgba(37, 211, 102, 0.15); color: #25d366; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: bold; border: 1px solid rgba(37, 211, 102, 0.3);">
+                        <i class="fa-solid fa-shield-halved"></i> TZ Verified & Safe Portal
+                    </span>
+                </div>
+
+                <div class="footer-col">
+                    <h3><i class="fa-solid fa-layer-group" style="color: #ff9500; margin-right: 8px;"></i> Browse Categories & Genres</h3>
+                    <ul class="footer-guide-list">
+                        <li><i class="fa-solid fa-angle-right"></i> Click on <b>"All Categories"</b> at the top to browse genres like Action, Racing, and Simulation.</li>
+                        <li><i class="fa-solid fa-angle-right"></i> Click on <b>"Game Type"</b> to filter games by specific franchises.</li>
+                    </ul>
+                </div>
+
+                <div class="footer-col">
+                    <h3><i class="fa-solid fa-magnifying-glass" style="color: #007aff; margin-right: 8px;"></i> Instant Search Index</h3>
+                    <ul class="footer-guide-list">
+                        <li><i class="fa-solid fa-angle-right"></i> Type any game title into the <b>Search box</b> at the top of the portal.</li>
+                        <li><i class="fa-solid fa-angle-right"></i> Real-time filtering connects you directly to download links.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom-bar">
+                <span>&copy; 2013-2026 Squad Games Store TZ. All rights reserved. Built for Tanzanian Gamers.</span>
+                <div class="footer-bottom-links">
+                    <a href="https://wa.me/255692752060?text=Hello%20SquadGames" target="_blank"><i class="fa-brands fa-whatsapp"></i> WhatsApp Support</a>
+                </div>
+            </div>
+        </footer>
+
     </div>
 
+    <!-- Fullscreen Image Modal -->
+    <div id="fullscreen-overlay" class="fullscreen-overlay" onclick="closeFullScreen()">
+        <span class="fullscreen-close">&times;</span>
+        <img id="fullscreen-img" class="fullscreen-img" src="" alt="Fullscreen View">
+    </div>
+
+    <!-- Auto-Sync Landing Images Script -->
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            try {
+                const res = await fetch('games.json');
+                const data = await res.json();
+                const games = Array.isArray(data) ? data : (data.games || data.data || []);
+
+                const targets = [
+                    { id: 'landing-img-1', title: 'Need for Speed Payback' },
+                    { id: 'landing-img-2', title: 'The Last of Us Part II' },
+                    { id: 'landing-img-3', title: 'Assetto Corsa' },
+                    { id: 'landing-img-4', title: 'Black Ops III Zombies Chronicles' },
+                    { id: 'landing-img-5', title: 'Tomb Raider' },
+                    { id: 'landing-img-6', title: 'Grand Theft Auto V Legacy' }
+                ];
+
+                targets.forEach(target => {
+                    const match = games.find(g => (g.title || '').toLowerCase().includes(target.title.toLowerCase()));
+                    if (match && match.image) {
+                        const imgEl = document.getElementById(target.id);
+                        if (imgEl) imgEl.src = match.image;
+                    }
+                });
+            } catch (e) {
+                console.warn("Could not sync landing images:", e);
+            }
+        });
+    </script>
+    <script src="script.js"></script>
 </body>
 </html>
