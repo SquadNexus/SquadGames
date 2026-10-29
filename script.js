@@ -481,20 +481,22 @@ function closeAllDropdowns() {
 }
 window.closeAllDropdowns = closeAllDropdowns;
 
+// FIXED: Now stays within store.html instead of redirecting to index.html
 function filterByCategory(category) {
     const lowerCat = category.toLowerCase();
     closeAllDropdowns();
     if (lowerCat === 'home' || lowerCat === 'all') {
-        window.location.href = 'index.html';
+        window.location.href = 'store.html';
     } else {
-        window.location.href = `index.html?category=${encodeURIComponent(category)}`;
+        window.location.href = `store.html?category=${encodeURIComponent(category)}`;
     }
 }
 window.filterByCategory = filterByCategory;
 
+// FIXED: Now stays within store.html instead of redirecting to index.html
 function filterByFranchise(franchiseKeyword) {
     closeAllDropdowns();
-    window.location.href = `index.html?franchise=${encodeURIComponent(franchiseKeyword)}`;
+    window.location.href = `store.html?franchise=${encodeURIComponent(franchiseKeyword)}`;
 }
 window.filterByFranchise = filterByFranchise;
 
