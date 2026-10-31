@@ -1315,5 +1315,27 @@
         { "part": "Part 02", "url": "https://www.mediafire.com/file_premium/agz9n2nrdywb7v2/Assetto_Corsa_Ready_To_Race_-_%2528Www.ApunKaGames.Net%2529.part2.rar/file" },
         { "part": "Part 03", "url": "https://www.mediafire.com/file_premium/gc5awhw8z7hy6bm/Assetto_Corsa_Ready_To_Race_-_%2528Www.ApunKaGames.Net%2529.part3.rar/file" }
     ]
+},
+  {
+    "id": "57",
+    "title": "Far Cry 4",
+    "platform": "PC",
+    "category": "Action-adventure, Open World",
+    "description": "",
+    "requirements": "OS: Windows 7/8/8.1/10 (64-bit versions only) Processor: Intel Core i5-750 2.6 GHz or AMD Phenom II X4 955 3.2 GHz RAM: 4 GB Hard Disk: 30 GB available space Video Card: NVIDIA GeForce GTX 460 or AMD Radeon HD5850 (1 GB VRAM) Network: Broadband Internet connection DirectX Version: 11",
+    "installGuide": "Far Cry 4, developed by Ubisoft Montreal and published by Ubisoft for Windows in November 2014, is a 13.03 GB open-world action-adventure video game set in Kyrat, a breathtaking yet perilous Himalayan region dominated by the tyrannical self-proclaimed king Pagan Min. The gameplay blends intense gunfights, tactical stealth, vehicular travel across rugged terrain, and dynamic wildlife encounters, inviting players to liberate enemy outposts and explore a vast, vertical sandbox using a diverse arsenal of weapons and tools.",
+    "price": "FREE",
+    "image": "images/fc4.jpeg",
+    "screenshots": [
+        "images/fc41.jpeg",
+        "images/fc42.jpeg",
+        "images/fc43.jpeg"
+    ],
+    "downloadUrl": "https://www.mediafire.com/file/fbiswjtrxp5ujau/Far_Cry_4_-_%2528Www.ApunKaGames.Biz%2529.part1.rar/file",
+    "downloadParts": [
+        { "name": "Part 1", "url": "https://www.mediafire.com/file/fbiswjtrxp5ujau/Far_Cry_4_-_%2528Www.ApunKaGames.Biz%2529.part1.rar/file" },
+        { "name": "Part 2", "url": "https://www.mediafire.com/file/6lhg2i1duby553z/Far_Cry_4_-_%2528Www.ApunKaGames.Biz%2529.part2.rar/file" },
+        { "name": "Part 3", "url": "https://www.mediafire.com/file/j6i2eav7nohcw0h/Far_Cry_4_-_%2528Www.ApunKaGames.Biz%2529.part3.rar/file" }
+    ]
 }
 ]
