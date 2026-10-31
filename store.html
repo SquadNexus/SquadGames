@@ -31,11 +31,14 @@
 
         <!-- Permanent Portal Header & Styled Navigation Box -->
         <div class="portal-header-wrapper">
-            <div class="portal-logo-area">
-                <h1 class="portal-logo">Squad Games Store TZ</h1>
+            <div class="portal-logo-area" style="display: flex; align-items: center; gap: 15px; flex-wrap: wrap;">
+                <!-- Profile Avatar Image Added on the Left Side -->
+                <img src="images/profile.jpg" alt="Profile" style="width: 45px; height: 45px; border-radius: 50%; object-fit: cover; border: 2px solid #25d366; box-shadow: 0 4px 10px rgba(0,0,0,0.5); flex-shrink: 0;" onerror="this.style.display='none';">
+
+                <h1 class="portal-logo" style="margin: 0;">Squad Games Store TZ</h1>
 
                 <!-- Sleek Modern Search Box Styling -->
-                <div class="portal-search-wrapper">
+                <div class="portal-search-wrapper" style="margin-left: auto;">
                     <i class="fa-solid fa-magnifying-glass search-icon"></i>
                     <input type="text" id="gameSearchInput" placeholder="Search games, mods, simulator...">
                 </div>
