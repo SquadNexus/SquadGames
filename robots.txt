@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://squadnexus.github.io/SquadGames/sitemap.xml
