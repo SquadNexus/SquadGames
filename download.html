@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download Links - Squad Games Store TZ</title>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .download-page-wrapper {
+            max-width: 800px;
+            margin: 40px auto;
+            background: #16161a;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            padding: 30px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.6);
+        }
+        .download-page-title {
+            color: #ffffff;
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-top: 0;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .download-notice-box {
+            background: rgba(241, 196, 15, 0.1);
+            border: 1px solid rgba(241, 196, 15, 0.3);
+            color: #f1c40f;
+            padding: 14px 18px;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .parts-grid-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            max-height: 550px;
+            overflow-y: auto;
+            padding-right: 8px;
+        }
+        .part-row-btn {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 20px;
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: #ffffff;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.95rem;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .part-row-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.5);
+        }
+        .back-to-details-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 25px;
+            color: #38bdf8;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        .back-to-details-btn:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="download-page-wrapper">
+            <div id="downloadHeaderContent">
+                <h1 class="download-page-title" id="downloadGameTitle"><i class="fa-solid fa-spinner fa-spin"></i> Loading Download Links...</h1>
+            </div>
+
+            <div class="download-notice-box">
+                <i class="fa-solid fa-triangle-exclamation" style="font-size: 1.2rem;"></i>
+                <span>PLEASE REMEMBER: Download ALL Parts One by One & Extract Part 1 Using WinRAR for proper installation.</span>
+            </div>
+
+            <!-- Dynamic Parts Container -->
+            <div id="pagePartsListContainer" class="parts-grid-list">
+                <!-- Links populate here -->
+            </div>
+
+            <div style="margin-top: 20px;">
+                <a href="store.html" id="backToGameLink" class="back-to-details-btn">
+                    <i class="fa-solid fa-arrow-left"></i> Back to Game Details / Store
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script to Load Parts Data -->
+    <script>
+        document.addEventListener("DOMContentLoaded", async () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const gameId = urlParams.get('id');
+
+            if (!gameId) {
+                document.getElementById('downloadGameTitle').innerText = "Invalid Game Link";
+                return;
+            }
+
+            try {
+                const response = await fetch('games.json');
+                const rawData = await response.json();
+                let gamesArray = Array.isArray(rawData) ? rawData : (rawData.games || rawData.data || Object.values(rawData).find(Array.isArray) || []);
+
+                const targetGame = gamesArray.find(g => String(g.id || g.title) === decodeURIComponent(gameId));
+
+                if (!targetGame) {
+                    document.getElementById('downloadGameTitle').innerText = "Game Not Found";
+                    return;
+                }
+
+                document.title = `Download Links: ${targetGame.title} - Squad Games Store TZ`;
+                document.getElementById('downloadGameTitle').innerHTML = `<i class="fa-solid fa-download" style="color: #10b981;"></i> Download: ${targetGame.title}`;
+                
+                const backLink = document.getElementById('backToGameLink');
+                backLink.href = `details.html?id=${encodeURIComponent(targetGame.id || targetGame.title)}`;
+
+                let partsArray = targetGame.parts || targetGame.downloadParts || [];
+                if (typeof partsArray === 'string') {
+                    try { partsArray = JSON.parse(partsArray); } catch (e) { partsArray = []; }
+                }
+
+                const container = document.getElementById('pagePartsListContainer');
+                if (partsArray.length === 0) {
+                    container.innerHTML = `<p style="color: #94a3b8; text-align: center; padding: 20px;">No multi-part download links available for this title.</p>`;
+                    return;
+                }
+
+                container.innerHTML = partsArray.map((part, idx) => {
+                    const partUrl = (typeof part === 'object' && part !== null) ? (part.url || part.link || '#') : part;
+                    const partName = (typeof part === 'object' && part !== null) ? (part.name || `Part ${idx + 1}`) : `Part ${idx + 1}`;
+
+                    return `
+                        <a href="${partUrl}" target="_blank" class="part-row-btn">
+                            <span><i class="fa-solid fa-cloud-arrow-down" style="margin-right: 10px;"></i> Download ${partName}</span>
+                            <i class="fa-solid fa-external-link-alt" style="font-size: 0.85rem;"></i>
+                        </a>
+                    `;
+                }).join('');
+
+            } catch (err) {
+                console.error("Error loading download page:", err);
+                document.getElementById('downloadGameTitle').innerText = "Error Loading Links";
+            }
+        });
+    </script>
+</body>
+</html>
