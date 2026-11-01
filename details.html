@@ -104,16 +104,6 @@
                                     <span><i class="fa-solid fa-key"></i> <strong>Password:</strong> www.squadgamestz.com / apunkagames</span>
                                 </div>
                             </div>
-
-                            <!-- APUNKAGAMES STYLE DIRECT EMBEDDED PARTS CONTAINER -->
-                            <div id="embeddedPartsSection" style="display: none; margin-top: 25px; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px;">
-                                <p style="color: #f1c40f; font-size: 0.85rem; margin-bottom: 15px; font-weight: 600; line-height: 1.4;">
-                                    <i class="fa-solid fa-triangle-exclamation"></i> PLEASE REMEMBER: Download ALL Parts One by One & Extract Part 1 Using WinRAR.
-                                </p>
-                                <div id="embeddedPartsList" style="display: flex; flex-direction: column; gap: 10px; max-height: 450px; overflow-y: auto; padding-right: 5px;">
-                                    <!-- Rendered dynamically -->
-                                </div>
-                            </div>
                         </div>
                     </div>
 
@@ -201,27 +191,6 @@
                 // Display dynamic size from games.json
                 document.getElementById('gameSizeText').innerText = extractGameSize(currentGameData);
 
-                // Render Embedded ApunKaGames Style Parts List if available
-                const partsArray = currentGameData.parts || currentGameData.downloadParts;
-                if (partsArray && partsArray.length > 0) {
-                    const embeddedSection = document.getElementById('embeddedPartsSection');
-                    const embeddedList = document.getElementById('embeddedPartsList');
-                    if (embeddedSection && embeddedList) {
-                        embeddedSection.style.display = 'block';
-                        embeddedList.innerHTML = partsArray.map((part, idx) => {
-                            const partUrl = (typeof part === 'object' && part !== null) ? (part.url || part.link || '#') : part;
-                            const partName = (typeof part === 'object' && part !== null) ? (part.name || `Part ${idx + 1}`) : `Part ${idx + 1}`;
-
-                            return `
-                                <a href="${partUrl}" target="_blank" class="btn-action btn-get" style="display: flex; justify-content: space-between; align-items: center; padding: 12px 18px; text-decoration: none; border-radius: 8px; background: linear-gradient(135deg, #10b981, #059669); color: #fff; font-weight: bold; box-shadow: 0 4px 12px rgba(16, 185, 129, 0.25); transition: transform 0.2s;">
-                                    <span><i class="fa-solid fa-download" style="margin-right: 8px;"></i> Download ${partName}</span>
-                                    <i class="fa-solid fa-external-link-alt" style="font-size: 0.8rem;"></i>
-                                </a>
-                            `;
-                        }).join('');
-                    }
-                }
-
                 // Populate System Requirements Dynamically from games.json
                 const reqListEl = document.getElementById('systemReqList');
                 if (currentGameData.requirements) {
@@ -273,12 +242,11 @@
             }
 
             const partsArray = currentGameData.parts || currentGameData.downloadParts;
+            const gameId = currentGameData.id || currentGameData.title;
+
             if (partsArray && partsArray.length > 0) {
-                // If parts exist, smoothly scroll down to the embedded parts list on the page
-                const embeddedSection = document.getElementById('embeddedPartsSection');
-                if (embeddedSection) {
-                    embeddedSection.scrollIntoView({ behavior: 'smooth' });
-                }
+                // Redirects directly to the dedicated download.html page for multi-part games
+                window.location.href = `download.html?id=${encodeURIComponent(gameId)}`;
             } else if (currentGameData.downloadUrl) {
                 window.open(currentGameData.downloadUrl, '_blank');
             } else {
