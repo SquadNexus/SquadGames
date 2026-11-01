@@ -174,21 +174,37 @@ function initStore(games) {
             catalogTitleEl.innerHTML = `<i class="fa-solid fa-fire"></i> Game Type: ${urlFranchise}`;
         }
     } else {
-        // Featured games slider list (homepage)
+        // Featured games slider list (homepage) - Arranged in exact custom order
         const featuredTargetIds = ["1", "2", "59", "46", "22", "50", "56", "7", "19", "39"];
-        const featuredGames = games.filter(game => {
-            if (featuredTargetIds.includes(String(game.id))) return true;
-            const title = (game.title || "").toLowerCase();
-            return title.includes("tanzania euro truck simulator 2 + 50 tz mods") ||
-                   title.includes("tanzania euro truck simulator 2 mobile") ||
-                   title.includes("forza horizon 6") ||
-                   title.includes("the last of us part ii remastered") ||
-                   title.includes("call of duty: modern warfare III") ||
-                   title.includes("shadow of the tomb raider") ||
-                   title.includes("assetto corsa – ready to race") ||
-                   title.includes("carx street") ||
-                   title.includes("need for speed: heat") ||
-                   title === "fifa 23";
+        const featuredKeywords = [
+            "tanzania euro truck simulator 2 + 50 tz mods",
+            "tanzania euro truck simulator 2 mobile",
+            "forza horizon 6",
+            "the last of us part ii remastered",
+            "call of duty: modern warfare iii",
+            "shadow of the tomb raider",
+            "assetto corsa – ready to race",
+            "carx street",
+            "need for speed: heat",
+            "fifa 23"
+        ];
+
+        let featuredGames = [];
+
+        // Gather games strictly matching your IDs in your defined sequence first
+        featuredTargetIds.forEach(targetId => {
+            const found = games.find(g => String(g.id) === String(targetId));
+            if (found && !featuredGames.includes(found)) {
+                featuredGames.push(found);
+            }
+        });
+
+        // Gather games matching keywords next if any slot remains or for keyword entries
+        featuredKeywords.forEach(keyword => {
+            const found = games.find(g => (g.title || "").toLowerCase().includes(keyword));
+            if (found && !featuredGames.includes(found)) {
+                featuredGames.push(found);
+            }
         });
         
         featuredSliderList = featuredGames.length ? featuredGames : games.slice(0, 10);
