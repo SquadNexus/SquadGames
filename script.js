@@ -481,7 +481,6 @@ function closeAllDropdowns() {
 }
 window.closeAllDropdowns = closeAllDropdowns;
 
-// FIXED: Now stays within store.html instead of redirecting to index.html
 function filterByCategory(category) {
     const lowerCat = category.toLowerCase();
     closeAllDropdowns();
@@ -493,7 +492,6 @@ function filterByCategory(category) {
 }
 window.filterByCategory = filterByCategory;
 
-// FIXED: Now stays within store.html instead of redirecting to index.html
 function filterByFranchise(franchiseKeyword) {
     closeAllDropdowns();
     window.location.href = `store.html?franchise=${encodeURIComponent(franchiseKeyword)}`;
@@ -517,7 +515,7 @@ function applyFilters() {
         if (featuredBox) featuredBox.style.display = 'none';
         if (latestBox) latestBox.style.display = 'none';
         if (trustBar) trustBar.style.display = 'none';
-        if (popularSidebar) popularSidebar.style.display = 'none'; // Hides Popular Posts sidebar on category/search views
+        if (popularSidebar) popularSidebar.style.display = 'none';
 
         if (currentSearchQuery) {
             if (catalogTitleEl) catalogTitleEl.innerHTML = `<i class="fa-solid fa-magnifying-glass"></i> Search Results: "${currentSearchQuery}"`;
@@ -532,7 +530,7 @@ function applyFilters() {
         if (featuredBox) featuredBox.style.display = 'block';
         if (latestBox) latestBox.style.display = 'block';
         if (trustBar) trustBar.style.display = 'flex';
-        if (popularSidebar) popularSidebar.style.display = 'block'; // Shows Popular Posts ONLY on Home Page
+        if (popularSidebar) popularSidebar.style.display = 'block';
         if (catalogTitleEl) catalogTitleEl.innerHTML = `<i class="fa-solid fa-layer-group"></i> Game Catalog & Store`;
     }
 
@@ -573,7 +571,6 @@ function applyFilters() {
         return matchesSearch && matchesCategory;
     });
 
-    // If on homepage ('all' category and no search parameters), strictly limit to 8 curated games
     if (!urlCategory && !urlFranchise && !currentSearchQuery) {
         const priorityTitles = [
             "tanzania euro truck simulator 2 + 50 tz mods packs",
@@ -747,56 +744,12 @@ function closePaymentOptionsModal() {
 }
 window.closePaymentOptionsModal = closePaymentOptionsModal;
 
+/**
+ * Updated to open multi-part download links on their own dedicated download.html page
+ */
 function showDownloadPartsModal(game) {
-    let modal = document.getElementById('download-parts-modal');
-    if (!modal) {
-        modal = document.createElement('div');
-        modal.id = 'download-parts-modal';
-        modal.className = 'modal-overlay';
-        modal.innerHTML = `
-            <div class="modal-content">
-                <button onclick="closeDownloadPartsModal()" style="position: absolute; top: 15px; right: 15px; background: rgba(255,255,255,0.08); border: none; color: #fff; font-size: 1.1rem; cursor: pointer; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 10;"><i class="fa-solid fa-xmark"></i></button>
-                <h3 id="parts-modal-title" style="margin-top: 0; margin-bottom: 8px; font-size: 1.15rem; color: #fff; padding-right: 30px;">Select Download Part</h3>
-                
-                <p style="color: #f1c40f; font-size: 0.82rem; margin-bottom: 12px; font-weight: 600; line-height: 1.4;">
-                    <i class="fa-solid fa-triangle-exclamation"></i> To get this game you are required to download all these parts for proper installation and extraction of the game.
-                </p>
-
-                <p style="color: #aaa; font-size: 0.85rem; margin-bottom: 20px;">Choose a specific part series below to start your direct download link:</p>
-                <div id="parts-list-container"></div>
-            </div>
-        `;
-        document.body.appendChild(modal);
-
-        modal.addEventListener('click', function(event) {
-            if (event.target === modal) {
-                closeDownloadPartsModal();
-            }
-        });
-    }
-
-    document.getElementById('parts-modal-title').innerText = `Download: ${game.title}`;
-
-    let partsArray = game.parts || game.downloadParts;
-    if (typeof partsArray === 'string') {
-        try { partsArray = JSON.parse(partsArray); } catch (e) { partsArray = []; }
-    }
-    partsArray = partsArray || [];
-
-    const container = document.getElementById('parts-list-container');
-    container.innerHTML = partsArray.map((part, idx) => {
-        const partUrl = (typeof part === 'object' && part !== null) ? (part.url || part.link || '#') : part;
-        const partName = (typeof part === 'object' && part !== null) ? (part.name || `Part ${idx + 1}`) : `Part ${idx + 1}`;
-
-        return `
-            <a href="${partUrl}" target="_blank" class="btn-action btn-get" style="display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; text-decoration: none; border-radius: 10px;">
-                <span><i class="fa-solid fa-download" style="margin-right: 8px;"></i> ${partName}</span>
-                <i class="fa-solid fa-external-link-alt" style="font-size: 0.8rem;"></i>
-            </a>
-        `;
-    }).join('');
-
-    modal.classList.add('active');
+    const gameId = game.id || game.title;
+    window.location.href = `download.html?id=${encodeURIComponent(gameId)}`;
 }
 window.showDownloadPartsModal = showDownloadPartsModal;
 
