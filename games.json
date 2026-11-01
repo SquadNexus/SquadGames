@@ -1337,5 +1337,41 @@
         { "name": "Part 2", "url": "https://www.mediafire.com/file/6lhg2i1duby553z/Far_Cry_4_-_%2528Www.ApunKaGames.Biz%2529.part2.rar/file" },
         { "name": "Part 3", "url": "https://www.mediafire.com/file/j6i2eav7nohcw0h/Far_Cry_4_-_%2528Www.ApunKaGames.Biz%2529.part3.rar/file" }
     ]
+},
+  {
+    "id": "58",
+    "title": " Battlefield 6",
+    "platform": "PC",
+    "category": "Action-First person shooter",
+    "description": "Battlefield 6, developed by Battlefield Studios and published by Electronic Arts for Windows on October 10, 2025, is an 84.4 GB action-FPS video game focused on large-scale, all-out warfare and squad-based coordination. The gameplay immerses players in massive, dynamic environments featuring intense infantry combat, military vehicle warfare, and fast-paced tactical action designed around cooperative teamwork.",
+    "requirements": "OS: Windows 10 (64‑bit)<br>Processor: Intel Core i5-8400, AMD Ryzen 5 2600<br>RAM: 16 GB<br>Hard Disk: 80 GB available space<br>Graphics Card: Nvidia RTX 2060, AMD Radeon RX 5600 XT 6GB, Intel Arc A380<br>Network: Broadband Internet connection<br>DirectX: Version 12",
+    "installGuide": "",
+    "price": "FREE",
+    "image": "images/bf6.jpeg",
+    "screenshots": [
+        "images/bf61.jpeg",
+        "images/bf62.jpeg",
+        "images/bf63.jpeg"
+    ],
+    "downloadUrl": "https://www.mediafire.com/file/eezgmsux4zr4niy/Battlefield_6_-_%2528Www.ApunKaGames.Net%2529.part01.rar/file",
+    "downloadParts": [
+        { "name": "Part 1", "url": "https://www.mediafire.com/file/eezgmsux4zr4niy/Battlefield_6_-_%2528Www.ApunKaGames.Net%2529.part01.rar/file" },
+        { "name": "Part 2", "url": "https://www.mediafire.com/file/w9kbdq9liks88up/Battlefield_6_-_%2528Www.ApunKaGames.Net%2529.part02.rar/file" },
+        { "name": "Part 3", "url": "https://www.mediafire.com/file/y5dgjwwk2ob0epk/Battlefield_6_-_%2528Www.ApunKaGames.Net%2529.part03.rar/file" },
+        { "name": "Part 4", "url": "https://www.mediafire.com/file/95ez5vh33swqeao/Battlefield_6_-_%2528Www.ApunKaGames.Net%2529.part04.rar/file" },
+        { "name": "Part 5", "url": "https://www.mediafire.com/file/bm8gaualsgtpetm/Battlefield_6_-_%2528Www.ApunKaGames.Net%2529.part05.rar/file" },
+        { "name": "Part 6", "url": "https://www.mediafire.com/file/p2eqnuikjsrign5/Battlefield_6_-_%2528Www.ApunKaGames.Net%2529.part06.rar/file" },
+        { "name": "Part 7", "url": "https://www.mediafire.com/file/wtczu1y9gtqr7s0/Battlefield_6_-_%2528Www.ApunKaGames.Net%2529.part07.rar/file" },
+        { "name": "Part 8", "url": "https://www.mediafire.com/file/s4wihsyyq4p4dfw/Battlefield_6_-_%2528Www.ApunKaGames.Net%2529.part08.rar/file" },
+        { "name": "Part 9", "url": "https://www.mediafire.com/file/f077nzrglgsbqki/Battlefield_6_-_%2528Www.ApunKaGames.Net%2529.part09.rar/file" },
+        { "name": "Part 10", "url": "https://www.mediafire.com/file/wt2hrf05c0ktln3/Battlefield_6_-_%2528Www.ApunKaGames.Net%2529.part10.rar/file" },
+        { "name": "Part 11", "url": "https://www.mediafire.com/file/is4kbb4v3zgsond/Battlefield_6_-_%2528Www.ApunKaGames.Net%2529.part11.rar/file" },
+        { "name": "Part 12", "url": "https://www.mediafire.com/file/avse5mpxyioq8tf/Battlefield_6_-_%2528Www.ApunKaGames.Net%2529.part12.rar/file" },
+        { "name": "Part 13", "url": "https://www.mediafire.com/file/63msqki7h2lrpv3/Battlefield_6_-_%2528Www.ApunKaGames.Net%2529.part13.rar/file" },
+        { "name": "Part 14", "url": "https://www.mediafire.com/file/ta9c43fir4f776o/Battlefield_6_-_%2528Www.ApunKaGames.Net%2529.part14.rar/file" },
+        { "name": "Part 15", "url": "https://www.mediafire.com/file/bgkb1ar88c3ievq/Battlefield_6_-_%2528Www.ApunKaGames.Net%2529.part15.rar/file" },
+        { "name": "Part 16", "url": "https://www.mediafire.com/file/z82de79w56gosdg/Battlefield_6_-_%2528Www.ApunKaGames.Net%2529.part16.rar/file" },
+        { "name": "Part 17", "url": "https://www.mediafire.com/file/n1zup3ly6actz1n/Battlefield_6_-_%2528Www.ApunKaGames.Net%2529.part17.rar/file" }
+    ]
 }
 ]
