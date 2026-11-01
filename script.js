@@ -422,7 +422,7 @@ function renderNavbarDropdowns(games) {
 
     container.innerHTML = `
         <div style="display: flex; gap: 10px; align-items: center; flex-wrap: wrap; width: 100%;">
-            <button class="nav-tab ${!urlCat ? 'active' : ''}" onclick="window.location.href='index.html'">
+            <button class="nav-tab ${!urlCat ? 'active' : ''}" onclick="window.location.href='store.html'">
                 <i class="fa-solid fa-house"></i> Home
             </button>
             <button class="nav-tab ${urlCat === 'all_games' ? 'active' : ''}" onclick="filterByCategory('all_games')">
