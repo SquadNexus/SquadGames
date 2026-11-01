@@ -175,20 +175,20 @@ function initStore(games) {
         }
     } else {
         // Featured games slider list (homepage)
-        const featuredTargetIds = ["1", "2", "19", "8", "13", "12", "46", "7", "27", "51"];
+        const featuredTargetIds = ["1", "2", "59", "46", "22", "50", "56", "7", "19", "39"];
         const featuredGames = games.filter(game => {
             if (featuredTargetIds.includes(String(game.id))) return true;
             const title = (game.title || "").toLowerCase();
             return title.includes("tanzania euro truck simulator 2 + 50 tz mods") ||
                    title.includes("tanzania euro truck simulator 2 mobile") ||
-                   title.includes("need for speed: heat") ||
-                   title.includes("grand theft auto v legacy") ||
-                   title.includes("fifa 22") ||
-                   title.includes("spider-man: miles morales") ||
-                   title.includes("the last of us part ii") ||
+                   title.includes("forza horizon 6") ||
+                   title.includes("the last of us part ii remastered") ||
+                   title.includes("call of duty: modern warfare III") ||
+                   title.includes("shadow of the tomb raider") ||
+                   title.includes("assetto corsa – ready to race") ||
                    title.includes("carx street") ||
-                   title.includes("black ops iii zombies chronicles") ||
-                   title === "tomb raider";
+                   title.includes("need for speed: heat") ||
+                   title === "fifa 23";
         });
         
         featuredSliderList = featuredGames.length ? featuredGames : games.slice(0, 10);
