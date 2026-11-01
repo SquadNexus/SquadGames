@@ -174,24 +174,34 @@ function initStore(games) {
             catalogTitleEl.innerHTML = `<i class="fa-solid fa-fire"></i> Game Type: ${urlFranchise}`;
         }
     } else {
-        // Featured games slider list (homepage) - Arranged in your exact requested custom order
+        // Featured games slider list (homepage) - Arranged in exact custom order
+        const featuredTargetIds = ["1", "2", "59", "46", "22", "50", "56", "7", "19", "39"];
         const featuredKeywords = [
-            "grand theft auto v legacy",
-            "marvel’s spider-man: miles morales",
-            "battlefield 6",
-            "call of duty: black ops iii zombies chronicles",
-            "the last of us part i",
-            "red dead redemption 2",
-            "far cry 4",
-            "assetto corsa rally",
-            "need for speed payback"
+            "tanzania euro truck simulator 2 + 50 tz mods",
+            "tanzania euro truck simulator 2 mobile",
+            "forza horizon 6",
+            "the last of us part ii remastered",
+            "call of duty: modern warfare iii",
+            "shadow of the tomb raider",
+            "assetto corsa – ready to race",
+            "carx street",
+            "need for speed: heat",
+            "fifa 23"
         ];
 
         let featuredGames = [];
 
-        // Gather games strictly matching your keywords in your defined sequence
+        // Gather games strictly matching your IDs in your defined sequence first
+        featuredTargetIds.forEach(targetId => {
+            const found = games.find(g => String(g.id) === String(targetId));
+            if (found && !featuredGames.includes(found)) {
+                featuredGames.push(found);
+            }
+        });
+
+        // Gather games matching keywords next if any slot remains or for keyword entries
         featuredKeywords.forEach(keyword => {
-            const found = games.find(g => (g.title || "").toLowerCase().includes(keyword.toLowerCase()));
+            const found = games.find(g => (g.title || "").toLowerCase().includes(keyword));
             if (found && !featuredGames.includes(found)) {
                 featuredGames.push(found);
             }
@@ -346,7 +356,22 @@ function renderPopularPostsTextSidebar(games) {
     const container = document.getElementById('popularPostsTextList');
     if (!container) return;
 
-    const popularSubset = games.slice(0, 10);
+    // Put your custom popular game IDs here in the exact unordered sequence you want!
+    const popularCustomIds = ["59", "12", "2", "46", "8", "1", "27", "51", "19", "39"];
+
+    let popularSubset = [];
+    popularCustomIds.forEach(id => {
+        const found = games.find(g => String(g.id) === String(id));
+        if (found && !popularSubset.includes(found)) {
+            popularSubset.push(found);
+        }
+    });
+
+    // Fallback if any ID is missing: fills up with standard games
+    if (popularSubset.length === 0) {
+        popularSubset = games.slice(0, 10);
+    }
+
     container.innerHTML = popularSubset.map(game => {
         const gameId = game.id || game.title;
         return `
