@@ -356,7 +356,22 @@ function renderPopularPostsTextSidebar(games) {
     const container = document.getElementById('popularPostsTextList');
     if (!container) return;
 
-    const popularSubset = games.slice(0, 10);
+    // Put your custom popular game IDs here in the exact unordered sequence you want!
+    const popularCustomIds = ["59", "12", "2", "46", "8", "1", "27", "51", "19", "39"];
+
+    let popularSubset = [];
+    popularCustomIds.forEach(id => {
+        const found = games.find(g => String(g.id) === String(id));
+        if (found && !popularSubset.includes(found)) {
+            popularSubset.push(found);
+        }
+    });
+
+    // Fallback if any ID is missing: fills up with standard games
+    if (popularSubset.length === 0) {
+        popularSubset = games.slice(0, 10);
+    }
+
     container.innerHTML = popularSubset.map(game => {
         const gameId = game.id || game.title;
         return `
