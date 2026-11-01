@@ -22,7 +22,7 @@
             font-size: 1.5rem;
             font-weight: 800;
             margin-top: 0;
-            margin-bottom: 10px;
+            margin-bottom: 15px;
             display: flex;
             align-items: center;
             gap: 10px;
@@ -44,27 +44,45 @@
             display: flex;
             flex-direction: column;
             gap: 12px;
-            max-height: 550px;
+            max-height: 500px;
             overflow-y: auto;
             padding-right: 8px;
         }
-        .part-row-btn {
+        .part-row-card {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 14px 20px;
+            padding: 12px 18px;
             background: linear-gradient(135deg, #10b981, #059669);
             color: #ffffff;
             border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.25);
+            transition: transform 0.2s ease;
+        }
+        .part-row-card:hover {
+            transform: translateY(-2px);
+        }
+        .part-link {
+            color: #fff;
             text-decoration: none;
             font-weight: 700;
             font-size: 0.95rem;
-            box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3);
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            flex-grow: 1;
         }
-        .part-row-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(16, 185, 129, 0.5);
+        .part-checkbox-label {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: #fff;
+            font-size: 0.8rem;
+            cursor: pointer;
+            background: rgba(0,0,0,0.25);
+            padding: 6px 10px;
+            border-radius: 6px;
+            font-weight: 600;
         }
         .back-to-details-btn {
             display: inline-flex;
@@ -85,8 +103,18 @@
 
     <div class="container">
         <div class="download-page-wrapper">
-            <div id="downloadHeaderContent">
-                <h1 class="download-page-title" id="downloadGameTitle"><i class="fa-solid fa-spinner fa-spin"></i> Loading Download Links...</h1>
+            <h1 class="download-page-title" id="downloadGameTitle">
+                <i class="fa-solid fa-spinner fa-spin"></i> Loading Download Links...
+            </h1>
+
+            <!-- Game Thumbnail & Meta Banner -->
+            <div id="downloadGameMetaBanner" style="display: none; gap: 15px; align-items: center; background: rgba(255,255,255,0.03); padding: 15px; border-radius: 12px; margin-bottom: 20px; border: 1px solid rgba(255,255,255,0.06);">
+                <img id="downloadGameThumb" src="" alt="Game Poster" style="width: 70px; height: 90px; object-fit: cover; border-radius: 8px; border: 1px solid rgba(255,255,255,0.1);">
+                <div>
+                    <h3 id="bannerGameTitle" style="color: #fff; margin: 0 0 5px 0; font-size: 1.1rem;">Loading...</h3>
+                    <p style="color: #94a3b8; font-size: 0.82rem; margin: 0 0 8px 0;"><span id="bannerPlatform">PC</span> | Size: <strong id="bannerGameSize" style="color: #38bdf8;">Loading...</strong></p>
+                    <span style="background: rgba(16, 185, 129, 0.15); color: #34d399; font-size: 0.75rem; padding: 3px 8px; border-radius: 6px; font-weight: bold;">TZ Verified Safe Download</span>
+                </div>
             </div>
 
             <div class="download-notice-box">
@@ -99,7 +127,15 @@
                 <!-- Links populate here -->
             </div>
 
-            <div style="margin-top: 20px;">
+            <!-- Report Broken Link / Support Bar -->
+            <div style="margin-top: 30px; text-align: center; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 20px; display: flex; flex-direction: column; align-items: center; gap: 10px;">
+                <p style="color: #94a3b8; font-size: 0.85rem; margin: 0;">Encountered a broken link or need an alternate mirror?</p>
+                <a href="https://wa.me/255692752060?text=Hello%20SquadGames%2C%20I%20found%20a%20broken%20link%20on%20download%20page." target="_blank" style="display: inline-flex; align-items: center; gap: 8px; background: #25d366; color: #fff; padding: 10px 18px; border-radius: 8px; text-decoration: none; font-weight: bold; font-size: 0.85rem; box-shadow: 0 4px 12px rgba(37, 211, 102, 0.25);">
+                    <i class="fa-brands fa-whatsapp" style="font-size: 1.1rem;"></i> Report Broken Link via WhatsApp
+                </a>
+            </div>
+
+            <div style="margin-top: 15px;">
                 <a href="store.html" id="backToGameLink" class="back-to-details-btn">
                     <i class="fa-solid fa-arrow-left"></i> Back to Game Details / Store
                 </a>
@@ -107,8 +143,25 @@
         </div>
     </div>
 
-    <!-- Script to Load Parts Data -->
+    <!-- Script to Load Parts Data & Checkboxes -->
     <script>
+        function getGameSize(game) {
+            if (game.size) return game.size;
+            if (game.gameSize) return game.gameSize;
+            if (game.fileSize) return game.fileSize;
+            const fullText = `${game.description || ''} ${game.requirements || ''}`;
+            const match = fullText.match(/(\d+(\.\d+)?\s*(GB|MB))/i);
+            return match ? match[0] : "N/A";
+        }
+
+        function togglePartCheck(checkboxId, isChecked) {
+            if (isChecked) {
+                localStorage.setItem(checkboxId, 'true');
+            } else {
+                localStorage.removeItem(checkboxId);
+            }
+        }
+
         document.addEventListener("DOMContentLoaded", async () => {
             const urlParams = new URLSearchParams(window.location.search);
             const gameId = urlParams.get('id');
@@ -131,8 +184,15 @@
                 }
 
                 document.title = `Download Links: ${targetGame.title} - Squad Games Store TZ`;
-                document.getElementById('downloadGameTitle').innerHTML = `<i class="fa-solid fa-download" style="color: #10b981;"></i> Download: ${targetGame.title}`;
+                document.getElementById('downloadGameTitle').innerHTML = `<i class="fa-solid fa-cloud-arrow-down" style="color: #10b981;"></i> Download Center`;
                 
+                // Populate Meta Banner
+                document.getElementById('downloadGameThumb').src = targetGame.image || 'images/nfsmw-shot1.png';
+                document.getElementById('bannerGameTitle').innerText = targetGame.title;
+                document.getElementById('bannerPlatform').innerText = targetGame.platform || "PC";
+                document.getElementById('bannerGameSize').innerText = getGameSize(targetGame);
+                document.getElementById('downloadGameMetaBanner').style.display = 'flex';
+
                 const backLink = document.getElementById('backToGameLink');
                 backLink.href = `details.html?id=${encodeURIComponent(targetGame.id || targetGame.title)}`;
 
@@ -150,12 +210,19 @@
                 container.innerHTML = partsArray.map((part, idx) => {
                     const partUrl = (typeof part === 'object' && part !== null) ? (part.url || part.link || '#') : part;
                     const partName = (typeof part === 'object' && part !== null) ? (part.name || `Part ${idx + 1}`) : `Part ${idx + 1}`;
+                    const checkboxId = `part_check_${targetGame.id || targetGame.title}_${idx}`;
+                    const isChecked = localStorage.getItem(checkboxId) === 'true';
 
                     return `
-                        <a href="${partUrl}" target="_blank" class="part-row-btn">
-                            <span><i class="fa-solid fa-cloud-arrow-down" style="margin-right: 10px;"></i> Download ${partName}</span>
-                            <i class="fa-solid fa-external-link-alt" style="font-size: 0.85rem;"></i>
-                        </a>
+                        <div class="part-row-card">
+                            <a href="${partUrl}" target="_blank" class="part-link">
+                                <i class="fa-solid fa-download"></i> Download ${partName}
+                            </a>
+                            <label class="part-checkbox-label">
+                                <input type="checkbox" ${isChecked ? 'checked' : ''} onchange="togglePartCheck('${checkboxId}', this.checked)" style="accent-color: #f1c40f; width: 16px; height: 16px; cursor: pointer;">
+                                Downloaded
+                            </label>
+                        </div>
                     `;
                 }).join('');
 
