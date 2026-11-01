@@ -1055,3 +1055,141 @@ body {
         max-height: 50vh !important;
     }
 }
+
+/* ==========================================================================
+   ApunKaGames Style Dedicated Download Page Enhancements
+   ========================================================================== */
+.download-page-wrapper {
+    max-width: 800px;
+    margin: 40px auto;
+    background: #16161a;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 16px;
+    padding: 30px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+}
+
+.download-page-title {
+    color: #ffffff;
+    font-size: 1.5rem;
+    font-weight: 800;
+    margin-top: 0;
+    margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.download-notice-box {
+    background: rgba(241, 196, 15, 0.1);
+    border: 1px solid rgba(241, 196, 15, 0.3);
+    color: #f1c40f;
+    padding: 14px 18px;
+    border-radius: 10px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 25px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.parts-grid-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-height: 500px;
+    overflow-y: auto;
+    padding-right: 8px;
+}
+
+.parts-grid-list::-webkit-scrollbar {
+    width: 8px;
+}
+
+.parts-grid-list::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
+}
+
+.parts-grid-list::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 4px;
+}
+
+.parts-grid-list::-webkit-scrollbar-thumb:hover {
+    background: rgba(16, 185, 129, 0.6);
+}
+
+.part-row-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 18px;
+    background: linear-gradient(135deg, #10b981, #059669);
+    color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(16, 185, 129, 0.25);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.part-row-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(16, 185, 129, 0.4);
+}
+
+.part-link {
+    color: #fff;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-grow: 1;
+}
+
+.part-checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: #fff;
+    font-size: 0.8rem;
+    cursor: pointer;
+    background: rgba(0, 0, 0, 0.25);
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-weight: 600;
+}
+
+.back-to-details-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 25px;
+    color: #38bdf8;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: color 0.2s;
+}
+
+.back-to-details-btn:hover {
+    color: #60a5fa;
+    text-decoration: underline;
+}
+
+@media(max-width: 600px) {
+    .download-page-wrapper {
+        margin: 15px;
+        padding: 20px;
+    }
+    .part-row-card {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    .part-checkbox-label {
+        align-self: flex-end;
+    }
+}
