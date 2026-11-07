@@ -1,8 +1,8 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Montserrat:wght@400;600;700;800;900&display=swap');
 
 /**
- * GamingTZ Store / Squad Games Store TZ - Core Application Stylesheet
- * Optimized for Cinematic Full-Screen Layout & Wide Cards
+ * Squad Games Store TZ / SquAdGameZ - Core Application Stylesheet
+ * Optimized for Cinematic Full-Screen Layout & Brush Gaming Logo
  */
 
 :root {
@@ -100,6 +100,53 @@ h1, h2, h3, h4, h5, h6, button, input, .section-title, .gamingtz-nav-item {
 .search-icon {
     color: var(--text-muted);
     font-size: 0.85rem;
+}
+
+/* --- SQUADGAMEZ CUSTOM BRUSH LOGO STYLE --- */
+.gamingtz-logo-area {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+}
+
+.custom-logo-icon {
+    background: #e50914;
+    color: #fff;
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    box-shadow: 0 4px 15px rgba(229, 9, 20, 0.4);
+}
+
+.squad-logo-text {
+    font-family: 'Permanent Marker', cursive, sans-serif !important;
+    font-size: 1.8rem;
+    font-weight: 400;
+    color: #ffffff;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+}
+
+.squad-logo-text .highlight-z {
+    color: #ff9500;
+    text-shadow: 0 0 12px rgba(255, 149, 0, 0.6);
+}
+
+.gamingtz-store-badge {
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    padding: 3px 8px;
+    border-radius: 6px;
+    font-size: 0.65rem;
+    font-weight: bold;
+    color: #cbd5e1;
+    letter-spacing: 1px;
 }
 
 /* --- MODERN CINEMATIC TRANSPARENT HERO SPOTLIGHT (PERFECT 100% FIT) --- */
