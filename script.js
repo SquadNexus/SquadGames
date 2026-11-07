@@ -191,7 +191,6 @@ function initStore(games) {
 
         let featuredGames = [];
 
-        // Gather games strictly matching your IDs in your defined sequence first
         featuredTargetIds.forEach(targetId => {
             const found = games.find(g => String(g.id) === String(targetId));
             if (found && !featuredGames.includes(found)) {
@@ -199,7 +198,6 @@ function initStore(games) {
             }
         });
 
-        // Gather games matching keywords next if any slot remains or for keyword entries
         featuredKeywords.forEach(keyword => {
             const found = games.find(g => (g.title || "").toLowerCase().includes(keyword));
             if (found && !featuredGames.includes(found)) {
@@ -211,7 +209,6 @@ function initStore(games) {
         updateHeroSlider(0);
         initAutoSlide();
 
-        // SORT BY ID DESCENDING: Highest ID (newest added) comes first down to ID #1
         latestGamesSorted = [...games].sort((a, b) => {
             const idA = parseInt(a.id, 10) || 0;
             const idB = parseInt(b.id, 10) || 0;
@@ -314,7 +311,6 @@ function renderLatestGamesPage() {
 
     container.innerHTML = gridHTML;
 
-    // Render / Update Pagination Controls below Latest Games Grid
     let paginationContainer = document.getElementById('latestGamesPagination');
     if (!paginationContainer) {
         paginationContainer = document.createElement('div');
@@ -356,7 +352,6 @@ function renderPopularPostsTextSidebar(games) {
     const container = document.getElementById('popularPostsTextList');
     if (!container) return;
 
-    // Put your custom popular game IDs here in the exact unordered sequence you want!
     const popularCustomIds = ["59", "12", "2", "46", "8", "1", "27", "51", "19", "39"];
 
     let popularSubset = [];
@@ -367,7 +362,6 @@ function renderPopularPostsTextSidebar(games) {
         }
     });
 
-    // Fallback if any ID is missing: fills up with standard games
     if (popularSubset.length === 0) {
         popularSubset = games.slice(0, 10);
     }
@@ -382,9 +376,6 @@ function renderPopularPostsTextSidebar(games) {
     }).join('');
 }
 
-/**
- * Intelligent Franchise / Game Series Grouper
- */
 function getGameFranchise(title) {
     const t = (title || "").toLowerCase();
     
@@ -408,9 +399,6 @@ function getGameFranchise(title) {
     return cleanTitle;
 }
 
-/**
- * Dynamically builds navbar dropdowns (Includes Home, All Games, Categories, Game Types)
- */
 function renderNavbarDropdowns(games) {
     const container = document.getElementById('dynamic-game-types');
     if (!container) return;
@@ -602,35 +590,6 @@ function applyFilters() {
         return matchesSearch && matchesCategory;
     });
 
-    if (!urlCategory && !urlFranchise && !currentSearchQuery) {
-        const priorityTitles = [
-            "tanzania euro truck simulator 2 + 50 tz mods packs",
-            "tanzania euro truck simulator 2 mobile",
-            "need for speed most wanted 2005",
-            "need for speed payback",
-            "grand theft auto v legacy",
-            "call of duty: advanced warfare",
-            "fifa 22",
-            "carx street"
-        ];
-
-        let curatedList = [];
-        priorityTitles.forEach(pTitle => {
-            const found = filteredGames.find(g => (g.title || "").toLowerCase().includes(pTitle));
-            if (found && !curatedList.includes(found)) {
-                curatedList.push(found);
-            }
-        });
-
-        filteredGames.forEach(g => {
-            if (!curatedList.includes(g) && curatedList.length < 8) {
-                curatedList.push(g);
-            }
-        });
-
-        filteredGames = curatedList.slice(0, 8);
-    }
-
     renderGameStore(filteredGames);
 }
 
@@ -646,6 +605,8 @@ function renderGameStore(gameList) {
                 <p>No games found matching your search or filters.</p>
             </div>
         `;
+        const wrapper = document.getElementById('catalogExpandWrapper');
+        if (wrapper) wrapper.style.display = 'none';
         return;
     }
 
@@ -694,7 +655,41 @@ function renderGameStore(gameList) {
 
         container.appendChild(card);
     });
+
+    // Automatically check height to display or hide the "Show More" button
+    checkCatalogHeight();
 }
+
+/**
+ * Handles toggling the Game Catalog grid between 4-row limit and fully expanded view
+ */
+function checkCatalogHeight() {
+    const grid = document.getElementById('games-grid');
+    const wrapper = document.getElementById('catalogExpandWrapper');
+    if (grid && wrapper) {
+        // If content height exceeds 4 lines or total items are more than 8, show button
+        if (grid.scrollHeight > 1100 || grid.children.length > 8) {
+            wrapper.style.display = 'block';
+        } else {
+            wrapper.style.display = 'none';
+        }
+    }
+}
+
+function toggleGameCatalog() {
+    const grid = document.getElementById('games-grid');
+    const btn = document.getElementById('toggleCatalogBtn');
+    
+    grid.classList.toggle('expanded');
+    
+    if (grid.classList.contains('expanded')) {
+        btn.innerHTML = '<i class="fa-solid fa-angles-up"></i> Onyesha Kidogo (Show Less)';
+    } else {
+        btn.innerHTML = '<i class="fa-solid fa-angles-down"></i> Tazama Zaidi (Show More)';
+        document.getElementById('games-grid-section').scrollIntoView({ behavior: 'smooth' });
+    }
+}
+window.toggleGameCatalog = toggleGameCatalog;
 
 function openDetailsById(id) {
     window.location.href = `details.html?id=${id}`;
@@ -715,9 +710,6 @@ function closeFullScreen() {
 }
 window.closeFullScreen = closeFullScreen;
 
-/**
- * Dual Payment Modal for Paid Games (Selar vs. Vodacom WhatsApp)
- */
 function showPaymentOptionsModal(game) {
     let modal = document.getElementById('payment-options-modal');
     if (!modal) {
@@ -775,9 +767,6 @@ function closePaymentOptionsModal() {
 }
 window.closePaymentOptionsModal = closePaymentOptionsModal;
 
-/**
- * Updated to open multi-part download links on their own dedicated download.html page
- */
 function showDownloadPartsModal(game) {
     const gameId = game.id || game.title;
     window.location.href = `download.html?id=${encodeURIComponent(gameId)}`;
