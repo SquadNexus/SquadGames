@@ -105,69 +105,157 @@
             padding: 25px 20px;
         }
 
-        /* Full-Screen Cinematic Hero Banner */
-        .cinematic-hero-box {
-            background: rgba(18, 18, 24, 0.75);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 20px;
-            padding: 25px;
-            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
-            margin-bottom: 30px;
-        }
-
-        .hero-slider-wrapper {
+        /* --- MODERN CINEMATIC TRANSPARENT HERO SPOTLIGHT --- */
+        .modern-hero-spotlight {
             position: relative;
             width: 100%;
-            height: 480px;
-            border-radius: 14px;
+            min-height: 440px;
+            background: linear-gradient(135deg, rgba(18, 18, 28, 0.75) 0%, rgba(10, 10, 15, 0.88) 100%);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 22px;
+            padding: 45px 50px;
+            box-shadow: 0 25px 60px rgba(0, 0, 0, 0.85);
+            margin-bottom: 35px;
             overflow: hidden;
-            background: #000;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.9);
             cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            transition: border-color 0.3s ease;
         }
 
-        .hero-slider-img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            filter: brightness(0.95);
-            transition: transform 0.5s ease;
+        .modern-hero-spotlight:hover {
+            border-color: rgba(255, 149, 0, 0.4);
         }
 
-        .slider-arrow {
+        /* Ambient Background Glow */
+        .hero-backdrop-glow {
             position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            z-index: 10;
-            background: rgba(0, 0, 0, 0.6);
-            backdrop-filter: blur(6px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            top: -50px;
+            right: -50px;
+            width: 350px;
+            height: 350px;
+            background: radial-gradient(circle, rgba(255, 149, 0, 0.15) 0%, transparent 70%);
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .hero-content-overlay {
+            position: relative;
+            z-index: 2;
+            max-width: 750px;
+        }
+
+        .hero-tag-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: linear-gradient(135deg, #ff9500, #ff5722);
+            color: #000;
+            font-size: 0.72rem;
+            font-weight: 900;
+            padding: 5px 12px;
+            border-radius: 6px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+            box-shadow: 0 4px 15px rgba(255, 149, 0, 0.4);
+        }
+
+        .hero-main-title {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: #ffffff;
+            margin: 0 0 12px 0;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.8);
+            line-height: 1.1;
+        }
+
+        .hero-sub-text {
+            font-size: 0.92rem;
+            color: #94a3b8;
+            margin: 0 0 25px 0;
+            line-height: 1.5;
+        }
+
+        .hero-action-buttons {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+            margin-bottom: 25px;
+        }
+
+        .hero-btn-primary {
+            background: linear-gradient(135deg, #ff9500, #e56000);
             color: #fff;
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
+            border: none;
+            padding: 12px 26px;
+            border-radius: 10px;
+            font-weight: 800;
+            font-size: 0.9rem;
             cursor: pointer;
             display: flex;
             align-items: center;
-            justify-content: center;
-            transition: all 0.2s;
+            gap: 8px;
+            box-shadow: 0 6px 20px rgba(255, 149, 0, 0.35);
+            transition: transform 0.2s, box-shadow 0.2s;
         }
 
-        .slider-arrow:hover {
-            background: #e50914;
-            border-color: #e50914;
+        .hero-btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 149, 0, 0.55);
         }
 
-        .slider-prev { left: 20px; }
-        .slider-next { right: 20px; }
-
-        .hero-slider-title {
-            margin-top: 20px;
-            font-size: 1.6rem;
+        .hero-btn-secondary {
+            background: rgba(255, 255, 255, 0.06);
             color: #fff;
-            font-weight: 800;
-            text-shadow: 0 2px 8px rgba(0,0,0,0.8);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 12px 22px;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 0.9rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            backdrop-filter: blur(6px);
+            transition: background 0.2s, border-color 0.2s;
+        }
+
+        .hero-btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.12);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        /* Glowing Animated Navigation Dots (Passing Around at the Bottom) */
+        .hero-dots-pagination {
+            position: absolute;
+            bottom: 25px;
+            right: 40px;
+            display: flex;
+            gap: 8px;
+            z-index: 3;
+        }
+
+        .hero-dot {
+            width: 10px;
+            height: 10px;
+            background: rgba(255, 255, 255, 0.25);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 8px rgba(0,0,0,0.5);
+        }
+
+        .hero-dot.active {
+            width: 28px;
+            background: #ff9500;
+            border-radius: 6px;
+            box-shadow: 0 0 12px rgba(255, 149, 0, 0.8);
         }
 
         /* Full Grid Layout */
@@ -180,6 +268,9 @@
 
         @media (max-width: 768px) {
             .gamingtz-nav-links { display: none; }
+            .modern-hero-spotlight { padding: 25px 20px; }
+            .hero-main-title { font-size: 1.8rem; }
+            .hero-dots-pagination { right: 20px; bottom: 15px; }
         }
     </style>
 </head>
@@ -212,22 +303,32 @@
     <!-- Main Full-Width Container -->
     <div class="main-full-container">
 
-        <!-- 1. Cinematic Full-Width Featured Spotlight Hero Banner -->
-        <div class="cinematic-hero-box">
-            <div class="section-title" style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
-                <span><i class="fa-solid fa-fire" style="color: #ff9500;"></i> Featured Game Spotlight</span>
-                <span style="font-size: 0.75rem; background: rgba(229,9,20,0.2); color: #e50914; padding: 3px 10px; border-radius: 4px; font-weight: bold;">🔥 HOT DEAL</span>
-            </div>
+        <!-- New Cinematic Transparent Hero Spotlight Banner -->
+        <div class="modern-hero-spotlight" onclick="openFeaturedDetails()">
+            <div class="hero-backdrop-glow"></div>
             
-            <div class="hero-slider-wrapper" onclick="openFeaturedDetails()">
-                <button class="slider-arrow slider-prev" onclick="event.stopPropagation(); moveFeaturedSlide(-1);"><i class="fa-solid fa-chevron-left"></i></button>
-                <div class="hero-slider-img-container" style="width: 100%; height: 100%;">
-                    <img id="heroSliderImg" src="" alt="Featured Game" class="hero-slider-img">
+            <div class="hero-content-overlay">
+                <span class="hero-tag-badge"><i class="fa-solid fa-bolt"></i> FEATURED</span>
+                <h1 id="heroSliderTitle" class="hero-main-title">Loading Featured Game...</h1>
+                <p class="hero-sub-text">Pata toleo bora la mchezo huu ukiwa na huduma ya haraka na salama kupitia Squad Games Store TZ.</p>
+                
+                <div class="hero-action-buttons">
+                    <button class="hero-btn-primary" onclick="event.stopPropagation(); openFeaturedDetails();">
+                        <i class="fa-solid fa-play"></i> <span>Tazama Zaidi</span>
+                    </button>
+                    <button class="hero-btn-secondary" onclick="event.stopPropagation(); moveFeaturedSlide(1);">
+                        <span>Game Inayofuata</span> <i class="fa-solid fa-arrow-right"></i>
+                    </button>
                 </div>
-                <button class="slider-arrow slider-next" onclick="event.stopPropagation(); moveFeaturedSlide(1);"><i class="fa-solid fa-chevron-right"></i></button>
             </div>
 
-            <h2 id="heroSliderTitle" class="hero-slider-title">Loading Featured Game...</h2>
+            <!-- Glowing Animated Navigation Dots Passing Around -->
+            <div class="hero-dots-pagination" id="heroDotsContainer">
+                <span class="hero-dot active" onclick="event.stopPropagation(); updateHeroSlider(0);"></span>
+                <span class="hero-dot" onclick="event.stopPropagation(); updateHeroSlider(1);"></span>
+                <span class="hero-dot" onclick="event.stopPropagation(); updateHeroSlider(2);"></span>
+                <span class="hero-dot" onclick="event.stopPropagation(); updateHeroSlider(3);"></span>
+            </div>
         </div>
 
         <!-- 2. Trust Bar -->
