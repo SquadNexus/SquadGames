@@ -349,14 +349,32 @@ h1, h2, h3, h4, h5, h6, button, input, .section-title, .gamingtz-nav-item {
     color: var(--text-muted);
 }
 
-/* --- LATEST GAMES GRID --- */
+/* --- LATEST GAMES HORIZONTAL SCROLLER (OPTION A) --- */
 .latest-games-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    display: flex !important;
     gap: 15px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    padding-bottom: 12px;
+    width: 100%;
+}
+
+.latest-games-grid::-webkit-scrollbar {
+    height: 6px;
+}
+
+.latest-games-grid::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 4px;
+}
+
+.latest-games-grid::-webkit-scrollbar-thumb {
+    background: var(--accent-orange);
+    border-radius: 4px;
 }
 
 .latest-game-card {
+    flex: 0 0 160px;
     background: rgba(20,20,24,0.8);
     border: 1px solid var(--border-color);
     border-radius: 12px;
