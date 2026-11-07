@@ -3,132 +3,335 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Squad Games Store TZ - PC & Mobile Games Portal</title>
+    <title>Squad Games Store TZ - Duka Bora la Games Tanzania</title>
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* --- GAMINGTZ STYLE OVERRIDES --- */
+        body {
+            background-color: #0b0b0e;
+            color: #fff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        /* Top Header Navigation Bar matching GamingTZ style */
+        .gamingtz-header {
+            background: linear-gradient(180deg, rgba(15,15,20,0.95) 0%, rgba(10,10,12,0.98) 100%);
+            border-bottom: 2px solid rgba(255,149,0,0.3);
+            padding: 15px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 15px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        .gamingtz-logo-area {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .gamingtz-logo-text {
+            font-size: 1.4rem;
+            font-weight: 900;
+            color: #fff;
+            letter-spacing: 0.5px;
+        }
+
+        .gamingtz-logo-text span {
+            color: #ff9500;
+        }
+
+        .gamingtz-store-badge {
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.15);
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 0.65rem;
+            font-weight: bold;
+            color: #cbd5e1;
+            letter-spacing: 1px;
+        }
+
+        /* Top Navigation Tabs */
+        .gamingtz-nav-links {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+
+        .gamingtz-nav-item {
+            color: #cbd5e1;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            transition: color 0.2s;
+            position: relative;
+            padding-bottom: 4px;
+        }
+
+        .gamingtz-nav-item:hover, .gamingtz-nav-item.active {
+            color: #ff9500;
+        }
+
+        .gamingtz-nav-item.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: #ff9500;
+            border-radius: 2px;
+        }
+
+        /* Full Width Container */
+        .main-full-container {
+            max-width: 1450px;
+            margin: 0 auto;
+            padding: 25px 20px;
+        }
+
+        /* Full-Screen Cinematic Hero Banner */
+        .cinematic-hero-box {
+            background: rgba(18, 18, 24, 0.75);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+            margin-bottom: 30px;
+        }
+
+        .hero-slider-wrapper {
+            position: relative;
+            width: 100%;
+            height: 480px;
+            border-radius: 14px;
+            overflow: hidden;
+            background: #000;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.9);
+        }
+
+        .hero-slider-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.95);
+            transition: transform 0.5s ease;
+        }
+
+        .slider-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 10;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(6px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+
+        .slider-arrow:hover {
+            background: #e50914;
+            border-color: #e50914;
+        }
+
+        .slider-prev { left: 20px; }
+        .slider-next { right: 20px; }
+
+        .hero-slider-title {
+            margin-top: 20px;
+            font-size: 1.6rem;
+            color: #fff;
+            font-weight: 800;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.8);
+        }
+
+        /* Floating Side Icon Dock (Matched to your second uploaded image) */
+        .floating-side-dock {
+            position: fixed;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(15, 15, 20, 0.85);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 30px;
+            padding: 12px 6px;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            z-index: 999;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+        }
+
+        .dock-icon-btn {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #cbd5e1;
+            background: rgba(255,255,255,0.04);
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            position: relative;
+        }
+
+        .dock-icon-btn:hover, .dock-icon-btn.active {
+            background: #ff9500;
+            color: #000;
+            transform: scale(1.1);
+        }
+
+        .dock-indicator {
+            position: absolute;
+            right: -6px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 4px;
+            height: 20px;
+            background: transparent;
+            border-radius: 2px;
+        }
+
+        .dock-icon-btn.active .dock-indicator {
+            background: #ff9500;
+        }
+
+        /* Full Grid Layout */
+        .full-game-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 22px;
+            margin-top: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .floating-side-dock { display: none; }
+            .gamingtz-nav-links { display: none; }
+        }
+    </style>
 </head>
 <body>
 
-    <!-- Top Utility Link Bar (ApunKaGames Style Header) -->
-    <div class="top-utility-bar">
-        <div class="top-utility-container">
-            <div class="top-links">
-                <a href="index.html"><i class="fa-solid fa-house"></i> Home</a>
-                <a href="#games-grid"><i class="fa-solid fa-gamepad"></i> PC Games List</a>
-                <a href="https://wa.me/255692752060?text=Hello%20SquadGames%2C%20I%20want%20to%20request%20a%20game." target="_blank"><i class="fa-solid fa-paper-plane"></i> Request Game</a>
-                <a href="https://wa.me/255692752060?text=Hello%20SquadGames%2C%20I%20need%20help%20with%20installation." target="_blank"><i class="fa-solid fa-circle-question"></i> How to Download</a>
-                <a href="https://wa.me/255692752060?text=Hello%20SquadGames" target="_blank"><i class="fa-solid fa-headset"></i> Contact Us</a>
-            </div>
-            <div class="top-social-badge">
-                <span><i class="fa-solid fa-shield-halved" style="color: #22c55e;"></i> TZ Verified Store</span>
-            </div>
+    <!-- GamingTZ Top Header Navigation Bar -->
+    <header class="gamingtz-header">
+        <div class="gamingtz-logo-area">
+            <i class="fa-solid fa-gamepad" style="font-size: 1.8rem; color: #e50914;"></i>
+            <div class="gamingtz-logo-text">Gaming<span>TZ</span> <span class="gamingtz-store-badge">STORE</span></div>
         </div>
+
+        <!-- Navigation Tabs from your uploaded screenshot -->
+        <nav class="gamingtz-nav-links">
+            <a href="store.html" class="gamingtz-nav-item active">Home</a>
+            <a href="#games-grid-section" class="gamingtz-nav-item">Games</a>
+            <a href="download.html" class="gamingtz-nav-item">Vifaa Vya Game</a>
+            <a href="store.html?category=mobile" class="gamingtz-nav-item">Game Za Simu</a>
+            <a href="store.html?category=pc" class="gamingtz-nav-item">Game Za PC</a>
+            <a href="https://wa.me/255692752060?text=Hello%20SquadGames%2C%20nisaidie%20kuhusu%20game." target="_blank" class="gamingtz-nav-item">Jinsi Inavyofanya</a>
+            <a href="https://wa.me/255692752060" target="_blank" class="gamingtz-nav-item">Community</a>
+        </nav>
+
+        <div class="portal-search-wrapper" style="width: 240px;">
+            <i class="fa-solid fa-magnifying-glass search-icon"></i>
+            <input type="text" id="gameSearchInput" placeholder="Tafuta games...">
+        </div>
+    </header>
+
+    <!-- Floating Right Side Icon Dock (From your second reference image) -->
+    <div class="floating-side-dock">
+        <a href="store.html" class="dock-icon-btn active" title="Home"><i class="fa-solid fa-house"></i><span class="dock-indicator"></span></a>
+        <a href="store.html?category=courses" class="dock-icon-btn" title="Learning / Guides"><i class="fa-solid fa-graduation-cap"></i></a>
+        <a href="https://wa.me/255692752060" class="dock-icon-btn" title="Wallet / Payments"><i class="fa-solid fa-dollar-sign"></i></a>
+        <a href="store.html?category=mobile" class="dock-icon-btn" title="Mobile Games"><i class="fa-solid fa-mobile-screen"></i></a>
+        <a href="store.html?category=pc" class="dock-icon-btn" title="PC Games"><i class="fa-solid fa-desktop"></i></a>
+        <a href="store.html?category=action" class="dock-icon-btn" title="Arcade & Games"><i class="fa-solid fa-gamepad"></i></a>
+        <a href="download.html" class="dock-icon-btn" title="Tools & Utilities"><i class="fa-solid fa-keyboard"></i></a>
+        <a href="https://wa.me/255692752060" class="dock-icon-btn" title="Security & Safety"><i class="fa-solid fa-shield-halved"></i></a>
+        <a href="https://wa.me/255692752060" class="dock-icon-btn" title="Documents"><i class="fa-solid fa-file-lines"></i></a>
+        <a href="https://wa.me/255692752060" class="dock-icon-btn" title="Support Alert"><i class="fa-solid fa-triangle-exclamation"></i></a>
+        <a href="https://wa.me/255692752060" class="dock-icon-btn" title="Phone Support"><i class="fa-solid fa-phone"></i></a>
+        <a href="https://wa.me/255692752060" class="dock-icon-btn" title="Help"><i class="fa-solid fa-circle-question"></i></a>
     </div>
 
-    <!-- Main Container -->
-    <div class="container">
+    <!-- Main Full-Width Container (No Sidebar) -->
+    <div class="main-full-container">
 
-        <!-- Permanent Portal Header & Styled Navigation Box -->
-        <div class="portal-header-wrapper">
-            <div class="portal-logo-area" style="display: flex; align-items: center; gap: 15px; flex-wrap: wrap;">
-                <!-- Profile Avatar Image on the Left Side of Title -->
-                <img src="images/profile.jpg" alt="Profile" style="width: 45px; height: 45px; border-radius: 50%; object-fit: cover; border: 2px solid #25d366; box-shadow: 0 4px 10px rgba(0,0,0,0.5); flex-shrink: 0;" onerror="this.style.display='none';">
-                
-                <h1 class="portal-logo" style="margin: 0;">Squad Games Store TZ</h1>
-
-                <!-- Sleek Modern Search Box Styling -->
-                <div class="portal-search-wrapper" style="margin-left: auto;">
-                    <i class="fa-solid fa-magnifying-glass search-icon"></i>
-                    <input type="text" id="gameSearchInput" placeholder="Search games, mods, simulator...">
+        <!-- 1. Cinematic Full-Width Featured Spotlight Hero Banner -->
+        <div class="cinematic-hero-box">
+            <div class="section-title" style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
+                <span><i class="fa-solid fa-fire" style="color: #ff9500;"></i> Featured Game Spotlight</span>
+                <span style="font-size: 0.75rem; background: rgba(229,9,20,0.2); color: #e50914; padding: 3px 10px; border-radius: 4px; font-weight: bold;">🔥 HOT DEAL</span>
+            </div>
+            
+            <div class="hero-slider-wrapper" onclick="openFeaturedDetails()" style="cursor: pointer;">
+                <button class="slider-arrow slider-prev" onclick="event.stopPropagation(); moveFeaturedSlide(-1);"><i class="fa-solid fa-chevron-left"></i></button>
+                <div class="hero-slider-img-container" style="width: 100%; height: 100%;">
+                    <img id="heroSliderImg" src="" alt="Featured Game" class="hero-slider-img">
                 </div>
+                <button class="slider-arrow slider-next" onclick="event.stopPropagation(); moveFeaturedSlide(1);"><i class="fa-solid fa-chevron-right"></i></button>
             </div>
 
-            <!-- Portal Navigation Container (Dynamic Expandable Dropdowns & Categories) -->
-            <div id="dynamic-game-types" class="portal-navbar">
-                <!-- Dropdown buttons load here dynamically via JavaScript -->
-            </div>
+            <h2 id="heroSliderTitle" class="hero-slider-title">Loading Featured Game...</h2>
         </div>
 
-        <!-- ApunKaGames Style Two-Column Portal Grid -->
-        <div class="portal-layout-grid">
-
-            <!-- LEFT COLUMN: Featured Hero Slider, Latest Games & Catalog -->
-            <div class="portal-main-content">
-
-                <!-- 1. Featured Games Hero Slider with Arrows & Title Below -->
-                <div class="apunka-featured-box">
-                    <h3 class="section-title"><i class="fa-solid fa-gamepad" style="color: #ff9500;"></i> Featured Games</h3>
-                    <div class="hero-slider-wrapper">
-                        <button class="slider-arrow slider-prev" onclick="moveFeaturedSlide(-1)"><i class="fa-solid fa-chevron-left"></i></button>
-                        <div id="heroSliderImageContainer" class="hero-slider-img-container" onclick="openFeaturedDetails()" style="width: 100%; height: 100%; cursor: pointer;">
-                            <img id="heroSliderImg" src="" alt="Featured Game" class="hero-slider-img">
-                        </div>
-                        <button class="slider-arrow slider-next" onclick="moveFeaturedSlide(1)"><i class="fa-solid fa-chevron-right"></i></button>
-                    </div>
-                    <h2 id="heroSliderTitle" class="hero-slider-title">Loading Featured Game...</h2>
-                </div>
-
-                <!-- 2. Latest Games Added Section (Horizontal Grid Cards with Dates & Badges) -->
-                <div class="apunka-section-box" style="margin-top: 20px;">
-                    <h3 class="section-title"><i class="fa-solid fa-fire" style="color: #ff9500;"></i> Latest Games Added</h3>
-                    <div id="latestGamesGrid" class="latest-games-grid">
-                        <!-- Populated dynamically -->
-                    </div>
-                </div>
-
-                <!-- Trust Bar -->
-                <div class="trust-bar" style="margin-top: 20px;">
-                    <div class="trust-item"><span class="trust-icon">⚡</span> Fast Downloads</div>
-                    <div class="trust-item"><span class="trust-icon">🛡️</span> Verified Safe Files</div>
-                    <div class="trust-item"><span class="trust-icon">🇹🇿</span> Local TZ Support</div>
-                </div>
-
-                <!-- 3. Main Game Catalog Grid Section -->
-                <section style="margin-top: 20px;">
-                    <h3 id="catalogSectionTitle" class="section-title"><i class="fa-solid fa-layer-group"></i> Game Catalog & Store</h3>
-                    <div id="games-grid" class="game-grid">
-                        <!-- Dynamic game cards load here via JavaScript -->
-                        <div class="loading-state" style="grid-column: 1 / -1; text-align: center; padding: 40px;">
-                            <div class="spinner" style="margin: 0 auto 10px;"></div>
-                            <p style="color: var(--text-muted);">Loading games catalog...</p>
-                        </div>
-                    </div>
-                </section>
-
-            </div>
-
-            <!-- RIGHT COLUMN: Sidebar (Popular Posts + Payment Info) -->
-            <div class="portal-sidebar">
-
-                <!-- Popular Posts Sidebar Box -->
-                <div class="sidebar-box">
-                    <h3 class="sidebar-title"><i class="fa-solid fa-star" style="color: #f1c40f; margin-right: 6px;"></i> Popular Posts</h3>
-                    <div id="popularPostsTextList" class="popular-posts-text-list">
-                        <!-- Populated dynamically via script.js -->
-                    </div>
-                </div>
-
-                <!-- Payment Info Sidebar Box -->
-                <div class="sidebar-box" style="margin-top: 20px;">
-                    <h3 class="sidebar-title"><i class="fa-solid fa-circle-info" style="color: #007aff; margin-right: 6px;"></i> TZ Payment Info</h3>
-                    <p style="font-size: 0.82rem; color: var(--text-muted); line-height: 1.5; margin: 0;">
-                        Paid games like Tanzania ETS2 can be bought instantly via <b>Selar</b> online or directly through <b>Vodacom M-Pesa</b> via WhatsApp support!
-                    </p>
-                </div>
-
-            </div>
-
+        <!-- 2. Trust Bar -->
+        <div class="trust-bar" style="margin-bottom: 30px;">
+            <div class="trust-item"><i class="fa-solid fa-mobile-screen-button" style="color: #22c55e;"></i> <b>M-Pesa / Tigo / Airtel</b> Malipo Salama</div>
+            <div class="trust-item"><i class="fa-solid fa-bolt" style="color: #ff9500;"></i> <b>Instant Delivery</b> Download Baada ya Malipo</div>
+            <div class="trust-item"><i class="fa-solid fa-headset" style="color: #38bdf8;"></i> <b>24/7 Support</b> Kiswahili & English</div>
+            <div class="trust-item"><i class="fa-solid fa-shield-halved" style="color: #f1c40f;"></i> <b>100% Verified</b> Safe Games</div>
         </div>
 
-        <!-- PROFESSIONAL FOOTER SECTION -->
+        <!-- 3. Latest Games Added Section -->
+        <div class="apunka-section-box" style="margin-bottom: 30px;">
+            <h3 class="section-title"><i class="fa-solid fa-clock-rotate-left" style="color: #38bdf8;"></i> New Releases / Latest Games Added</h3>
+            <div id="latestGamesGrid" class="latest-games-grid"></div>
+        </div>
+
+        <!-- 4. Main Game Catalog Grid Section (Edge-to-Edge Full Screen) -->
+        <section id="games-grid-section" style="margin-bottom: 40px;">
+            <h3 id="catalogSectionTitle" class="section-title"><i class="fa-solid fa-layer-group" style="color: #e50914;"></i> Game Catalog & Store</h3>
+            <div id="games-grid" class="full-game-grid">
+                <div class="loading-state" style="grid-column: 1 / -1; text-align: center; padding: 50px;">
+                    <div class="spinner" style="margin: 0 auto 10px;"></div>
+                    <p style="color: #94a3b8;">Inapakiza games za Tanzania...</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Professional Footer -->
         <footer class="portal-professional-footer">
             <div class="footer-grid">
-
                 <div class="footer-col">
-                    <h3><i class="fa-solid fa-gamepad" style="color: #38bdf8; margin-right: 8px;"></i> Squad Games Store TZ</h3>
-                    <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; margin: 0 0 12px 0;">
-                        Tanzania's ultimate PC & mobile gaming hub. Featuring high-speed repacks, custom regional mods (such as Tanzania ETS2 packs), and dedicated local support.
+                    <h3><i class="fa-solid fa-gamepad" style="color: #38bdf8; margin-right: 8px;"></i> GamingTZ Store</h3>
+                    <p style="font-size: 0.85rem; color: #94a3b8; line-height: 1.6; margin: 0 0 12px 0;">
+                        Duka bora la digital games na mods Tanzania. Pakua repack za PC, mods za malori ya Tanzania, na application mbalimbali.
                     </p>
                     <span style="display: inline-block; background: rgba(37, 211, 102, 0.15); color: #25d366; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: bold; border: 1px solid rgba(37, 211, 102, 0.3);">
                         <i class="fa-solid fa-shield-halved"></i> TZ Verified & Safe Portal
@@ -136,31 +339,24 @@
                 </div>
 
                 <div class="footer-col">
-                    <h3><i class="fa-solid fa-layer-group" style="color: #ff9500; margin-right: 8px;"></i> Browse Categories & Genres</h3>
-                    <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; margin: 0 0 10px 0;">
-                        Looking for more games? Easily unfold and explore our full collection:
-                    </p>
+                    <h3><i class="fa-solid fa-layer-group" style="color: #ff9500; margin-right: 8px;"></i> Aina za Games</h3>
                     <ul class="footer-guide-list">
-                        <li><i class="fa-solid fa-angle-right"></i> Click on <b>"All Categories"</b> at the top to unfold and browse genres like Action, Racing, Simulation, and Shooting.</li>
-                        <li><i class="fa-solid fa-angle-right"></i> Click on <b>"Game Type"</b> to filter games by specific franchises (Need for Speed, GTA, Truck Sim, etc.).</li>
+                        <li><i class="fa-solid fa-angle-right"></i> Tumia navigation ya juu kuchagua Simulator, Racing, au Action.</li>
+                        <li><i class="fa-solid fa-angle-right"></i> Tumia floating dock pembeni kufika kwa haraka kwenye vifaa vya simu na PC.</li>
                     </ul>
                 </div>
 
                 <div class="footer-col">
-                    <h3><i class="fa-solid fa-magnifying-glass" style="color: #007aff; margin-right: 8px;"></i> Instant Search Index</h3>
-                    <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; margin: 0 0 10px 0;">
-                        Found exactly what you need? Use our search index:
-                    </p>
+                    <h3><i class="fa-solid fa-headset" style="color: #007aff; margin-right: 8px;"></i> Huduma kwa Wateja</h3>
                     <ul class="footer-guide-list">
-                        <li><i class="fa-solid fa-angle-right"></i> Type any game title or keyword into the <b>Search box</b> at the top of the portal.</li>
-                        <li><i class="fa-solid fa-angle-right"></i> Results filter in real-time to connect you directly to your required game and download links.</li>
+                        <li><i class="fa-solid fa-angle-right"></i> Wasiliana nasi kupitia WhatsApp: <b>+255 692 752 060</b></li>
+                        <li><i class="fa-solid fa-angle-right"></i> Malipo ya M-Pesa, Tigo Pesa, na Airtel Money papo hapo.</li>
                     </ul>
                 </div>
-
             </div>
 
             <div class="footer-bottom-bar">
-                <span>&copy; 2013-2026 Squad Games Store TZ. All rights reserved. Built for Tanzanian Gamers.</span>
+                <span>&copy; 2026 GamingTZ Store / Squad Games Store TZ. Haki zote zimehifadhiwa.</span>
                 <div class="footer-bottom-links">
                     <a href="https://wa.me/255692752060?text=Hello%20SquadGames" target="_blank"><i class="fa-brands fa-whatsapp"></i> WhatsApp Support</a>
                 </div>
@@ -175,7 +371,6 @@
         <img id="fullscreen-img" class="fullscreen-img" src="" alt="Fullscreen View">
     </div>
 
-    <!-- Script File -->
     <script src="script.js"></script>
 </body>
-</html>
+</html>s
