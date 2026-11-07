@@ -6,313 +6,423 @@
     <title>Game Details - Squad Games Store TZ</title>
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Montserrat:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* --- DETAILS PORTAL OVERRIDES --- */
+        body {
+            background-color: #0b0b0e;
+            color: #fff;
+            font-family: 'Montserrat', sans-serif !important;
+            margin: 0;
+            padding: 0;
+        }
+
+        .gamingtz-header {
+            background: linear-gradient(180deg, rgba(15,15,20,0.95) 0%, rgba(10,10,12,0.98) 100%);
+            border-bottom: 2px solid rgba(255,149,0,0.3);
+            padding: 15px 30px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+        }
+
+        .details-container {
+            max-width: 1300px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        /* Cinematic Hero Layout */
+        .game-hero-wrapper {
+            display: grid;
+            grid-template-columns: 320px 1fr;
+            gap: 35px;
+            background: rgba(18, 18, 22, 0.85);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.8);
+            margin-bottom: 35px;
+        }
+
+        @media (max-width: 900px) {
+            .game-hero-wrapper {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .game-poster-box {
+            position: relative;
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+            height: 420px;
+            background: #000;
+        }
+
+        .game-poster-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .game-info-content h1 {
+            font-size: 2.2rem;
+            font-weight: 900;
+            color: #fff;
+            margin: 0 0 10px 0;
+            text-transform: uppercase;
+        }
+
+        .meta-badges-row {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin: 15px 0 20px 0;
+        }
+
+        .meta-badge {
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.12);
+            padding: 5px 12px;
+            border-radius: 8px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: #cbd5e1;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .meta-badge.highlight {
+            background: rgba(34, 197, 94, 0.15);
+            color: #22c55e;
+            border-color: rgba(34, 197, 94, 0.3);
+        }
+
+        .game-synopsis {
+            font-size: 0.92rem;
+            color: #94a3b8;
+            line-height: 1.6;
+            margin-bottom: 25px;
+        }
+
+        .genres-pills-row {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 25px;
+        }
+
+        .genre-pill {
+            background: rgba(255, 149, 0, 0.15);
+            color: #ff9500;
+            border: 1px solid rgba(255, 149, 0, 0.3);
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 800;
+            text-transform: uppercase;
+        }
+
+        .action-buttons-row {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .portal-btn {
+            background: linear-gradient(135deg, #e50914, #b20710);
+            color: #fff;
+            border: none;
+            padding: 12px 28px;
+            border-radius: 12px;
+            font-weight: 800;
+            font-size: 0.9rem;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            box-shadow: 0 6px 20px rgba(229, 9, 20, 0.4);
+            transition: transform 0.2s;
+        }
+
+        .portal-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        .portal-btn.secondary {
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.15);
+            box-shadow: none;
+        }
+
+        /* Comments Section */
+        .comments-section-box {
+            background: rgba(18, 18, 22, 0.85);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 35px;
+        }
+
+        .comment-input-box {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 25px;
+        }
+
+        .comment-input-box input, .comment-input-box textarea {
+            background: rgba(0,0,0,0.4);
+            border: 1px solid rgba(255,255,255,0.12);
+            padding: 12px 16px;
+            border-radius: 10px;
+            color: #fff;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.88rem;
+            outline: none;
+        }
+
+        .comment-input-box textarea {
+            height: 100px;
+            resize: vertical;
+        }
+
+        .comment-item {
+            background: rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 12px;
+        }
+
+        .comment-author {
+            font-weight: 700;
+            color: #ff9500;
+            font-size: 0.85rem;
+            margin-bottom: 4px;
+        }
+
+        .comment-text {
+            color: #cbd5e1;
+            font-size: 0.85rem;
+            line-height: 1.4;
+        }
+
+        /* Recommended Similar Games Section */
+        .recommended-section {
+            margin-top: 40px;
+        }
+
+        .recommended-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
 
-    <!-- Top Utility Link Bar -->
-    <div class="top-utility-bar">
-        <div class="top-utility-container">
-            <div class="top-links">
-                <a href="index.html"><i class="fa-solid fa-house"></i> Home</a>
-                <a href="index.html#games-grid"><i class="fa-solid fa-gamepad"></i> PC Games List</a>
-                <a href="https://wa.me/255692752060?text=Hello%20SquadGames%2C%20I%20want%20to%20request%20a%20game." target="_blank"><i class="fa-solid fa-paper-plane"></i> Request Game</a>
-                <a href="https://wa.me/255692752060?text=Hello%20SquadGames%2C%20I%20need%20help%20with%20installation." target="_blank"><i class="fa-solid fa-circle-question"></i> How to Download</a>
-                <a href="https://wa.me/255692752060?text=Hello%20SquadGames" target="_blank"><i class="fa-solid fa-headset"></i> Contact Us</a>
-            </div>
-            <div class="top-social-badge">
-                <span><i class="fa-solid fa-shield-halved" style="color: #22c55e;"></i> TZ Verified Store</span>
+    <!-- Top Header -->
+    <header class="gamingtz-header">
+        <a href="index.html" style="text-decoration: none; display: flex; align-items: center; gap: 10px;">
+            <div style="font-family: 'Permanent Marker', cursive; font-size: 1.8rem; color: #fff;">SquAd<span style="color: #ff9500;">GameZ</span></div>
+            <span style="background: rgba(255,255,255,0.08); padding: 2px 6px; border-radius: 4px; font-size: 0.6rem; color: #cbd5e1;">STORE</span>
+        </a>
+        <a href="index.html" class="portal-btn secondary" style="padding: 8px 16px; font-size: 0.8rem;"><i class="fa-solid fa-arrow-left"></i> Back to Store</a>
+    </header>
+
+    <div class="details-container">
+        <!-- Game Hero Overview Box -->
+        <div class="game-hero-wrapper" id="gameHeroContainer">
+            <div class="loading-state" style="grid-column: 1 / -1; text-align: center; padding: 40px;">
+                <div class="spinner"></div>
+                <p style="color: #94a3b8;">Loading game details...</p>
             </div>
         </div>
-    </div>
 
-    <!-- Main Container -->
-    <div class="container" style="margin-top: 20px;">
+        <!-- Similar / Recommended Games Section (Dynamically generated) -->
+        <div class="recommended-section" id="recommendedSection" style="display: none;">
+            <h3 class="section-title"><i class="fa-solid fa-fire" style="color: #ff9500;"></i> Recommended & Similar Games</h3>
+            <div class="recommended-grid" id="recommendedGrid"></div>
+        </div>
 
-        <!-- ApunKaGames Two-Column Layout -->
-        <div class="portal-layout-grid">
+        <!-- Interactive Comments & Reviews Section -->
+        <div class="comments-section-box">
+            <h3 class="section-title" style="margin-bottom: 20px;"><i class="fa-solid fa-comments" style="color: #38bdf8;"></i> Player Reviews & Comments</h3>
             
-            <!-- LEFT COLUMN: Main Game Article Details -->
-            <div class="portal-main-content">
-                
-                <!-- Breadcrumbs -->
-                <div id="gameBreadcrumb" class="apunka-breadcrumb">
-                    <a href="index.html">HOME</a> &gt; <span id="crumbCategory">ACTION</span> &gt; <span id="crumbTitle">GAME TITLE</span>
-                </div>
-
-                <!-- Main Article Box -->
-                <div class="apunka-article-box">
-                    
-                    <!-- Title Only -->
-                    <h1 id="gameTitle" class="apunka-game-title">Loading Game Details...</h1>
-
-                    <!-- Featured Cover Image -->
-                    <div class="apunka-cover-wrapper" onclick="openFullScreenImg()" style="margin-top: 16px; cursor: pointer;">
-                        <img id="gameCoverImg" src="" alt="Game Cover" class="apunka-cover-img">
-                    </div>
-
-                    <!-- Overview Paragraph -->
-                    <div id="gameOverviewText" class="apunka-overview-text">
-                        Loading game overview and descriptions...
-                    </div>
-
-                    <!-- System Requirements Box -->
-                    <div class="apunka-req-box">
-                        <h3>Minimum System Requirements</h3>
-                        <ul id="systemReqList">
-                            <!-- Populated dynamically from games.json -->
-                        </ul>
-                    </div>
-
-                    <!-- Screenshots Gallery -->
-                    <div class="apunka-screenshots-section">
-                        <h3>Screenshots</h3>
-                        <div id="screenshotsGallery" class="apunka-screenshots-grid">
-                            <!-- Populated dynamically -->
-                        </div>
-                    </div>
-
-                    <!-- How to Install? Section -->
-                    <div class="apunka-install-box">
-                        <h3>How to Install?</h3>
-                        <ol>
-                            <li>Click on the <b>"Download"</b> button below to start downloading.</li>
-                            <li>Extract the rar/zip file using WinRAR (Download WinRAR if you don't have it).</li>
-                            <li>Open the extracted folder, double click on <b>"Setup"</b> and install the game.</li>
-                            <li>Once the installation is 100% complete, go to the desktop.</li>
-                            <li>Right click and launch the game as administrator. Enjoy!</li>
-                        </ol>
-                    </div>
-
-                    <!-- How to Download? & Eye-Catching Download Section -->
-                    <div class="apunka-download-section">
-                        <h3>How to Download?</h3>
-                        <p class="download-help-text">If you encounter any trouble downloading this game, just <a href="https://wa.me/255692752060?text=Hello%20SquadGames%2C%20I%20need%20help%20downloading%20this%20game." target="_blank">Click Here</a>.</p>
-                        
-                        <div class="apunka-download-box-card">
-                            <h2 id="downloadBoxTitle" style="font-size: 1.3rem; margin-top: 0; margin-bottom: 14px; color: #ffffff;">Download Game</h2>
-                            
-                            <!-- Premium Eye-Catching Download CTA Button -->
-                            <div class="download-cta-container">
-                                <a href="javascript:void(0)" id="mainDownloadBtn" onclick="handleMainDownloadClick()" class="btn-download-cta">
-                                    <i class="fa-solid fa-cloud-arrow-down"></i>
-                                    <span>Click Here to Download This Game</span>
-                                </a>
-                                
-                                <div class="game-meta-info">
-                                    <span><i class="fa-solid fa-hard-drive"></i> <strong>Game Size:</strong> <span id="gameSizeText">Loading...</span></span>
-                                    <span><i class="fa-solid fa-key"></i> <strong>Password:</strong> www.squadgamestz.com / apunkagames</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
+            <div class="comment-input-box">
+                <input type="text" id="commentAuthorInput" placeholder="Jina lako (Your Name)...">
+                <textarea id="commentTextInput" placeholder="Andika maoni yako hapa (Write your review/comment)..."></textarea>
+                <button class="portal-btn" style="align-self: flex-start; padding: 10px 22px;" onclick="postComment()"><i class="fa-solid fa-paper-plane"></i> Tuma Maoni</button>
             </div>
 
-            <!-- RIGHT COLUMN: Popular Posts Sidebar -->
-            <div class="portal-sidebar">
-                <div class="sidebar-box">
-                    <h3 class="sidebar-title"><i class="fa-solid fa-star" style="color: #f1c40f; margin-right: 6px;"></i> Popular Posts</h3>
-                    <div id="detailsPopularList" class="popular-posts-text-list">
-                        <!-- Populated dynamically -->
-                    </div>
-                </div>
-
-                <div class="sidebar-box" style="margin-top: 20px;">
-                    <h3 class="sidebar-title"><i class="fa-solid fa-headset" style="color: #25d366; margin-right: 6px;"></i> TZ Support</h3>
-                    <p style="font-size: 0.82rem; color: var(--text-muted); line-height: 1.5; margin: 0;">
-                        Need installation help? Contact our local TZ team on WhatsApp for instant assistance!
-                    </p>
-                </div>
+            <div id="commentsListContainer">
+                <!-- Dynamically loaded comments -->
             </div>
-
         </div>
-
     </div>
 
-    <!-- Fullscreen Image Modal -->
-    <div id="fullscreen-overlay" class="fullscreen-overlay" onclick="closeFullScreen()">
-        <span class="fullscreen-close" onclick="closeFullScreen()">&times;</span>
-        <img id="fullscreen-img" class="fullscreen-img" src="" alt="Fullscreen View" onclick="event.stopPropagation()">
-    </div>
-
-    <!-- Details Page Logic Script -->
     <script>
         let currentGameData = null;
-
-        // Smart Game Size Extractor to read exact size from games.json properties or description
-        function extractGameSize(game) {
-            if (game.size) return game.size;
-            if (game.gameSize) return game.gameSize;
-            if (game.fileSize) return game.fileSize;
-
-            const fullText = `${game.description || ''} ${game.requirements || ''}`;
-            const match = fullText.match(/(\d+(\.\d+)?\s*(GB|MB))/i);
-            return match ? match[0] : "N/A";
-        }
+        let allGamesCatalog = [];
 
         document.addEventListener("DOMContentLoaded", async () => {
             const urlParams = new URLSearchParams(window.location.search);
             const gameId = urlParams.get('id');
 
             if (!gameId) {
-                document.getElementById('gameTitle').innerText = "Game Not Found";
+                window.location.href = 'index.html';
                 return;
             }
 
             try {
-                const response = await fetch('games.json');
-                const rawData = await response.json();
-                let gamesArray = Array.isArray(rawData) ? rawData : (rawData.games || rawData.data || Object.values(rawData).find(Array.isArray) || []);
+                const response = await fetch('./games.json');
+                const data = await response.json();
+                allGamesCatalog = Array.isArray(data) ? data : (data.games || data.data || []);
 
-                currentGameData = gamesArray.find(g => String(g.id || g.title) === decodeURIComponent(gameId));
+                currentGameData = allGamesCatalog.find(g => String(g.id || g.title) === decodeURIComponent(gameId));
 
-                if (!currentGameData) {
-                    document.getElementById('gameTitle').innerText = "Game Not Found in Catalog";
-                    return;
-                }
-
-                // Populate Details
-                document.title = `${currentGameData.title} - Squad Games Store TZ`;
-                document.getElementById('crumbCategory').innerText = (currentGameData.category || currentGameData.platform || "PC GAME").toUpperCase();
-                document.getElementById('crumbTitle').innerText = currentGameData.title.toUpperCase();
-                document.getElementById('gameTitle').innerText = currentGameData.title;
-                
-                const coverImg = currentGameData.image || 'images/nfsmw-shot1.png';
-                document.getElementById('gameCoverImg').src = coverImg;
-
-                document.getElementById('gameOverviewText').innerHTML = `
-                    <p><b>${currentGameData.title} (${currentGameData.platform || "PC"})</b> — ${currentGameData.description || "Experience high-definition gaming with immersive gameplay, stunning visuals, and incredible missions."}</p>
-                    <p>Developed and published with high performance standards. Enjoy seamless controls, custom mods support, and optimized performance for your machine.</p>
-                `;
-
-                // Display dynamic size from games.json
-                document.getElementById('gameSizeText').innerText = extractGameSize(currentGameData);
-
-                // Populate System Requirements Dynamically from games.json
-                const reqListEl = document.getElementById('systemReqList');
-                if (currentGameData.requirements) {
-                    if (Array.isArray(currentGameData.requirements)) {
-                        reqListEl.innerHTML = currentGameData.requirements.map(req => `<li>${req}</li>`).join('');
-                    } else if (typeof currentGameData.requirements === 'string') {
-                        reqListEl.innerHTML = `<li>${currentGameData.requirements}</li>`;
-                    }
+                if (currentGameData) {
+                    renderGameDetails(currentGameData);
+                    renderRecommendedGames(currentGameData, allGamesCatalog);
+                    loadSavedComments(gameId);
                 } else {
-                    reqListEl.innerHTML = `
-                        <li><b>OS:</b> Windows 10 / 11 (64-bit)</li>
-                        <li><b>Processor:</b> Intel Core i3 / AMD Equivalent</li>
-                        <li><b>Memory:</b> 4 GB RAM</li>
-                        <li><b>Storage:</b> Available space matching game size</li>
-                        <li><b>Graphics:</b> DirectX 11 compatible graphics card</li>
-                    `;
+                    document.getElementById('gameHeroContainer').innerHTML = `<p style="text-align:center; color:#e50914;">Game not found.</p>`;
                 }
-
-                // Screenshots
-                const gallery = document.getElementById('screenshotsGallery');
-                let shots = currentGameData.screenshots || [coverImg, coverImg, coverImg];
-                gallery.innerHTML = shots.map(shot => `
-                    <div class="shot-wrapper" onclick="openFullScreenImgCustom('${shot}')">
-                        <img src="${shot}" alt="Gameplay Screenshot" loading="lazy">
-                    </div>
-                `).join('');
-
-                // Populate Sidebar Popular Posts
-                const sidebarContainer = document.getElementById('detailsPopularList');
-                sidebarContainer.innerHTML = gamesArray.slice(0, 10).map(g => `
-                    <a href="details.html?id=${encodeURIComponent(g.id || g.title)}" class="popular-text-item">
-                        <i class="fa-solid fa-angle-right" style="font-size: 0.75rem; margin-right: 6px; color: #e50914;"></i> ${g.title}
-                    </a>
-                `).join('');
-
             } catch (err) {
                 console.error("Error loading game details:", err);
-                document.getElementById('gameTitle').innerText = "Error Loading Game Details";
             }
         });
 
-        function handleMainDownloadClick() {
-            if (!currentGameData) return;
+        function renderGameDetails(game) {
+            const container = document.getElementById('gameHeroContainer');
+            const isPaid = game.price && game.price.toUpperCase() !== "FREE" && game.price.trim() !== "";
+            
+            let actionBtnHTML = '';
+            let gameParts = game.parts || game.downloadParts;
 
-            const isPaid = currentGameData.price && currentGameData.price.toUpperCase() !== "FREE" && currentGameData.price.trim() !== "";
             if (isPaid) {
-                showPaymentOptionsModal(currentGameData);
+                actionBtnHTML = `<button class="portal-btn" onclick="showPaymentOptionsModal(${JSON.stringify(game).replace(/"/g, '&quot;')})"><i class="fa-solid fa-cart-shopping"></i> Buy Now (${game.price})</button>`;
+            } else if (gameParts && gameParts.length > 0) {
+                actionBtnHTML = `<a href="download.html?id=${encodeURIComponent(game.id || game.title)}" class="portal-btn"><i class="fa-solid fa-download"></i> Download Parts</a>`;
+            } else {
+                actionBtnHTML = `<a href="${game.downloadUrl || '#'}" target="_blank" class="portal-btn"><i class="fa-solid fa-download"></i> Instant Download</a>`;
+            }
+
+            // Extract genres pills
+            let genresList = game.category ? game.category.split(/[\/,|]+/) : ['Action', 'PC Game'];
+            let genresHTML = genresList.map(g => `<span class="genre-pill">${g.trim()}</span>`).join('');
+
+            container.innerHTML = `
+                <div class="game-poster-box">
+                    <img src="${game.image || 'images/nfsmw-shot1.png'}" alt="${game.title}" onerror="this.src='images/nfsmw-shot1.png';">
+                </div>
+                <div class="game-info-content">
+                    <span class="category-tag">${game.platform || "PC Game"}</span>
+                    <h1>${game.title}</h1>
+
+                    <div class="meta-badges-row">
+                        <span class="meta-badge highlight"><i class="fa-solid fa-shield-halved"></i> 100% Verified</span>
+                        <span class="meta-badge"><i class="fa-solid fa-hard-drive"></i> Size: ${game.size || 'Standard'}</span>
+                        <span class="meta-badge"><i class="fa-solid fa-calendar"></i> Released: 2026</span>
+                        <span class="meta-badge"><i class="fa-solid fa-tag"></i> ${game.price || 'FREE'}</span>
+                    </div>
+
+                    <div class="genres-pills-row">
+                        ${genresHTML}
+                    </div>
+
+                    <p class="game-synopsis">${game.description || 'No description provided for this title yet. Fully tested and verified for Tanzania gamers.'}</p>
+
+                    <div class="action-buttons-row">
+                        ${actionBtnHTML}
+                        <a href="https://wa.me/255692752060?text=${encodeURIComponent('Hello SquadGames, I need help with ' + game.title)}" target="_blank" class="portal-btn secondary">
+                            <i class="fa-brands fa-whatsapp" style="color: #25d366; font-size: 1.1rem;"></i> Need Help?
+                        </a>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Automatically scans and recommends similar games based on category matching
+        function renderRecommendedGames(currentGame, allGames) {
+            const currentCat = (currentGame.category || "").toLowerCase();
+            const similar = allGames.filter(g => {
+                if (String(g.id) === String(currentGame.id)) return false;
+                const gCat = (g.category || "").toLowerCase();
+                return gCat.includes(currentCat) || currentCat.includes(gCat);
+            }).slice(0, 4);
+
+            if (similar.length > 0) {
+                document.getElementById('recommendedSection').style.display = 'block';
+                const grid = document.getElementById('recommendedGrid');
+                grid.innerHTML = similar.map(game => `
+                    <div class="game-card" onclick="window.location.href='details.html?id=${encodeURIComponent(game.id || game.title)}'" style="cursor: pointer;">
+                        <div class="game-img-wrapper" style="height: 140px;">
+                            <img src="${game.image || 'images/nfsmw-shot1.png'}" alt="${game.title}" class="game-img">
+                        </div>
+                        <div class="game-details" style="padding: 12px;">
+                            <h3 style="font-size: 0.85rem !important; margin-bottom: 4px;">${game.title}</h3>
+                            <span class="price" style="font-size: 0.8rem !important;">${game.price || 'FREE'}</span>
+                        </div>
+                    </div>
+                `).join('');
+            }
+        }
+
+        // Comment section handling
+        function loadSavedComments(gameId) {
+            const container = document.getElementById('commentsListContainer');
+            const saved = JSON.parse(localStorage.getItem('comments_' + gameId) || '[]');
+            
+            if (saved.length === 0) {
+                container.innerHTML = `<p style="color: #64748b; font-size: 0.85rem; font-style: italic;">Hakuna maoni bado. Kuwa wa kwanza kuweka maoni yako!</p>`;
                 return;
             }
 
-            const partsArray = currentGameData.parts || currentGameData.downloadParts;
-            const gameId = currentGameData.id || currentGameData.title;
-
-            if (partsArray && partsArray.length > 0) {
-                // Redirects directly to the dedicated download.html page for multi-part games
-                window.location.href = `download.html?id=${encodeURIComponent(gameId)}`;
-            } else if (currentGameData.downloadUrl) {
-                window.open(currentGameData.downloadUrl, '_blank');
-            } else {
-                alert("Download links are currently being updated for this game.");
-            }
+            container.innerHTML = saved.map(c => `
+                <div class="comment-item">
+                    <div class="comment-author"><i class="fa-solid fa-user-circle"></i> ${escapeHtml(c.author)}</div>
+                    <div class="comment-text">${escapeHtml(c.text)}</div>
+                </div>
+            `).join('');
         }
 
-        function showPaymentOptionsModal(game) {
-            let modal = document.getElementById('payment-options-modal');
-            if (!modal) {
-                modal = document.createElement('div');
-                modal.id = 'payment-options-modal';
-                modal.className = 'modal-overlay';
-                modal.innerHTML = `
-                    <div class="modal-content">
-                        <button onclick="closePaymentOptionsModal()" style="position: absolute; top: 15px; right: 15px; background: rgba(255,255,255,0.08); border: none; color: #fff; font-size: 1.1rem; cursor: pointer; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 10;"><i class="fa-solid fa-xmark"></i></button>
-                        <h3 id="payment-modal-title" style="margin-top: 0; margin-bottom: 8px; font-size: 1.2rem; color: #fff; padding-right: 30px;">Choose Payment Method</h3>
-                        <p id="payment-modal-subtitle" style="color: #94a3b8; font-size: 0.85rem; margin-bottom: 20px; line-height: 1.4;">Select your preferred payment option below to complete your order securely.</p>
-                        
-                        <div style="display: flex; flex-direction: column; gap: 12px;">
-                            <a id="selar-pay-btn" href="#" target="_blank" class="btn-action" style="background: linear-gradient(135deg, #007aff, #0056b3); padding: 14px 16px; border-radius: 10px; font-weight: bold; display: flex; align-items: center; justify-content: space-between; text-decoration: none; color: #fff; box-shadow: 0 4px 15px rgba(0,122,255,0.3);">
-                                <span><i class="fa-solid fa-credit-card" style="margin-right: 8px;"></i> Pay Online via Selar</span>
-                                <i class="fa-solid fa-external-link-alt" style="font-size: 0.8rem;"></i>
-                            </a>
+        function postComment() {
+            const authorInput = document.getElementById('commentAuthorInput');
+            const textInput = document.getElementById('commentTextInput');
+            const gameId = new URLSearchParams(window.location.search).get('id');
 
-                            <a id="vodacom-pay-btn" href="#" target="_blank" class="btn-action" style="background: linear-gradient(135deg, #25d366, #128c7e); padding: 14px 16px; border-radius: 10px; font-weight: bold; display: flex; align-items: center; justify-content: space-between; text-decoration: none; color: #fff; box-shadow: 0 4px 15px rgba(37,211,102,0.3);">
-                                <span><i class="fa-brands fa-whatsapp" style="margin-right: 8px; font-size: 1.1rem;"></i> Pay via Vodacom (WhatsApp)</span>
-                                <i class="fa-solid fa-arrow-right" style="font-size: 0.8rem;"></i>
-                            </a>
-                        </div>
-                    </div>
-                `;
-                document.body.appendChild(modal);
-                modal.addEventListener('click', (e) => { if (e.target === modal) closePaymentOptionsModal(); });
+            const author = authorInput.value.trim() || "Mchezaji Anonymous";
+            const text = textInput.value.trim();
+
+            if (!text) {
+                alert("Tafadhali andika maoni kabla ya kutuma.");
+                return;
             }
 
-            const displayPrice = game.price || "Paid Game";
-            document.getElementById('payment-modal-title').innerText = `Buy: ${game.title}`;
-            document.getElementById('payment-modal-subtitle').innerHTML = `Choose how you want to purchase for <b>${displayPrice}</b> via Selar or Vodacom M-Pesa.`;
-            
-            const selarLink = (game.downloadUrl && game.downloadUrl.includes('selar')) 
-                ? game.downloadUrl 
-                : "https://selar.co/m/SquadGamesTZ";
+            const key = 'comments_' + gameId;
+            const saved = JSON.parse(localStorage.getItem(key) || '[]');
+            saved.unshift({ author, text });
+            localStorage.setItem(key, JSON.stringify(saved));
 
-            document.getElementById('selar-pay-btn').href = selarLink;
-            document.getElementById('vodacom-pay-btn').href = `https://wa.me/255692752060?text=${encodeURIComponent(`Hello SquadGames, I want to buy ${game.title} using Vodacom mobile money.`)}`;
-            modal.classList.add('active');
+            authorInput.value = '';
+            textInput.value = '';
+            loadSavedComments(gameId);
         }
 
-        function closePaymentOptionsModal() {
-            const modal = document.getElementById('payment-options-modal');
-            if (modal) modal.classList.remove('active');
-        }
-
-        function openFullScreenImg() {
-            const src = document.getElementById('gameCoverImg').src;
-            openFullScreenImgCustom(src);
-        }
-
-        function openFullScreenImgCustom(src) {
-            document.getElementById('fullscreen-img').src = src;
-            document.getElementById('fullscreen-overlay').classList.add('active');
-        }
-
-        function closeFullScreen() {
-            document.getElementById('fullscreen-overlay').classList.remove('active');
+        function escapeHtml(str) {
+            return str.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
         }
     </script>
 </body>
