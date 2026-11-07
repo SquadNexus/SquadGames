@@ -53,47 +53,39 @@
         <!-- ApunKaGames Style Two-Column Portal Grid -->
         <div class="portal-layout-grid">
 
-            <!-- LEFT COLUMN: Immersive Featured Hero Slider, Trust Bar & Catalog -->
+            <!-- LEFT COLUMN: Featured Hero Slider, Latest Games & Catalog -->
             <div class="portal-main-content">
 
-                <!-- 1. Large Immersive Featured Hero Slider Box (Matched to Reference Layout) -->
-                <div class="apunka-featured-box" style="background: linear-gradient(135deg, rgba(24,24,28,0.95), rgba(10,10,12,0.98)); border: 1px solid rgba(255,255,255,0.12); border-radius: 16px; padding: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.6);">
-                    <div class="section-title" style="display: flex; align-items: center; gap: 8px; margin-bottom: 15px; font-size: 1.1rem; color: #fff;">
-                        <span style="background: rgba(255,149,0,0.15); color: #ff9500; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: bold; text-transform: uppercase;">Featured</span>
-                        <span style="color: #cbd5e1;">Spotlight Games</span>
-                    </div>
-                    
-                    <div class="hero-slider-wrapper" style="position: relative; width: 100%; height: 380px; border-radius: 12px; overflow: hidden; background: #000; box-shadow: inset 0 0 20px rgba(0,0,0,0.8);">
-                        <button class="slider-arrow slider-prev" onclick="moveFeaturedSlide(-1)" style="position: absolute; left: 15px; top: 50%; transform: translateY(-50%); z-index: 10; background: rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.2); color: #fff; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.2s;"><i class="fa-solid fa-chevron-left"></i></button>
-                        
+                <!-- 1. Featured Games Hero Slider with Arrows & Title Below -->
+                <div class="apunka-featured-box">
+                    <h3 class="section-title"><i class="fa-solid fa-gamepad" style="color: #ff9500;"></i> Featured Games</h3>
+                    <div class="hero-slider-wrapper">
+                        <button class="slider-arrow slider-prev" onclick="moveFeaturedSlide(-1)"><i class="fa-solid fa-chevron-left"></i></button>
                         <div id="heroSliderImageContainer" class="hero-slider-img-container" onclick="openFeaturedDetails()" style="width: 100%; height: 100%; cursor: pointer;">
-                            <img id="heroSliderImg" src="" alt="Featured Game" class="hero-slider-img" style="width: 100%; height: 100%; object-fit: cover;">
+                            <img id="heroSliderImg" src="" alt="Featured Game" class="hero-slider-img">
                         </div>
-
-                        <button class="slider-arrow slider-next" onclick="moveFeaturedSlide(1)" style="position: absolute; right: 15px; top: 50%; transform: translateY(-50%); z-index: 10; background: rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.2); color: #fff; width: 40px; height: 40px; border-radius: 50%; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: background 0.2s;"><i class="fa-solid fa-chevron-right"></i></button>
+                        <button class="slider-arrow slider-next" onclick="moveFeaturedSlide(1)"><i class="fa-solid fa-chevron-right"></i></button>
                     </div>
-
-                    <h2 id="heroSliderTitle" class="hero-slider-title" style="margin-top: 15px; font-size: 1.4rem; color: #fff; font-weight: 700; text-shadow: 0 2px 4px rgba(0,0,0,0.5);">Loading Featured Game...</h2>
+                    <h2 id="heroSliderTitle" class="hero-slider-title">Loading Featured Game...</h2>
                 </div>
 
-                <!-- 2. Trust Bar (Matching Reference Style Icons) -->
-                <div class="trust-bar" style="display: flex; gap: 15px; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.08); padding: 15px 20px; border-radius: 12px; margin-top: 20px; align-items: center; justify-content: space-around; flex-wrap: wrap;">
-                    <div class="trust-item" style="display: flex; align-items: center; gap: 8px; font-size: 0.85rem; color: #cbd5e1;"><i class="fa-solid fa-credit-card" style="color: #ff9500;"><b>M-PESA / CARD</b></i> Malipo Salama</div>
-                    <div class="trust-item" style="display: flex; align-items: center; gap: 8px; font-size: 0.85rem; color: #cbd5e1;"><i class="fa-solid fa-bolt" style="color: #38bdf8;"><b>INSTANT DELIVERY</b></i> Baada ya Malipo</div>
-                    <div class="trust-item" style="display: flex; align-items: center; gap: 8px; font-size: 0.85rem; color: #cbd5e1;"><i class="fa-solid fa-headset" style="color: #22c55e;"><b>MSAADA 24/7</b></i> Kiswahili & English</div>
-                    <div class="trust-item" style="display: flex; align-items: center; gap: 8px; font-size: 0.85rem; color: #cbd5e1;"><i class="fa-solid fa-shield-halved" style="color: #f1c40f;"><b>100% VERIFIED</b></i> Safe & Legit Games</div>
-                </div>
-
-                <!-- 3. Latest Games Added Section -->
-                <div class="apunka-section-box" style="margin-top: 25px;">
+                <!-- 2. Latest Games Added Section (Horizontal Grid Cards with Dates & Badges) -->
+                <div class="apunka-section-box" style="margin-top: 20px;">
                     <h3 class="section-title"><i class="fa-solid fa-fire" style="color: #ff9500;"></i> Latest Games Added</h3>
                     <div id="latestGamesGrid" class="latest-games-grid">
                         <!-- Populated dynamically -->
                     </div>
                 </div>
 
-                <!-- 4. Main Game Catalog Grid Section -->
-                <section style="margin-top: 25px;">
+                <!-- Trust Bar -->
+                <div class="trust-bar" style="margin-top: 20px;">
+                    <div class="trust-item"><span class="trust-icon">⚡</span> Fast Downloads</div>
+                    <div class="trust-item"><span class="trust-icon">🛡️</span> Verified Safe Files</div>
+                    <div class="trust-item"><span class="trust-icon">🇹🇿</span> Local TZ Support</div>
+                </div>
+
+                <!-- 3. Main Game Catalog Grid Section -->
+                <section style="margin-top: 20px;">
                     <h3 id="catalogSectionTitle" class="section-title"><i class="fa-solid fa-layer-group"></i> Game Catalog & Store</h3>
                     <div id="games-grid" class="game-grid">
                         <!-- Dynamic game cards load here via JavaScript -->
