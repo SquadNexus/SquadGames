@@ -6,19 +6,22 @@
     <title>Squad Games Store TZ - Duka Bora la Games Tanzania</title>
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts: Permanent Marker & Montserrat -->
+    <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Montserrat:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
     <style>
         /* --- GAMINGTZ CINEMATIC STORE STYLING OVERRIDES --- */
         body {
             background-color: #0b0b0e;
             color: #fff;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Montserrat', sans-serif !important;
             margin: 0;
             padding: 0;
             overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
         }
 
-        /* Top Header Navigation Bar matching GamingTZ style */
+        /* Top Header Navigation Bar */
         .gamingtz-header {
             background: linear-gradient(180deg, rgba(15,15,20,0.95) 0%, rgba(10,10,12,0.98) 100%);
             border-bottom: 2px solid rgba(255,149,0,0.3);
@@ -34,6 +37,7 @@
             backdrop-filter: blur(10px);
         }
 
+        /* --- SQUADGAMEZ CUSTOM BRUSH LOGO STYLE --- */
         .gamingtz-logo-area {
             display: flex;
             align-items: center;
@@ -41,29 +45,46 @@
             text-decoration: none;
         }
 
-        .gamingtz-logo-text {
-            font-size: 1.4rem;
-            font-weight: 900;
+        .custom-logo-icon {
+            background: #e50914;
             color: #fff;
-            letter-spacing: 0.5px;
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 15px rgba(229, 9, 20, 0.4);
         }
 
-        .gamingtz-logo-text span {
+        .squad-logo-text {
+            font-family: 'Permanent Marker', cursive, sans-serif !important;
+            font-size: 1.8rem;
+            font-weight: 400;
+            color: #ffffff;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+        }
+
+        .squad-logo-text .highlight-z {
             color: #ff9500;
+            text-shadow: 0 0 12px rgba(255, 149, 0, 0.6);
         }
 
         .gamingtz-store-badge {
             background: rgba(255,255,255,0.08);
             border: 1px solid rgba(255,255,255,0.15);
-            padding: 2px 8px;
-            border-radius: 4px;
+            padding: 3px 8px;
+            border-radius: 6px;
             font-size: 0.65rem;
             font-weight: bold;
             color: #cbd5e1;
             letter-spacing: 1px;
         }
 
-        /* Top Navigation Tabs (Without Jinsi Inavyofanya & Community) */
+        /* Top Navigation Tabs */
         .gamingtz-nav-links {
             display: flex;
             align-items: center;
@@ -234,7 +255,7 @@
             background: rgba(0, 0, 0, 0.8);
         }
 
-        /* Glowing Animated Navigation Dots (Passing Around at the Bottom Right) */
+        /* Glowing Animated Navigation Dots */
         .hero-dots-pagination {
             position: absolute;
             bottom: 35px;
@@ -280,14 +301,17 @@
 </head>
 <body>
 
-    <!-- GamingTZ Top Header Navigation Bar (Cleaned Up) -->
+    <!-- SquAdGameZ Top Header Navigation Bar -->
     <header class="gamingtz-header">
         <a href="index.html" class="gamingtz-logo-area">
-            <i class="fa-solid fa-gamepad" style="font-size: 1.8rem; color: #e50914;"></i>
-            <div class="gamingtz-logo-text">Gaming<span>TZ</span> <span class="gamingtz-store-badge">STORE</span></div>
+            <div class="custom-logo-icon">
+                <i class="fa-solid fa-gamepad"></i>
+            </div>
+            <div class="squad-logo-text">SquAd<span class="highlight-z">GameZ</span></div>
+            <span class="gamingtz-store-badge">STORE</span>
         </a>
 
-        <!-- Navigation Tabs (Removed Jinsi Inavyofanya & Community) -->
+        <!-- Navigation Tabs -->
         <nav class="gamingtz-nav-links">
             <a href="index.html" class="gamingtz-nav-item active">Home</a>
             <a href="#games-grid-section" class="gamingtz-nav-item">Games</a>
@@ -305,7 +329,7 @@
     <!-- Main Full-Width Container -->
     <div class="main-full-container">
 
-        <!-- HD Cinematic Featured Spotlight Hero Banner (Shows Full Game Profile Images) -->
+        <!-- HD Cinematic Featured Spotlight Hero Banner -->
         <div class="modern-hero-spotlight" onclick="openFeaturedDetails()">
             <img id="heroSliderImg" src="" alt="Featured Game HD" class="hero-bg-image">
             <div class="hero-gradient-overlay"></div>
@@ -325,7 +349,7 @@
                 </div>
             </div>
 
-            <!-- Glowing Animated Navigation Dots Passing Around -->
+            <!-- Glowing Animated Navigation Dots -->
             <div class="hero-dots-pagination" id="heroDotsContainer">
                 <span class="hero-dot active" onclick="event.stopPropagation(); updateHeroSlider(0);"></span>
                 <span class="hero-dot" onclick="event.stopPropagation(); updateHeroSlider(1);"></span>
