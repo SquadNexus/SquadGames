@@ -170,43 +170,6 @@
             text-shadow: 0 2px 8px rgba(0,0,0,0.8);
         }
 
-        .dock-icon-btn {
-            width: 38px;
-            height: 38px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #cbd5e1;
-            background: rgba(255,255,255,0.04);
-            border: none;
-            cursor: pointer;
-            transition: all 0.2s;
-            text-decoration: none;
-            position: relative;
-        }
-
-        .dock-icon-btn:hover, .dock-icon-btn.active {
-            background: #ff9500;
-            color: #000;
-            transform: scale(1.1);
-        }
-
-        .dock-indicator {
-            position: absolute;
-            right: -6px;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 4px;
-            height: 20px;
-            background: transparent;
-            border-radius: 2px;
-        }
-
-        .dock-icon-btn.active .dock-indicator {
-            background: #ff9500;
-        }
-
         /* Full Grid Layout */
         .full-game-grid {
             display: grid;
@@ -216,7 +179,6 @@
         }
 
         @media (max-width: 768px) {
-            .floating-side-dock { display: none; }
             .gamingtz-nav-links { display: none; }
         }
     </style>
@@ -246,22 +208,6 @@
             <input type="text" id="gameSearchInput" placeholder="Tafuta games...">
         </div>
     </header>
-
-    <!-- Floating Right Side Icon Dock -->
-    <div class="floating-side-dock">
-        <a href="index.html" class="dock-icon-btn active" title="Home"><i class="fa-solid fa-house"></i><span class="dock-indicator"></span></a>
-        <a href="index.html?category=courses" class="dock-icon-btn" title="Learning / Guides"><i class="fa-solid fa-graduation-cap"></i></a>
-        <a href="https://wa.me/255692752060" class="dock-icon-btn" title="Wallet / Payments"><i class="fa-solid fa-dollar-sign"></i></a>
-        <a href="index.html?category=mobile" class="dock-icon-btn" title="Mobile Games"><i class="fa-solid fa-mobile-screen"></i></a>
-        <a href="index.html?category=pc" class="dock-icon-btn" title="PC Games"><i class="fa-solid fa-desktop"></i></a>
-        <a href="index.html?category=action" class="dock-icon-btn" title="Arcade & Games"><i class="fa-solid fa-gamepad"></i></a>
-        <a href="download.html" class="dock-icon-btn" title="Tools & Utilities"><i class="fa-solid fa-keyboard"></i></a>
-        <a href="https://wa.me/255692752060" class="dock-icon-btn" title="Security & Safety"><i class="fa-solid fa-shield-halved"></i></a>
-        <a href="https://wa.me/255692752060" class="dock-icon-btn" title="Documents"><i class="fa-solid fa-file-lines"></i></a>
-        <a href="https://wa.me/255692752060" class="dock-icon-btn" title="Support Alert"><i class="fa-solid fa-triangle-exclamation"></i></a>
-        <a href="https://wa.me/255692752060" class="dock-icon-btn" title="Phone Support"><i class="fa-solid fa-phone"></i></a>
-        <a href="https://wa.me/255692752060" class="dock-icon-btn" title="Help"><i class="fa-solid fa-circle-question"></i></a>
-    </div>
 
     <!-- Main Full-Width Container -->
     <div class="main-full-container">
@@ -326,7 +272,6 @@
                     <h3><i class="fa-solid fa-layer-group" style="color: #ff9500; margin-right: 8px;"></i> Aina za Games</h3>
                     <ul class="footer-guide-list">
                         <li><i class="fa-solid fa-angle-right"></i> Tumia navigation ya juu kuchagua Simulator, Racing, au Action.</li>
-                        <li><i class="fa-solid fa-angle-right"></i> Tumia floating dock pembeni kufika kwa haraka kwenye vifaa vya simu na PC.</li>
                     </ul>
                 </div>
 
@@ -357,4 +302,4 @@
 
     <script src="script.js"></script>
 </body>
-</html>8
+</html>
