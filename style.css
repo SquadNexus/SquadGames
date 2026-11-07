@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&display=swap');
+
 /**
  * GamingTZ Store / Squad Games Store TZ - Core Application Stylesheet
  * Optimized for Cinematic Full-Screen Layout & Wide Cards
@@ -18,10 +20,16 @@
 body {
     background-color: var(--bg-main);
     color: var(--text-main);
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Montserrat', sans-serif !important;
     margin: 0;
     padding: 0;
     overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Global Font Application for Headings, Inputs, and Buttons */
+h1, h2, h3, h4, h5, h6, button, input, .section-title, .gamingtz-nav-item {
+    font-family: 'Montserrat', sans-serif !important;
 }
 
 /* --- TOP UTILITY BAR --- */
@@ -86,6 +94,7 @@ body {
     width: 100%;
     padding-left: 8px;
     font-size: 0.88rem;
+    font-family: 'Montserrat', sans-serif !important;
 }
 
 .search-icon {
