@@ -3,493 +3,376 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Squad Games Store TZ - Free & Paid PC Games Download | Official Portal</title>
+    <title>Squad Games Store TZ - Duka Bora la Games Tanzania</title>
     <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
     <style>
+        /* --- GAMINGTZ CINEMATIC STORE STYLING OVERRIDES --- */
         body {
-            background-color: #0b0c10;
-            background-image: 
-                radial-gradient(circle at 15% 15%, rgba(229, 9, 20, 0.12) 0%, transparent 40%),
-                radial-gradient(circle at 85% 85%, rgba(37, 211, 102, 0.10) 0%, transparent 40%);
-            color: #d1d5db;
+            background-color: #0b0b0e;
+            color: #fff;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 0;
-            line-height: 1.7;
+            overflow-x: hidden;
         }
 
-        .intro-wrapper {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: 40px 20px 80px;
-        }
-
-        /* Top Header Area */
-        .portal-brand-header {
-            text-align: center;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-            padding-bottom: 30px;
-            margin-bottom: 35px;
-        }
-
-        .brand-badge {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: rgba(37, 211, 102, 0.12);
-            border: 1px solid rgba(37, 211, 102, 0.3);
-            color: #25d366;
-            padding: 6px 18px;
-            border-radius: 30px;
-            font-size: 0.82rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 15px;
-        }
-
-        .portal-main-title {
-            font-size: 2.2rem;
-            font-weight: 900;
-            color: #ffffff;
-            text-transform: uppercase;
-            margin: 0;
-            letter-spacing: 0.5px;
-        }
-
-        .portal-intro-lead {
-            font-size: 1rem;
-            color: #94a3b8;
-            max-width: 820px;
-            margin: 0 auto 25px;
-        }
-
-        /* Call To Action Button */
-        .btn-enter-store-main {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            background: linear-gradient(135deg, #25d366, #128c7e);
-            color: #ffffff !important;
-            font-size: 1.1rem;
-            font-weight: 800;
-            text-transform: uppercase;
-            padding: 15px 36px;
-            border-radius: 30px;
-            text-decoration: none;
-            box-shadow: 0 8px 25px rgba(37, 211, 102, 0.35);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .btn-enter-store-main:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 12px 35px rgba(37, 211, 102, 0.55);
-        }
-
-        /* Editorial Content Sections */
-        .content-section {
-            background: rgba(22, 22, 26, 0.6);
-            border: 1px solid rgba(255, 255, 255, 0.07);
-            border-radius: 16px;
-            padding: 30px;
-            margin-bottom: 30px;
-            backdrop-filter: blur(8px);
-        }
-
-        .content-section h2 {
-            color: #ffffff;
-            font-size: 1.4rem;
-            font-weight: 800;
-            margin-top: 0;
-            margin-bottom: 16px;
-            border-left: 4px solid #e50914;
-            padding-left: 12px;
-            text-transform: uppercase;
-        }
-
-        .content-section p {
-            color: #94a3b8;
-            font-size: 0.94rem;
-            margin-bottom: 16px;
-        }
-
-        .styled-list {
-            list-style: none;
-            padding: 0;
-            margin: 0 0 20px;
-        }
-
-        .styled-list li {
-            position: relative;
-            padding-left: 24px;
-            margin-bottom: 10px;
-            color: #cbd5e1;
-            font-size: 0.92rem;
-        }
-
-        .styled-list li::before {
-            content: "➔";
-            position: absolute;
-            left: 0;
-            color: #38bdf8;
-            font-size: 0.85rem;
-        }
-
-        /* CUSTOM INTRO IMAGE BANNER CONTAINER */
-        .custom-intro-banner {
-            width: 100%;
-            border-radius: 12px;
-            overflow: hidden;
-            border: 1px solid rgba(56, 189, 248, 0.25);
-            background: #000;
-            margin: 25px 0;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-        }
-
-        .custom-intro-banner img {
-            width: 100%;
-            height: auto;
-            max-height: 450px;
-            object-fit: cover;
-            display: block;
-        }
-
-        /* EXACT STORE-MATCHING "LATEST GAMES ADDED" HORIZONTAL LIST GRID */
-        .latest-games-grid-container {
-            background: #16161a;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 16px;
-            padding: 24px;
-            margin-bottom: 30px;
-        }
-
-        .latest-grid-header-title {
-            color: #ff9500;
-            font-size: 1.25rem;
-            font-weight: 800;
-            margin: 0 0 20px 0;
+        /* Top Header Navigation Bar matching GamingTZ style */
+        .gamingtz-header {
+            background: linear-gradient(180deg, rgba(15,15,20,0.95) 0%, rgba(10,10,12,0.98) 100%);
+            border-bottom: 2px solid rgba(255,149,0,0.3);
+            padding: 15px 30px;
             display: flex;
             align-items: center;
-            gap: 10px;
-            text-transform: uppercase;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 15px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
         }
 
-        .latest-games-grid-intro {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 16px;
-        }
-
-        .latest-intro-card {
-            background: #1e1e24;
-            border: 1px solid rgba(255, 255, 255, 0.07);
-            border-radius: 10px;
-            padding: 12px;
+        .gamingtz-logo-area {
             display: flex;
             align-items: center;
             gap: 12px;
             text-decoration: none;
-            transition: transform 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
         }
 
-        .latest-intro-card:hover {
-            transform: translateY(-3px);
-            border-color: rgba(229, 9, 20, 0.5);
-            background-color: #25252b;
+        .gamingtz-logo-text {
+            font-size: 1.4rem;
+            font-weight: 900;
+            color: #fff;
+            letter-spacing: 0.5px;
         }
 
-        .latest-intro-thumb {
-            width: 55px;
-            height: 55px;
-            border-radius: 8px;
-            object-fit: cover;
-            background: #000;
-            flex-shrink: 0;
+        .gamingtz-logo-text span {
+            color: #ff9500;
         }
 
-        .latest-intro-info {
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-            flex-grow: 1;
-        }
-
-        .latest-intro-title {
-            color: #ffffff;
-            font-size: 0.9rem;
-            font-weight: 700;
-            margin: 0 0 3px 0;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-        }
-
-        .latest-intro-date {
-            color: #94a3b8;
-            font-size: 0.75rem;
-            margin: 0 0 6px 0;
-        }
-
-        .latest-intro-badge {
-            display: inline-block;
-            background: rgba(34, 197, 94, 0.15);
-            color: #22c55e;
-            font-size: 0.65rem;
-            font-weight: 800;
+        .gamingtz-store-badge {
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.15);
             padding: 2px 8px;
             border-radius: 4px;
+            font-size: 0.65rem;
+            font-weight: bold;
+            color: #cbd5e1;
+            letter-spacing: 1px;
+        }
+
+        /* Top Navigation Tabs */
+        .gamingtz-nav-links {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            flex-wrap: wrap;
+        }
+
+        .gamingtz-nav-item {
+            color: #cbd5e1;
+            text-decoration: none;
+            font-size: 0.85rem;
+            font-weight: 700;
             text-transform: uppercase;
-            width: fit-content;
+            letter-spacing: 0.5px;
+            transition: color 0.2s;
+            position: relative;
+            padding-bottom: 4px;
         }
 
-        /* Comparison Table & FAQs */
-        .comparison-table {
+        .gamingtz-nav-item:hover, .gamingtz-nav-item.active {
+            color: #ff9500;
+        }
+
+        .gamingtz-nav-item.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
             width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-            font-size: 0.88rem;
+            height: 3px;
+            background: #ff9500;
+            border-radius: 2px;
         }
 
-        .comparison-table th, .comparison-table td {
+        /* Full Width Container */
+        .main-full-container {
+            max-width: 1450px;
+            margin: 0 auto;
+            padding: 25px 20px;
+        }
+
+        /* Full-Screen Cinematic Hero Banner */
+        .cinematic-hero-box {
+            background: rgba(18, 18, 24, 0.75);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+            margin-bottom: 30px;
+        }
+
+        .hero-slider-wrapper {
+            position: relative;
+            width: 100%;
+            height: 480px;
+            border-radius: 14px;
+            overflow: hidden;
+            background: #000;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.9);
+            cursor: pointer;
+        }
+
+        .hero-slider-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.95);
+            transition: transform 0.5s ease;
+        }
+
+        .slider-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 10;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(6px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: #fff;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+
+        .slider-arrow:hover {
+            background: #e50914;
+            border-color: #e50914;
+        }
+
+        .slider-prev { left: 20px; }
+        .slider-next { right: 20px; }
+
+        .hero-slider-title {
+            margin-top: 20px;
+            font-size: 1.6rem;
+            color: #fff;
+            font-weight: 800;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.8);
+        }
+
+        /* Floating Side Icon Dock */
+        .floating-side-dock {
+            position: fixed;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(15, 15, 20, 0.85);
+            backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 12px 15px;
-            text-align: left;
+            border-radius: 30px;
+            padding: 12px 6px;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+            z-index: 999;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8);
         }
 
-        .comparison-table th {
-            background: rgba(229, 9, 20, 0.2);
-            color: #ffffff;
-            font-weight: 800;
+        .dock-icon-btn {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #cbd5e1;
+            background: rgba(255,255,255,0.04);
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            position: relative;
         }
 
-        .comparison-table tr:nth-child(even) {
-            background: rgba(255, 255, 255, 0.02);
+        .dock-icon-btn:hover, .dock-icon-btn.active {
+            background: #ff9500;
+            color: #000;
+            transform: scale(1.1);
         }
 
-        .faq-item {
-            margin-bottom: 18px;
+        .dock-indicator {
+            position: absolute;
+            right: -6px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 4px;
+            height: 20px;
+            background: transparent;
+            border-radius: 2px;
         }
 
-        .faq-question {
-            font-weight: 800;
-            color: #ffffff;
-            font-size: 1rem;
-            margin-bottom: 6px;
+        .dock-icon-btn.active .dock-indicator {
+            background: #ff9500;
         }
 
-        .faq-answer {
-            color: #94a3b8;
-            font-size: 0.9rem;
+        /* Full Grid Layout */
+        .full-game-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 22px;
+            margin-top: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .floating-side-dock { display: none; }
+            .gamingtz-nav-links { display: none; }
         }
     </style>
 </head>
 <body>
 
-    <div class="intro-wrapper">
+    <!-- GamingTZ Top Header Navigation Bar -->
+    <header class="gamingtz-header">
+        <a href="index.html" class="gamingtz-logo-area">
+            <i class="fa-solid fa-gamepad" style="font-size: 1.8rem; color: #e50914;"></i>
+            <div class="gamingtz-logo-text">Gaming<span>TZ</span> <span class="gamingtz-store-badge">STORE</span></div>
+        </a>
 
-        <!-- Header Hero -->
-        <header class="portal-brand-header">
-            <div class="brand-badge">
-                <i class="fa-solid fa-shield-halved"></i> TZ Verified Gaming Portal
+        <!-- Navigation Tabs -->
+        <nav class="gamingtz-nav-links">
+            <a href="index.html" class="gamingtz-nav-item active">Home</a>
+            <a href="#games-grid-section" class="gamingtz-nav-item">Games</a>
+            <a href="download.html" class="gamingtz-nav-item">Vifaa Vya Game</a>
+            <a href="index.html?category=mobile" class="gamingtz-nav-item">Game Za Simu</a>
+            <a href="index.html?category=pc" class="gamingtz-nav-item">Game Za PC</a>
+            <a href="https://wa.me/255692752060?text=Hello%20SquadGames%2C%20nisaidie%20kuhusu%20game." target="_blank" class="gamingtz-nav-item">Jinsi Inavyofanya</a>
+            <a href="https://wa.me/255692752060" target="_blank" class="gamingtz-nav-item">Community</a>
+        </nav>
+
+        <div class="portal-search-wrapper" style="width: 240px;">
+            <i class="fa-solid fa-magnifying-glass search-icon"></i>
+            <input type="text" id="gameSearchInput" placeholder="Tafuta games...">
+        </div>
+    </header>
+
+    <!-- Floating Right Side Icon Dock -->
+    <div class="floating-side-dock">
+        <a href="index.html" class="dock-icon-btn active" title="Home"><i class="fa-solid fa-house"></i><span class="dock-indicator"></span></a>
+        <a href="index.html?category=courses" class="dock-icon-btn" title="Learning / Guides"><i class="fa-solid fa-graduation-cap"></i></a>
+        <a href="https://wa.me/255692752060" class="dock-icon-btn" title="Wallet / Payments"><i class="fa-solid fa-dollar-sign"></i></a>
+        <a href="index.html?category=mobile" class="dock-icon-btn" title="Mobile Games"><i class="fa-solid fa-mobile-screen"></i></a>
+        <a href="index.html?category=pc" class="dock-icon-btn" title="PC Games"><i class="fa-solid fa-desktop"></i></a>
+        <a href="index.html?category=action" class="dock-icon-btn" title="Arcade & Games"><i class="fa-solid fa-gamepad"></i></a>
+        <a href="download.html" class="dock-icon-btn" title="Tools & Utilities"><i class="fa-solid fa-keyboard"></i></a>
+        <a href="https://wa.me/255692752060" class="dock-icon-btn" title="Security & Safety"><i class="fa-solid fa-shield-halved"></i></a>
+        <a href="https://wa.me/255692752060" class="dock-icon-btn" title="Documents"><i class="fa-solid fa-file-lines"></i></a>
+        <a href="https://wa.me/255692752060" class="dock-icon-btn" title="Support Alert"><i class="fa-solid fa-triangle-exclamation"></i></a>
+        <a href="https://wa.me/255692752060" class="dock-icon-btn" title="Phone Support"><i class="fa-solid fa-phone"></i></a>
+        <a href="https://wa.me/255692752060" class="dock-icon-btn" title="Help"><i class="fa-solid fa-circle-question"></i></a>
+    </div>
+
+    <!-- Main Full-Width Container -->
+    <div class="main-full-container">
+
+        <!-- 1. Cinematic Full-Width Featured Spotlight Hero Banner -->
+        <div class="cinematic-hero-box">
+            <div class="section-title" style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px;">
+                <span><i class="fa-solid fa-fire" style="color: #ff9500;"></i> Featured Game Spotlight</span>
+                <span style="font-size: 0.75rem; background: rgba(229,9,20,0.2); color: #e50914; padding: 3px 10px; border-radius: 4px; font-weight: bold;">🔥 HOT DEAL</span>
             </div>
             
-            <!-- Profile Avatar & Title Container -->
-            <div style="display: flex; align-items: center; justify-content: center; gap: 15px; flex-wrap: wrap; margin-bottom: 15px;">
-                <img src="images/profile.jpg" alt="Profile" style="width: 55px; height: 55px; border-radius: 50%; object-fit: cover; border: 2px solid #25d366; box-shadow: 0 4px 12px rgba(37,211,102,0.3); flex-shrink: 0;" onerror="this.style.display='none';">
-                <h1 class="portal-main-title">Squad Games Store TZ - Free & Paid PC Games Download</h1>
+            <div class="hero-slider-wrapper" onclick="openFeaturedDetails()">
+                <button class="slider-arrow slider-prev" onclick="event.stopPropagation(); moveFeaturedSlide(-1);"><i class="fa-solid fa-chevron-left"></i></button>
+                <div class="hero-slider-img-container" style="width: 100%; height: 100%;">
+                    <img id="heroSliderImg" src="" alt="Featured Game" class="hero-slider-img">
+                </div>
+                <button class="slider-arrow slider-next" onclick="event.stopPropagation(); moveFeaturedSlide(1);"><i class="fa-solid fa-chevron-right"></i></button>
             </div>
 
-            <p class="portal-intro-lead">
-                Finding dependable, highly-compressed PC game repacks and custom regional simulation mods can be challenging. Squad Games Store TZ stands out as Tanzania’s dedicated gaming repository, offering ultra-fast direct downloads, verified installer packages, and exclusive regional content like Tanzania Euro Truck Simulator 2 map mods.
-            </p>
-            <a href="store.html" class="btn-enter-store-main">
-                <i class="fa-solid fa-gamepad"></i> Go to Homepage & Store
-            </a>
-        </header>
+            <h2 id="heroSliderTitle" class="hero-slider-title">Loading Featured Game...</h2>
+        </div>
 
-        <!-- Store Overview with Custom intro.jpg Banner -->
-        <section class="content-section">
-            <h2>Overview of Squad Games Store TZ</h2>
-            <p>
-                Squad Games Store TZ was crafted specifically for Tanzanian and African gamers who demand high performance without absurd bandwidth consumption. Our store library features thousands of compressed game repacks, offline action blockbusters, tactical shooters, and open-world simulators.
-            </p>
-            <p>
-                Whether you play on a mid-range laptop or a high-end gaming PC, our collection ensures stable installation setups, pre-configured game updates, and clean multi-part downloads.
-            </p>
+        <!-- 2. Trust Bar -->
+        <div class="trust-bar" style="margin-bottom: 30px;">
+            <div class="trust-item"><i class="fa-solid fa-mobile-screen-button" style="color: #22c55e;"></i> <b>M-Pesa / Tigo / Airtel</b> Malipo Salama</div>
+            <div class="trust-item"><i class="fa-solid fa-bolt" style="color: #ff9500;"></i> <b>Instant Delivery</b> Download Baada ya Malipo</div>
+            <div class="trust-item"><i class="fa-solid fa-headset" style="color: #38bdf8;"></i> <b>24/7 Support</b> Kiswahili & English</div>
+            <div class="trust-item"><i class="fa-solid fa-shield-halved" style="color: #f1c40f;"></i> <b>100% Verified</b> Safe Games</div>
+        </div>
 
-            <!-- Custom User Image Banner inserted here -->
-            <div class="custom-intro-banner">
-                <img src="images/intro.jpg" alt="Squad Games Store TZ Custom Banner" onerror="this.src='images/nfsmw-shot1.png';">
-            </div>
-        </section>
+        <!-- 3. Latest Games Added Section -->
+        <div class="apunka-section-box" style="margin-bottom: 30px;">
+            <h3 class="section-title"><i class="fa-solid fa-clock-rotate-left" style="color: #38bdf8;"></i> New Releases / Latest Games Added</h3>
+            <div id="latestGamesGrid" class="latest-games-grid"></div>
+        </div>
 
-        <!-- EXACT LATEST GAMES ADDED HORIZONTAL LIST (DESCENDING ORDER) -->
-        <section class="latest-games-grid-container">
-            <h2 class="latest-grid-header-title">
-                <i class="fa-solid fa-fire"></i> Latest Games Added
-            </h2>
-
-            <div id="introLatestGamesList" class="latest-games-grid-intro">
-                <div style="grid-column: 1 / -1; text-align: center; padding: 25px; color: #94a3b8;">
-                    <i class="fa-solid fa-circle-notch fa-spin" style="font-size: 1.4rem; margin-bottom: 8px;"></i>
-                    <p>Loading latest games...</p>
+        <!-- 4. Main Game Catalog Grid Section -->
+        <section id="games-grid-section" style="margin-bottom: 40px;">
+            <h3 id="catalogSectionTitle" class="section-title"><i class="fa-solid fa-layer-group" style="color: #e50914;"></i> Game Catalog & Store</h3>
+            <div id="games-grid" class="full-game-grid">
+                <div class="loading-state" style="grid-column: 1 / -1; text-align: center; padding: 50px;">
+                    <div class="spinner" style="margin: 0 auto 10px;"></div>
+                    <p style="color: #94a3b8;">Inapakiza games za Tanzania...</p>
                 </div>
             </div>
         </section>
 
-        <!-- Categories and Optimization -->
-        <section class="content-section">
-            <h2>Game Categories & Selection</h2>
-            <ul class="styled-list">
-                <li><b>Action & High-Octane Driving Games:</b> Including Need for Speed, Assetto Corsa, and GTA V.</li>
-                <li><b>Tactical First-Person Shooters:</b> Call of Duty series, Ghost Recon, and Zombie survival repacks.</li>
-                <li><b>Custom Regional Simulator Mods:</b> Exclusive Tanzania Euro Truck Simulator 2 map mods and bus packs.</li>
-                <li><b>Mobile Gaming Utilities:</b> Select high-performance Android simulator titles.</li>
-            </ul>
+        <!-- Professional Footer -->
+        <footer class="portal-professional-footer">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3><i class="fa-solid fa-gamepad" style="color: #38bdf8; margin-right: 8px;"></i> Squad Games Store TZ</h3>
+                    <p style="font-size: 0.85rem; color: #94a3b8; line-height: 1.6; margin: 0 0 12px 0;">
+                        Duka bora la digital games na mods Tanzania. Pakua repack za PC, mods za malori ya Tanzania, na application mbalimbali.
+                    </p>
+                    <span style="display: inline-block; background: rgba(37, 211, 102, 0.15); color: #25d366; padding: 4px 10px; border-radius: 6px; font-size: 0.75rem; font-weight: bold; border: 1px solid rgba(37, 211, 102, 0.3);">
+                        <i class="fa-solid fa-shield-halved"></i> TZ Verified & Safe Portal
+                    </span>
+                </div>
 
-            <h2>File Optimization & Repack Technology</h2>
-            <p>
-                Our store utilizes high-ratio loss-less compression techniques. This ensures smaller installer download sizes without sacrificing in-game graphical fidelity or audio quality.
-            </p>
-            <ul class="styled-list">
-                <li>Reduced setup archive download size.</li>
-                <li>Clean multi-part direct mirror downloads.</li>
-                <li>Pre-applied game patches and update files.</li>
-                <li>Tested installation compatibility across Windows 10 and Windows 11.</li>
-            </ul>
-        </section>
+                <div class="footer-col">
+                    <h3><i class="fa-solid fa-layer-group" style="color: #ff9500; margin-right: 8px;"></i> Aina za Games</h3>
+                    <ul class="footer-guide-list">
+                        <li><i class="fa-solid fa-angle-right"></i> Tumia navigation ya juu kuchagua Simulator, Racing, au Action.</li>
+                        <li><i class="fa-solid fa-angle-right"></i> Tumia floating dock pembeni kufika kwa haraka kwenye vifaa vya simu na PC.</li>
+                    </ul>
+                </div>
 
-        <!-- Safety and Download Process -->
-        <section class="content-section">
-            <h2>Safety, Reliability & Basic Download Process</h2>
-            <p>
-                Every game file published on Squad Games Store TZ undergoes internal diagnostic scans to guarantee virus-free, secure execution.
-            </p>
-            <ol style="color: #cbd5e1; padding-left: 20px; margin-bottom: 20px;">
-                <li style="margin-bottom: 8px;">Browse our catalog and select your desired game title.</li>
-                <li style="margin-bottom: 8px;">Review system requirements and file size breakdowns on `details.html`.</li>
-                <li style="margin-bottom: 8px;">Click the direct server link or WhatsApp order button for custom mods.</li>
-                <li style="margin-bottom: 8px;">Extract setup files using WinRAR or 7-Zip and run setup.exe.</li>
-            </ol>
-        </section>
-
-        <!-- Platform Comparison -->
-        <section class="content-section">
-            <h2>Platform Comparison</h2>
-            <table class="comparison-table">
-                <thead>
-                    <tr>
-                        <th>Feature</th>
-                        <th>Squad Games Store TZ</th>
-                        <th>Generic Sites</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td><b>Tanzanian Custom Mods</b></td>
-                        <td><i class="fa-solid fa-check" style="color: #22c55e;"></i> Exclusive TZ ETS2 Mods</td>
-                        <td><i class="fa-solid fa-xmark" style="color: #e50914;"></i> None</td>
-                    </tr>
-                    <tr>
-                        <td><b>Local TZ Payment Support</b></td>
-                        <td><i class="fa-solid fa-check" style="color: #22c55e;"></i> M-Pesa & Selar Online</td>
-                        <td><i class="fa-solid fa-xmark" style="color: #e50914;"></i> International Cards Only</td>
-                    </tr>
-                    <tr>
-                        <td><b>Direct WhatsApp Help</b></td>
-                        <td><i class="fa-solid fa-check" style="color: #22c55e;"></i> Yes (+255 692 752 060)</td>
-                        <td><i class="fa-solid fa-xmark" style="color: #e50914;"></i> No Direct Support</td>
-                    </tr>
-                    <tr>
-                        <td><b>Download Speeds</b></td>
-                        <td><i class="fa-solid fa-check" style="color: #22c55e;"></i> High-Speed Direct Mirrors</td>
-                        <td><i class="fa-solid fa-xmark" style="color: #e50914;"></i> Slow Bandwidth Limits</td>
-                    </tr>
-                </tbody>
-            </table>
-        </section>
-
-        <!-- FAQs -->
-        <section class="content-section">
-            <h2>Frequently Asked Questions (FAQs)</h2>
-
-            <div class="faq-item">
-                <div class="faq-question">Q: Are the downloads beginner-friendly?</div>
-                <div class="faq-answer">Yes, all installer packages come with clear setup guides and direct WhatsApp support if you need installation help.</div>
+                <div class="footer-col">
+                    <h3><i class="fa-solid fa-headset" style="color: #007aff; margin-right: 8px;"></i> Huduma kwa Wateja</h3>
+                    <ul class="footer-guide-list">
+                        <li><i class="fa-solid fa-angle-right"></i> Wasiliana nasi kupitia WhatsApp: <b>+255 692 752 060</b></li>
+                        <li><i class="fa-solid fa-angle-right"></i> Malipo ya M-Pesa, Tigo Pesa, na Airtel Money papo hapo.</li>
+                    </ul>
+                </div>
             </div>
 
-            <div class="faq-item">
-                <div class="faq-question">Q: Do downloads require an account registration?</div>
-                <div class="faq-answer">No account or login is required to browse or download free PC games from our catalog.</div>
+            <div class="footer-bottom-bar">
+                <span>&copy; 2026 Squad Games Store TZ. Haki zote zimehifadhiwa.</span>
+                <div class="footer-bottom-links">
+                    <a href="https://wa.me/255692752060?text=Hello%20SquadGames" target="_blank"><i class="fa-brands fa-whatsapp"></i> WhatsApp Support</a>
+                </div>
             </div>
-
-            <div class="faq-item">
-                <div class="faq-question">Q: Can games run on low-end or budget PCs?</div>
-                <div class="faq-answer">Many of our titles feature compressed repacks designed specifically to perform smoothly on integrated graphics and mid-range systems.</div>
-            </div>
-        </section>
-
-        <!-- Bottom Call to Action -->
-        <div style="text-align: center; margin-top: 40px;">
-            <a href="store.html" class="btn-enter-store-main">
-                <i class="fa-solid fa-arrow-right-to-bracket"></i> Enter Main Game Store Catalog
-            </a>
-            <p style="color: #64748b; font-size: 0.8rem; margin-top: 15px;">
-                &copy; 2013-2026 Squad Games Store TZ. Built for Tanzanian Gamers.
-            </p>
-        </div>
+        </footer>
 
     </div>
 
-    <!-- DYNAMIC LATEST GAMES AUTO-LOADER SCRIPT (DESCENDING / NEWEST FIRST) -->
-    <script>
-        document.addEventListener('DOMContentLoaded', async () => {
-            const container = document.getElementById('introLatestGamesList');
-            if (!container) return;
+    <!-- Fullscreen Image Modal -->
+    <div id="fullscreen-overlay" class="fullscreen-overlay" onclick="closeFullScreen()">
+        <span class="fullscreen-close">&times;</span>
+        <img id="fullscreen-img" class="fullscreen-img" src="" alt="Fullscreen View">
+    </div>
 
-            try {
-                const res = await fetch('games.json');
-                const data = await res.json();
-                let games = Array.isArray(data) ? data : (data.games || data.data || []);
-
-                if (!games || games.length === 0) {
-                    container.innerHTML = `<p style="grid-column: 1 / -1; color: #94a3b8; text-align: center;">No games available.</p>`;
-                    return;
-                }
-
-                // Reverse array so the last added games in games.json are displayed first
-                games = games.slice().reverse();
-
-                // Select top 12 newest games
-                const latestGames = games.slice(0, 12);
-                container.innerHTML = '';
-
-                latestGames.forEach(game => {
-                    const title = game.title || 'Untitled Game';
-                    const date = game.date || game.releaseDate || 'October 20, 2026';
-                    const image = game.image || 'images/nfsmw-shot1.png';
-                    const gameId = encodeURIComponent(game.id || game.title);
-
-                    const cardHTML = `
-                        <a href="details.html?id=${gameId}" class="latest-intro-card">
-                            <img src="${image}" alt="${title}" class="latest-intro-thumb" onerror="this.src='images/nfsmw-shot1.png';">
-                            <div class="latest-intro-info">
-                                <h4 class="latest-intro-title" title="${title}">${title}</h4>
-                                <p class="latest-intro-date">${date}</p>
-                                <span class="latest-intro-badge">Latest</span>
-                            </div>
-                        </a>
-                    `;
-                    container.innerHTML += cardHTML;
-                });
-
-            } catch (e) {
-                console.warn("Could not load latest games list:", e);
-                container.innerHTML = `<p style="grid-column: 1 / -1; color: #e50914; text-align: center;">Failed to load latest games from store database.</p>`;
-            }
-        });
-    </script>
+    <script src="script.js"></script>
 </body>
-</html>
+</html>8
