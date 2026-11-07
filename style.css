@@ -424,6 +424,47 @@ h1, h2, h3, h4, h5, h6, button, input, .section-title, .gamingtz-nav-item {
     font-weight: bold;
 }
 
+/* --- GAME CATALOG COLLAPSIBLE GRID (MAX 4 LINES) --- */
+#games-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)) !important;
+    gap: 22px !important;
+    max-height: 1100px; /* Limits height to roughly 4 rows of game cards */
+    overflow: hidden;
+    transition: max-height 0.5s ease-in-out;
+    position: relative;
+}
+
+#games-grid.expanded {
+    max-height: 5000px; /* Expands to show all catalog games */
+}
+
+/* Show More Button Container */
+.catalog-expand-wrapper {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.btn-show-more {
+    background: linear-gradient(135deg, #ff9500, #e56000);
+    color: #fff;
+    border: none;
+    padding: 12px 35px;
+    border-radius: 30px;
+    font-weight: 800;
+    font-size: 0.9rem;
+    cursor: pointer;
+    box-shadow: 0 6px 20px rgba(255, 149, 0, 0.35);
+    transition: transform 0.2s, box-shadow 0.2s;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.btn-show-more:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(255, 149, 0, 0.55);
+}
+
 /* --- WIDE GAMINGTZ GAME CARDS & GRID STYLE --- */
 .full-game-grid, .game-grid {
     display: grid;
