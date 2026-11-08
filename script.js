@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // 2. Save scroll position on action/details click & close dropdowns on outside click
     document.addEventListener('click', function(e) {
-        if (e.target.closest('.btn-action') || e.target.closest('.btn-details') || e.target.closest('.hero-slider-img-container')) {
+        if (e.target.closest('.btn-action') || e.target.closest('.hero-slider-img-container')) {
             localStorage.setItem('scrollPosition', window.scrollY);
         }
         
@@ -50,7 +50,7 @@ document.addEventListener("DOMContentLoaded", () => {
     document.addEventListener('click', function(e) {
         if (e.target.closest('#download-parts-modal') || e.target.closest('#payment-options-modal') || e.target.closest('.global-floating-dropdown')) return;
 
-        const downloadBtn = e.target.closest('.btn-download, .btn-get, .btn-action');
+        const downloadBtn = e.target.closest('.btn-download, .btn-action');
         if (!downloadBtn) return;
 
         if (downloadBtn.classList.contains('btn-vodacom') || downloadBtn.href.includes('wa.me')) return;
@@ -619,39 +619,33 @@ function renderGameStore(gameList) {
         const card = document.createElement("div");
         card.classList.add("game-card");
 
-        const isPaid = game.price && game.price.toUpperCase() !== "FREE" && game.price.trim() !== "";
+        // Make the entire card open details when clicked
+        card.setAttribute("onclick", `openDetailsById('${encodeURIComponent(gameId)}')`);
 
-        let actionBtnText = isPaid ? "Buy Now" : "Get";
-        let actionBtnClass = isPaid ? "btn-download" : "btn-get";
+        const isPaid = game.price && game.price.toUpperCase() !== "FREE" && game.price.trim() !== "";
 
         let actionButtonsHTML = '';
         if (isPaid) {
             actionButtonsHTML = `
-                <button class="btn-action ${actionBtnClass}" onclick="showPaymentOptionsModal(loadedGamesData[${originalIndex}])">${actionBtnText}</button>
+                <button class="btn-action btn-download" onclick="event.stopPropagation(); showPaymentOptionsModal(loadedGamesData[${originalIndex}])">Buy Now</button>
             `;
         } else {
-            let gameParts = game.parts || game.downloadParts;
-            let targetUrl = game.downloadUrl || (gameParts && gameParts.length > 0 ? "#" : "");
-            actionButtonsHTML = `
-                <a href="${targetUrl}" target="_blank" class="btn-action ${actionBtnClass}" data-game-id="${encodeURIComponent(gameId)}" data-game-index="${originalIndex}">${actionBtnText}</a>
-            `;
+            // Free / Non-paid games show no extra buttons; clicking the card takes them straight to details
+            actionButtonsHTML = ``;
         }
 
         card.innerHTML = `
             <span class="card-badge">${game.platform || "PC"}</span>
-            <div class="game-img-wrapper" onclick="openDetailsById('${encodeURIComponent(gameId)}')">
+            <div class="game-img-wrapper">
                 <img src="${game.image || 'images/nfsmw-shot1.png'}" alt="${game.title}" class="game-img" loading="lazy" onerror="this.onerror=null; this.src='images/nfsmw-shot1.png';" />
             </div>
-            <div class="game-details" onclick="openDetailsById('${encodeURIComponent(gameId)}')">
+            <div class="game-details">
                 <span class="category-tag">${game.category || game.Category || "General"}</span>
                 <h3>${game.title}</h3>
                 <p>${game.description || ""}</p>
-            </div>
-            <div class="game-details" style="padding-top: 0 !important; padding-bottom: 14px !important; margin-top: auto;">
                 <div class="card-action">
                     <span class="price">${game.price || "FREE"}</span>
                     <div class="action-group">
-                        <button class="btn-details" onclick="openDetailsById('${encodeURIComponent(gameId)}')">Details &rarr;</button>
                         ${actionButtonsHTML}
                     </div>
                 </div>
@@ -673,7 +667,7 @@ function checkCatalogHeight() {
     const wrapper = document.getElementById('catalogExpandWrapper');
     if (grid && wrapper) {
         // If total items are more than 18 (3 lines x 6 columns) or height exceeds limit, show button
-        if (grid.children.length > 18 || grid.scrollHeight > 1150) {
+        if (grid.children.length > 18 || grid.scrollHeight > 1200) {
             wrapper.style.display = 'block';
         } else {
             wrapper.style.display = 'none';
@@ -693,7 +687,7 @@ function toggleGameCatalog() {
     catalogExpandedLevel++;
     
     // Increase max-height dynamically to reveal 3 more lines per click
-    const newHeight = 1150 * catalogExpandedLevel;
+    const newHeight = 1200 * catalogExpandedLevel;
     grid.style.maxHeight = newHeight + 'px';
 
     const totalCards = grid.children.length;
