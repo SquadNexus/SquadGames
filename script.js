@@ -18,6 +18,9 @@ let latestCurrentPage = 1;
 const latestPerPage = 12; // Displays 12 games per page in the grid
 let latestGamesSorted = [];
 
+// Catalog Progressive Expansion State (3 lines x 6 columns = 18 games per level)
+let catalogExpandedLevel = 1;
+
 document.addEventListener("DOMContentLoaded", () => {
     console.log("Squad Games Store initialized successfully.");
 
@@ -661,14 +664,14 @@ function renderGameStore(gameList) {
 }
 
 /**
- * Handles toggling the Game Catalog grid between 4-row limit and fully expanded view
+ * Automatically checks if catalog content exceeds the initial 3 rows height limit
  */
 function checkCatalogHeight() {
     const grid = document.getElementById('games-grid');
     const wrapper = document.getElementById('catalogExpandWrapper');
     if (grid && wrapper) {
-        // If content height exceeds 4 lines or total items are more than 8, show button
-        if (grid.scrollHeight > 1100 || grid.children.length > 8) {
+        // If total items are more than 18 (3 lines x 6 columns) or height exceeds limit, show button
+        if (grid.children.length > 18 || grid.scrollHeight > 1150) {
             wrapper.style.display = 'block';
         } else {
             wrapper.style.display = 'none';
@@ -676,17 +679,29 @@ function checkCatalogHeight() {
     }
 }
 
+/**
+ * Expands 3 more lines (18 games) per click progressively until all are visible
+ */
 function toggleGameCatalog() {
     const grid = document.getElementById('games-grid');
     const btn = document.getElementById('toggleCatalogBtn');
     
-    grid.classList.toggle('expanded');
+    if (!grid) return;
+
+    catalogExpandedLevel++;
     
-    if (grid.classList.contains('expanded')) {
+    // Increase max-height dynamically to reveal 3 more lines per click
+    const newHeight = 1150 * catalogExpandedLevel;
+    grid.style.maxHeight = newHeight + 'px';
+
+    const totalCards = grid.children.length;
+    const revealedCount = catalogExpandedLevel * 18; // 3 lines * 6 columns = 18 games per level
+
+    if (revealedCount >= totalCards || grid.style.maxHeight >= grid.scrollHeight) {
+        grid.classList.add('expanded');
         btn.innerHTML = '<i class="fa-solid fa-angles-up"></i> Onyesha Kidogo (Show Less)';
     } else {
         btn.innerHTML = '<i class="fa-solid fa-angles-down"></i> Tazama Zaidi (Show More)';
-        document.getElementById('games-grid-section').scrollIntoView({ behavior: 'smooth' });
     }
 }
 window.toggleGameCatalog = toggleGameCatalog;
