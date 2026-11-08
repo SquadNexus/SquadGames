@@ -639,13 +639,15 @@ function renderGameStore(gameList) {
 
         card.innerHTML = `
             <span class="card-badge">${game.platform || "PC"}</span>
-            <div class="game-img-wrapper" onclick="openDetailsById('${encodeURIComponent(gameId)}')" style="cursor: pointer;">
+            <div class="game-img-wrapper" onclick="openDetailsById('${encodeURIComponent(gameId)}')">
                 <img src="${game.image || 'images/nfsmw-shot1.png'}" alt="${game.title}" class="game-img" loading="lazy" onerror="this.onerror=null; this.src='images/nfsmw-shot1.png';" />
             </div>
-            <div class="game-details">
+            <div class="game-details" onclick="openDetailsById('${encodeURIComponent(gameId)}')">
                 <span class="category-tag">${game.category || game.Category || "General"}</span>
                 <h3>${game.title}</h3>
                 <p>${game.description || ""}</p>
+            </div>
+            <div class="game-details" style="padding-top: 0 !important; padding-bottom: 14px !important; margin-top: auto;">
                 <div class="card-action">
                     <span class="price">${game.price || "FREE"}</span>
                     <div class="action-group">
